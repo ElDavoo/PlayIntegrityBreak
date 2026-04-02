@@ -78,7 +78,6 @@ val Fragment.contentResolver get(): ContentResolver = requireContext().contentRe
 
 fun Fragment.recreateMainActivity(restart: Boolean = false) {
     val mainActivity = activity as MainActivity
-    mainActivity.readyToKill = false
 
     if (restart) {
         mainActivity.finish()

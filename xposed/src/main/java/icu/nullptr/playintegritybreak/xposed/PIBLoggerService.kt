@@ -175,17 +175,7 @@ object PIBLoggerService : IPIBService.Stub() {
         }
     }
 
-    override fun handlePackageEvent(eventType: String?, packageName: String?, extras: Bundle?) {
-        // No-op in logger mode.
-    }
-
-    override fun getPackagesForPreset(presetName: String): Array<String> = emptyArray()
-
     override fun readConfig(): String = synchronized(configLock) { config.toString() }
-
-    override fun forceStop(packageName: String?, userId: Int) {
-        // No-op in logger mode.
-    }
 
     override fun log(level: Int, tag: String, message: String) {
         logWithLevel(level, tag, message)
@@ -219,20 +209,8 @@ object PIBLoggerService : IPIBService.Stub() {
         }.getOrNull()
     }
 
-    override fun listAllSettings(databaseName: String): Array<String> = emptyArray()
-
     override fun getLogFileLocation(): String = synchronized(logLock) {
         ensureLogFile()?.absolutePath ?: "unavailable"
-    }
-
-    override fun reloadPresetsFromScratch() {
-        // No-op in logger mode.
-    }
-
-    override fun getDetailedFilterStats(): String = "{}"
-
-    override fun clearFilterStats() {
-        // No-op in logger mode.
     }
 
     private fun rotateLogs(current: File) {

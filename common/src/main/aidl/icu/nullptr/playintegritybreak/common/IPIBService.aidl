@@ -14,27 +14,13 @@ interface IPIBService {
 
     void clearLogs() = 5;
 
-    void handlePackageEvent(String eventType, String packageName, in Bundle extras) = 6;
+    String readConfig() = 6;
 
-    String[] getPackagesForPreset(String presetName) = 7;
+    void log(int level, String tag, String message) = 7;
 
-    String readConfig() = 8;
+    String[] getPackageNames(int userId) = 8;
 
-    void forceStop(String packageName, int userId) = 9;
+    PackageInfo getPackageInfo(String packageName, int userId) = 9;
 
-    void log(int level, String tag, String message) = 10;
-
-    String[] getPackageNames(int userId) = 11;
-
-    PackageInfo getPackageInfo(String packageName, int userId) = 12;
-
-    String[] listAllSettings(String databaseName) = 13;
-
-    String getLogFileLocation() = 14;
-
-    void reloadPresetsFromScratch() = 15;
-
-    String getDetailedFilterStats() = 16;
-
-    void clearFilterStats() = 17;
+    String getLogFileLocation() = 10;
 }

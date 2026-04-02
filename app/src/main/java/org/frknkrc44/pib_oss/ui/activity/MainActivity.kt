@@ -12,15 +12,12 @@ import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.DynamicColorsOptions
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.service.PrefManager
-import icu.nullptr.playintegritybreak.service.ServiceClient
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils
 import icu.nullptr.playintegritybreak.util.ConfigUtils
-import org.frknkrc44.pib_oss.BuildConfig
 import org.frknkrc44.pib_oss.R
 import org.frknkrc44.pib_oss.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    var readyToKill: Boolean = true
     var currentConfiguration: Configuration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
 
         if (isNightModeEnabled(currentConfiguration) != isNightModeEnabled(newConfig)) {
-            readyToKill = false
             recreate()
         }
 
@@ -76,16 +72,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(getLocaleAppliedContext(newBase))
-    }
-
-    override fun onDestroy() {
-        if (readyToKill) {
-            ServiceClient.forceStop(BuildConfig.APPLICATION_ID)
-        } else {
-            readyToKill = true
-        }
-
-        super.onDestroy()
     }
 
     fun applyWallpaperBackgroundColor(value: Int = PrefManager.systemWallpaperAlpha) {

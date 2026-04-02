@@ -1,6 +1,5 @@
 package icu.nullptr.playintegritybreak.service
 
-import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.IPIBService
@@ -50,13 +49,6 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
         service?.clearLogs()
     }
 
-    override fun handlePackageEvent(eventType: String?, packageName: String?, extras: Bundle?) {
-        service?.handlePackageEvent(eventType, packageName, extras)
-    }
-
-    override fun getPackagesForPreset(presetName: String) =
-        service?.getPackagesForPreset(presetName)
-
     override fun readConfig() = service?.readConfig()
 
     override fun writeConfig(json: String) {
@@ -65,14 +57,6 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
 
     override fun stopService(cleanEnv: Boolean) {
         service?.stopService(cleanEnv)
-    }
-
-    fun forceStop(packageName: String) {
-        forceStop(packageName, 0)
-    }
-
-    override fun forceStop(packageName: String, userId: Int) {
-        service?.forceStop(packageName, userId)
     }
 
     override fun log(level: Int, tag: String, message: String) {
@@ -86,17 +70,5 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
         userId: Int
     ) = service?.getPackageInfo(packageName, userId)
 
-    override fun listAllSettings(databaseName: String) = service?.listAllSettings(databaseName) ?: arrayOf()
-
     override fun getLogFileLocation() = service?.logFileLocation ?: "the log file"
-
-    override fun reloadPresetsFromScratch() {
-        service?.reloadPresetsFromScratch()
-    }
-
-    override fun getDetailedFilterStats() = service?.detailedFilterStats
-
-    override fun clearFilterStats() {
-        service?.clearFilterStats()
-    }
 }

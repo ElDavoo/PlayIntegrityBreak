@@ -212,27 +212,10 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                     it.icon = PackageHelper.loadAppIcon(pack.app)
                     it.title = PackageHelper.loadAppLabel(pack.app)
                     it.summary = pack.app
-                    it.setOnPreferenceClickListener { pref ->
-                        MaterialAlertDialogBuilder(pref.context).apply {
-                            setTitle(it.title)
-                            setItems(
-                                R.array.app_action_texts,
-                            ) { _, which ->
-                                parent.saveConfig()
-                                val userId = PackageHelper.loadUserId(pack.app)
-
-                                when (which) {
-                                    0 -> {
-                                        ServiceClient.forceStop(pack.app, userId)
-                                        launchMainActivity(pack.app, userId)
-                                    }
-                                    1 -> {
-                                        launchMainActivity(pack.app, userId)
-                                    }
-                                }
-                            }
-                        }.show()
-
+                    it.setOnPreferenceClickListener {
+                        parent.saveConfig()
+                        val userId = PackageHelper.loadUserId(pack.app)
+                        launchMainActivity(pack.app, userId)
                         true
                     }
                 }
