@@ -112,7 +112,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "darkTheme" -> PrefManager.darkTheme.toString()
                 "maxLogSize" -> ConfigManager.maxLogSize.toString()
                 "defaultHookRewriteErrorCode" -> ConfigManager.defaultHookRewriteErrorCode.toString()
-                "defaultHookRewriteCallerPackages" -> ConfigManager.defaultHookRewriteCallerPackages
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -153,7 +152,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "darkTheme" -> PrefManager.darkTheme = value!!.toInt()
                 "maxLogSize" -> ConfigManager.maxLogSize = value!!.toInt()
                 "defaultHookRewriteErrorCode" -> ConfigManager.defaultHookRewriteErrorCode = value?.toIntOrNull() ?: -8
-                "defaultHookRewriteCallerPackages" -> ConfigManager.defaultHookRewriteCallerPackages = value ?: ""
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }

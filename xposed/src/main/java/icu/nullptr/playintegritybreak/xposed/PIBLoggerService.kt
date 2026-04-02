@@ -128,9 +128,8 @@ object PIBLoggerService : IPIBService.Stub() {
         synchronized(configLock) {
             val appConfig = config.scope[callerPkg]
             val hasScopedApps = config.scope.isNotEmpty()
-            val defaultCallerRewriteMatch = callerPkg in config.defaultHookRewriteCallerPackages
 
-            if (appConfig == null && hasScopedApps && !defaultCallerRewriteMatch) {
+            if (appConfig == null && hasScopedApps) {
                 return IntegrityPolicy(
                     enabled = false,
                     logRequest = true,
@@ -142,14 +141,13 @@ object PIBLoggerService : IPIBService.Stub() {
                 )
             }
 
-            val defaultRewriteEnabled = config.defaultHookRewriteEnabled || defaultCallerRewriteMatch
             return IntegrityPolicy(
                 enabled = appConfig?.integrityLoggerEnabled ?: true,
                 // Request/response logging is always enabled; only logger enable/error-only may filter output.
                 logRequest = true,
                 logResponse = true,
                 errorOnly = config.errorOnlyLog,
-                rewriteResponse = appConfig?.rewriteIntegrityResponse ?: defaultRewriteEnabled,
+                rewriteResponse = appConfig?.rewriteIntegrityResponse ?: config.defaultHookRewriteEnabled,
                 rewriteErrorCode = appConfig?.rewriteIntegrityErrorCode ?: config.defaultHookRewriteErrorCode,
                 rewriteRemediable = appConfig?.rewriteIntegrityErrorRemediable ?: config.defaultHookRewriteRemediable,
             )

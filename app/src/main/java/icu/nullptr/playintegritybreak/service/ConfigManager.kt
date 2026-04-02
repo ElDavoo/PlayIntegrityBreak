@@ -96,17 +96,6 @@ object ConfigManager {
             saveConfig()
         }
 
-    var defaultHookRewriteCallerPackages: String
-        get() = config.defaultHookRewriteCallerPackages.joinToString(",")
-        set(value) {
-            config.defaultHookRewriteCallerPackages = value
-                .split(',', ';', '\n', '\r', ' ', '\t')
-                .map { it.trim() }
-                .filter { it.isNotBlank() }
-                .toMutableSet()
-            saveConfig()
-        }
-
     var maxLogSize: Int
         get() = config.maxLogSize
         set(value) {
@@ -173,7 +162,6 @@ object ConfigManager {
             appConfig.integrityLoggerEnabled = true
             appConfig.logIntegrityRequests = true
             appConfig.logIntegrityResponses = true
-            appConfig.logIntegrityErrorsOnly = false
             appConfig.rewriteIntegrityResponse = false
             appConfig.rewriteIntegrityErrorCode = -8
             appConfig.rewriteIntegrityErrorRemediable = true

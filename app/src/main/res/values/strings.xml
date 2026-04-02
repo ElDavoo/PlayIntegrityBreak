@@ -90,10 +90,9 @@
     <string name="template_apps_invisible_count">%d apps excluded</string>
 
     <!-- App settings -->
-    <string name="app_enable_hide">Enable Integrity logging</string>
+    <string name="app_enable_hide">Rewrite response as controlled error</string>
     <string name="app_log_integrity_requests">Log Integrity requests</string>
     <string name="app_log_integrity_responses">Log Integrity responses</string>
-    <string name="app_log_integrity_errors_only">Log only failing responses</string>
     <string name="app_rewrite_integrity_response">Rewrite response as controlled error</string>
     <string name="app_rewrite_integrity_response_desc">When enabled, successful Integrity responses for this app are rewritten to an error payload.</string>
     <string name="app_rewrite_integrity_error_code">Rewrite error code</string>
@@ -184,11 +183,10 @@
     <string name="settings_force_mount_data">Enforce data isolation for all apps</string>
     <string name="settings_force_mount_data_summary">Data isolation is disabled for apps target API lower than 30 by default</string>
     <string name="settings_detail_log">Detail log for debugging</string>
+    <string name="settings_default_rewrite_section">Default rewrite behavior</string>
     <string name="settings_max_log_size">Logger buffer sizes</string>
     <string name="settings_default_hook_rewrite_enabled">Default rewrite policy</string>
     <string name="settings_default_hook_rewrite_enabled_summary">When enabled, rewrite successful Integrity responses to an error unless app-level policy overrides it.</string>
-    <string name="settings_default_hook_rewrite_callers">Default rewrite caller packages</string>
-    <string name="settings_default_hook_rewrite_callers_summary">Comma-separated package names that should always apply default rewrite values.</string>
     <string name="settings_default_hook_error_code">Default rewrite error code</string>
     <string name="settings_default_hook_error_code_summary">Used when rewrite is applied by default and no app-level override is set.</string>
     <string name="settings_default_hook_remediable">Default rewrite remediable flag</string>
