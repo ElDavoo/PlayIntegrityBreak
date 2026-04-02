@@ -23,7 +23,6 @@ import icu.nullptr.playintegritybreak.util.PackageHelper
 import kotlinx.coroutines.launch
 import org.frknkrc44.pib_oss.R
 import org.frknkrc44.pib_oss.databinding.FragmentAppSelectBinding
-import org.frknkrc44.pib_oss.ui.fragment.AppPresetFragment
 
 abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
 
@@ -163,11 +162,10 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
         private val recyclerView: RecyclerView,
         private val emptyView: View
     ): RecyclerView.AdapterDataObserver() {
-        private val fragmentType by lazy {
+        private val emptyTextRes by lazy {
             when(this@AppSelectFragment.javaClass) {
-                ScopeFragment::class.java -> 0
-                AppPresetFragment::class.java -> 1
-                else -> 2
+                ScopeFragment::class.java -> R.string.list_empty_no_enabled
+                else -> R.string.list_empty_no_apps
             }
         }
 
@@ -175,13 +173,7 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
             val emptyViewVisible = recyclerView.adapter!!.itemCount < 1
             emptyView.visibility = if (emptyViewVisible) View.VISIBLE else View.GONE
             if (emptyViewVisible) {
-                emptyView.findViewById<TextView>(R.id.list_empty_text).text = getString(
-                    when (fragmentType) {
-                        0 -> R.string.list_empty_no_enabled
-                        1 -> R.string.list_empty_preset
-                        else -> R.string.list_empty_no_apps
-                    }
-                )
+                emptyView.findViewById<TextView>(R.id.list_empty_text).text = getString(emptyTextRes)
             }
             recyclerView.visibility = if (emptyViewVisible) View.GONE else View.VISIBLE
         }

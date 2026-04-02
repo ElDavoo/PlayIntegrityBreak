@@ -52,23 +52,7 @@
                     layout="@layout/view_home_item" />
 
                 <include
-                    android:id="@+id/manage_templates"
-                    layout="@layout/view_home_item" />
-
-                <include
-                    android:id="@+id/manage_presets"
-                    layout="@layout/view_home_item" />
-
-                <include
-                    android:id="@+id/nav_bulk_config_wizard"
-                    layout="@layout/view_home_item" />
-
-                <include
                     android:id="@+id/nav_logs"
-                    layout="@layout/view_home_item" />
-
-                <include
-                    android:id="@+id/nav_stats"
                     layout="@layout/view_home_item" />
 
                 <include

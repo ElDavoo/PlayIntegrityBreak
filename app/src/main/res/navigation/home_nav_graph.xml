@@ -15,11 +15,6 @@
         android:label="@string/title_logs" />
 
     <fragment
-        android:id="@+id/nav_stats"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.StatsFragment"
-        android:label="@string/title_filter_logs" />
-
-    <fragment
         android:id="@+id/nav_settings"
         android:name="icu.nullptr.playintegritybreak.ui.fragment.SettingsFragment"
         android:label="@string/title_settings" />
@@ -30,121 +25,9 @@
         android:label="@string/title_about" />
 
     <fragment
-        android:id="@+id/nav_template_manage"
-        android:name="icu.nullptr.playintegritybreak.ui.fragment.TemplateManageFragment"
-        android:label="@string/title_template_manage" />
-
-    <fragment
-        android:id="@+id/nav_presets"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.PresetManageFragment"
-        android:label="@string/title_preset_manage" />
-
-    <fragment
-        android:id="@+id/nav_template_settings"
-        android:name="icu.nullptr.playintegritybreak.ui.fragment.TemplateSettingsFragment"
-        android:label="@string/title_template_settings">
-
-        <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="true" />
-
-        <argument
-            android:name="isWhiteList"
-            app:argType="boolean" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_bulk_config_wizard"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.BulkConfigWizardFragment"
-        android:label="@string/title_template_settings">
-
-        <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="true" />
-
-        <argument
-            android:name="isWhiteList"
-            app:argType="boolean" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_setting_template_conf"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.SettingsTemplateConfFragment"
-        android:label="@string/title_settings_template_conf">
-
-        <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="true" />
-
-    </fragment>
-
-    <fragment
         android:id="@+id/nav_app_manage"
         android:name="icu.nullptr.playintegritybreak.ui.fragment.AppManageFragment"
         android:label="@string/title_app_manage" />
-
-    <fragment
-        android:id="@+id/nav_preset_inner_manage"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.AppPresetFragment">
-
-        <argument
-            android:name="name"
-            app:argType="string" />
-
-        <argument
-            android:name="title"
-            app:argType="string" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_settings_templates_edit_setting"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.EditSettingFragment">
-
-        <argument
-            android:name="database"
-            app:argType="string"
-            app:nullable="true" />
-
-        <argument
-            android:name="name"
-            app:argType="string" />
-
-        <argument
-            android:name="value"
-            app:argType="string"
-            app:nullable="true" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_settings_preset_inner_manage"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.SettingsPresetFragment">
-
-        <argument
-            android:name="name"
-            app:argType="string" />
-
-        <argument
-            android:name="title"
-            app:argType="string" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_settings_template_inner_manage"
-        android:name="org.frknkrc44.pib_oss.ui.fragment.SettingsTemplateInnerFragment">
-
-        <argument
-            android:name="items"
-            app:argType="android.os.Bundle" />
-
-    </fragment>
 
     <fragment
         android:id="@+id/nav_app_settings"

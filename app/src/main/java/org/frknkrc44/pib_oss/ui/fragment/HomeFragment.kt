@@ -250,28 +250,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        with(binding.manageTemplates) {
-            root.visibility = View.GONE
-        }
-
-        with(binding.managePresets) {
-            root.visibility = View.GONE
-        }
-
-        with(binding.navBulkConfigWizard) {
-            root.visibility = View.GONE
-        }
-
         with(binding.navLogs) {
             text1.text = getString(R.string.title_logs)
             icon.setImageResource(R.drawable.outline_assignment_24)
             root.setOnClickListener {
                 navigate(R.id.nav_logs)
             }
-        }
-
-        with(binding.navStats) {
-            root.visibility = View.GONE
         }
 
         with(binding.navSettings) {
