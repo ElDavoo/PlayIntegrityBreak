@@ -3,9 +3,9 @@
     <string name="title_home">Acasă</string>
     <string name="title_logs">Log-uri</string>
     <string name="title_settings">Setări</string>
-    <string name="title_template_manage">Gestionarea șablonului</string>
-    <string name="title_template_settings">Setările șablonului</string>
-    <string name="title_settings_template_conf">Settings template configuration</string>
+    <string name="title_template_manage">Manage logging profiles</string>
+    <string name="title_template_settings">Logging profile settings</string>
+    <string name="title_settings_template_conf">Advanced logger configuration</string>
     <string name="title_app_manage">Gestionare aplicație</string>
     <string name="title_app_select">Selectează aplicații</string>
     <string name="title_app_settings">Setările aplicației</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Serviciul de sistem rulează [%d]</string>
     <string name="home_xposed_service_off">Serviciul de sistem nu funcționează</string>
     <string name="home_xposed_service_old">Modul actualizat, trebuie repornire</string>
-    <string name="home_xposed_filter_count">Ascunde Lista de Aplicații a filtrat in total %d cereri</string>
+    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
     <string name="home_manage">Administrare</string>
     <string name="home_detection_test">Test de detectare</string>
     <string name="home_download_test_app_title">Descărcă aplicație pentru test</string>
@@ -64,82 +64,82 @@
     <string name="list_sort_by_package_name">După numele pachetului</string>
     <string name="list_sort_by_install_time">După data instalării</string>
     <string name="list_sort_by_update_time">După data actualizării</string>
-    <string name="list_empty_no_enabled">Activați la camuflarea aplicațiilor utilizarea acestui șablon și aplicațiile se vor afișa aici</string>
+    <string name="list_empty_no_enabled">Enable Integrity logging for apps and they will appear here</string>
     <string name="list_empty_no_apps">Nu au fost găsite aplicații, posibil nu ați dat permisiunea acestei aplicații să sondeze toate pachetele</string>
-    <string name="list_empty_preset">Nu au fost adăugate aplicații la acest preset</string>
+    <string name="list_empty_preset">No apps configured yet</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Stabilirea șabloanelor pentru aplicații \"neliniștite\", ce vor controla lista aplicațiilor vizibile pentru ele. \n\nLista neagră (se recomandă): aplicațiile selectate în șablon vor fi invizibile pentru aplicațiile la care se aplică șablonul.\nLista albă: aplicațiile neselectate în șablon vor fi invizibile pentru aplicațiile la care se aplică șablonul.</string>
-    <string name="template_new_blacklist">Crearea unui șablon de Listă Neagră</string>
-    <string name="template_new_whitelist">Crearea unui șablon de Listă Albă</string>
-    <string name="template_new_setting">Create a settings template</string>
-    <string name="template_delete">Sunteți sigur că doriți să eliminați acest șablon?</string>
-    <string name="template_name">Numele șablonului</string>
-    <string name="template_name_invalid">Numele nu este valid</string>
-    <string name="template_delete_title">Eliminare șablon</string>
-    <string name="template_name_already_exist">Șablon cu același nume deja există</string>
-    <string name="template_applied_count">Aplicat la %d aplicații</string>
-    <string name="template_setting_count">%d settings added</string>
-    <string name="template_apps_visible_count">%d aplicații vizibile</string>
-    <string name="template_apps_invisible_count">%d aplicații invizibile</string>
+    <string name="template_usage_hint">Use logging profiles to group target apps and quickly apply logger behavior.\n\nYou can assign profiles from app settings.</string>
+    <string name="template_new_blacklist">Create logging profile</string>
+    <string name="template_new_whitelist">Create strict logging profile</string>
+    <string name="template_new_setting">Create advanced logger profile</string>
+    <string name="template_delete">Are you sure you want to delete this logging profile?</string>
+    <string name="template_name">Profile name</string>
+    <string name="template_name_invalid">Profile name is invalid</string>
+    <string name="template_delete_title">Delete profile</string>
+    <string name="template_name_already_exist">Profile name already exists</string>
+    <string name="template_applied_count">Applied to %d apps</string>
+    <string name="template_setting_count">%d logger options configured</string>
+    <string name="template_apps_visible_count">%d apps targeted</string>
+    <string name="template_apps_invisible_count">%d apps excluded</string>
     <!-- App settings -->
-    <string name="app_enable_hide">Activare mascare</string>
-    <string name="app_template_config">Configurare șablon</string>
-    <string name="app_choose_template">Alege șablon</string>
-    <string name="app_choose_preset">Alege preset</string>
-    <string name="app_exclude_system_apps">Exclude aplicații de sistem</string>
-    <string name="app_exclude_system_apps_summary">Dezactivați această opțiune doar în cazuri real necesare. Este posibilă o blocare a sistemului în cazul dacă este dezactivată</string>
-    <string name="app_template_using">Se folosesc %d șabloane</string>
-    <string name="app_preset_using">Se folosesc %d preseturi</string>
-    <string name="app_settings_preset_using">Se folosesc %d preseturi pentru setări</string>
-    <string name="app_settings_template_using">Using %d settings templates</string>
-    <string name="app_extra_apps_visible_count">%d aplicații extra vizibile</string>
-    <string name="app_extra_apps_invisible_count">%d aplicații extra invizibile</string>
+    <string name="app_enable_hide">Enable Integrity logging</string>
+    <string name="app_template_config">Logger profile</string>
+    <string name="app_choose_template">Choose logging profile</string>
+    <string name="app_choose_preset">Choose recommended profile</string>
+    <string name="app_exclude_system_apps">Include system apps</string>
+    <string name="app_exclude_system_apps_summary">Enable only for troubleshooting; this can reduce stability.</string>
+    <string name="app_template_using">Using %d logging profiles</string>
+    <string name="app_preset_using">Using %d recommended profiles</string>
+    <string name="app_settings_preset_using">Using %d advanced profiles</string>
+    <string name="app_settings_template_using">Using %d logger templates</string>
+    <string name="app_extra_apps_visible_count">%d additional apps targeted</string>
+    <string name="app_extra_apps_invisible_count">%d additional apps excluded</string>
     <string name="app_warning_risky_package_title">Pachet riscant</string>
-    <string name="app_warning_risky_package_desc">Acest pachet este marcat ca riscant și poate cauza probleme către aplicațiile mascate. Doriți să continuați?</string>
-    <string name="app_spoof">Falsificare</string>
-    <string name="app_hide_installation_source">Falsificarea sursei de instalare</string>
-    <string name="app_hide_installation_source_desc">Pentru această aplicație sursa de instalare a tuturor aplicațiilor instalate va fi falsificată ca Play Store</string>
-    <string name="app_hide_installation_source_system">Falsificarea sursei de instalare și pentru aplicațiile de sistem</string>
-    <string name="app_hide_installation_source_system_desc">Toate aplicațiile de sistem vor fi falsificate ca instalate din nici o sursă pentru această aplicație</string>
-    <string name="app_exclude_target_installation_source">Exclude the target app</string>
-    <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
-    <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
+    <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
+    <string name="app_spoof">Compatibility options</string>
+    <string name="app_hide_installation_source">Spoof installation source</string>
+    <string name="app_hide_installation_source_desc">For compatibility testing, pretend installs came from Play Store for this target app.</string>
+    <string name="app_hide_installation_source_system">Also spoof system apps</string>
+    <string name="app_hide_installation_source_system_desc">Include system packages in spoofed installation source behavior.</string>
+    <string name="app_exclude_target_installation_source">Exclude target package</string>
+    <string name="app_exclude_target_installation_source_desc">Enable if this package is not distributed via Play Store.</string>
+    <string name="app_force_stop_warning">Force-stop the target app after changing configuration.</string>
     <string name="app_invert_activity_launch_protection">Invert Activity launch protection</string>
     <string name="app_invert_activity_launch_protection_desc">This option will invert \"Disable Activity launch protection\" selection in Settings.</string>
     <string name="app_global_activity_launch_protection_state">Protection is %s globally</string>
-    <string name="app_force_stop_launch">Force stop and launch</string>
+    <string name="app_force_stop_launch">Restart and launch</string>
     <string name="app_launch">Launch</string>
     <string name="app_launch_failed">App launch failed, check logs for more details</string>
     <string name="app_restrict_zygote_permissions">Restrict Zygote permissions</string>
     <string name="app_restrict_zygote_permissions_desc">This option can cause crashes or false positives, choose wisely.</string>
     <!-- Presets -->
-    <string name="title_preset">Presets</string>
-    <string name="title_settings_preset">Settings presets</string>
-    <string name="title_preset_manage">Show presets</string>
-    <string name="preset_xposed">LSPosed/Xposed modules</string>
-    <string name="preset_root_apps">Root managers/Rooted apps</string>
-    <string name="preset_custom_rom">Custom ROM apps</string>
+    <string name="title_preset">Recommended profiles</string>
+    <string name="title_settings_preset">Advanced profiles</string>
+    <string name="title_preset_manage">Show recommended profiles</string>
+    <string name="preset_xposed">LSPosed/Xposed environment</string>
+    <string name="preset_root_apps">Root-related apps</string>
+    <string name="preset_custom_rom">Custom ROM components</string>
     <string name="preset_sus_apps">Suspicious apps</string>
     <string name="preset_detector_apps">Detector/Checker apps</string>
     <string name="preset_shizuku_dhizuku">Shizuku/Dhizuku apps</string>
     <!-- Settings preset names -->
-    <string name="settings_preset_accessibility">Accessibility</string>
-    <string name="settings_preset_dev_options">Developer options</string>
-    <string name="settings_preset_input_method">Input method</string>
+    <string name="settings_preset_accessibility">Accessibility preset</string>
+    <string name="settings_preset_dev_options">Developer options preset</string>
+    <string name="settings_preset_input_method">Input method preset</string>
     <!-- Settings templates -->
-    <string name="settings_templates_database">Settings database</string>
-    <string name="settings_templates_name">Setting name</string>
+    <string name="settings_templates_database">Settings source</string>
+    <string name="settings_templates_name">Setting key</string>
     <string name="settings_templates_value">Setting value</string>
     <!-- Settings templates - basic configuration types -->
-    <string name="settings_templates_custom">Custom setting</string>
-    <string name="settings_templates_random_ssaid">Random SSAID</string>
+    <string name="settings_templates_custom">Custom value</string>
+    <string name="settings_templates_random_ssaid">Randomize SSAID</string>
     <!-- Logs -->
     <string name="logs_save">Save logs</string>
     <string name="logs_clear">Clear logs</string>
     <string name="logs_empty">No logs to save</string>
     <string name="logs_saved">Logs saved</string>
     <!-- Filter logs -->
-    <string name="title_filter_logs">Filter logs</string>
+    <string name="title_filter_logs">Event statistics</string>
     <!-- Settings -->
     <string name="settings_module">Module</string>
     <string name="settings_overwrite">Overwrite</string>
@@ -152,7 +152,7 @@
     <string name="settings_app_data_isolation">App data isolation</string>
     <string name="settings_vold_app_data_isolation">Vold app data isolation</string>
     <string name="settings_warning">Warning</string>
-    <string name="settings_vold_warning">This will enable an AOSP feature which make app\'s external private storage directory isolated. This can help improve hiding apps while may cause stability issues. This feature may stop working at any time since it is abandoned in AOSP.</string>
+    <string name="settings_vold_warning">This enables an AOSP isolation feature for app external private storage. It may improve compatibility but can reduce stability and may stop working in future Android versions.</string>
     <string name="settings_change_require_root">Changing requires root permission</string>
     <string name="settings_need_reboot">Changing requires reboot</string>
     <string name="settings_permission_denied">Permission denied</string>
@@ -183,30 +183,28 @@
     <string name="settings_dark_theme">Tematică închisă</string>
     <string name="settings_pure_black_dark_theme">Tematică Amoled</string>
     <string name="settings_pure_black_dark_theme_summary">Folosește tematica Amoled dacă tematică neagră este pornită</string>
-    <string name="settings_service">Serviciu</string>
-    <string name="settings_stop_system_service">Oprește serviciul de sistem</string>
-    <string name="settings_stop_system_service_summary">Trebuie repornit telefonul pentru a reporni serviciul</string>
-    <string name="settings_is_clean_env">Clean runtime environment at the same time?</string>
-    <string name="settings_is_clean_env_summary">Remove system service cache in /data/misc/hide_my_applist_*. This means you need to launch the module app once manually after next reboot in order to enable interceptions, and interception counts will also be cleaned.</string>
-    <string name="settings_force_clean_env">Force clean runtime environment (root)</string>
-    <string name="settings_force_clean_env_summary">Only if system service fails to start, otherwise you should click the above option.</string>
-    <string name="settings_force_clean_env_toast_successful">Runtime environment cleaned</string>
+    <string name="settings_service">Logger service</string>
+    <string name="settings_stop_system_service">Stop logger service</string>
+    <string name="settings_stop_system_service_summary">Reboot to start it again</string>
+    <string name="settings_is_clean_env">Clean logger runtime cache too?</string>
+    <string name="settings_is_clean_env_summary">Remove logger runtime cache in /data/misc/play_integrity_break_*.</string>
+    <string name="settings_force_clean_env">Force clean logger runtime cache (root)</string>
+    <string name="settings_force_clean_env_summary">Use only if logger service fails to start.</string>
+    <string name="settings_force_clean_env_toast_successful">Logger runtime cache cleaned</string>
     <string name="settings_update">Update</string>
     <string name="settings_disable_update">Disable update notification</string>
     <string name="settings_receive_beta_update">Receive beta update</string>
     <string name="settings_receive_beta_update_summary">Beta version may be unstable</string>
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Bulk config wizard</string>
+    <string name="title_bulk_config_wizard">Bulk logger configuration</string>
     <!-- About -->
     <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
     </string>
     <string name="about_fork_description">        The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
-    <string name="about_how_to_use_description_1">        You can create templates in \"Template manage\".\nThen apply the templates to apps in \"App manage\". (You can also select extra apps for targets.)\nYou should and ONLY should check \"System Framework\" in Xposed module scope / whitelist.
-    </string>
-    <string name="about_how_to_use_description_2">        Config modification effective in real time.
-    </string>
+    <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
+    <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>
     <string name="about_translator">Translator</string>
     <string name="about_developer">Developer</string>
     <string name="about_support">Support and feedback</string>
