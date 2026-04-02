@@ -10,6 +10,7 @@ import java.lang.reflect.Proxy
 object ServiceClient : IPIBService, IBinder.DeathRecipient {
 
     private const val TAG = "ServiceClient"
+    private const val STATUS_CACHE_GRACE_MS = 120_000L
 
     private class ServiceProxy(private val obj: IPIBService) : InvocationHandler {
         override fun invoke(proxy: Any?, method: Method, args: Array<out Any?>?): Any? {
@@ -23,23 +24,87 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
     @Volatile
     private var service: IPIBService? = null
 
+    @Volatile
+    private var linkedBinder: IBinder? = null
+
+    @Volatile
+    private var lastKnownServiceVersion: Int = 0
+
+    @Volatile
+    private var lastKnownHealthcheckTimestamp: Long = 0L
+
+    @Volatile
+    private var lastKnownLinkTimestamp: Long = 0L
+
+    private fun updateStatusCache(version: Int? = null, healthcheckTimestamp: Long? = null) {
+        val now = System.currentTimeMillis()
+        version?.let {
+            lastKnownServiceVersion = it
+            lastKnownLinkTimestamp = now
+        }
+        healthcheckTimestamp?.let {
+            if (it > 0L) {
+                lastKnownHealthcheckTimestamp = it
+                lastKnownLinkTimestamp = now
+            }
+        }
+    }
+
+    private fun isStatusCacheFresh(): Boolean {
+        val lastLink = lastKnownLinkTimestamp
+        if (lastLink <= 0L) return false
+        return System.currentTimeMillis() - lastLink <= STATUS_CACHE_GRACE_MS
+    }
+
     fun linkService(binder: IBinder) {
+        if (linkedBinder == binder && service != null) return
+
+        linkedBinder?.let {
+            runCatching { it.unlinkToDeath(this, 0) }
+        }
+
         service = Proxy.newProxyInstance(
             javaClass.classLoader,
             arrayOf(IPIBService::class.java),
             ServiceProxy(IPIBService.Stub.asInterface(binder))
         ) as IPIBService
+        linkedBinder = binder
         binder.linkToDeath(this, 0)
+
+        val initialVersion = runCatching { service?.serviceVersion }.getOrNull()
+        val initialHealthcheck = runCatching { service?.serviceHealthcheckTimestamp }.getOrNull()
+        updateStatusCache(initialVersion, initialHealthcheck)
     }
 
     override fun binderDied() {
         service = null
+        linkedBinder = null
         Log.e(TAG, "Binder died")
     }
 
     override fun asBinder() = service?.asBinder()
 
-    override fun getServiceVersion() = service?.serviceVersion ?: 0
+    override fun getServiceVersion(): Int {
+        service?.let { remote ->
+            val live = runCatching { remote.serviceVersion }.getOrNull()
+            if (live != null) {
+                updateStatusCache(version = live)
+                return live
+            }
+        }
+        return if (isStatusCacheFresh()) lastKnownServiceVersion else 0
+    }
+
+    override fun getServiceHealthcheckTimestamp(): Long {
+        service?.let { remote ->
+            val live = runCatching { remote.serviceHealthcheckTimestamp }.getOrNull()
+            if (live != null) {
+                updateStatusCache(healthcheckTimestamp = live)
+                return live
+            }
+        }
+        return if (isStatusCacheFresh()) lastKnownHealthcheckTimestamp else 0L
+    }
 
     override fun getFilterCount() = service?.filterCount ?: 0
 

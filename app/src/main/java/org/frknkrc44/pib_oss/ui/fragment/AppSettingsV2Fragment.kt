@@ -2,6 +2,7 @@ package org.frknkrc44.pib_oss.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import androidx.activity.addCallback
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceDataStore
 import androidx.preference.PreferenceFragmentCompat
@@ -121,6 +123,14 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                 "logIntegrityResponses" -> pack.config.logIntegrityResponses
                 "logIntegrityErrorsOnly" -> pack.config.logIntegrityErrorsOnly
                 "rewriteIntegrityResponse" -> pack.config.rewriteIntegrityResponse
+                "rewriteIntegrityErrorRemediable" -> pack.config.rewriteIntegrityErrorRemediable
+                else -> throw IllegalArgumentException("Invalid key: $key")
+            }
+        }
+
+        override fun getString(key: String, defValue: String?): String {
+            return when (key) {
+                "rewriteIntegrityErrorCode" -> pack.config.rewriteIntegrityErrorCode.toString()
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -132,6 +142,14 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                 "logIntegrityResponses" -> pack.config.logIntegrityResponses = value
                 "logIntegrityErrorsOnly" -> pack.config.logIntegrityErrorsOnly = value
                 "rewriteIntegrityResponse" -> pack.config.rewriteIntegrityResponse = value
+                "rewriteIntegrityErrorRemediable" -> pack.config.rewriteIntegrityErrorRemediable = value
+                else -> throw IllegalArgumentException("Invalid key: $key")
+            }
+        }
+
+        override fun putString(key: String, value: String?) {
+            when (key) {
+                "rewriteIntegrityErrorCode" -> pack.config.rewriteIntegrityErrorCode = value?.toIntOrNull() ?: -8
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -171,6 +189,10 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             preferenceManager.preferenceDataStore = AppPreferenceDataStore(pack)
             setPreferencesFromResource(R.xml.app_settings_v2, rootKey)
+            findPreference<EditTextPreference>("rewriteIntegrityErrorCode")?.setOnBindEditTextListener {
+                it.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_SIGNED
+            }
+
             findPreference<Preference>("appInfo")?.let {
                 if (pack.bulkConfig) {
                     it.icon = R.drawable.outline_storage_24.asDrawable(requireContext())

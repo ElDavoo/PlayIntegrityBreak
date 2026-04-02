@@ -103,8 +103,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onStart()
 
         val serviceVersion = ServiceClient.serviceVersion
+        val serviceHealthTs = ServiceClient.serviceHealthcheckTimestamp
+        val serviceHealthy = serviceVersion > 0 &&
+                serviceHealthTs > 0L &&
+                (System.currentTimeMillis() - serviceHealthTs) <= SERVICE_HEALTH_STALE_MS
+
         var color = when {
-            serviceVersion == 0 -> getColor(R.color.invalid)
+            serviceVersion == 0 || !serviceHealthy -> getColor(R.color.invalid)
             else -> themeColor(android.R.attr.colorPrimary)
         }
 
@@ -135,6 +140,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 if (serviceVersion < org.frknkrc44.pib_oss.common.BuildConfig.SERVICE_VERSION) {
                     serviceStatus.text =
                         getString(R.string.home_xposed_service_old)
+                } else if (!serviceHealthy) {
+                    serviceStatus.text =
+                        getString(R.string.home_xposed_service_health_stale)
                 } else {
                     serviceStatus.text =
                         getString(R.string.home_xposed_service_on, serviceVersion)
@@ -321,6 +329,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     companion object {
+        private const val SERVICE_HEALTH_STALE_MS = 90_000L
+
         @JvmStatic
         fun newInstance() = HomeFragment()
     }

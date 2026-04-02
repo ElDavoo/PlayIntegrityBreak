@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
@@ -21,11 +23,29 @@ object PIBLoggerService : IPIBService.Stub() {
     private const val TAG = "PIB-LoggerService"
     private const val RUNTIME_LOG_FILE = "integrity_runtime.log"
     private const val RUNTIME_LOG_OLD_FILE = "integrity_runtime.old.log"
+    private const val HEARTBEAT_INTERVAL_MS = 10_000L
 
     private val initialized = AtomicBoolean(false)
+    private val heartbeatLoopStarted = AtomicBoolean(false)
+    private val binderPublished = AtomicBoolean(false)
     private val capturedEvents = AtomicLong(0)
+    private val lastHealthcheckTimestamp = AtomicLong(0)
     private val configLock = Any()
     private val logLock = Any()
+
+    private val heartbeatHandler by lazy { Handler(Looper.getMainLooper()) }
+    private val heartbeatRunnable = object : Runnable {
+        override fun run() {
+            if (!initialized.get()) {
+                heartbeatLoopStarted.set(false)
+                return
+            }
+
+            touchHealthcheck()
+            tryPublishBinderToClientApp()
+            heartbeatHandler.postDelayed(this, HEARTBEAT_INTERVAL_MS)
+        }
+    }
 
     @Volatile
     private var config = JsonConfig().apply {
@@ -47,8 +67,14 @@ object PIBLoggerService : IPIBService.Stub() {
     )
 
     fun initialize() {
-        if (!initialized.compareAndSet(false, true)) return
+        if (!initialized.compareAndSet(false, true)) {
+            touchHealthcheck()
+            return
+        }
+
         ensureLogFile()
+        touchHealthcheck()
+        startHeartbeatLoop()
         tryPublishBinderToClientApp()
         logI(TAG, "PIB logger service initialized")
     }
@@ -60,6 +86,7 @@ object PIBLoggerService : IPIBService.Stub() {
     fun isDetailLogging(): Boolean = synchronized(configLock) { config.detailLog }
 
     fun appendParsedLog(parsedMsg: String) {
+        touchHealthcheck()
         synchronized(logLock) {
             val file = ensureLogFile() ?: return
             val maxLogSizeKb = synchronized(configLock) { config.maxLogSize }
@@ -76,46 +103,55 @@ object PIBLoggerService : IPIBService.Stub() {
     }
 
     fun resolvePolicy(callerPkg: String): IntegrityPolicy {
-        if (callerPkg.isBlank() || callerPkg == "unknown") {
-            return IntegrityPolicy(
-                enabled = true,
-                logRequest = true,
-                logResponse = true,
-                errorOnly = isErrorOnlyLogging(),
-                rewriteResponse = false,
-                rewriteErrorCode = -8,
-                rewriteRemediable = true,
-            )
+        touchHealthcheck()
+
+        val unknownCaller = callerPkg.isBlank() || callerPkg == "unknown"
+        if (unknownCaller) {
+            return synchronized(configLock) {
+                IntegrityPolicy(
+                    enabled = true,
+                    logRequest = true,
+                    logResponse = true,
+                    errorOnly = config.errorOnlyLog,
+                    rewriteResponse = config.defaultHookRewriteEnabled,
+                    rewriteErrorCode = config.defaultHookRewriteErrorCode,
+                    rewriteRemediable = config.defaultHookRewriteRemediable,
+                )
+            }
         }
 
         synchronized(configLock) {
             val appConfig = config.scope[callerPkg]
             val hasScopedApps = config.scope.isNotEmpty()
-            if (appConfig == null && hasScopedApps) {
+            val defaultCallerRewriteMatch = callerPkg in config.defaultHookRewriteCallerPackages
+
+            if (appConfig == null && hasScopedApps && !defaultCallerRewriteMatch) {
                 return IntegrityPolicy(
                     enabled = false,
                     logRequest = false,
                     logResponse = false,
                     errorOnly = true,
                     rewriteResponse = false,
-                    rewriteErrorCode = -8,
-                    rewriteRemediable = true,
+                    rewriteErrorCode = config.defaultHookRewriteErrorCode,
+                    rewriteRemediable = config.defaultHookRewriteRemediable,
                 )
             }
 
+            val defaultRewriteEnabled = config.defaultHookRewriteEnabled || defaultCallerRewriteMatch
             return IntegrityPolicy(
                 enabled = appConfig?.integrityLoggerEnabled ?: true,
                 logRequest = appConfig?.logIntegrityRequests ?: true,
                 logResponse = appConfig?.logIntegrityResponses ?: true,
                 errorOnly = config.errorOnlyLog || (appConfig?.logIntegrityErrorsOnly ?: false),
-                rewriteResponse = appConfig?.rewriteIntegrityResponse ?: false,
-                rewriteErrorCode = appConfig?.rewriteIntegrityErrorCode ?: -8,
-                rewriteRemediable = appConfig?.rewriteIntegrityErrorRemediable ?: true,
+                rewriteResponse = appConfig?.rewriteIntegrityResponse ?: defaultRewriteEnabled,
+                rewriteErrorCode = appConfig?.rewriteIntegrityErrorCode ?: config.defaultHookRewriteErrorCode,
+                rewriteRemediable = appConfig?.rewriteIntegrityErrorRemediable ?: config.defaultHookRewriteRemediable,
             )
         }
     }
 
     fun tryPublishBinderToClientApp(): Boolean {
+        touchHealthcheck()
         val app = getCurrentApplication() ?: return false
         val extras = Bundle().apply { putBinder("binder", this@PIBLoggerService) }
         val uri = Uri.parse("content://${Constants.PROVIDER_AUTHORITY}")
@@ -123,11 +159,13 @@ object PIBLoggerService : IPIBService.Stub() {
         return runCatching {
             app.contentResolver.call(uri, "link", null, extras) != null
         }.onSuccess { success ->
-            if (success) {
+            if (success && binderPublished.compareAndSet(false, true)) {
                 logI(TAG, "Published logger binder to app")
             }
         }.onFailure {
-            logW(TAG, "Failed to publish logger binder", it)
+            if (binderPublished.getAndSet(false)) {
+                logW(TAG, "Failed to publish logger binder", it)
+            }
         }.getOrDefault(false)
     }
 
@@ -143,9 +181,11 @@ object PIBLoggerService : IPIBService.Stub() {
         }
     }
 
-    override fun getServiceVersion() = BuildConfig.SERVICE_VERSION
+    override fun getServiceVersion(): Int = BuildConfig.SERVICE_VERSION
 
-    override fun getFilterCount() = capturedEvents.get().coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
+    override fun getServiceHealthcheckTimestamp(): Long = lastHealthcheckTimestamp.get()
+
+    override fun getFilterCount(): Int = capturedEvents.get().coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
 
     override fun getLogs(): String {
         synchronized(logLock) {
@@ -201,6 +241,15 @@ object PIBLoggerService : IPIBService.Stub() {
 
     override fun getLogFileLocation(): String = synchronized(logLock) {
         ensureLogFile()?.absolutePath ?: "unavailable"
+    }
+
+    private fun startHeartbeatLoop() {
+        if (!heartbeatLoopStarted.compareAndSet(false, true)) return
+        heartbeatHandler.post(heartbeatRunnable)
+    }
+
+    private fun touchHealthcheck() {
+        lastHealthcheckTimestamp.set(System.currentTimeMillis())
     }
 
     private fun rotateLogs(current: File) {

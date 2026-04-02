@@ -3,11 +3,18 @@ package icu.nullptr.playintegritybreak.service
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.net.Uri
+import android.os.Binder
 import android.os.Bundle
 import icu.nullptr.playintegritybreak.common.Constants
 import org.frknkrc44.pib_oss.common.BuildConfig
 
 class ServiceProvider : ContentProvider() {
+
+    private val allowedCallers = setOf(
+        Constants.ANDROID_PACKAGE_NAME,
+        Constants.VENDING_PACKAGE_NAME,
+        BuildConfig.APP_PACKAGE_NAME,
+    )
 
     override fun onCreate() = false
 
@@ -21,14 +28,25 @@ class ServiceProvider : ContentProvider() {
 
     override fun update(p0: Uri, p1: ContentValues?, p2: String?, p3: Array<out String>?) = 0
 
+    private fun isCallerAllowed(): Boolean {
+        val directCaller = callingPackage
+        if (directCaller != null && directCaller in allowedCallers) {
+            return true
+        }
+
+        val uidPackages = context?.packageManager?.getPackagesForUid(Binder.getCallingUid()) ?: return false
+        return uidPackages.any { it in allowedCallers }
+    }
+
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
-        val sourcePkg = callingPackage ?: return null
-        val allowedCallers = setOf(
-            Constants.ANDROID_PACKAGE_NAME,
-            Constants.VENDING_PACKAGE_NAME,
-            BuildConfig.APP_PACKAGE_NAME,
-        )
-        if (sourcePkg !in allowedCallers) return null
+        if (!isCallerAllowed()) return null
+
+        if (method == "healthcheck") {
+            return Bundle().apply {
+                putInt("serviceVersion", ServiceClient.serviceVersion)
+                putLong("healthcheckTimestamp", ServiceClient.serviceHealthcheckTimestamp)
+            }
+        }
 
         val binder = extras?.getBinder("binder") ?: return null
         ServiceClient.linkService(binder)

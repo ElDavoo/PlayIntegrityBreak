@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.InputType
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceDataStore
@@ -88,6 +90,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "blackDarkTheme" -> PrefManager.blackDarkTheme
                 "detailLog" -> ConfigManager.detailLog
                 "errorOnlyLog" -> ConfigManager.errorOnlyLog
+                "defaultHookRewriteEnabled" -> ConfigManager.defaultHookRewriteEnabled
+                "defaultHookRewriteRemediable" -> ConfigManager.defaultHookRewriteRemediable
                 "hideIcon" -> PrefManager.hideIcon
                 "bypassRiskyPackageWarning" -> PrefManager.bypassRiskyPackageWarning
                 "appDataIsolation" -> ConfigManager.altAppDataIsolation
@@ -107,6 +111,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor
                 "darkTheme" -> PrefManager.darkTheme.toString()
                 "maxLogSize" -> ConfigManager.maxLogSize.toString()
+                "defaultHookRewriteErrorCode" -> ConfigManager.defaultHookRewriteErrorCode.toString()
+                "defaultHookRewriteCallerPackages" -> ConfigManager.defaultHookRewriteCallerPackages
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -125,6 +131,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "blackDarkTheme" -> PrefManager.blackDarkTheme = value
                 "detailLog" -> ConfigManager.detailLog = value
                 "errorOnlyLog" -> ConfigManager.errorOnlyLog = value
+                "defaultHookRewriteEnabled" -> ConfigManager.defaultHookRewriteEnabled = value
+                "defaultHookRewriteRemediable" -> ConfigManager.defaultHookRewriteRemediable = value
                 "forceMountData" -> ConfigManager.forceMountData = value
                 "disableUpdate" -> PrefManager.disableUpdate = value
                 "hideIcon" -> PrefManager.hideIcon = value
@@ -144,6 +152,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor = value!!
                 "darkTheme" -> PrefManager.darkTheme = value!!.toInt()
                 "maxLogSize" -> ConfigManager.maxLogSize = value!!.toInt()
+                "defaultHookRewriteErrorCode" -> ConfigManager.defaultHookRewriteErrorCode = value?.toIntOrNull() ?: -8
+                "defaultHookRewriteCallerPackages" -> ConfigManager.defaultHookRewriteCallerPackages = value ?: ""
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -335,6 +345,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
 
                     true
                 }
+            }
+
+            findPreference<EditTextPreference>("defaultHookRewriteErrorCode")?.setOnBindEditTextListener {
+                it.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_SIGNED
             }
 
             lifecycleScope.launch {

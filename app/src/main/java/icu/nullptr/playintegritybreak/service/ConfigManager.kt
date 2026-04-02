@@ -64,6 +64,38 @@ object ConfigManager {
             saveConfig()
         }
 
+    var defaultHookRewriteEnabled: Boolean
+        get() = config.defaultHookRewriteEnabled
+        set(value) {
+            config.defaultHookRewriteEnabled = value
+            saveConfig()
+        }
+
+    var defaultHookRewriteErrorCode: Int
+        get() = config.defaultHookRewriteErrorCode
+        set(value) {
+            config.defaultHookRewriteErrorCode = value
+            saveConfig()
+        }
+
+    var defaultHookRewriteRemediable: Boolean
+        get() = config.defaultHookRewriteRemediable
+        set(value) {
+            config.defaultHookRewriteRemediable = value
+            saveConfig()
+        }
+
+    var defaultHookRewriteCallerPackages: String
+        get() = config.defaultHookRewriteCallerPackages.joinToString(",")
+        set(value) {
+            config.defaultHookRewriteCallerPackages = value
+                .split(',', ';', '\n', '\r', ' ', '\t')
+                .map { it.trim() }
+                .filter { it.isNotBlank() }
+                .toMutableSet()
+            saveConfig()
+        }
+
     var maxLogSize: Int
         get() = config.maxLogSize
         set(value) {

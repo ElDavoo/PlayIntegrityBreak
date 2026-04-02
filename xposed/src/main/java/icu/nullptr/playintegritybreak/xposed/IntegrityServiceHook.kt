@@ -12,9 +12,6 @@ import java.util.regex.Pattern
 
 object IntegrityServiceHook {
     private const val TAG = "IntegrityServiceHook"
-    private const val LEGACY_BLOCKED_CALLER_PACKAGE = "gr.nikolasspyr.integritycheck"
-    private const val LEGACY_REWRITE_ERROR_CODE = -8
-    private const val LEGACY_REWRITE_RETRIABLE = true
 
     private val packageNamePattern =
         Pattern.compile("[a-zA-Z][a-zA-Z0-9_]*(?:\\.[a-zA-Z0-9_]+)+")
@@ -82,8 +79,6 @@ object IntegrityServiceHook {
                 val requestPayload = isIntegrityRequestPayload(args)
                 val responsePayload = hasResponsePayload(args)
                 val callbackRewrite = extractRememberedBlockedCallback(args)
-                val legacyBlockedCaller =
-                    LEGACY_BLOCKED_CALLER_PACKAGE == callerPkg || hasPackageStringArg(args, LEGACY_BLOCKED_CALLER_PACKAGE)
 
                 val policyRewrite = if (policy.rewriteResponse) {
                     RewriteSpec(
@@ -94,25 +89,16 @@ object IntegrityServiceHook {
                 } else {
                     null
                 }
-                val legacyRewrite = if (legacyBlockedCaller) {
-                    RewriteSpec(
-                        packageName = LEGACY_BLOCKED_CALLER_PACKAGE,
-                        errorCode = LEGACY_REWRITE_ERROR_CODE,
-                        remediable = LEGACY_REWRITE_RETRIABLE,
-                    )
-                } else {
-                    null
-                }
 
                 if (policy.enabled && policy.logRequest && looksLikeRequest && callerPkg != "unknown") {
                     logI("Request from $callerPkg")
                 }
 
                 if (requestPayload) {
-                    (policyRewrite ?: legacyRewrite)?.let { rememberBlockedCallback(args, it) }
+                    policyRewrite?.let { rememberBlockedCallback(args, it) }
                 }
 
-                val rewriteSpec = callbackRewrite ?: policyRewrite ?: legacyRewrite
+                val rewriteSpec = callbackRewrite ?: policyRewrite
                 val shouldRewrite = !requestPayload && responsePayload && rewriteSpec != null
 
                 if (shouldRewrite && rewriteResponseToBlockedError(args, rewriteSpec.errorCode, rewriteSpec.remediable)) {
@@ -229,13 +215,6 @@ object IntegrityServiceHook {
         return args.any {
             val bundle = it as? Bundle ?: return@any false
             bundle.containsKey("token") || bundle.containsKey("error")
-        }
-    }
-
-    private fun hasPackageStringArg(args: Array<Any?>, expectedPkg: String): Boolean {
-        return args.any { arg ->
-            val value = arg as? String ?: return@any false
-            value == expectedPkg
         }
     }
 

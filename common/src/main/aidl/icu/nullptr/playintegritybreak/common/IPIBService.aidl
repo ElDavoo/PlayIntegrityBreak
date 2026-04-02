@@ -6,6 +6,8 @@ interface IPIBService {
 
     int getServiceVersion() = 1;
 
+    long getServiceHealthcheckTimestamp() = 10;
+
     int getFilterCount() = 2;
 
     String getLogs() = 3;

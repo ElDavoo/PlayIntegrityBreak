@@ -35,5 +35,22 @@
             app:singleLineTitle="false"
             android:title="@string/app_rewrite_integrity_response"
             android:summary="@string/app_rewrite_integrity_response_desc" />
+        <EditTextPreference
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="rewriteIntegrityErrorCode"
+            android:defaultValue="-8"
+            android:dependency="rewriteIntegrityResponse"
+            app:singleLineTitle="false"
+            android:summary="%s"
+            android:title="@string/app_rewrite_integrity_error_code"
+            android:dialogMessage="@string/app_rewrite_integrity_error_code_desc" />
+        <SwitchPreferenceCompat
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="rewriteIntegrityErrorRemediable"
+            android:defaultValue="true"
+            android:dependency="rewriteIntegrityResponse"
+            app:singleLineTitle="false"
+            android:title="@string/app_rewrite_integrity_error_remediable"
+            android:summary="@string/app_rewrite_integrity_error_remediable_desc" />
     </PreferenceCategory>
 </PreferenceScreen>
