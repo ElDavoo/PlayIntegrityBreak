@@ -12,6 +12,8 @@ import java.util.regex.Pattern
 
 object IntegrityServiceHook {
     private const val TAG = "IntegrityServiceHook"
+    private const val RESPONSE_SOURCE_SERVICE = "service-response"
+    private const val RESPONSE_SOURCE_REWRITTEN_PRE_DELIVERY = "rewritten-before-delivery"
 
     private val packageNamePattern =
         Pattern.compile("[a-zA-Z][a-zA-Z0-9_]*(?:\\.[a-zA-Z0-9_]+)+")
@@ -90,8 +92,12 @@ object IntegrityServiceHook {
                     null
                 }
 
+                if (policy.enabled && requestPayload && callerPkg != "unknown") {
+                    PIBLoggerService.recordIntegrityRequest(callerPkg)
+                }
+
                 if (policy.enabled && policy.logRequest && looksLikeRequest && callerPkg != "unknown") {
-                    logI("Request from $callerPkg")
+                    logI("Integrity request intercepted from $callerPkg")
                 }
 
                 if (requestPayload) {
@@ -103,7 +109,20 @@ object IntegrityServiceHook {
 
                 if (shouldRewrite && rewriteResponseToBlockedError(args, rewriteSpec.errorCode, rewriteSpec.remediable)) {
                     val pkgForLog = if (callerPkg == "unknown") rewriteSpec.packageName else callerPkg
-                    logResult(pkgForLog, false, rewriteSpec.errorCode, rewriteSpec.remediable, "blocked-rewrite-pre")
+                    PIBLoggerService.recordIntegrityResponse(
+                        callerPkg = pkgForLog,
+                        success = false,
+                        errorCode = rewriteSpec.errorCode,
+                        retriable = rewriteSpec.remediable,
+                        source = RESPONSE_SOURCE_REWRITTEN_PRE_DELIVERY,
+                    )
+                    logResult(
+                        callerPkg = pkgForLog,
+                        success = false,
+                        errorCode = rewriteSpec.errorCode,
+                        retriable = rewriteSpec.remediable,
+                        source = RESPONSE_SOURCE_REWRITTEN_PRE_DELIVERY,
+                    )
                     clearRememberedBlockedCallback(args)
                 }
             }
@@ -119,6 +138,17 @@ object IntegrityServiceHook {
                 val callerPkg = extractCallerPackage(args)
                 val outcome = extractOutcome(args)
                 val policy = PIBLoggerService.resolvePolicy(callerPkg)
+
+                if (outcome != null && callerPkg != "unknown" && policy.enabled) {
+                    PIBLoggerService.recordIntegrityResponse(
+                        callerPkg = callerPkg,
+                        success = outcome.success,
+                        errorCode = outcome.errorCode,
+                        retriable = outcome.retriable,
+                        source = RESPONSE_SOURCE_SERVICE,
+                    )
+                }
+
                 val shouldLogOutcome = outcome != null
                     && callerPkg != "unknown"
                     && policy.enabled
@@ -126,7 +156,13 @@ object IntegrityServiceHook {
                     && (!policy.errorOnly || !outcome.success)
 
                 if (shouldLogOutcome) {
-                    logResult(callerPkg, outcome.success, outcome.errorCode, outcome.retriable, "forwarded")
+                    logResult(
+                        callerPkg = callerPkg,
+                        success = outcome.success,
+                        errorCode = outcome.errorCode,
+                        retriable = outcome.retriable,
+                        source = RESPONSE_SOURCE_SERVICE,
+                    )
                 }
             }
         })
@@ -140,13 +176,13 @@ object IntegrityServiceHook {
         source: String,
     ) {
         if (success) {
-            logI("Result for $callerPkg: success ($source)")
+            logI("Integrity response for $callerPkg: success [source=$source]")
             return
         }
 
         val errorText = errorCode?.toString() ?: "unknown"
         val retriableText = retriable?.toString() ?: "unknown"
-        logI("Result for $callerPkg: failed (error=$errorText, retriable=$retriableText) ($source)")
+        logI("Integrity response for $callerPkg: failed (error=$errorText, retriable=$retriableText) [source=$source]")
     }
 
     private fun extractOutcome(args: Array<Any?>): Outcome? {

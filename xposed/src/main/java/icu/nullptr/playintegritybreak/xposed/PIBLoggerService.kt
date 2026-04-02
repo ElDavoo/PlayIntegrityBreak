@@ -128,8 +128,8 @@ object PIBLoggerService : IPIBService.Stub() {
             if (appConfig == null && hasScopedApps && !defaultCallerRewriteMatch) {
                 return IntegrityPolicy(
                     enabled = false,
-                    logRequest = false,
-                    logResponse = false,
+                    logRequest = true,
+                    logResponse = true,
                     errorOnly = true,
                     rewriteResponse = false,
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
@@ -140,14 +140,40 @@ object PIBLoggerService : IPIBService.Stub() {
             val defaultRewriteEnabled = config.defaultHookRewriteEnabled || defaultCallerRewriteMatch
             return IntegrityPolicy(
                 enabled = appConfig?.integrityLoggerEnabled ?: true,
-                logRequest = appConfig?.logIntegrityRequests ?: true,
-                logResponse = appConfig?.logIntegrityResponses ?: true,
+                // Request/response logging is always enabled; only logger enable/error-only may filter output.
+                logRequest = true,
+                logResponse = true,
                 errorOnly = config.errorOnlyLog || (appConfig?.logIntegrityErrorsOnly ?: false),
                 rewriteResponse = appConfig?.rewriteIntegrityResponse ?: defaultRewriteEnabled,
                 rewriteErrorCode = appConfig?.rewriteIntegrityErrorCode ?: config.defaultHookRewriteErrorCode,
                 rewriteRemediable = appConfig?.rewriteIntegrityErrorRemediable ?: config.defaultHookRewriteRemediable,
             )
         }
+    }
+
+    fun recordIntegrityRequest(callerPkg: String) {
+        touchHealthcheck()
+        val app = getCurrentApplication() ?: return
+        IntegrityEventStore.recordRequest(app, callerPkg)
+    }
+
+    fun recordIntegrityResponse(
+        callerPkg: String,
+        success: Boolean,
+        errorCode: Int?,
+        retriable: Boolean?,
+        source: String,
+    ) {
+        touchHealthcheck()
+        val app = getCurrentApplication() ?: return
+        IntegrityEventStore.recordResponse(
+            app = app,
+            packageName = callerPkg,
+            success = success,
+            errorCode = errorCode,
+            retriable = retriable,
+            source = source,
+        )
     }
 
     fun tryPublishBinderToClientApp(): Boolean {
@@ -185,7 +211,12 @@ object PIBLoggerService : IPIBService.Stub() {
 
     override fun getServiceHealthcheckTimestamp(): Long = lastHealthcheckTimestamp.get()
 
-    override fun getFilterCount(): Int = capturedEvents.get().coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
+    override fun getFilterCount(): Int {
+        val inMemoryCount = capturedEvents.get().coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
+        val app = getCurrentApplication() ?: return inMemoryCount
+        val dbCount = IntegrityEventStore.countEvents(app)
+        return dbCount.coerceAtLeast(inMemoryCount)
+    }
 
     override fun getLogs(): String {
         synchronized(logLock) {
@@ -203,6 +234,7 @@ object PIBLoggerService : IPIBService.Stub() {
                 capturedEvents.set(0)
             }
         }
+        getCurrentApplication()?.let(IntegrityEventStore::clear)
     }
 
     override fun readConfig(): String = synchronized(configLock) { config.toString() }
