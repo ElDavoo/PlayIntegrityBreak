@@ -11,7 +11,7 @@
     <string name="title_app_settings">앱 설정</string>
     <string name="title_about">정보</string>
     <string name="title_about_fork">이 포크 버전에 대하여</string>
-    <string name="do_not_dual">보조 사용자에게 HMA 설치하지 않음</string>
+    <string name="do_not_dual">보조 사용자에게 PIB 설치하지 않음</string>
     <string name="show_crash_log">크래시 로그 표시</string>
     <string name="config_damaged">설정 파일이 손상되었습니다. 앱 데이터를 삭제하세요.</string>
     <string name="edit_list">목록 편집</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">시스템 서비스 실행 중 [%d]</string>
     <string name="home_xposed_service_off">시스템 서비스 실행 중지</string>
     <string name="home_xposed_service_old">모듈이 업데이트되었습니다. 재부팅이 필요합니다.</string>
-    <string name="home_xposed_filter_count">HMA-OSS가 총 %d개의 요청을 필터링했습니다.</string>
+    <string name="home_xposed_filter_count">PIB-OSS가 총 %d개의 요청을 필터링했습니다.</string>
     <string name="home_manage">관리</string>
     <string name="home_detection_test">탐지 테스트</string>
     <string name="home_download_test_app_title">테스트 앱 다운로드</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        특정 앱 설치를 감지하는 것이 올바르지는 않지만, ROOT를 사용하는 모든 앱이 랜덤 패키지 이름을 지원하는 것은 아닙니다. 이 경우, ROOT를 사용하는 앱(Fake Location, Storage Isolation 등)이 감지되는 것은 ROOT 자체가 감지되는 것과 같습니다.\n\n동시에, 일부 영리한 앱들은 다양한 허점을 이용해 사용자의 앱 목록을 획득하고, 이를 통해 사용자의 페르소나를 그려내기도 합니다.\n\n이 모듈은 앱 목록이 잘 숨겨졌는지 테스트하는 몇 가지 방법을 제공합니다. 또한 Xposed 모듈로 작동하여 일부 앱을 숨기거나 앱 목록 요청을 거부하여 개인 정보를 보호할 수 있습니다.
     </string>
-    <string name="about_fork_description">        기존 HMA 프로젝트가 비공개 소스로 전환되었고 최신 코드에 일부 최신 변경 사항이 포함되지 않았기에, 오픈 소스로 계속 이어가기 위해 이 포크를 만들었습니다.
+    <string name="about_fork_description">        기존 PIB 프로젝트가 비공개 소스로 전환되었고 최신 코드에 일부 최신 변경 사항이 포함되지 않았기에, 오픈 소스로 계속 이어가기 위해 이 포크를 만들었습니다.
     </string>
     <string name="about_how_to_use_title">모듈 사용 방법</string>
     <string name="about_how_to_use_description_1">        \"템플릿 관리\"에서 템플릿을 만들 수 있습니다.\n그런 다음 \"앱 관리\"에서 앱에 템플릿을 적용하세요. (대상에 대해 추가 앱을 선택할 수도 있습니다.)\nXposed 모듈 범위 / 화이트리스트에서 반드시 오직 \"시스템 프레임워크(System Framework)\"만 체크해야 합니다.

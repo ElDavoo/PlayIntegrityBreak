@@ -1,0 +1,135 @@
+package icu.nullptr.playintegritybreak.ui.fragment
+
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.clearFragmentResultListener
+import androidx.fragment.app.setFragmentResultListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.common.JsonConfig
+import icu.nullptr.playintegritybreak.service.ConfigManager
+import icu.nullptr.playintegritybreak.ui.adapter.TemplateAdapter
+import icu.nullptr.playintegritybreak.ui.util.navController
+import icu.nullptr.playintegritybreak.ui.util.navigate
+import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
+import icu.nullptr.playintegritybreak.ui.util.setupToolbar
+import org.frknkrc44.pib_oss.R
+import org.frknkrc44.pib_oss.databinding.FragmentTemplateManageBinding
+import org.frknkrc44.pib_oss.ui.fragment.SettingsTemplateConfFragmentArgs
+import org.frknkrc44.pib_oss.ui.util.toTargetSettingList
+
+class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
+
+    private val binding by viewBinding(FragmentTemplateManageBinding::bind)
+    private val adapter = TemplateAdapter(this::navigateToSettings)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupToolbar(
+            toolbar = binding.toolbar,
+            title = getString(R.string.title_template_manage),
+            navigationIcon = R.drawable.baseline_arrow_back_24,
+            navigationOnClick = { navController.navigateUp() },
+            menuRes = R.menu.menu_template_manage,
+            onMenuOptionSelected = {
+                when (it.itemId) {
+                    R.id.menu_info -> {
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(R.string.title_template_manage)
+                            .setMessage(R.string.template_usage_hint)
+                            .setNegativeButton(android.R.string.ok, null)
+                            .show()
+                    }
+                }
+            }
+        )
+
+        binding.newBlacklistTemplate.setOnClickListener {
+            navigateToSettings(ConfigManager.TemplateInfo(null, ConfigManager.PTType.APP, false))
+        }
+        binding.newWhitelistTemplate.setOnClickListener {
+            navigateToSettings(ConfigManager.TemplateInfo(null, ConfigManager.PTType.APP, true))
+        }
+        binding.newSettingTemplate.setOnClickListener {
+            navigateToSettings(ConfigManager.TemplateInfo(null, ConfigManager.PTType.SETTINGS, false))
+        }
+        binding.templateList.layoutManager = LinearLayoutManager(context)
+        binding.templateList.adapter = adapter
+
+        setEdge2EdgeFlags(binding.root)
+    }
+
+    private fun navigateToSettings(info: ConfigManager.TemplateInfo) {
+        when (info.type) {
+            ConfigManager.PTType.APP -> navigateToAppTemplateSettings(info)
+            ConfigManager.PTType.SETTINGS -> navigateToSettingTemplateSettings(info)
+        }
+    }
+
+    private fun navigateToAppTemplateSettings(info: ConfigManager.TemplateInfo) {
+        setFragmentResultListener("template_settings") { _, bundle ->
+            fun deal() {
+                var name = bundle.getString("name")
+                val appliedList = bundle.getStringArrayList("appliedList")!!
+                val targetList = bundle.getStringArrayList("targetList")!!
+                if (info.name == null) { // New template
+                    if (name.isNullOrEmpty()) return
+                    ConfigManager.updateTemplate(name, JsonConfig.Template(info.isWhiteList, targetList.toSet()))
+                    ConfigManager.updateTemplateAppliedApps(name, appliedList)
+                } else {                 // Existing template
+                    if (name == null) {
+                        ConfigManager.deleteTemplate(info.name)
+                    } else {
+                        if (name.isEmpty()) name = info.name
+                        if (name != info.name) ConfigManager.renameTemplate(info.name, name)
+                        ConfigManager.updateTemplate(name, JsonConfig.Template(info.isWhiteList, targetList.toSet()))
+                        ConfigManager.updateTemplateAppliedApps(name, appliedList)
+                    }
+                }
+            }
+            deal()
+            adapter.updateList()
+            clearFragmentResultListener("template_settings")
+        }
+
+        val args = TemplateSettingsFragmentArgs(info.name, info.isWhiteList)
+        navigate(R.id.nav_template_settings, args.toBundle())
+    }
+
+    private fun navigateToSettingTemplateSettings(info: ConfigManager.TemplateInfo) {
+        setFragmentResultListener("settings_template_conf") { _, bundle ->
+            fun deal() {
+                var name = bundle.getString("name")
+                val appliedList = bundle.getStringArrayList("appliedList")!!
+                val targetList = bundle.getBundle("settingList")!!.toTargetSettingList()
+                if (info.name == null) { // New template
+                    if (name.isNullOrEmpty()) return
+                    ConfigManager.updateSettingTemplate(
+                        name,
+                        JsonConfig.SettingsTemplate(targetList.toSet())
+                    )
+                    ConfigManager.updateSettingTemplateAppliedApps(name, appliedList)
+                } else {                 // Existing template
+                    if (name == null) {
+                        ConfigManager.deleteSettingTemplate(info.name)
+                    } else {
+                        if (name.isEmpty()) name = info.name
+                        if (name != info.name) ConfigManager.renameSettingTemplate(info.name, name)
+                        ConfigManager.updateSettingTemplate(
+                            name,
+                            JsonConfig.SettingsTemplate(targetList.toSet())
+                        )
+                        ConfigManager.updateSettingTemplateAppliedApps(name, appliedList)
+                    }
+                }
+            }
+            deal()
+            adapter.updateList()
+            clearFragmentResultListener("settings_template_conf")
+        }
+
+        val args = SettingsTemplateConfFragmentArgs(info.name)
+        navigate(R.id.nav_setting_template_conf, args.toBundle())
+    }
+}

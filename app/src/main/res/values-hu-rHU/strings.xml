@@ -11,7 +11,7 @@
     <string name="title_app_settings">App settings</string>
     <string name="title_about">About</string>
     <string name="title_about_fork">About this fork</string>
-    <string name="do_not_dual">Do not install HMA to secondary user</string>
+    <string name="do_not_dual">Do not install PIB to secondary user</string>
     <string name="show_crash_log">Show crash log</string>
     <string name="config_damaged">Config file damaged. Please clean the app data</string>
     <string name="edit_list">Edit list</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">System service running [%d]</string>
     <string name="home_xposed_service_off">System service not running</string>
     <string name="home_xposed_service_old">Module updated, need reboot</string>
-    <string name="home_xposed_filter_count">HMA-OSS has filtered total %d requests</string>
+    <string name="home_xposed_filter_count">PIB-OSS has filtered total %d requests</string>
     <string name="home_manage">Manage</string>
     <string name="home_detection_test">Detection test</string>
     <string name="home_download_test_app_title">Download test app</string>
@@ -204,7 +204,7 @@ Jelenleg néhány okos alkalmazás különféle kiskapukat használ az alkalamz�
 
 Ez a modul néhány eljárást biztosít annak ellenőrzésére, hogy az alkalmazás lisa rendesen elrejtésre került-e. A modul Xposed modulként is tud működni, hogy elrejtse az alkalmazásokat, vagy visszautasítsa az alkalmazás lista lekéréseket az adatvédelmed érdekében.
     </string>
-    <string name="about_fork_description">        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
+    <string name="about_fork_description">        The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">        A \"Sablonok kezelése\" alatt lehet létrehozni sablonokat.

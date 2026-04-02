@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/item_padding_mini2x"
             android:textAppearance="?textAppearanceTitleSmall"
-            tools:text="HMA-Bridge" />
+            tools:text="PIB-Bridge" />
 
     </LinearLayout>
 

@@ -4,10 +4,10 @@
     public static ** valueOf(java.lang.String);
 }
 
--keep class icu.nullptr.hidemyapplist.data.UpdateData { *; }
--keep class icu.nullptr.hidemyapplist.data.UpdateData$* { *; }
+-keep class icu.nullptr.playintegritybreak.data.UpdateData { *; }
+-keep class icu.nullptr.playintegritybreak.data.UpdateData$* { *; }
 
 -keep,allowoptimization class * extends androidx.preference.PreferenceFragmentCompat
--keepclassmembers class org.frknkrc44.hma_oss.databinding.**  {
+-keepclassmembers class org.frknkrc44.pib_oss.databinding.**  {
     public <methods>;
 }

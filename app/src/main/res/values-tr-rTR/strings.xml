@@ -11,7 +11,7 @@
     <string name="title_app_settings">Uygulama ayarları</string>
     <string name="title_about">Hakkında</string>
     <string name="title_about_fork">Bu çatal hakkında</string>
-    <string name="do_not_dual">HMA’yı ikincil kullanıcıya yüklemeyin</string>
+    <string name="do_not_dual">PIB’yı ikincil kullanıcıya yüklemeyin</string>
     <string name="show_crash_log">Çökme kaydını göster</string>
     <string name="config_damaged">Yapılandırma dosyası hasarlı. Lütfen uygulama verilerini temizleyin</string>
     <string name="edit_list">Listeyi düzenle</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Sistem servisi çalışıyor [%d]</string>
     <string name="home_xposed_service_off">Sistem servisi çalışmıyor</string>
     <string name="home_xposed_service_old">Modül güncellendi, yeniden başlatma gerekiyor</string>
-    <string name="home_xposed_filter_count">HMA-OSS toplam %d isteği filtreledi</string>
+    <string name="home_xposed_filter_count">PIB-OSS toplam %d isteği filtreledi</string>
     <string name="home_manage">Yönet</string>
     <string name="home_detection_test">Tespit testi</string>
     <string name="home_download_test_app_title">Test uygulaması indir</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        Belirli bir uygulamanın yüklü olup olmadığını tespit etmek yanlış olsa da, root kullanan her uygulama rastgele paket adı desteği sunmaz. Bu durumda, root kullanan tespit edilen uygulamalar (örneğin, Sahte Konum ve Depolama İzolasyonu), root’un kendisinin tespit edilmesiyle eşdeğerdir.\n\nAynı zamanda, bazı akıllı uygulamalar, uygulama listenizi elde etmek için çeşitli açıkları kullanır, böylece sizin için bir profil çizebilir.\n\nBu modül, uygulama listenizi başarıyla gizleyip gizlemediğinizi test etmenin bazı yollarını sunar. Ayrıca, bir Xposed modülü olarak çalışarak bazı uygulamaları gizlemek veya uygulama liste isteklerini reddederek gizliliğinizi korumak için kullanılabilir.
     </string>
-    <string name="about_fork_description">        Orijinal HMA projesi kapalı kaynak haline geldi ve en son kodları bazı son değişiklikleri içermiyordu, bu yüzden bu çatalı oluşturup projeyi tekrar açık kaynak olarak sürdürmeye karar verdim.
+    <string name="about_fork_description">        Orijinal PIB projesi kapalı kaynak haline geldi ve en son kodları bazı son değişiklikleri içermiyordu, bu yüzden bu çatalı oluşturup projeyi tekrar açık kaynak olarak sürdürmeye karar verdim.
     </string>
     <string name="about_how_to_use_title">Bu modül nasıl kullanılır</string>
     <string name="about_how_to_use_description_1">        \"Şablonları Yönet\" bölümünde şablonlar oluşturabilirsiniz.\nSonra \"Uygulamaları Yönet\" bölümünde uygulamalara şablonları uygulayabilirsiniz. (Hedefler için ek uygulamalar da seçebilirsiniz.)\nXposed modül kapsamında/beyaz listede YALNIZCA \"Sistem Çerçevesi\"ni işaretlemelisiniz.

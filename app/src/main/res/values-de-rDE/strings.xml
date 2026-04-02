@@ -11,7 +11,7 @@
     <string name="title_app_settings">App Einstellungen</string>
     <string name="title_about">Über</string>
     <string name="title_about_fork">Über diesen Fork</string>
-    <string name="do_not_dual">Installiere HMA NICHT als zweit Nutzer</string>
+    <string name="do_not_dual">Installiere PIB NICHT als zweit Nutzer</string>
     <string name="show_crash_log">Absturzprotokoll anzeigen</string>
     <string name="config_damaged">Konfigurationsdatei beschädigt. Bitte Appdaten löschen</string>
     <string name="edit_list">Liste bearbeiten</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">System Service läuft [%d]</string>
     <string name="home_xposed_service_off">System Service läuft nicht</string>
     <string name="home_xposed_service_old">Modul aktualisiert, Neustart benötigt</string>
-    <string name="home_xposed_filter_count">HMA-OSS hat insgesamt %d Anfragen gefiltert</string>
+    <string name="home_xposed_filter_count">PIB-OSS hat insgesamt %d Anfragen gefiltert</string>
     <string name="home_manage">Verwalten</string>
     <string name="home_detection_test">Erkennungstest</string>
     <string name="home_download_test_app_title">Test App herunterladen</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
     </string>
-    <string name="about_fork_description">        Das ursprüngliche HMA-Projekt wurde geschlossen und der neueste Code enthielt keine der neuesten Änderungen so habe ich diesen Fork erstellt, um ihn wieder als Open-Source fortzusetzen.
+    <string name="about_fork_description">        Das ursprüngliche PIB-Projekt wurde geschlossen und der neueste Code enthielt keine der neuesten Änderungen so habe ich diesen Fork erstellt, um ihn wieder als Open-Source fortzusetzen.
     </string>
     <string name="about_how_to_use_title">Wie verwendet man dieses Modul</string>
     <string name="about_how_to_use_description_1">        Du kannst Vorlagen unter \"Vorlagen verwalten\" erstellen.\nWende diese dann unter \"Apps verwalten\" an. (Du kannst außerdem extra Apps für Ziele einstellen.)\nWähle nur und wirklich NUR \"System Framework\" in Xposed aus.</string>

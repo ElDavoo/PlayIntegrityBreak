@@ -70,44 +70,47 @@ afterEvaluate {
         "cvnertnc" to "https://avatars.githubusercontent.com/u/148134890?v=4",
     )
 
-    val urlConnection = if (crowdinApiKey.isNotBlank()) {
-        val url = URL("https://crowdin.com/api/v2/projects/$crowdinProjectId/members")
-        (url.openConnection() as HttpURLConnection).apply {
-            setRequestProperty("authorization", "Bearer $crowdinApiKey")
-        }
-    } else {
-        val url = URL("https://github.com/frknkrc44/HMA-OSS/releases/latest/download/translators.json")
-        url.openConnection() as HttpURLConnection
-    }
-
-    val inputStream = DataInputStream(urlConnection.getInputStream())
-    val str = String(inputStream.readAllBytes())
-    inputStream.close()
-    urlConnection.disconnect()
-
-    val json = JsonParser.parseString(str).asJsonObject
-
-    if (crowdinApiKey.isNotBlank()) {
-        val translators = json.getAsJsonArray("data")
-
-        for (item in translators) {
-            val translator = item.asJsonObject.getAsJsonObject("data")
-            val avatarUrl = translator.get("avatarUrl").asString
-            val username = translator.get("username").asString
-            val fullName = try {
-                translator.get("fullName").asString
-            } catch (_: Throwable) {
-                ""
+    runCatching {
+        val urlConnection = if (crowdinApiKey.isNotBlank()) {
+            val url = URL("https://crowdin.com/api/v2/projects/$crowdinProjectId/members")
+            (url.openConnection() as HttpURLConnection).apply {
+                setRequestProperty("authorization", "Bearer $crowdinApiKey")
             }
-
-            if (fullName.isNotEmpty() && fullName != username) {
-                translatorsMap["$fullName ($username)"] = avatarUrl
-            } else {
-                translatorsMap[username] = avatarUrl
-            }
+        } else {
+            val primary = URL("https://github.com/frknkrc44/PIB-OSS/releases/latest/download/translators.json")
+                primary.openConnection() as HttpURLConnection
         }
-    } else {
-        json.keySet().forEach { translatorsMap[it] = json.get(it).asString }
+
+        val inputStream = DataInputStream(urlConnection.getInputStream())
+        val str = String(inputStream.readAllBytes())
+        inputStream.close()
+        urlConnection.disconnect()
+
+        val json = JsonParser.parseString(str).asJsonObject
+        if (crowdinApiKey.isNotBlank()) {
+            val translators = json.getAsJsonArray("data")
+
+            for (item in translators) {
+                val translator = item.asJsonObject.getAsJsonObject("data")
+                val avatarUrl = translator.get("avatarUrl").asString
+                val username = translator.get("username").asString
+                val fullName = try {
+                    translator.get("fullName").asString
+                } catch (_: Throwable) {
+                    ""
+                }
+
+                if (fullName.isNotEmpty() && fullName != username) {
+                    translatorsMap["$fullName ($username)"] = avatarUrl
+                } else {
+                    translatorsMap[username] = avatarUrl
+                }
+            }
+        } else {
+            json.keySet().forEach { translatorsMap[it] = json.get(it).asString }
+        }
+    }.onFailure {
+        logger.warn("Failed to fetch translators metadata, using bundled defaults", it)
     }
 
     val translatorJson = JSONObject(translatorsMap).toJSONString()
@@ -142,7 +145,7 @@ kotlin {
 autoResConfig {
     generateClass.set(true)
     generateRes.set(false)
-    generatedClassFullName.set("icu.nullptr.hidemyapplist.util.LangList")
+    generatedClassFullName.set("icu.nullptr.playintegritybreak.util.LangList")
     generatedArrayFirstItem.set("SYSTEM")
 }
 

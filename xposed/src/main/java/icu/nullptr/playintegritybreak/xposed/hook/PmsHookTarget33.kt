@@ -1,0 +1,96 @@
+package icu.nullptr.playintegritybreak.xposed.hook
+
+import android.content.pm.PackageInstaller
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.github.kyuubiran.ezxhelper.utils.findConstructor
+import com.github.kyuubiran.ezxhelper.utils.findMethod
+import com.github.kyuubiran.ezxhelper.utils.hookBefore
+import com.github.kyuubiran.ezxhelper.utils.paramCount
+import icu.nullptr.playintegritybreak.common.Constants
+import icu.nullptr.playintegritybreak.common.Constants.VENDING_PACKAGE_NAME
+import icu.nullptr.playintegritybreak.common.Utils
+import icu.nullptr.playintegritybreak.xposed.PIBService
+import icu.nullptr.playintegritybreak.xposed.Utils4Xposed
+import icu.nullptr.playintegritybreak.xposed.XposedConstants.APPS_FILTER_IMPL_CLASS
+import icu.nullptr.playintegritybreak.xposed.logD
+import icu.nullptr.playintegritybreak.xposed.logE
+import icu.nullptr.playintegritybreak.xposed.logI
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+class PmsHookTarget33(service: PIBService) : PmsHookTargetBase(service) {
+
+    override val TAG = "PmsHookTarget33"
+
+    private val getPackagesForUidMethod by lazy {
+        findMethod("com.android.server.pm.Computer") {
+            name == "getPackagesForUid"
+        }
+    }
+
+    override val fakeSystemPackageInstallSourceInfo: Any by lazy {
+        findConstructor(
+            "android.content.pm.InstallSourceInfo"
+        ) {
+            paramCount == 5
+        }.newInstance(
+            null,
+            null,
+            null,
+            null,
+            PackageInstaller.PACKAGE_SOURCE_UNSPECIFIED,
+        )
+    }
+
+    override val fakeUserPackageInstallSourceInfo: Any by lazy {
+        findConstructor(
+            "android.content.pm.InstallSourceInfo"
+        ) {
+            paramCount == 5
+        }.newInstance(
+            VENDING_PACKAGE_NAME,
+            psPackageInfo?.signingInfo,
+            VENDING_PACKAGE_NAME,
+            VENDING_PACKAGE_NAME,
+            PackageInstaller.PACKAGE_SOURCE_STORE,
+        )
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun load() {
+        logI(TAG, "Load hook")
+        hooks += findMethod(APPS_FILTER_IMPL_CLASS, findSuper = true) {
+            name == "shouldFilterApplication"
+        }.hookBefore { param ->
+            runCatching {
+                val callingUid = param.args[1] as Int
+                if (callingUid == Constants.UID_SYSTEM) return@hookBefore
+                val targetApp = Utils4Xposed.getPackageNameFromPackageSettings(param.args[3]) // PackageSettings <- PackageStateInternal
+                if (service.shouldHideFromUid(callingUid, targetApp) == true) {
+                    param.result = true
+                    service.increasePMFilterCount(callingUid)
+                    logD(TAG, "@shouldFilterApplication caller cache: $callingUid, target: $targetApp")
+                    return@hookBefore
+                }
+                val snapshot = param.args[0]
+                val callingApps = Utils.binderLocalScope {
+                    getPackagesForUidMethod.invoke(snapshot, callingUid) as Array<String>?
+                } ?: return@hookBefore
+                val caller = callingApps.firstOrNull { service.shouldHide(it, targetApp) }
+                if (caller != null) {
+                    param.result = true
+                    service.putShouldHideUidCache(callingUid, caller, targetApp!!)
+                    service.increasePMFilterCount(caller)
+                    val last = lastFilteredApp.getAndSet(caller)
+                    if (last != caller) logI(TAG, "@shouldFilterApplication: query from $caller")
+                    logD(TAG, "@shouldFilterApplication caller: $callingUid $caller, target: $targetApp")
+                }
+            }.onFailure {
+                logE(TAG, "Fatal error occurred, disable hooks", it)
+                unload()
+            }
+        }
+
+        super.load()
+    }
+}

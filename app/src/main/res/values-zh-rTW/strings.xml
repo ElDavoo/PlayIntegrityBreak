@@ -10,8 +10,8 @@
     <string name="title_app_select">選擇應用程式</string>
     <string name="title_app_settings">應用程式設定</string>
     <string name="title_about">關於</string>
-    <string name="title_about_fork">關於HMA-OSS</string>
-    <string name="do_not_dual">不要多開或將 HMA 安裝給次要使用者</string>
+    <string name="title_about_fork">關於PIB-OSS</string>
+    <string name="do_not_dual">不要多開或將 PIB 安裝給次要使用者</string>
     <string name="show_crash_log">顯示崩潰日誌</string>
     <string name="config_damaged">配置檔損毀，請清理應用程式的資料</string>
     <string name="edit_list">編輯列表</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        雖然檢測特定的應用程式安裝來判斷使否有使用 root 是不正卻也不應該的，但並不是每個使用 root 的應用程式都提供隨機包名的功能。\n在這種情況下，檢測到的使用 root 的應用程式（例如 Fake Location 和儲存隔離）就等於檢測到了 root 本身。\n\n同時，一些應用會利用各種漏洞來獲取你的應用列表，並預設你是使用 root 的使用者。\n\n這個模組提供了一些方法來測試你是否已經很好地隱藏了你的應用列表。\n同時它可以作為一個 Xposed 模塊來隱藏一些應用程式或拒絕應用程式列表請求，以保護你的隱私。
     </string>
-    <string name="about_fork_description">原本的 HMA 專案已經轉為閉源，他們的最新程式碼並未包含一些最新變更，因此我建立了這個分支，讓它再次以開源方式持續下去。
+    <string name="about_fork_description">原本的 PIB 專案已經轉為閉源，他們的最新程式碼並未包含一些最新變更，因此我建立了這個分支，讓它再次以開源方式持續下去。
     </string>
     <string name="about_how_to_use_title">如何使用此模組</string>
     <string name="about_how_to_use_description_1">        首先在 「模板管理」中建立模板。\n然後在 「應用管理」選擇想隱藏應用列表的應用程式並「啟用隱藏」並選擇設定好的模板。\n(當然你也可以選擇額外的應用程式隱藏或顯示)\n注意：在 Xposed 模組作用域或白名單中你應該只勾選「系統框架」(某些系統中可能會將系統框架顯示為 Android)

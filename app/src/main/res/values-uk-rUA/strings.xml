@@ -11,7 +11,7 @@
     <string name="title_app_settings">Налаштування додатка</string>
     <string name="title_about">Про додаток</string>
     <string name="title_about_fork">Про цей клон</string>
-    <string name="do_not_dual">Не встановлюйте HMA для додаткового користувача</string>
+    <string name="do_not_dual">Не встановлюйте PIB для додаткового користувача</string>
     <string name="show_crash_log">Показати журнал збоїв</string>
     <string name="config_damaged">Файл конфігурації пошкоджено. Очистіть дані додатку</string>
     <string name="edit_list">Редагувати список</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Системна служба працює [%d]</string>
     <string name="home_xposed_service_off">Системна служба не працює</string>
     <string name="home_xposed_service_old">Модуль оновлено, потрібно перезавантажити</string>
-    <string name="home_xposed_filter_count">HMA-OSS відфільтрував %d запитів</string>
+    <string name="home_xposed_filter_count">PIB-OSS відфільтрував %d запитів</string>
     <string name="home_manage">Керувати</string>
     <string name="home_detection_test">Перевірка на виявлення</string>
     <string name="home_download_test_app_title">Завантажити додаток для перевірки</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        Незважаючи на те, що виявляти встановлену конкретний додаток неправильно, не кожен додаток, що використовує root, забезпечує підтримку довільних імен пакетів. У цьому випадку виявлені додатки, які використовують root (наприклад, Fake Location and Storage Isolation), дорівнюють самому виявленому root.\n\nУ той же час деякі розумні додатки використовують різні лазівки, щоб отримати ваш список додатків, щоб він міг малювати особистість для вас.\n\nЦей модуль надає деякі методи перевірити, чи добре ви вже приховали свій список додатків. Крім того, він може працювати як модуль Xposed, щоб приховати деякі додатки або відхилити запити списку додатків, щоб захистити вашу конфіденційність.
     </string>
-    <string name="about_fork_description">Оригінальний проєкт HMA став закритим, а їхній останній код не містив деяких останніх змін, тому мною створено цей форк, щоб продовжити його як відкритий.</string>
+    <string name="about_fork_description">Оригінальний проєкт PIB став закритим, а їхній останній код не містив деяких останніх змін, тому мною створено цей форк, щоб продовжити його як відкритий.</string>
     <string name="about_how_to_use_title">Як користуватися цим модулем</string>
     <string name="about_how_to_use_description_1">        Ви можете створювати шаблони в «Керування шаблонами».\nПотім застосуйте шаблони до додатків у «Керування додатками». (Ви також можете вибрати додаткові додатки для цілей.)\nВи повинні й ТІЛЬКИ повинні перевірити «System Framework» в області/білому списку модуля Xposed.
     </string>

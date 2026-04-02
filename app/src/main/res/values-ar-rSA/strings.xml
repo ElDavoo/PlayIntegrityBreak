@@ -11,7 +11,7 @@
     <string name="title_app_settings">إعـدادات التطبيـق</string>
     <string name="title_about">حول</string>
     <string name="title_about_fork">حول هذه النسخة</string>
-    <string name="do_not_dual">لا تقم بتثبيت HMA للمستخدم الثانوي</string>
+    <string name="do_not_dual">لا تقم بتثبيت PIB للمستخدم الثانوي</string>
     <string name="show_crash_log">أظهار سجل التعطيل</string>
     <string name="config_damaged">مِلف التكوين تآلف. رجاءًا قـم بحذف بيانات التطبيق</string>
     <string name="edit_list">تعديـل القائـمة</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">خدمة النظام تعمل [%d]</string>
     <string name="home_xposed_service_off">خدمة النظام متوقفة</string>
     <string name="home_xposed_service_old">تم تحديث الإضافة، تحتاج إلى إعادة التشغيل</string>
-    <string name="home_xposed_filter_count">HMA-OSS قام بتصفية إجمالي %d من الطلبات</string>
+    <string name="home_xposed_filter_count">PIB-OSS قام بتصفية إجمالي %d من الطلبات</string>
     <string name="home_manage">الإدارة</string>
     <string name="home_detection_test">اختبار الاكتشاف</string>
     <string name="home_download_test_app_title">تنزيل تطبيق الاختبار</string>
@@ -200,7 +200,7 @@
     <string name="title_bulk_config_wizard">معالج الإعدادات الجماعية</string>
     <!-- About -->
     <string name="about_description">على الرغم من أنه من غير الصحيح اكتشاف تثبيت تطبيق معين ، إلا أنه لا يوفر كل تطبيق يستخدم الجذر دعمًا عشوائيًا لاسم الحزمة. في هذه الحالة ، فإن التطبيقات المكتشفة التي تستخدم الجذر (مثل الموقع المزيف وعزل التخزين) تساوي الجذر المكتشف نفسه.\n\n في نفس الوقت ، تستخدم بعض التطبيقات الذكية ثغرات مختلفة للحصول على قائمة التطبيقات الخاصة بك ، بحيث يمكنها رسم شخصية لك.\n\n توفر هذه الإضافة بعض الطرق لاختبار ما إذا كنت قد أخفيت التطبيق الخاص بك بشكل جيد. أيضًا ، يمكن أن يعمل كإضافة Xposed لإخفاء بعض التطبيقات أو رفض طلبات قائمة التطبيقات لحماية خصوصيتك.    </string>
-    <string name="about_fork_description">مشروع تطبيق HMA الأصلي اصبح مغلق المصدر والشفرات الأخيرة الخاصة بها لا تحتوي على بعض التغييرات الأخيرة،لذا قمتُ بصناعة هذه النسخة من جديد للاستمرار بها على أنها مفتوحة المصدر                            </string>
+    <string name="about_fork_description">مشروع تطبيق PIB الأصلي اصبح مغلق المصدر والشفرات الأخيرة الخاصة بها لا تحتوي على بعض التغييرات الأخيرة،لذا قمتُ بصناعة هذه النسخة من جديد للاستمرار بها على أنها مفتوحة المصدر                            </string>
     <string name="about_how_to_use_title">كيفية استخدام هذه الإضافة</string>
     <string name="about_how_to_use_description_1">يمكنك إنشاء قوالب من \"إدارة القوالب\".\nثم تطبيق هذه القوالب على التطبيقات من \"إدارة التطبيقات\".(يمكنك أيضا اختيار تطبيقات إضافية للتطبيقات المستهدفة.)\n ينبغي فقط فحص \"إطار النظام\" من نطاق وحدة إكسبوسد/القائمة البيضاء.    </string>
     <string name="about_how_to_use_description_2">تعديل التكوين يطبق في الوقت الفعلى.    </string>

@@ -11,7 +11,7 @@
     <string name="title_app_settings">Definições da aplicação</string>
     <string name="title_about">Acerca</string>
     <string name="title_about_fork">Sobre este fork</string>
-    <string name="do_not_dual">Não instalar HMA como utilizador secundário</string>
+    <string name="do_not_dual">Não instalar PIB como utilizador secundário</string>
     <string name="show_crash_log">Mostrar registo de erros</string>
     <string name="config_damaged">Ficheiro de configuração danificado. Limpe os dados da aplicação</string>
     <string name="edit_list">Editar lista</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Serviço do sistema em execução [%d]</string>
     <string name="home_xposed_service_off">Serviço do sistema parado</string>
     <string name="home_xposed_service_old">Módulo atualizado, é necessário reiniciar</string>
-    <string name="home_xposed_filter_count">HMA-OSS filtrou um total de %d pedidos</string>
+    <string name="home_xposed_filter_count">PIB-OSS filtrou um total de %d pedidos</string>
     <string name="home_manage">Gerir</string>
     <string name="home_detection_test">Teste de deteção</string>
     <string name="home_download_test_app_title">Transferir aplicação de teste</string>
@@ -199,7 +199,7 @@
     <string name="title_bulk_config_wizard">Assistente de configuração em massa</string>
     <!-- About -->
     <string name="about_description">Embora seja incorreto detetar a instalação de aplicações específicas, nem todas as aplicações que usam root oferecem suporte para nomes de pacotes aleatórios. Neste caso, detetar aplicações que usam root (como a Fake Location e a Storage Isolation) equivale a detetar o próprio root.\n\nAo mesmo tempo, algumas aplicações mais inteligentes aproveitam várias falhas para obter a sua lista de aplicações, de modo a traçar um perfil seu.\n\nEste módulo fornece alguns métodos para testar se já ocultou bem a sua lista de aplicações. Além disso, pode funcionar como um módulo Xposed para ocultar algumas aplicações ou rejeitar pedidos de acesso à lista de aplicações para proteger a sua privacidade.    </string>
-    <string name="about_fork_description">        O projeto original HMA passou a ser de código fechado e a sua versão mais recente não incluía algumas das últimas alterações, portanto, criei este fork para o continuar como um projeto de código aberto.
+    <string name="about_fork_description">        O projeto original PIB passou a ser de código fechado e a sua versão mais recente não incluía algumas das últimas alterações, portanto, criei este fork para o continuar como um projeto de código aberto.
     </string>
     <string name="about_how_to_use_title">Como usar este módulo</string>
     <string name="about_how_to_use_description_1">        Pode criar modelos em \"Gerir modelos\".\nDepois, aplique os modelos a aplicações em \"Gerir aplicações\". (Também pode selecionar aplicações extra para os alvos.)\nDeve e APENAS deve marcar \"System Framework\" no âmbito do módulo Xposed / lista branca.

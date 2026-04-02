@@ -11,7 +11,7 @@
     <string name="title_app_settings">Configurações do aplicativo</string>
     <string name="title_about">Sobre</string>
     <string name="title_about_fork">Sobre essa versão</string>
-    <string name="do_not_dual">Não instale HMA no usuário secundário</string>
+    <string name="do_not_dual">Não instale PIB no usuário secundário</string>
     <string name="show_crash_log">Mostrar registro do erro</string>
     <string name="config_damaged">Arquivo de configuração danificado. Por favor limpe os dados do aplicativo</string>
     <string name="edit_list">Editar lista</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Serviço do sistema funcionando [%d]</string>
     <string name="home_xposed_service_off">Serviço do sistema não está funcionando</string>
     <string name="home_xposed_service_old">Módulo atualizado, necessário reiniciar</string>
-    <string name="home_xposed_filter_count">HMA-OSS filtrou no total %d pedidos</string>
+    <string name="home_xposed_filter_count">PIB-OSS filtrou no total %d pedidos</string>
     <string name="home_manage">Gerenciar</string>
     <string name="home_detection_test">Teste de detecção</string>
     <string name="home_download_test_app_title">Baixar aplicativo de teste</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
     </string>
-    <string name="about_fork_description">O projeto original do HMA se tornou de código fechado e o código disponível não disponibilizou as últimas ultimas mudanças, então eu criei essa versão para continua-la como código aberto novamente.    </string>
+    <string name="about_fork_description">O projeto original do PIB se tornou de código fechado e o código disponível não disponibilizou as últimas ultimas mudanças, então eu criei essa versão para continua-la como código aberto novamente.    </string>
     <string name="about_how_to_use_title">Como usar esse modulo</string>
     <string name="about_how_to_use_description_1">Voce pode criar modelos em \"Gerenciar modelos\".\nEntão aplique os modelos nos apps em \"Gerenciar apps\". (Voce tamber pode selecionar apps adicionais para os esconder de tais.)\nVoce só deve habilitar o \"Sistema Android\" na lista de ativação do Xposed.\n    </string>
     <string name="about_how_to_use_description_2">       A modificação de configurações tem efeito imediato.\n    </string>

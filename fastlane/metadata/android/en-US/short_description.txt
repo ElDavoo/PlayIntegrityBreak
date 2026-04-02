@@ -1,1 +1,1 @@
-A FOSS continuation of Hide My Applist project with bunch of new features.
+Google Play Integrity API logger/debugger for LSPosed.

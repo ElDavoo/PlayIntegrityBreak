@@ -1,0 +1,545 @@
+package org.frknkrc44.pib_oss.ui.fragment
+
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.clearFragmentResultListener
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import androidx.preference.Preference
+import androidx.preference.PreferenceDataStore
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.common.AppPresets
+import icu.nullptr.playintegritybreak.common.Constants
+import icu.nullptr.playintegritybreak.common.JsonConfig
+import icu.nullptr.playintegritybreak.common.SettingsPresets
+import icu.nullptr.playintegritybreak.service.ConfigManager
+import icu.nullptr.playintegritybreak.service.ServiceClient
+import icu.nullptr.playintegritybreak.ui.fragment.ScopeFragmentArgs
+import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.asDrawable
+import icu.nullptr.playintegritybreak.ui.util.enabledString
+import icu.nullptr.playintegritybreak.ui.util.navController
+import icu.nullptr.playintegritybreak.ui.util.navigate
+import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
+import icu.nullptr.playintegritybreak.ui.util.setupToolbar
+import icu.nullptr.playintegritybreak.ui.util.showToast
+import icu.nullptr.playintegritybreak.ui.util.withAnimations
+import icu.nullptr.playintegritybreak.ui.viewmodel.AppSettingsViewModel
+import icu.nullptr.playintegritybreak.util.PackageHelper
+import org.frknkrc44.pib_oss.BuildConfig
+import org.frknkrc44.pib_oss.R
+import org.frknkrc44.pib_oss.databinding.FragmentSettingsBinding
+import org.frknkrc44.pib_oss.databinding.LayoutListEmptyBinding
+
+class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
+    companion object {
+        private const val TAG = "AppSettingsV2Fragment"
+    }
+
+    private val binding by viewBinding(FragmentSettingsBinding::bind)
+    private val viewModel by viewModels<AppSettingsViewModel>() {
+        val args by navArgs<AppSettingsV2FragmentArgs>()
+        val cfg: JsonConfig.AppConfig? = if (args.bulkConfigMode) {
+            if (args.bulkConfig != null) JsonConfig.AppConfig.parse(args.bulkConfig!!)
+            else null
+        } else {
+            ConfigManager.getAppConfig(args.packageName)
+        }
+
+        val pack = AppSettingsViewModel.Pack(
+            app = args.packageName,
+            enabled = cfg != null,
+            bulkConfig =  args.bulkConfigMode,
+            config = cfg ?: JsonConfig.AppConfig(),
+            bulkApps = args.bulkConfigApps,
+        )
+        AppSettingsViewModel.Factory(pack)
+    }
+
+    private fun saveConfig() {
+        if (viewModel.pack.bulkConfig) {
+            setFragmentResult("bulk_app_settings", Bundle().apply {
+                putString(
+                    "appConfig",
+                    if (viewModel.pack.enabled) viewModel.pack.config.toString() else null,
+                )
+            })
+        } else {
+            ConfigManager.setAppConfig(
+                viewModel.pack.app,
+                if (viewModel.pack.enabled) viewModel.pack.config else null,
+            )
+        }
+    }
+
+    private fun onBack() {
+        if (!parentFragmentManager.popBackStackImmediate()) {
+            saveConfig()
+            navController.navigateUp()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveConfig()
+    }
+
+    val subtitle: String by lazy {
+        if (viewModel.pack.bulkConfig) {
+            if (viewModel.pack.bulkApps.isNullOrEmpty()) {
+                return@lazy getString(R.string.title_bulk_config_wizard)
+            } else {
+                return@lazy viewModel.pack.bulkApps!!.joinToString(", ") {
+                    PackageHelper.loadAppLabel(it)
+                }
+            }
+        }
+
+        return@lazy PackageHelper.loadAppLabel(viewModel.pack.app)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { onBack() }
+        setupToolbar(
+            toolbar = binding.toolbar,
+            title = getString(R.string.title_app_settings),
+            subtitle = subtitle,
+            navigationIcon = R.drawable.baseline_arrow_back_24,
+            navigationOnClick = { onBack() }
+        )
+
+        if (childFragmentManager.findFragmentById(R.id.settings_container) == null) {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.settings_container, AppPreferenceFragment())
+                .commit()
+        }
+
+        setEdge2EdgeFlags(binding.root)
+    }
+
+    class AppPreferenceDataStore(private val pack: AppSettingsViewModel.Pack) : PreferenceDataStore() {
+
+        override fun getBoolean(key: String, defValue: Boolean): Boolean {
+            return when (key) {
+                "enableLogger", "enableHide" -> pack.enabled
+                "logIntegrityRequests" -> pack.config.logIntegrityRequests
+                "logIntegrityResponses" -> pack.config.logIntegrityResponses
+                "logIntegrityErrorsOnly" -> pack.config.logIntegrityErrorsOnly
+                "rewriteIntegrityResponse" -> pack.config.rewriteIntegrityResponse
+                "useWhiteList" -> pack.config.useWhitelist
+                "excludeSystemApps" -> pack.config.excludeSystemApps
+                "hideInstallationSource" -> pack.config.hideInstallationSource
+                "hideSystemInstallationSource" -> pack.config.hideSystemInstallationSource
+                "excludeTargetInstallationSource" -> pack.config.excludeTargetInstallationSource
+                "invertActivityLaunchProtection" -> pack.config.invertActivityLaunchProtection
+                "excludeVoldIsolation" -> pack.config.excludeVoldIsolation
+                else -> throw IllegalArgumentException("Invalid key: $key")
+            }
+        }
+
+        override fun putBoolean(key: String, value: Boolean) {
+            when (key) {
+                "enableLogger", "enableHide" -> pack.enabled = value
+                "logIntegrityRequests" -> pack.config.logIntegrityRequests = value
+                "logIntegrityResponses" -> pack.config.logIntegrityResponses = value
+                "logIntegrityErrorsOnly" -> pack.config.logIntegrityErrorsOnly = value
+                "rewriteIntegrityResponse" -> pack.config.rewriteIntegrityResponse = value
+                "useWhiteList" -> pack.config.useWhitelist = value
+                "excludeSystemApps" -> pack.config.excludeSystemApps = value
+                "hideInstallationSource" -> pack.config.hideInstallationSource = value
+                "hideSystemInstallationSource" -> pack.config.hideSystemInstallationSource = value
+                "excludeTargetInstallationSource" -> pack.config.excludeTargetInstallationSource = value
+                "invertActivityLaunchProtection" -> pack.config.invertActivityLaunchProtection = value
+                "excludeVoldIsolation" -> pack.config.excludeVoldIsolation = value
+                else -> throw IllegalArgumentException("Invalid key: $key")
+            }
+        }
+    }
+
+    class AppPreferenceFragment : PreferenceFragmentCompat() {
+
+        private val parent get() = requireParentFragment() as AppSettingsV2Fragment
+        private val pack get() = parent.viewModel.pack
+
+        private fun launchMainActivity(packageName: String, userId: Int) {
+            if (userId != 0) {
+                // TODO: Try to find a method to launch apps across user profiles
+                return
+            }
+
+            try {
+                val pkgMgr = requireContext().packageManager
+                val pkgInfo = pkgMgr.getPackageInfo(packageName, 0)
+                if (pkgInfo.applicationInfo?.enabled == true) {
+                    val resolvedIntent = pkgMgr.getLaunchIntentForPackage(packageName)
+                    if (resolvedIntent != null) {
+                        startActivity(resolvedIntent)
+                    } else {
+                        throw RuntimeException("No main activity found to launch this app")
+                    }
+                } else {
+                    throw RuntimeException("Package is disabled")
+                }
+            } catch (e: Throwable) {
+                showToast(R.string.app_launch_failed)
+                ServiceClient.log(Log.ERROR, TAG, e.stackTraceToString())
+            }
+        }
+
+        @SuppressLint("DiscouragedApi")
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            preferenceManager.preferenceDataStore = AppPreferenceDataStore(pack)
+            setPreferencesFromResource(R.xml.app_settings_v2, rootKey)
+            findPreference<Preference>("appInfo")?.let {
+                if (pack.bulkConfig) {
+                    it.icon = R.drawable.outline_storage_24.asDrawable(requireContext())
+                    it.title = parent.subtitle
+                    if (!pack.bulkApps.isNullOrEmpty()) {
+                        it.isSingleLineTitle = true
+                        it.summary = getString(R.string.title_bulk_config_wizard)
+                    }
+                } else {
+                    it.icon = PackageHelper.loadAppIcon(pack.app)
+                    it.title = PackageHelper.loadAppLabel(pack.app)
+                    it.summary = pack.app
+                    it.setOnPreferenceClickListener { pref ->
+                        MaterialAlertDialogBuilder(pref.context).apply {
+                            setTitle(it.title)
+                            setItems(
+                                R.array.app_action_texts,
+                            ) { _, which ->
+                                parent.saveConfig()
+                                val userId = PackageHelper.loadUserId(pack.app)
+
+                                when (which) {
+                                    0 -> {
+                                        ServiceClient.forceStop(pack.app, userId)
+                                        launchMainActivity(pack.app, userId)
+                                    }
+                                    1 -> {
+                                        launchMainActivity(pack.app, userId)
+                                    }
+                                }
+                            }
+                        }.show()
+
+                        true
+                    }
+                }
+            }
+            findPreference<Preference>("spoofing")?.setOnPreferenceClickListener { _ ->
+                parentFragmentManager.beginTransaction()
+                    .withAnimations()
+                    .replace(
+                        R.id.settings_container,
+                        AppSpoofingPreferenceFragment(
+                            preferenceManager.preferenceDataStore!!
+                        )
+                    )
+                    .addToBackStack(null)
+                    .commit()
+
+                true
+            }
+            findPreference<Preference>("templateConfig")?.setOnPreferenceClickListener { _ ->
+                parentFragmentManager.beginTransaction()
+                    .withAnimations()
+                    .replace(
+                        R.id.settings_container,
+                        TemplateConfigPreferenceFragment(
+                            preferenceManager.preferenceDataStore!!
+                        )
+                    )
+                    .addToBackStack(null)
+                    .commit()
+
+                true
+            }
+            findPreference<SwitchPreferenceCompat>("excludeVoldIsolation")?.let {
+                it.isEnabled = ConfigManager.altVoldAppDataIsolation
+            }
+            findPreference<SwitchPreferenceCompat>("invertActivityLaunchProtection")?.let {
+                it.summary = getString(R.string.app_invert_activity_launch_protection_desc) + "\n\n" +
+                        getString(
+                            R.string.app_global_activity_launch_protection_state,
+                            (!ConfigManager.disableActivityLaunchProtection).enabledString(resources)
+                        )
+            }
+            findPreference<Preference>("restrictZygotePermissions")?.setOnPreferenceClickListener {
+                val checked = Constants.GID_PAIRS.values.map {
+                    it in pack.config.restrictedZygotePermissions
+                }.toBooleanArray()
+
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.app_restrict_zygote_permissions)
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        pack.config.restrictedZygotePermissions = Constants.GID_PAIRS.values.mapIndexedNotNullTo(mutableSetOf()) { i, value ->
+                            if (checked[i]) value else null
+                        }.toList()
+                        Toast.makeText(requireContext(),
+                            R.string.app_force_stop_warning, Toast.LENGTH_LONG).show()
+                    }.setMultiChoiceItems(Constants.GID_PAIRS.keys.toTypedArray(), checked) { _, i, value ->
+                        checked[i] = value
+                    }.show()
+
+                true
+            }
+        }
+    }
+
+    class AppSpoofingPreferenceFragment(private val preferenceDataStore: PreferenceDataStore) : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            preferenceManager.preferenceDataStore = preferenceDataStore
+            setPreferencesFromResource(R.xml.app_settings_spoofing_v2, rootKey)
+
+            findPreference<SwitchPreferenceCompat>("hideInstallationSource")?.setOnPreferenceChangeListener { _, newValue ->
+                Toast.makeText(requireContext(),
+                    R.string.app_force_stop_warning, Toast.LENGTH_LONG).show()
+                true
+            }
+            findPreference<SwitchPreferenceCompat>("hideSystemInstallationSource")?.setOnPreferenceChangeListener { _, newValue ->
+                Toast.makeText(requireContext(),
+                    R.string.app_force_stop_warning, Toast.LENGTH_LONG).show()
+                true
+            }
+            findPreference<SwitchPreferenceCompat>("excludeTargetInstallationSource")?.setOnPreferenceChangeListener { _, newValue ->
+                Toast.makeText(requireContext(),
+                    R.string.app_force_stop_warning, Toast.LENGTH_LONG).show()
+                true
+            }
+        }
+    }
+
+    class TemplateConfigPreferenceFragment(private val preferenceDataStore: PreferenceDataStore) : PreferenceFragmentCompat() {
+        private val parent get() = requireParentFragment() as AppSettingsV2Fragment
+        private val pack get() = parent.viewModel.pack
+
+        private fun updateApplyTemplates() {
+            findPreference<Preference>("applyTemplates")?.title =
+                getString(R.string.app_template_using, pack.config.applyTemplates.size)
+        }
+
+        private fun updateApplyPresets(useWhitelist: Boolean = pack.config.useWhitelist) {
+            findPreference<Preference>("applyPresets")?.title =
+                getString(R.string.app_preset_using, pack.config.applyPresets.size)
+        }
+
+        private fun updateApplySettingsPresets() {
+            findPreference<Preference>("applySettingsPresets")?.title =
+                getString(R.string.app_settings_preset_using, pack.config.applySettingsPresets.size)
+        }
+
+        private fun updateApplySettingsTemplates() {
+            findPreference<Preference>("applySettingsTemplates")?.title =
+                getString(R.string.app_settings_template_using, pack.config.applySettingTemplates.size)
+        }
+
+        private fun updateExtraAppList(useWhiteList: Boolean) {
+            findPreference<Preference>("extraAppList")?.title =
+                if (useWhiteList) getString(R.string.app_extra_apps_visible_count, pack.config.extraAppList.size)
+                else getString(R.string.app_extra_apps_invisible_count, pack.config.extraAppList.size)
+        }
+
+        private fun updateExtraOppositeAppList(useWhiteList: Boolean) {
+            findPreference<Preference>("extraOppositeAppList")?.title =
+                if (!useWhiteList) getString(R.string.app_extra_apps_visible_count, pack.config.extraOppositeAppList.size)
+                else getString(R.string.app_extra_apps_invisible_count, pack.config.extraOppositeAppList.size)
+        }
+
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            preferenceManager.preferenceDataStore = preferenceDataStore
+            setPreferencesFromResource(R.xml.app_settings_template_config_v2, rootKey)
+
+            findPreference<SwitchPreferenceCompat>("useWhiteList")?.setOnPreferenceChangeListener { _, newValue ->
+                val useWhitelist = newValue as Boolean
+
+                pack.config.applyTemplates.clear()
+                pack.config.extraAppList.clear()
+                pack.config.extraOppositeAppList.clear()
+                updateApplyTemplates()
+                updateExtraAppList(useWhitelist)
+                updateExtraOppositeAppList(useWhitelist)
+                true
+            }
+            findPreference<Preference>("applyTemplates")?.setOnPreferenceClickListener {
+                val templates = ConfigManager.getTemplateList().mapNotNull {
+                    if (it.isWhiteList == pack.config.useWhitelist) it.name else null
+                }.toTypedArray()
+                val checked = templates.map {
+                    pack.config.applyTemplates.contains(it)
+                }.toBooleanArray()
+
+                val dialog = MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.app_choose_template)
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        pack.config.applyTemplates = templates.mapIndexedNotNullTo(mutableSetOf()) { i, name ->
+                            if (checked[i]) name else null
+                        }
+                        updateApplyTemplates()
+                    }
+
+                if (templates.isNotEmpty()) {
+                    dialog.setMultiChoiceItems(templates, checked) { _, i, value ->
+                        checked[i] = value
+                    }
+                } else {
+                    val emptyView = LayoutListEmptyBinding.inflate(layoutInflater)
+                    emptyView.root.isVisible = true
+                    emptyView.listEmptyIcon.setImageResource(R.drawable.sentiment_very_dissatisfied_24px)
+                    emptyView.listEmptyText.text = getString(R.string.title_template_manage)
+                    dialog.setView(emptyView.root)
+                }
+
+                dialog.show()
+
+                true
+            }
+            findPreference<Preference>("applyPresets")?.setOnPreferenceClickListener {
+                val presetNames = AppPresets.instance.presetNames
+                val presetTranslations = presetNames.map { name ->
+                    try {
+                        val id = resources.getIdentifier(
+                            "preset_${name}",
+                            "string",
+                            BuildConfig.APPLICATION_ID
+                        )
+
+                        return@map if (id != 0) { getString(id) } else { name }
+                    } catch (_: Throwable) {}
+
+                    name
+                }
+
+                val presets = presetNames.zip(presetTranslations).toMap().toSortedMap()
+                val checked = presets.keys.map {
+                    pack.config.applyPresets.contains(it)
+                }.toBooleanArray()
+                val presetValues = presets.values.toTypedArray()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.app_choose_preset)
+                    .setMultiChoiceItems(presetValues, checked) { _, i, value -> checked[i] = value }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        pack.config.applyPresets = presetValues.mapIndexedNotNullTo(mutableSetOf()) { i, name ->
+                            if (checked[i]) presets.filterValues { v -> v == name }.keys.first() else null
+                        }
+                        updateApplyPresets()
+                    }
+                    .show()
+                true
+            }
+            findPreference<Preference>("applySettingsTemplates")?.apply {
+                setOnPreferenceClickListener {
+                    val templates = ConfigManager.getSettingTemplateList().mapNotNull { it.name }.toTypedArray()
+                    val checked = templates.map {
+                        pack.config.applySettingTemplates.contains(it)
+                    }.toBooleanArray()
+
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(R.string.app_choose_template)
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .setPositiveButton(android.R.string.ok) { _, _ ->
+                            pack.config.applySettingTemplates = templates.mapIndexedNotNullTo(mutableSetOf()) { i, name ->
+                                if (checked[i]) name else null
+                            }
+                            updateApplySettingsTemplates()
+                        }
+
+                    if (templates.isNotEmpty()) {
+                        dialog.setMultiChoiceItems(templates, checked) { _, i, value -> checked[i] = value }
+                    } else {
+                        val emptyView = LayoutListEmptyBinding.inflate(layoutInflater)
+                        emptyView.root.isVisible = true
+                        emptyView.listEmptyIcon.setImageResource(R.drawable.sentiment_very_dissatisfied_24px)
+                        emptyView.listEmptyText.text = getString(R.string.title_template_manage)
+                        dialog.setView(emptyView.root)
+                    }
+
+                    dialog.show()
+                    true
+                }
+            }
+            findPreference<Preference>("applySettingsPresets")?.setOnPreferenceClickListener {
+                val presetNames = SettingsPresets.instance.presetNames
+                val presetTranslations = presetNames.map { name ->
+                    try {
+                        val id = resources.getIdentifier(
+                            "settings_preset_${name}",
+                            "string",
+                            BuildConfig.APPLICATION_ID
+                        )
+
+                        return@map if (id != 0) { getString(id) } else { name }
+                    } catch (_: Throwable) {}
+
+                    name
+                }
+
+                val presets = presetNames.zip(presetTranslations).toMap().toSortedMap()
+                val checked = presets.keys.map {
+                    pack.config.applySettingsPresets.contains(it)
+                }.toBooleanArray()
+                val presetValues = presets.values.toTypedArray()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.app_choose_preset)
+                    .setMultiChoiceItems(presetValues, checked) { _, i, value -> checked[i] = value }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        pack.config.applySettingsPresets = presetValues.mapIndexedNotNullTo(mutableSetOf()) { i, name ->
+                            if (checked[i]) presets.filterValues { v -> v == name }.keys.first() else null
+                        }
+                        updateApplySettingsPresets()
+                    }
+                    .show()
+                true
+            }
+            findPreference<Preference>("extraAppList")?.setOnPreferenceClickListener {
+                parent.setFragmentResultListener("app_select") { _, bundle ->
+                    pack.config.extraAppList = bundle.getStringArrayList("checked")!!.toMutableSet()
+                    updateExtraAppList(pack.config.useWhitelist)
+                    parent.clearFragmentResultListener("app_select")
+                }
+
+                val args = ScopeFragmentArgs(
+                    filterOnlyEnabled = false,
+                    checked = pack.config.extraAppList.toTypedArray()
+                )
+                navigate(R.id.nav_scope, args.toBundle())
+                true
+            }
+            findPreference<Preference>("extraOppositeAppList")?.setOnPreferenceClickListener {
+                parent.setFragmentResultListener("app_opposite_select") { _, bundle ->
+                    pack.config.extraOppositeAppList = bundle.getStringArrayList("checked")!!.toMutableSet()
+                    updateExtraOppositeAppList(pack.config.useWhitelist)
+                    parent.clearFragmentResultListener("app_opposite_select")
+                }
+
+                val args = ScopeFragmentArgs(
+                    filterOnlyEnabled = false,
+                    isOpposite = true,
+                    checked = pack.config.extraOppositeAppList.toTypedArray()
+                )
+                navigate(R.id.nav_scope, args.toBundle())
+                true
+            }
+            updateApplyTemplates()
+            updateApplyPresets()
+            updateApplySettingsTemplates()
+            updateApplySettingsPresets()
+            updateExtraAppList(pack.config.useWhitelist)
+            updateExtraOppositeAppList(pack.config.useWhitelist)
+        }
+    }
+}

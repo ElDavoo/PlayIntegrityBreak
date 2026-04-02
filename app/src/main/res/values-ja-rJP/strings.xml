@@ -11,7 +11,7 @@
     <string name="title_app_settings">アプリの設定</string>
     <string name="title_about">このアプリについて</string>
     <string name="title_about_fork">このフォークについて</string>
-    <string name="do_not_dual">HMA をセカンダリユーザーにインストールしないでください</string>
+    <string name="do_not_dual">PIB をセカンダリユーザーにインストールしないでください</string>
     <string name="show_crash_log">クラッシュログの表示</string>
     <string name="config_damaged">設定ファイルが破損しています。アプリデータを削除してください</string>
     <string name="edit_list">リストの編集</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">システムサービスが実行中 [%d]</string>
     <string name="home_xposed_service_off">システムサービスは実行されていません</string>
     <string name="home_xposed_service_old">モジュールが更新されました。再起動してください</string>
-    <string name="home_xposed_filter_count">HMA-OSS は合計 %d 件のリクエストをフィルタリングしました</string>
+    <string name="home_xposed_filter_count">PIB-OSS は合計 %d 件のリクエストをフィルタリングしました</string>
     <string name="home_manage">管理</string>
     <string name="home_detection_test">検出のテスト</string>
     <string name="home_download_test_app_title">テストアプリのダウンロード</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        特定のアプリのインストールを検出することは正しくありませんが、root 権限を使用するすべてのアプリがランダムなパッケージ名に対応しているわけではありません。この場合、root 権限を使用しているアプリ (Fake Location や Storage Isolation など) の検出は、root 権限自体が検出されることと同等です。\n\n同時に、一部のスマートアプリは、さまざまな抜け穴を使用してアプリリストを取得して、ユーザーの行動特性を分析する場合があります。\n\nこのモジュールは、アプリリストを適切に非表示にしているかどうかを検証する方法をいくつか提供します。また、Xposed モジュールとして動作することで、特定のアプリを非表示にしたり、アプリリストの取得要求を拒否したりして、プライバシーを保護することも可能です。
     </string>
-    <string name="about_fork_description">        オリジナルの HMA プロジェクトはクローズドソースになり、最新版のコードには一部の重要な変更点が反映されていませんでした。そこで、再びオープンソースとして継続していくために、このフォーク版を作成しました。
+    <string name="about_fork_description">        オリジナルの PIB プロジェクトはクローズドソースになり、最新版のコードには一部の重要な変更点が反映されていませんでした。そこで、再びオープンソースとして継続していくために、このフォーク版を作成しました。
     </string>
     <string name="about_how_to_use_title">このモジュールの使用方法</string>
     <string name="about_how_to_use_description_1">        「テンプレートの管理」でテンプレートを作成できます。\n作成したテンプレートは、「アプリの管理」でアプリに適用できます。(対象アプリを追加選択することもできます。)\nXposed モジュールのスコープ/ホワイトリストで「システム フレームワーク」のみにチェックを入れてください。

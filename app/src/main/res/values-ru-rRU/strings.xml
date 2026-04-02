@@ -11,7 +11,7 @@
     <string name="title_app_settings">Настройки приложения</string>
     <string name="title_about">О модуле</string>
     <string name="title_about_fork">Об этом форке</string>
-    <string name="do_not_dual">Не устанавливать HMA для второго пользователя</string>
+    <string name="do_not_dual">Не устанавливать PIB для второго пользователя</string>
     <string name="show_crash_log">Показывать краш-лог</string>
     <string name="config_damaged">Файл конфигурации поврежден. Пожалуйста, очистите данные приложения</string>
     <string name="edit_list">Редактировать список</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Системная служба работает [%d]</string>
     <string name="home_xposed_service_off">Системная служба не работает</string>
     <string name="home_xposed_service_old">Модуль обновлён, требуется перезагрузка</string>
-    <string name="home_xposed_filter_count">HMA-OSS отфильтровал всего %d запросов</string>
+    <string name="home_xposed_filter_count">PIB-OSS отфильтровал всего %d запросов</string>
     <string name="home_manage">Управление</string>
     <string name="home_detection_test">Проверка обнаружения</string>
     <string name="home_download_test_app_title">Скачать приложение для проверки</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        Хотя и неправильно определять наличие конкретных приложений, сейчас не каждое приложение, использующее root-права имеет поддержку случайного имени пакета. В этом случае обнаруженные приложения, использующие root-права (такие как Fake Location и Storage Isolation), будут равны обнаруженным root-правам.\n\nВ это же время некоторые умные приложения используют лазейки, чтобы получить список приложений и нарисовать себе вашу персону.\n\nЭто приложение предоставляет несколько методов для проверки того, насколько хорошо вы скрыли свой список приложений. Также это приложение может работать как Xposed модуль, чтобы скрыть какие-либо приложения или отклонять запросы на получение списка приложений для защиты вашей конфиденциальности.
     </string>
-    <string name="about_fork_description">        Изначальный проект HMA стал закрытым, и в его последнем коде не было ряда последних изменений, поэтому я создал этот форк, чтобы снова развивать его как open-source.
+    <string name="about_fork_description">        Изначальный проект PIB стал закрытым, и в его последнем коде не было ряда последних изменений, поэтому я создал этот форк, чтобы снова развивать его как open-source.
     </string>
     <string name="about_how_to_use_title">Как использовать этот модуль</string>
     <string name="about_how_to_use_description_1">        Вы можете создать шаблоны в \"Управление шаблонами\".\nЗатем примените шаблоны к приложениям в \"Управление приложениями\". (Вы также можете выбрать дополнительные приложения для целей.)\nВыбирайте ТОЛЬКО \"System Framework\" в настройках охвата этого Xposed-модуля / белого списка.

@@ -11,7 +11,7 @@
     <string name="title_app_settings">App instellingen</string>
     <string name="title_about">Over</string>
     <string name="title_about_fork">Over deze Fork</string>
-    <string name="do_not_dual">Installeer HMA niet voor secundaire gebruiker</string>
+    <string name="do_not_dual">Installeer PIB niet voor secundaire gebruiker</string>
     <string name="show_crash_log">Toon_Crash_log</string>
     <string name="config_damaged">Configuratiebestand beschadigd Wis de App gegevens</string>
     <string name="edit_list">Bewerk lijst</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Systeem Service Actief [%d]</string>
     <string name="home_xposed_service_off">Systeem Service Niet Actief</string>
     <string name="home_xposed_service_old">Module Geüpdate Herstarten Nodig</string>
-    <string name="home_xposed_filter_count">HMA-OSS Heeft gefilterd Totaal %d verzoeken</string>
+    <string name="home_xposed_filter_count">PIB-OSS Heeft gefilterd Totaal %d verzoeken</string>
     <string name="home_manage">Beheren</string>
     <string name="home_detection_test">Detectie Test</string>
     <string name="home_download_test_app_title">Download Test app</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
     </string>
-    <string name="about_fork_description">        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
+    <string name="about_fork_description">        The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">        You can create templates in \"Template manage\".\nThen apply the templates to apps in \"App manage\". (You can also select extra apps for targets.)\nYou should and ONLY should check \"System Framework\" in Xposed module scope / whitelist.

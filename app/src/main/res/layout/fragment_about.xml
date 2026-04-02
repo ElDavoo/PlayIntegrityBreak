@@ -69,13 +69,13 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/list_hma_oss"
+                    android:id="@+id/list_pib_oss"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
-                    android:id="@+id/list_hma"
+                    android:id="@+id/list_pib"
                     android:visibility="gone"
                     android:orientation="vertical"
                     android:layout_width="match_parent"

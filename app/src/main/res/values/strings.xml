@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">HMA-OSS</string>
+    <string name="app_name" translatable="false">PIB-OSS</string>
 
     <string name="title_home">Home</string>
     <string name="title_logs">Logs</string>
@@ -14,7 +14,7 @@
     <string name="title_about">About</string>
     <string name="title_about_fork">About this fork</string>
 
-    <string name="do_not_dual">Do not install HMA to secondary user</string>
+    <string name="do_not_dual">Do not install PIB to secondary user</string>
     <string name="show_crash_log">Show crash log</string>
     <string name="config_damaged">Config file damaged. Please clean the app data</string>
     <string name="edit_list">Edit list</string>
@@ -43,7 +43,7 @@
     <string name="home_xposed_service_on">System service running [%d]</string>
     <string name="home_xposed_service_off">System service not running</string>
     <string name="home_xposed_service_old">Module updated, need reboot</string>
-    <string name="home_xposed_filter_count">HMA-OSS has filtered total %d requests</string>
+    <string name="home_xposed_filter_count">PIB-OSS has filtered total %d requests</string>
     <string name="home_manage">Manage</string>
     <string name="home_detection_test">Detection test</string>
     <string name="home_download_test_app_title">Download test app</string>
@@ -89,7 +89,12 @@
     <string name="template_apps_invisible_count">%d apps invisible</string>
 
     <!-- App settings -->
-    <string name="app_enable_hide">Enable hide</string>
+    <string name="app_enable_hide">Enable Integrity logging</string>
+    <string name="app_log_integrity_requests">Log Integrity requests</string>
+    <string name="app_log_integrity_responses">Log Integrity responses</string>
+    <string name="app_log_integrity_errors_only">Log only failing responses</string>
+    <string name="app_rewrite_integrity_response">Rewrite response as controlled error</string>
+    <string name="app_rewrite_integrity_response_desc">When enabled, successful Integrity responses for this app are rewritten to an error payload.</string>
     <string name="app_template_config">Template config</string>
     <string name="app_choose_template">Choose template</string>
     <string name="app_choose_preset">Choose preset</string>
@@ -223,7 +228,7 @@
         Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
     </string>
     <string name="about_fork_description">
-        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
+        The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">

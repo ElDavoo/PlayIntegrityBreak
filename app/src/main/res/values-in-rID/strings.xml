@@ -11,7 +11,7 @@
     <string name="title_app_settings">Setelan aplikasi</string>
     <string name="title_about">Tentang</string>
     <string name="title_about_fork">Tentang cabang ini</string>
-    <string name="do_not_dual">Jangan pasang HMA pada pengguna kedua</string>
+    <string name="do_not_dual">Jangan pasang PIB pada pengguna kedua</string>
     <string name="show_crash_log">Tampilkan log kerusakan</string>
     <string name="config_damaged">File konfigurasi rusak. Harap bersihkan data aplikasi</string>
     <string name="edit_list">Edit daftar</string>
@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Layanan sistem sedang berjalan [%d]</string>
     <string name="home_xposed_service_off">Layanan sistem tidak berjalan</string>
     <string name="home_xposed_service_old">Modul diperbarui, perlu mulai ulang</string>
-    <string name="home_xposed_filter_count">HMA-OSS telah menyaring total %d permintaan</string>
+    <string name="home_xposed_filter_count">PIB-OSS telah menyaring total %d permintaan</string>
     <string name="home_manage">Kelola</string>
     <string name="home_detection_test">Uji deteksi</string>
     <string name="home_download_test_app_title">Unduh aplikasi uji</string>
@@ -200,7 +200,7 @@
     <!-- About -->
     <string name="about_description">        Meskipun tidak tepat untuk mendeteksi instalasi aplikasi tertentu, tidak semua aplikasi yang menggunakan root mendukung nama paket acak. Dalam kasus ini, aplikasi terdeteksi yang menggunakan root (seperti Pemalsuan Lokasi dan Isolasi Data) dianggap sama dengan root itu sendiri.\n\nPada saat yang sama, beberapa aplikasi cerdas memanfaatkan celah untuk mendapatkan daftar aplikasi anda, sehingga mereka bisa membangun profil tentang anda.\n\nModul ini menyediakan beberapa metode untuk menguji apakah anda telah menyembunyikan daftar aplikasi dengan baik. Selain itu, dapat berfungsi sebagai modul Xposed untuk menyembunyikan aplikasi tertentu atau menolak permintaan daftar aplikasi guna melindungi privasi anda.
     </string>
-    <string name="about_fork_description">        Proyek HMA asli telah menjadi sumber tertutup dan kode terbaru mereka tidak memuat beberapa perubahan terbaru, jadi saya membuat percabangan ini untuk melanjutkannya sebagai sumber terbuka lagi.
+    <string name="about_fork_description">        Proyek PIB asli telah menjadi sumber tertutup dan kode terbaru mereka tidak memuat beberapa perubahan terbaru, jadi saya membuat percabangan ini untuk melanjutkannya sebagai sumber terbuka lagi.
     </string>
     <string name="about_how_to_use_title">Cara menggunakan modul ini</string>
     <string name="about_how_to_use_description_1">        Anda dapat membuat templat di \"Kelola templat\".\nKemudian terapkan templat ke aplikasi di \"Kelola aplikasi\". (Anda juga dapat memilih aplikasi tambahan untuk target.)\nAnda harus dan HANYA mengaktifkan \"Kerangka Kerja Sistem\" dalam cakupan modul Xposed / daftar putih.

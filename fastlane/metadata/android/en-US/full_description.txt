@@ -1,20 +1,12 @@
-A FOSS continuation of Hide My Applist project with bunch of new features.
+A FOSS Play Integrity instrumentation module.
 
-Features of HMA-OSS:
+Features of PIB-OSS:
 
-* Hide your application list (similar to what Hide My Applist does)
-* Activity launch protection
-* Installation source spoofing for both user and system apps (replaces BetterKnownInstalled)
-* Application presets
-* Settings presets
-* Settings templates (more flexible than what SettingsFirewall does, also allows you to override the settings presets)
-* Propless appdata and vold appdata isolation with exclude system apps option
-* Ignore hiding an app from Google Play services automatically if it is risky to hide (fixes crash issues etc.)
-* Experimental Restrict Zygote permissions option
-* Extra opposite app list option to add:
-  - More visible apps in blacklist mode
-  - More invisible apps in whitelist mode
-* Redesigned home screen and some other screens
-* Bulk config wizard (apply a config to more than one apps)
+* Hooks Google Play Integrity service calls in com.android.vending
+* Per-app policy controls for request/response logging
+* Error-only logging mode for cleaner debugging sessions
+* Optional response rewrite mode for controlled failure testing
+* Runtime log buffer with clear/export support
+* Nix-friendly reproducible build workflow
 
-For more information, check this wiki page: https://github.com/frknkrc44/HMA-OSS/wiki
+For more information, check this wiki page: https://github.com/frknkrc44/PIB-OSS/wiki
