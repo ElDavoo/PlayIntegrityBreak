@@ -18,7 +18,10 @@ fun String.execute(currentWorkingDir: File = file("./")): String {
 }
 
 val localProperties = Properties()
-localProperties.load(file("local.properties").inputStream())
+val localPropertiesFile = file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use(localProperties::load)
+}
 val ciBuild = providers.environmentVariable("CI").isPresent
 val officialBuild by extra(localProperties.getProperty("officialBuild", "false") == "true")
 

@@ -1,6 +1,6 @@
 <resources>
     <string-array name="xposed_scope" translatable="false">
-        <item>android</item>
+        <item>com.android.vending</item>
     </string-array>
 
     <string-array name="max_log_size_entries" translatable="false">

@@ -86,7 +86,7 @@
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Hide your app list, settings, package installers and more." />
+            android:value="Log and debug Google Play Integrity API usage." />
         <meta-data
             android:name="xposedminversion"
             android:value="82" />
