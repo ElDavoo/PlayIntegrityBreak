@@ -56,8 +56,8 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
         return System.currentTimeMillis() - lastLink <= STATUS_CACHE_GRACE_MS
     }
 
-    fun linkService(binder: IBinder) {
-        if (linkedBinder == binder && service != null) return
+    fun linkService(binder: IBinder): Boolean {
+        if (linkedBinder == binder && service != null) return false
 
         linkedBinder?.let {
             runCatching { it.unlinkToDeath(this, 0) }
@@ -74,6 +74,7 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
         val initialVersion = runCatching { service?.serviceVersion }.getOrNull()
         val initialHealthcheck = runCatching { service?.serviceHealthcheckTimestamp }.getOrNull()
         updateStatusCache(initialVersion, initialHealthcheck)
+        return true
     }
 
     override fun binderDied() {

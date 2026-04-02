@@ -23,6 +23,7 @@ object PIBLoggerService : IPIBService.Stub() {
     private const val TAG = "PIB-LoggerService"
     private const val RUNTIME_LOG_FILE = "integrity_runtime.log"
     private const val RUNTIME_LOG_OLD_FILE = "integrity_runtime.old.log"
+    private const val CONFIG_SNAPSHOT_FILE = "integrity_config_snapshot.json"
     private const val HEARTBEAT_INTERVAL_MS = 10_000L
 
     private val initialized = AtomicBoolean(false)
@@ -56,6 +57,9 @@ object PIBLoggerService : IPIBService.Stub() {
     @Volatile
     private var runtimeLogFile: File? = null
 
+    @Volatile
+    private var configSnapshotFile: File? = null
+
     data class IntegrityPolicy(
         val enabled: Boolean,
         val logRequest: Boolean,
@@ -73,6 +77,7 @@ object PIBLoggerService : IPIBService.Stub() {
         }
 
         ensureLogFile()
+        loadPersistedConfigSnapshot()
         touchHealthcheck()
         startHeartbeatLoop()
         tryPublishBinderToClientApp()
@@ -143,7 +148,7 @@ object PIBLoggerService : IPIBService.Stub() {
                 // Request/response logging is always enabled; only logger enable/error-only may filter output.
                 logRequest = true,
                 logResponse = true,
-                errorOnly = config.errorOnlyLog || (appConfig?.logIntegrityErrorsOnly ?: false),
+                errorOnly = config.errorOnlyLog,
                 rewriteResponse = appConfig?.rewriteIntegrityResponse ?: defaultRewriteEnabled,
                 rewriteErrorCode = appConfig?.rewriteIntegrityErrorCode ?: config.defaultHookRewriteErrorCode,
                 rewriteRemediable = appConfig?.rewriteIntegrityErrorRemediable ?: config.defaultHookRewriteRemediable,
@@ -196,15 +201,19 @@ object PIBLoggerService : IPIBService.Stub() {
     }
 
     override fun writeConfig(json: String) {
-        synchronized(configLock) {
-            runCatching {
-                config = JsonConfig.parse(json).apply {
-                    configVersion = BuildConfig.CONFIG_VERSION
-                }
-            }.onFailure {
-                logE(TAG, "Failed to parse config", it)
+        val parsedConfig = runCatching {
+            JsonConfig.parse(json).apply {
+                configVersion = BuildConfig.CONFIG_VERSION
             }
+        }.onFailure {
+            logE(TAG, "Failed to parse config", it)
+        }.getOrNull() ?: return
+
+        synchronized(configLock) {
+            config = parsedConfig
         }
+
+        persistConfigSnapshot(parsedConfig.toString())
     }
 
     override fun getServiceVersion(): Int = BuildConfig.SERVICE_VERSION
@@ -308,6 +317,49 @@ object PIBLoggerService : IPIBService.Stub() {
         }
         runtimeLogFile = file
         return file
+    }
+
+    private fun ensureConfigSnapshotFile(): File? {
+        configSnapshotFile?.let { return it }
+
+        val app = getCurrentApplication() ?: return null
+        val baseDir = app.getExternalFilesDir(null) ?: app.filesDir
+        if (!baseDir.exists()) {
+            runCatching { baseDir.mkdirs() }
+        }
+
+        val file = File(baseDir, CONFIG_SNAPSHOT_FILE)
+        if (!file.exists()) {
+            runCatching { file.createNewFile() }
+        }
+        configSnapshotFile = file
+        return file
+    }
+
+    private fun loadPersistedConfigSnapshot() {
+        val file = ensureConfigSnapshotFile() ?: return
+        if (!file.exists() || file.length() == 0L) return
+
+        runCatching {
+            JsonConfig.parse(file.readText()).apply {
+                configVersion = BuildConfig.CONFIG_VERSION
+            }
+        }.onSuccess { restored ->
+            synchronized(configLock) {
+                config = restored
+            }
+        }.onFailure {
+            logW(TAG, "Failed to load persisted config snapshot", it)
+        }
+    }
+
+    private fun persistConfigSnapshot(text: String) {
+        val file = ensureConfigSnapshotFile() ?: return
+        runCatching {
+            file.writeText(text)
+        }.onFailure {
+            logW(TAG, "Failed to persist config snapshot", it)
+        }
     }
 
     private fun getCurrentApplication(): Application? {

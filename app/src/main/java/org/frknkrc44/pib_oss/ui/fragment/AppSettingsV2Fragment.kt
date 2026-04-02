@@ -118,9 +118,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         override fun getBoolean(key: String, defValue: Boolean): Boolean {
             return when (key) {
-                "enableLogger" -> pack.enabled
-                "logIntegrityErrorsOnly" -> pack.config.logIntegrityErrorsOnly
-                "rewriteIntegrityResponse" -> pack.config.rewriteIntegrityResponse
+                "enableLogger" -> pack.config.rewriteIntegrityResponse
                 "rewriteIntegrityErrorRemediable" -> pack.config.rewriteIntegrityErrorRemediable
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
@@ -135,9 +133,11 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         override fun putBoolean(key: String, value: Boolean) {
             when (key) {
-                "enableLogger" -> pack.enabled = value
-                "logIntegrityErrorsOnly" -> pack.config.logIntegrityErrorsOnly = value
-                "rewriteIntegrityResponse" -> pack.config.rewriteIntegrityResponse = value
+                "enableLogger" -> {
+                    // Keep legacy scope behavior: turning rewrite on should persist app config.
+                    if (value) pack.enabled = true
+                    pack.config.rewriteIntegrityResponse = value
+                }
                 "rewriteIntegrityErrorRemediable" -> pack.config.rewriteIntegrityErrorRemediable = value
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }

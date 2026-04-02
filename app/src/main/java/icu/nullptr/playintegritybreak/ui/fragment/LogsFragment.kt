@@ -17,7 +17,10 @@ import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.ui.util.setupToolbar
 import icu.nullptr.playintegritybreak.ui.util.showToast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.frknkrc44.pib_oss.R
 import org.frknkrc44.pib_oss.databinding.FragmentLogsBinding
 import java.text.SimpleDateFormat
@@ -27,9 +30,14 @@ import java.util.Locale
 
 class LogsFragment : Fragment(R.layout.fragment_logs) {
 
+    private companion object {
+        private const val MAX_RENDERED_LOG_ITEMS = 3000
+    }
+
     private val binding by viewBinding(FragmentLogsBinding::bind)
     private val adapter by lazy { LogAdapter(requireContext()) }
     private var logCache: String? = null
+    private var updateJob: Job? = null
 
     private val saveSAFLauncher =
         registerForActivityResult(ActivityResultContracts.CreateDocument("text/x-log")) save@{ uri ->
@@ -45,37 +53,59 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
             showToast(R.string.logs_saved)
         }
 
-    private fun updateLogs() {
-        lifecycleScope.launch {
-            logCache = try {
-                ServiceClient.logs
-            } catch (_: Throwable) {
-                "[ERROR] 01-01 01:01:01 (${getString(R.string.app_name)}) Cannot read logs due to Binder issues, try reading ${ServiceClient.logFileLocation} manually"
+    private fun parseLogs(rawText: String): List<LogAdapter.LogItem> {
+        val parsed = buildList {
+            val cur = StringBuilder()
+            rawText.lineSequence().forEach { line ->
+                if (line.startsWith('[') && cur.isNotEmpty()) {
+                    LogAdapter.parseLog(cur.toString())?.let(::add)
+                    cur.clear()
+                }
+                cur.append(line).append('\n')
             }
-            val raw = logCache?.split("\n")
-            if (raw == null) {
-                binding.serviceOff.visibility = View.VISIBLE
-            } else {
-                binding.serviceOff.visibility = View.GONE
-                adapter.logs = buildList {
-                    val cur = StringBuilder()
-                    for (line in raw) {
-                        if (line.startsWith('[')) {
-                            if (cur.isNotEmpty()) {
-                                val log = LogAdapter.parseLog(cur.toString())
-                                if (log != null) add(log)
-                            }
-                            cur.clear()
-                        }
-                        cur.append(line)
-                    }
-                    if (cur.isNotEmpty()) {
-                        val log = LogAdapter.parseLog(cur.toString())
-                        if (log != null) add(log)
-                    }
-                    if (!PrefManager.logFilter_reverseOrder) reverse()
+            if (cur.isNotEmpty()) {
+                LogAdapter.parseLog(cur.toString())?.let(::add)
+            }
+        }
+
+        val capped = if (parsed.size > MAX_RENDERED_LOG_ITEMS) {
+            parsed.takeLast(MAX_RENDERED_LOG_ITEMS)
+        } else {
+            parsed
+        }
+
+        return if (PrefManager.logFilter_reverseOrder) capped else capped.reversed()
+    }
+
+    private fun updateLogs() {
+        updateJob?.cancel()
+        updateJob = lifecycleScope.launch {
+            val logsText = withContext(Dispatchers.IO) {
+                runCatching {
+                    ServiceClient.logs
+                }.getOrElse {
+                    val location = runCatching {
+                        ServiceClient.logFileLocation
+                    }.getOrDefault("the log file")
+                    "[ERROR] 01-01 01:01:01 (${getString(R.string.app_name)}) Cannot read logs due to Binder issues, try reading $location manually"
                 }
             }
+
+            logCache = logsText
+            if (logsText.isNullOrEmpty()) {
+                binding.serviceOff.visibility = View.VISIBLE
+                adapter.logs = emptyList()
+                return@launch
+            }
+
+            val parsedLogs = withContext(Dispatchers.Default) {
+                parseLogs(logsText)
+            }
+
+            if (!isAdded) return@launch
+
+            binding.serviceOff.visibility = View.GONE
+            adapter.logs = parsedLogs
         }
     }
 
@@ -87,8 +117,10 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
                 saveSAFLauncher.launch("PIB-OSS_logs_$date.log")
             }
             R.id.menu_delete -> {
-                ServiceClient.clearLogs()
-                updateLogs()
+                lifecycleScope.launch(Dispatchers.IO) {
+                    ServiceClient.clearLogs()
+                    withContext(Dispatchers.Main) { updateLogs() }
+                }
             }
             R.id.menu_filter_debug -> {
                 item.isChecked = true
@@ -147,5 +179,10 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
         updateLogs()
 
         setEdge2EdgeFlags(binding.root)
+    }
+
+    override fun onDestroyView() {
+        updateJob?.cancel()
+        super.onDestroyView()
     }
 }

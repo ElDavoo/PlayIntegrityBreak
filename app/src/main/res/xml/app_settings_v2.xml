@@ -8,28 +8,18 @@
             android:icon="@drawable/outline_shield_24"
             android:key="enableLogger"
             app:singleLineTitle="false"
-            android:title="@string/app_enable_hide" />
+            android:title="@string/app_rewrite_integrity_response"
+            android:summary="@string/app_rewrite_integrity_response_desc" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:dependency="enableLogger"
         android:title="@string/preferences">
-        <SwitchPreferenceCompat
-            android:icon="@drawable/outline_bug_report_24"
-            android:key="logIntegrityErrorsOnly"
-            app:singleLineTitle="false"
-            android:title="@string/app_log_integrity_errors_only" />
-        <SwitchPreferenceCompat
-            android:icon="@drawable/syringe_24px"
-            android:key="rewriteIntegrityResponse"
-            app:singleLineTitle="false"
-            android:title="@string/app_rewrite_integrity_response"
-            android:summary="@string/app_rewrite_integrity_response_desc" />
         <EditTextPreference
             android:icon="@drawable/outline_bug_report_24"
             android:key="rewriteIntegrityErrorCode"
             android:defaultValue="-8"
-            android:dependency="rewriteIntegrityResponse"
+            android:dependency="enableLogger"
             app:singleLineTitle="false"
             app:useSimpleSummaryProvider="true"
             android:title="@string/app_rewrite_integrity_error_code"
@@ -38,7 +28,7 @@
             android:icon="@drawable/outline_bug_report_24"
             android:key="rewriteIntegrityErrorRemediable"
             android:defaultValue="true"
-            android:dependency="rewriteIntegrityResponse"
+            android:dependency="enableLogger"
             app:singleLineTitle="false"
             android:title="@string/app_rewrite_integrity_error_remediable"
             android:summary="@string/app_rewrite_integrity_error_remediable_desc" />

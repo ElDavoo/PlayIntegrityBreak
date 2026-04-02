@@ -102,57 +102,67 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onStart() {
         super.onStart()
 
-        val serviceVersion = ServiceClient.serviceVersion
-        val serviceHealthTs = ServiceClient.serviceHealthcheckTimestamp
-        val serviceHealthy = serviceVersion > 0 &&
-                serviceHealthTs > 0L &&
-                (System.currentTimeMillis() - serviceHealthTs) <= SERVICE_HEALTH_STALE_MS
-
-        var color = when {
-            serviceVersion == 0 || !serviceHealthy -> getColor(R.color.invalid)
-            else -> themeColor(android.R.attr.colorPrimary)
-        }
-
-        if (PrefManager.systemWallpaper) color -= 0x55000000
-
-        with(binding.statusCard) {
-            root.setCardBackgroundColor(color)
-            root.outlineAmbientShadowColor = color
-            root.outlineSpotShadowColor = color
-
-            if (serviceVersion > 0) {
-                moduleStatusIcon.setImageResource(R.drawable.sentiment_calm_24px)
-                val versionNameSimple = BuildConfig.VERSION_NAME.substringBefore(".r")
-                moduleStatus.text =
-                    getString(R.string.home_xposed_activated, versionNameSimple)
-                root.setOnLongClickListener {
-                    ConfigManager.saveConfig()
-                    showToast(android.R.string.ok)
-
-                    true
-                }
-            } else {
-                moduleStatusIcon.setImageResource(R.drawable.sentiment_very_dissatisfied_24px)
-                moduleStatus.setText(R.string.home_xposed_not_activated)
+        lifecycleScope.launch {
+            val (serviceVersion, serviceHealthy, serviceFilterCount) = withContext(Dispatchers.IO) {
+                runCatching {
+                    val version = ServiceClient.serviceVersion
+                    val healthTs = ServiceClient.serviceHealthcheckTimestamp
+                    val healthy = version > 0 &&
+                        healthTs > 0L &&
+                        (System.currentTimeMillis() - healthTs) <= SERVICE_HEALTH_STALE_MS
+                    val filterCount = if (version != 0) ServiceClient.filterCount else 0
+                    Triple(version, healthy, filterCount)
+                }.getOrDefault(Triple(0, false, 0))
             }
 
-            if (serviceVersion != 0) {
-                if (serviceVersion < org.frknkrc44.pib_oss.common.BuildConfig.SERVICE_VERSION) {
-                    serviceStatus.text =
-                        getString(R.string.home_xposed_service_old)
-                } else if (!serviceHealthy) {
-                    serviceStatus.text =
-                        getString(R.string.home_xposed_service_health_stale)
+            if (!isAdded) return@launch
+
+            var color = when {
+                serviceVersion == 0 || !serviceHealthy -> getColor(R.color.invalid)
+                else -> themeColor(android.R.attr.colorPrimary)
+            }
+
+            if (PrefManager.systemWallpaper) color -= 0x55000000
+
+            with(binding.statusCard) {
+                root.setCardBackgroundColor(color)
+                root.outlineAmbientShadowColor = color
+                root.outlineSpotShadowColor = color
+
+                if (serviceVersion > 0) {
+                    moduleStatusIcon.setImageResource(R.drawable.sentiment_calm_24px)
+                    val versionNameSimple = BuildConfig.VERSION_NAME.substringBefore(".r")
+                    moduleStatus.text =
+                        getString(R.string.home_xposed_activated, versionNameSimple)
+                    root.setOnLongClickListener {
+                        ConfigManager.saveConfig()
+                        showToast(android.R.string.ok)
+
+                        true
+                    }
                 } else {
-                    serviceStatus.text =
-                        getString(R.string.home_xposed_service_on, serviceVersion)
+                    moduleStatusIcon.setImageResource(R.drawable.sentiment_very_dissatisfied_24px)
+                    moduleStatus.setText(R.string.home_xposed_not_activated)
                 }
-                filterCount.visibility = View.VISIBLE
-                filterCount.text =
-                    getString(R.string.home_xposed_filter_count, ServiceClient.filterCount)
-            } else {
-                serviceStatus.setText(R.string.home_xposed_service_off)
-                filterCount.visibility = View.GONE
+
+                if (serviceVersion != 0) {
+                    if (serviceVersion < org.frknkrc44.pib_oss.common.BuildConfig.SERVICE_VERSION) {
+                        serviceStatus.text =
+                            getString(R.string.home_xposed_service_old)
+                    } else if (!serviceHealthy) {
+                        serviceStatus.text =
+                            getString(R.string.home_xposed_service_health_stale)
+                    } else {
+                        serviceStatus.text =
+                            getString(R.string.home_xposed_service_on, serviceVersion)
+                    }
+                    filterCount.visibility = View.VISIBLE
+                    filterCount.text =
+                        getString(R.string.home_xposed_filter_count, serviceFilterCount)
+                } else {
+                    serviceStatus.setText(R.string.home_xposed_service_off)
+                    filterCount.visibility = View.GONE
+                }
             }
         }
 

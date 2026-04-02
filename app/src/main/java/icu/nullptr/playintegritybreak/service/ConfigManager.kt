@@ -6,6 +6,10 @@ import icu.nullptr.playintegritybreak.common.JsonConfig
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.ui.util.showToast
 import icu.nullptr.playintegritybreak.util.PackageHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import org.frknkrc44.pib_oss.R
 import org.frknkrc44.pib_oss.common.BuildConfig
 import java.io.File
@@ -13,6 +17,7 @@ import java.io.File
 object ConfigManager {
     private const val TAG = "ConfigManager"
     private lateinit var config: JsonConfig
+    private val serviceSyncScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     val configFile = File("${pibApp.filesDir.absolutePath}/config.json")
 
     fun init() {
@@ -46,8 +51,14 @@ object ConfigManager {
 
     fun saveConfig() {
         val text = config.toString()
-        ServiceClient.writeConfig(text)
         configFile.writeText(text)
+        serviceSyncScope.launch {
+            runCatching {
+                ServiceClient.writeConfig(text)
+            }.onFailure {
+                Log.w(TAG, "Failed to sync config to service", it)
+            }
+        }
     }
 
     var detailLog: Boolean
@@ -179,7 +190,7 @@ object ConfigManager {
     }
 
     fun isLoggerEnabled(packageName: String): Boolean {
-        return config.scope.containsKey(packageName)
+        return config.scope[packageName]?.rewriteIntegrityResponse == true
     }
 
     fun getAppConfig(packageName: String): JsonConfig.AppConfig? {

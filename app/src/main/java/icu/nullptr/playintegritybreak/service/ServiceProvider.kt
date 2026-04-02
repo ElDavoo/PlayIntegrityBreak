@@ -5,10 +5,18 @@ import android.content.ContentValues
 import android.net.Uri
 import android.os.Binder
 import android.os.Bundle
+import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
 import org.frknkrc44.pib_oss.common.BuildConfig
+import java.io.File
+import kotlin.concurrent.thread
 
 class ServiceProvider : ContentProvider() {
+
+    private companion object {
+        private const val TAG = "ServiceProvider"
+        private const val CONFIG_FILE_NAME = "config.json"
+    }
 
     private val allowedCallers = setOf(
         Constants.ANDROID_PACKAGE_NAME,
@@ -38,6 +46,19 @@ class ServiceProvider : ContentProvider() {
         return uidPackages.any { it in allowedCallers }
     }
 
+    private fun syncConfigSnapshotAsync() {
+        val appContext = context ?: return
+        thread(name = "PIB-ConfigSync", isDaemon = true) {
+            runCatching {
+                val configFile = File(appContext.filesDir, CONFIG_FILE_NAME)
+                if (!configFile.exists()) return@runCatching
+                ServiceClient.writeConfig(configFile.readText())
+            }.onFailure {
+                Log.w(TAG, "Failed to sync config snapshot", it)
+            }
+        }
+    }
+
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
         if (!isCallerAllowed()) return null
 
@@ -49,7 +70,9 @@ class ServiceProvider : ContentProvider() {
         }
 
         val binder = extras?.getBinder("binder") ?: return null
-        ServiceClient.linkService(binder)
+        if (ServiceClient.linkService(binder)) {
+            syncConfigSnapshotAsync()
+        }
         return Bundle()
     }
 }
