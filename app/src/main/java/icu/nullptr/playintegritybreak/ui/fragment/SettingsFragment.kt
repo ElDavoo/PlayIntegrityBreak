@@ -24,7 +24,6 @@ import icu.nullptr.playintegritybreak.common.PropertyUtils
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
-import icu.nullptr.playintegritybreak.service.ServiceClient
 import icu.nullptr.playintegritybreak.ui.util.enabledString
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.recreateMainActivity
@@ -35,7 +34,6 @@ import icu.nullptr.playintegritybreak.ui.util.withAnimations
 import icu.nullptr.playintegritybreak.util.ConfigUtils.Companion.getLocale
 import icu.nullptr.playintegritybreak.util.LangList
 import icu.nullptr.playintegritybreak.util.PackageHelper.findEnabledAppComponent
-import icu.nullptr.playintegritybreak.util.SuUtils
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.frknkrc44.pib_oss.R
@@ -391,38 +389,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
 
             configureDataIsolation()
 
-            findPreference<Preference>("stopSystemService")?.setOnPreferenceClickListener {
-                if (ServiceClient.serviceVersion != 0) {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle(R.string.settings_is_clean_env)
-                        .setMessage(R.string.settings_is_clean_env_summary)
-                        .setPositiveButton(R.string.yes) { _, _ ->
-                            ServiceClient.stopService(true)
-                            showToast(R.string.settings_stop_system_service)
-                        }
-                        .setNegativeButton(R.string.no) { _, _ ->
-                            ServiceClient.stopService(false)
-                            showToast(R.string.settings_stop_system_service)
-                        }
-                        .setNeutralButton(android.R.string.cancel, null)
-                        .show()
-                } else showToast(R.string.home_xposed_service_off)
-                true
-            }
-
-            findPreference<Preference>("forceCleanEnv")?.setOnPreferenceClickListener {
-                MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle(R.string.settings_force_clean_env)
-                    .setMessage(R.string.settings_is_clean_env_summary)
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                        val result = SuUtils.execPrivileged("rm -rf /data/misc/hide_my_applist*")
-                        if (result) showToast(R.string.settings_force_clean_env_toast_successful)
-                        else showToast(R.string.settings_permission_denied)
-                    }
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show()
-                true
-            }
         }
 
         override fun onResume() {

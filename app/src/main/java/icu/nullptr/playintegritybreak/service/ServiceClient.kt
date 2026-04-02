@@ -55,10 +55,6 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
         service?.writeConfig(json)
     }
 
-    override fun stopService(cleanEnv: Boolean) {
-        service?.stopService(cleanEnv)
-    }
-
     override fun log(level: Int, tag: String, message: String) {
         service?.log(level, tag, message)
     }

@@ -131,16 +131,6 @@ object PIBLoggerService : IPIBService.Stub() {
         }.getOrDefault(false)
     }
 
-    override fun stopService(cleanEnv: Boolean) {
-        if (cleanEnv) {
-            synchronized(logLock) {
-                runtimeLogFile?.delete()
-                runtimeLogFile = null
-            }
-        }
-        initialized.set(false)
-    }
-
     override fun writeConfig(json: String) {
         synchronized(configLock) {
             runCatching {
