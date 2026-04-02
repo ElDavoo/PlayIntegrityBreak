@@ -77,7 +77,7 @@ object Constants {
         "SHARED_USER_GID" to SHARED_USER_GID,
     )
 
-    val packagesShouldNotHide = setOf(
+    val packagesExcludedFromSelection = setOf(
         "android",
         "android.media",
         "android.uid.system",

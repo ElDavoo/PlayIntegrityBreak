@@ -102,7 +102,7 @@ object PackageHelper {
                             val packages = ServiceClient.getPackageNames(userProfile.hashCode()) ?: arrayOf<String>()
                             for (packageName in packages) {
                                 val packageInfo = ServiceClient.getPackageInfo(packageName, userProfile.hashCode())!!
-                                if (packageInfo.packageName in Constants.packagesShouldNotHide) continue
+                                if (packageInfo.packageName in Constants.packagesExcludedFromSelection) continue
                                 packageInfo.applicationInfo?.let { appInfo ->
                                     val label = pm.getApplicationLabel(appInfo).toString()
                                     val icon = loadAppIconFromAppInfo(appInfo)
@@ -118,7 +118,7 @@ object PackageHelper {
                         for (userProfile: UserHandle in profiles) {
                             val packages = getInstalledPackagesAsUser(pm, userProfile.hashCode())
                             for (packageInfo in packages) {
-                                if (packageInfo.packageName in Constants.packagesShouldNotHide) continue
+                                if (packageInfo.packageName in Constants.packagesExcludedFromSelection) continue
                                 packageInfo.applicationInfo?.let { appInfo ->
                                     val label = pm.getApplicationLabel(appInfo).toString()
                                     val icon = loadAppIconFromAppInfo(appInfo)
