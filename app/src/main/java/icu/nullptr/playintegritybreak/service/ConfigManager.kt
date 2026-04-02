@@ -50,12 +50,14 @@ object ConfigManager {
             val configVersion = config.configVersion
             if (configVersion < BuildConfig.MIN_BACKUP_VERSION) throw RuntimeException("Config version too old")
             config.configVersion = BuildConfig.CONFIG_VERSION
+            applyLoggerMigrationIfNeeded()
         }.onSuccess {
             saveConfig()
         }.onFailure { catch ->
             runCatching {
                 config = JsonConfig.parse(ServiceClient.readConfig() ?: throw RuntimeException("Service config is unavailable"))
                 config.configVersion = BuildConfig.CONFIG_VERSION
+                applyLoggerMigrationIfNeeded()
                 showToast(R.string.home_restore_config)
             }.onSuccess {
                 saveConfig()
@@ -141,7 +143,31 @@ object ConfigManager {
     fun importConfig(json: String) {
         config = JsonConfig.parse(json)
         config.configVersion = BuildConfig.CONFIG_VERSION
+        applyLoggerMigrationIfNeeded()
         saveConfig()
+    }
+
+    private fun applyLoggerMigrationIfNeeded() {
+        if (config.integrityModeMigrated) return
+
+        config.scope.values.forEach { appConfig ->
+            appConfig.integrityLoggerEnabled = true
+            appConfig.logIntegrityRequests = true
+            appConfig.logIntegrityResponses = true
+            appConfig.logIntegrityErrorsOnly = false
+            appConfig.rewriteIntegrityResponse = false
+            appConfig.rewriteIntegrityErrorCode = -8
+            appConfig.rewriteIntegrityErrorRemediable = true
+        }
+
+        config.integrityModeMigrated = true
+        runCatching {
+            ServiceClient.log(
+                Log.INFO,
+                TAG,
+                "Config migration applied: migrated ${config.scope.size} scoped app entries to Integrity logger defaults",
+            )
+        }
     }
 
     fun hasTemplate(name: String?): Boolean {

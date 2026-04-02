@@ -15,6 +15,7 @@ import java.io.FileWriter
 import java.io.IOException
 import java.lang.reflect.Method
 import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicLong
 
 object PIBLoggerService : IPIBService.Stub() {
     private const val TAG = "PIB-LoggerService"
@@ -22,6 +23,7 @@ object PIBLoggerService : IPIBService.Stub() {
     private const val RUNTIME_LOG_OLD_FILE = "integrity_runtime.old.log"
 
     private val initialized = AtomicBoolean(false)
+    private val capturedEvents = AtomicLong(0)
     private val configLock = Any()
     private val logLock = Any()
 
@@ -67,6 +69,7 @@ object PIBLoggerService : IPIBService.Stub() {
 
             try {
                 FileWriter(file, true).use { it.write(parsedMsg) }
+                capturedEvents.incrementAndGet()
             } catch (_: IOException) {
             }
         }
@@ -152,7 +155,7 @@ object PIBLoggerService : IPIBService.Stub() {
 
     override fun getServiceVersion() = BuildConfig.SERVICE_VERSION
 
-    override fun getFilterCount() = 0
+    override fun getFilterCount() = capturedEvents.get().coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
 
     override fun getLogs(): String {
         synchronized(logLock) {
@@ -167,6 +170,7 @@ object PIBLoggerService : IPIBService.Stub() {
             runCatching {
                 file.writeText("")
                 File(file.parentFile, RUNTIME_LOG_OLD_FILE).delete()
+                capturedEvents.set(0)
             }
         }
     }

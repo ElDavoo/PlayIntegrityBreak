@@ -24,8 +24,8 @@ private fun parseLog(level: Int, tag: String, msg: String, cause: Throwable? = n
 }
 
 fun logWithLevel(level: Int, tag: String, msg: String, cause: Throwable? = null) {
-    val errorOnly = PIBLoggerService.isErrorOnlyLogging() || PIBService.instance?.config?.errorOnlyLog == true
-    val detailLogEnabled = PIBLoggerService.isDetailLogging() || PIBService.instance?.config?.detailLog == true
+    val errorOnly = PIBLoggerService.isErrorOnlyLogging()
+    val detailLogEnabled = PIBLoggerService.isDetailLogging()
 
     if (level != Log.ERROR && errorOnly) return
     if (level <= Log.DEBUG && !detailLogEnabled) return
@@ -38,10 +38,7 @@ fun logWithLevel(level: Int, tag: String, msg: String, cause: Throwable? = null)
         return
     }
 
-    PIBService.instance?.executor?.execute {
-        PIBService.instance?.addLog(parsedLog)
-        XposedBridge.log("[PIB-OSS] $parsedLog")
-    } ?: XposedBridge.log("[PIB-OSS] $parsedLog")
+    XposedBridge.log("[PIB-OSS] $parsedLog")
 }
 
 fun logV(tag: String, msg: String, cause: Throwable? = null) = logWithLevel(Log.VERBOSE, tag, msg, cause)

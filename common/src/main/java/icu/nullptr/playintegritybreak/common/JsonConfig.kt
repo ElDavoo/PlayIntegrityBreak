@@ -8,6 +8,7 @@ import org.frknkrc44.pib_oss.common.BuildConfig
 @Serializable
 data class JsonConfig(
     var configVersion: Int = BuildConfig.CONFIG_VERSION,
+    var integrityModeMigrated: Boolean = false,
     var detailLog: Boolean = false,
     var errorOnlyLog: Boolean = false,
     var maxLogSize: Int = 512,
