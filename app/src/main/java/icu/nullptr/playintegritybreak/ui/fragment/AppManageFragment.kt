@@ -9,7 +9,7 @@ import org.frknkrc44.pib_oss.ui.fragment.AppSettingsV2FragmentArgs
 
 class AppManageFragment : AppSelectFragment() {
 
-    override val firstComparator: Comparator<String> = Comparator.comparing(ConfigManager::isHideEnabled).reversed()
+    override val firstComparator: Comparator<String> = Comparator.comparing(ConfigManager::isLoggerEnabled).reversed()
 
     override val adapter = AppManageAdapter {
         if (PackageHelper.exists(it)) {

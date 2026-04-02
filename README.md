@@ -52,6 +52,24 @@ PIB-OSS runs as an LSPosed/Xposed module in the Play Store process and logs Inte
 
 https://github.com/frknkrc44/PIB-OSS/wiki
 
+## Build with Nix
+
+PIB-OSS ships a repo-local Nix development shell for reproducible Android builds.
+
+1. Enter the shell:
+
+```bash
+nix develop
+```
+
+2. Build all modules:
+
+```bash
+nix develop -c ./gradlew :common:assembleDebug :xposed:assembleDebug :app:assembleDebug --no-daemon
+```
+
+The shell uses Android SDK components from nixpkgs by default and only falls back to a host SDK when the required platform/build-tools are already present.
+
 ## I want to contribute translation
 You can contribute translation [here](https://crowdin.com/project/frknkrc44-pib-oss).
 

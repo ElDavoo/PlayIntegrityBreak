@@ -35,7 +35,7 @@ class AppManageAdapter(
         override fun bind(packageName: String) {
             (itemView as AppItemView).let {
                 it.load(packageName)
-                it.showEnabled = ConfigManager.isHideEnabled(packageName)
+                it.showEnabled = ConfigManager.isLoggerEnabled(packageName)
             }
         }
     }
