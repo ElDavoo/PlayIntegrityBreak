@@ -26,8 +26,7 @@ abstract class AppSelectAdapter(
                     if (firstFilter?.invoke(it) == false) return@filter false
                     if (!PrefManager.appFilter_showSystem && PackageHelper.isSystem(it)) return@filter false
                     if (it == BuildConfig.APPLICATION_ID &&
-                        (this@AppSelectAdapter.javaClass == AppManageAdapter::class.java ||
-                            (this@AppSelectAdapter.javaClass == AppScopeAdapter::class.java && firstFilter != null))) return@filter false
+                        this@AppSelectAdapter.javaClass == AppManageAdapter::class.java) return@filter false
                     val label = PackageHelper.loadAppLabel(it)
                     label.lowercase().contains(constraintLowered) || it.lowercase().contains(constraintLowered)
                 }

@@ -162,12 +162,7 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
         private val recyclerView: RecyclerView,
         private val emptyView: View
     ): RecyclerView.AdapterDataObserver() {
-        private val emptyTextRes by lazy {
-            when(this@AppSelectFragment.javaClass) {
-                ScopeFragment::class.java -> R.string.list_empty_no_enabled
-                else -> R.string.list_empty_no_apps
-            }
-        }
+        private val emptyTextRes = R.string.list_empty_no_apps
 
         private fun checkIfEmpty() {
             val emptyViewVisible = recyclerView.adapter!!.itemCount < 1

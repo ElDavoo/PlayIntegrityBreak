@@ -57,29 +57,4 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_scope"
-        android:name="icu.nullptr.playintegritybreak.ui.fragment.ScopeFragment"
-        android:label="@string/title_app_select">
-
-        <argument
-            android:name="filterOnlyEnabled"
-            app:argType="boolean" />
-
-        <argument
-            android:name="isOpposite"
-            app:argType="boolean"
-            android:defaultValue="false" />
-
-        <argument
-            android:name="isWhiteList"
-            android:defaultValue="false"
-            app:argType="boolean" />
-
-        <argument
-            android:name="checked"
-            app:argType="string[]" />
-
-    </fragment>
-
 </navigation>
