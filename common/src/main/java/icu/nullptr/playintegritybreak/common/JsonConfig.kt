@@ -27,6 +27,7 @@ data class JsonConfig(
         var integrityLoggerEnabled: Boolean = true,
         var logIntegrityRequests: Boolean = true,
         var logIntegrityResponses: Boolean = true,
+        var rewriteIntegrityResponseOverridden: Boolean = false,
         var rewriteIntegrityResponse: Boolean = false,
         var rewriteIntegrityErrorCode: Int = -8,
         var rewriteIntegrityErrorRemediable: Boolean = true,

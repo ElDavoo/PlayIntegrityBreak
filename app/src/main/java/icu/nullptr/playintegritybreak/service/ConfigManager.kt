@@ -162,6 +162,7 @@ object ConfigManager {
             appConfig.integrityLoggerEnabled = true
             appConfig.logIntegrityRequests = true
             appConfig.logIntegrityResponses = true
+            appConfig.rewriteIntegrityResponseOverridden = false
             appConfig.rewriteIntegrityResponse = false
             appConfig.rewriteIntegrityErrorCode = -8
             appConfig.rewriteIntegrityErrorRemediable = true
@@ -177,8 +178,21 @@ object ConfigManager {
         }
     }
 
+    private fun isRewriteOverridden(appConfig: JsonConfig.AppConfig): Boolean {
+        return appConfig.rewriteIntegrityResponseOverridden
+                || appConfig.rewriteIntegrityResponse
+                || appConfig.rewriteIntegrityErrorCode != config.defaultHookRewriteErrorCode
+                || appConfig.rewriteIntegrityErrorRemediable != config.defaultHookRewriteRemediable
+                || !appConfig.integrityLoggerEnabled
+    }
+
     fun isLoggerEnabled(packageName: String): Boolean {
-        return config.scope[packageName]?.rewriteIntegrityResponse == true
+        val appConfig = config.scope[packageName] ?: return config.defaultHookRewriteEnabled
+        return if (isRewriteOverridden(appConfig)) {
+            appConfig.rewriteIntegrityResponse
+        } else {
+            config.defaultHookRewriteEnabled
+        }
     }
 
     fun getAppConfig(packageName: String): JsonConfig.AppConfig? {

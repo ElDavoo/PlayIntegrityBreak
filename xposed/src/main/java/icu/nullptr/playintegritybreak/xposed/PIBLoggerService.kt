@@ -128,8 +128,32 @@ object PIBLoggerService : IPIBService.Stub() {
         synchronized(configLock) {
             val appConfig = config.scope[callerPkg]
             val hasScopedApps = config.scope.isNotEmpty()
+            val defaultRewriteEnabled = config.defaultHookRewriteEnabled
+            val appOverrideEnabled = appConfig?.let {
+                it.rewriteIntegrityResponseOverridden
+                        || it.rewriteIntegrityResponse
+                        || it.rewriteIntegrityErrorCode != config.defaultHookRewriteErrorCode
+                        || it.rewriteIntegrityErrorRemediable != config.defaultHookRewriteRemediable
+                        || !it.integrityLoggerEnabled
+            } == true
 
-            if (appConfig == null && hasScopedApps) {
+            val resolvedRewriteResponse = if (appOverrideEnabled) {
+                appConfig.rewriteIntegrityResponse
+            } else {
+                defaultRewriteEnabled
+            }
+            val resolvedRewriteErrorCode = if (appOverrideEnabled) {
+                appConfig.rewriteIntegrityErrorCode
+            } else {
+                config.defaultHookRewriteErrorCode
+            }
+            val resolvedRewriteRemediable = if (appOverrideEnabled) {
+                appConfig.rewriteIntegrityErrorRemediable
+            } else {
+                config.defaultHookRewriteRemediable
+            }
+
+            if (appConfig == null && hasScopedApps && !defaultRewriteEnabled) {
                 return IntegrityPolicy(
                     enabled = false,
                     logRequest = true,
@@ -147,9 +171,9 @@ object PIBLoggerService : IPIBService.Stub() {
                 logRequest = true,
                 logResponse = true,
                 errorOnly = config.errorOnlyLog,
-                rewriteResponse = appConfig?.rewriteIntegrityResponse ?: config.defaultHookRewriteEnabled,
-                rewriteErrorCode = appConfig?.rewriteIntegrityErrorCode ?: config.defaultHookRewriteErrorCode,
-                rewriteRemediable = appConfig?.rewriteIntegrityErrorRemediable ?: config.defaultHookRewriteRemediable,
+                rewriteResponse = resolvedRewriteResponse,
+                rewriteErrorCode = resolvedRewriteErrorCode,
+                rewriteRemediable = resolvedRewriteRemediable,
             )
         }
     }

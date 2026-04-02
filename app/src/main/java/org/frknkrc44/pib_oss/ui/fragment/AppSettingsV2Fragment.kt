@@ -116,17 +116,37 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
     class AppPreferenceDataStore(private val pack: AppSettingsViewModel.Pack) : PreferenceDataStore() {
 
+        private fun isRewriteOverridden(): Boolean {
+            return pack.config.rewriteIntegrityResponseOverridden
+                    || pack.config.rewriteIntegrityResponse
+                    || pack.config.rewriteIntegrityErrorCode != ConfigManager.defaultHookRewriteErrorCode
+                    || pack.config.rewriteIntegrityErrorRemediable != ConfigManager.defaultHookRewriteRemediable
+                    || !pack.config.integrityLoggerEnabled
+        }
+
         override fun getBoolean(key: String, defValue: Boolean): Boolean {
             return when (key) {
-                "enableLogger" -> pack.config.rewriteIntegrityResponse
-                "rewriteIntegrityErrorRemediable" -> pack.config.rewriteIntegrityErrorRemediable
+                "enableLogger" -> if (isRewriteOverridden()) {
+                    pack.config.rewriteIntegrityResponse
+                } else {
+                    ConfigManager.defaultHookRewriteEnabled
+                }
+                "rewriteIntegrityErrorRemediable" -> if (isRewriteOverridden()) {
+                    pack.config.rewriteIntegrityErrorRemediable
+                } else {
+                    ConfigManager.defaultHookRewriteRemediable
+                }
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
 
         override fun getString(key: String, defValue: String?): String {
             return when (key) {
-                "rewriteIntegrityErrorCode" -> pack.config.rewriteIntegrityErrorCode.toString()
+                "rewriteIntegrityErrorCode" -> if (isRewriteOverridden()) {
+                    pack.config.rewriteIntegrityErrorCode.toString()
+                } else {
+                    ConfigManager.defaultHookRewriteErrorCode.toString()
+                }
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -134,18 +154,26 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
         override fun putBoolean(key: String, value: Boolean) {
             when (key) {
                 "enableLogger" -> {
-                    // Keep legacy scope behavior: turning rewrite on should persist app config.
-                    if (value) pack.enabled = true
+                    pack.enabled = true
+                    pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityResponse = value
                 }
-                "rewriteIntegrityErrorRemediable" -> pack.config.rewriteIntegrityErrorRemediable = value
+                "rewriteIntegrityErrorRemediable" -> {
+                    pack.enabled = true
+                    pack.config.rewriteIntegrityResponseOverridden = true
+                    pack.config.rewriteIntegrityErrorRemediable = value
+                }
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
 
         override fun putString(key: String, value: String?) {
             when (key) {
-                "rewriteIntegrityErrorCode" -> pack.config.rewriteIntegrityErrorCode = value?.toIntOrNull() ?: -8
+                "rewriteIntegrityErrorCode" -> {
+                    pack.enabled = true
+                    pack.config.rewriteIntegrityResponseOverridden = true
+                    pack.config.rewriteIntegrityErrorCode = value?.toIntOrNull() ?: -8
+                }
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
