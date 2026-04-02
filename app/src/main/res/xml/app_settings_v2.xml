@@ -15,16 +15,6 @@
         android:dependency="enableLogger"
         android:title="@string/preferences">
         <SwitchPreferenceCompat
-            android:icon="@drawable/outline_assignment_24"
-            android:key="logIntegrityRequests"
-            app:singleLineTitle="false"
-            android:title="@string/app_log_integrity_requests" />
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_logs_checkable"
-            android:key="logIntegrityResponses"
-            app:singleLineTitle="false"
-            android:title="@string/app_log_integrity_responses" />
-        <SwitchPreferenceCompat
             android:icon="@drawable/outline_bug_report_24"
             android:key="logIntegrityErrorsOnly"
             app:singleLineTitle="false"
@@ -41,7 +31,7 @@
             android:defaultValue="-8"
             android:dependency="rewriteIntegrityResponse"
             app:singleLineTitle="false"
-            android:summary="%s"
+            app:useSimpleSummaryProvider="true"
             android:title="@string/app_rewrite_integrity_error_code"
             android:dialogMessage="@string/app_rewrite_integrity_error_code_desc" />
         <SwitchPreferenceCompat

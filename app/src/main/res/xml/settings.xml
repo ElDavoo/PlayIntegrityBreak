@@ -113,7 +113,7 @@
             android:key="defaultHookRewriteErrorCode"
             android:defaultValue="-8"
             app:singleLineTitle="false"
-            android:summary="%s"
+            app:useSimpleSummaryProvider="true"
             android:title="@string/settings_default_hook_error_code"
             android:dialogMessage="@string/settings_default_hook_error_code_summary" />
         <SwitchPreferenceCompat
