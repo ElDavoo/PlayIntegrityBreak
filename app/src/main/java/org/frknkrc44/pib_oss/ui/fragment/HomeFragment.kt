@@ -251,27 +251,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         with(binding.manageTemplates) {
-            text1.text = getString(R.string.title_template_manage)
-            icon.setImageResource(R.drawable.ic_outline_layers_24)
-            root.setOnClickListener {
-                navigate(R.id.nav_template_manage)
-            }
+            root.visibility = View.GONE
         }
 
         with(binding.managePresets) {
-            text1.text = getString(R.string.title_preset_manage)
-            icon.setImageResource(R.drawable.baseline_my_location_24)
-            root.setOnClickListener {
-                navigate(R.id.nav_presets)
-            }
+            root.visibility = View.GONE
         }
 
         with(binding.navBulkConfigWizard) {
-            text1.text = getString(R.string.title_bulk_config_wizard)
-            icon.setImageResource(R.drawable.outline_storage_24)
-            root.setOnClickListener {
-                navigate(R.id.nav_bulk_config_wizard)
-            }
+            root.visibility = View.GONE
         }
 
         with(binding.navLogs) {
@@ -283,11 +271,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         with(binding.navStats) {
-            text1.text = getString(R.string.title_filter_logs)
-            icon.setImageResource(R.drawable.outline_cleaning_services_24)
-            root.setOnClickListener {
-                navigate(R.id.nav_stats)
-            }
+            root.visibility = View.GONE
         }
 
         with(binding.navSettings) {

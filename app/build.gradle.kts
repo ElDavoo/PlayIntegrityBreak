@@ -110,7 +110,7 @@ afterEvaluate {
             json.keySet().forEach { translatorsMap[it] = json.get(it).asString }
         }
     }.onFailure {
-        logger.warn("Failed to fetch translators metadata, using bundled defaults", it)
+        logger.lifecycle("Failed to fetch translators metadata, using bundled defaults")
     }
 
     val translatorJson = JSONObject(translatorsMap).toJSONString()
