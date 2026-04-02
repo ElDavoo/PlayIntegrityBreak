@@ -12,7 +12,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.color.DynamicColors
 import icu.nullptr.playintegritybreak.service.PrefManager
-import org.frknkrc44.pib_oss.R
+import it.eldavo.pib_oss.R
 
 object ThemeUtils {
     private val colorThemeMap = mapOf(

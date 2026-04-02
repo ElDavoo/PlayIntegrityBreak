@@ -1,4 +1,4 @@
-package org.frknkrc44.pib_oss.ui.fragment
+package it.eldavo.pib_oss.ui.fragment
 
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
@@ -31,9 +31,9 @@ import icu.nullptr.playintegritybreak.ui.util.showToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.frknkrc44.pib_oss.BuildConfig
-import org.frknkrc44.pib_oss.R
-import org.frknkrc44.pib_oss.databinding.FragmentHomeBinding
+import it.eldavo.pib_oss.BuildConfig
+import it.eldavo.pib_oss.R
+import it.eldavo.pib_oss.databinding.FragmentHomeBinding
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -146,7 +146,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
 
                 if (serviceVersion != 0) {
-                    if (serviceVersion < org.frknkrc44.pib_oss.common.BuildConfig.SERVICE_VERSION) {
+                    if (serviceVersion < it.eldavo.pib_oss.common.BuildConfig.SERVICE_VERSION) {
                         serviceStatus.text =
                             getString(R.string.home_xposed_service_old)
                     } else if (!serviceHealthy) {

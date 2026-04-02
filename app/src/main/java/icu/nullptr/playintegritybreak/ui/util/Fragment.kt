@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import org.frknkrc44.pib_oss.R
-import org.frknkrc44.pib_oss.ui.activity.MainActivity
+import it.eldavo.pib_oss.R
+import it.eldavo.pib_oss.ui.activity.MainActivity
 
 val Fragment.navController get() = NavHostFragment.findNavController(this)
 

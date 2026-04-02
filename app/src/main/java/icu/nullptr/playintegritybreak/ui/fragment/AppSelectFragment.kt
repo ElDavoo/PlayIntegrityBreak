@@ -21,8 +21,8 @@ import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.ui.util.setupToolbar
 import icu.nullptr.playintegritybreak.util.PackageHelper
 import kotlinx.coroutines.launch
-import org.frknkrc44.pib_oss.R
-import org.frknkrc44.pib_oss.databinding.FragmentAppSelectBinding
+import it.eldavo.pib_oss.R
+import it.eldavo.pib_oss.databinding.FragmentAppSelectBinding
 
 abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
 

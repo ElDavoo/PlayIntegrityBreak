@@ -7,7 +7,7 @@ import android.os.Binder
 import android.os.Bundle
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
-import org.frknkrc44.pib_oss.common.BuildConfig
+import it.eldavo.pib_oss.common.BuildConfig
 import java.io.File
 import kotlin.concurrent.thread
 

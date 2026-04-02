@@ -2,7 +2,7 @@ package icu.nullptr.playintegritybreak.common
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import org.frknkrc44.pib_oss.common.BuildConfig
+import it.eldavo.pib_oss.common.BuildConfig
 
 @Serializable
 data class JsonConfig(

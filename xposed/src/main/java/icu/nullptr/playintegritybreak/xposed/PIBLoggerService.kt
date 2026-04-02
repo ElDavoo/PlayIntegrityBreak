@@ -11,7 +11,7 @@ import android.os.Looper
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
-import org.frknkrc44.pib_oss.common.BuildConfig
+import it.eldavo.pib_oss.common.BuildConfig
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException

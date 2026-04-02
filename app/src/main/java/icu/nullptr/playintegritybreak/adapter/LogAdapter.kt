@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.themeColor
-import org.frknkrc44.pib_oss.R
-import org.frknkrc44.pib_oss.databinding.LogItemViewBinding
+import it.eldavo.pib_oss.R
+import it.eldavo.pib_oss.databinding.LogItemViewBinding
 import java.util.regex.Pattern
 
 class LogAdapter(context: Context) : RecyclerView.Adapter<LogAdapter.ViewHolder>() {

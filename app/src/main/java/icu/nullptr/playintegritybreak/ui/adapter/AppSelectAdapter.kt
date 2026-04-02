@@ -8,7 +8,7 @@ import icu.nullptr.playintegritybreak.ui.view.AppItemView
 import icu.nullptr.playintegritybreak.util.PackageHelper
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import org.frknkrc44.pib_oss.BuildConfig
+import it.eldavo.pib_oss.BuildConfig
 
 abstract class AppSelectAdapter(
     private val firstFilter: ((String) -> Boolean)? = null

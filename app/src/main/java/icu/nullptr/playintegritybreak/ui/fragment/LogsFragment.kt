@@ -21,8 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.frknkrc44.pib_oss.R
-import org.frknkrc44.pib_oss.databinding.FragmentLogsBinding
+import it.eldavo.pib_oss.R
+import it.eldavo.pib_oss.databinding.FragmentLogsBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

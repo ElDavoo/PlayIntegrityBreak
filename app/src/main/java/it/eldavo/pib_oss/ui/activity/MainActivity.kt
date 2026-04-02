@@ -1,4 +1,4 @@
-package org.frknkrc44.pib_oss.ui.activity
+package it.eldavo.pib_oss.ui.activity
 
 import android.content.Context
 import android.content.res.Configuration
@@ -14,8 +14,8 @@ import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils
 import icu.nullptr.playintegritybreak.util.ConfigUtils
-import org.frknkrc44.pib_oss.R
-import org.frknkrc44.pib_oss.databinding.ActivityMainBinding
+import it.eldavo.pib_oss.R
+import it.eldavo.pib_oss.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     var currentConfiguration: Configuration? = null

@@ -1,4 +1,4 @@
-package org.frknkrc44.pib_oss.ui.preference
+package it.eldavo.pib_oss.ui.preference
 
 import android.annotation.SuppressLint
 import android.content.ComponentName
@@ -18,8 +18,8 @@ import icu.nullptr.playintegritybreak.data.AppConstants.allAppIcons
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.asDrawable
 import icu.nullptr.playintegritybreak.util.PackageHelper.findEnabledAppComponent
-import org.frknkrc44.pib_oss.BuildConfig
-import org.frknkrc44.pib_oss.R
+import it.eldavo.pib_oss.BuildConfig
+import it.eldavo.pib_oss.R
 
 
 @Suppress("deprecation")

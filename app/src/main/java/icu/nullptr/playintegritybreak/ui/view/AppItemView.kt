@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import dev.androidbroadcast.vbpd.CreateMethod
 import dev.androidbroadcast.vbpd.viewBinding
 import icu.nullptr.playintegritybreak.util.PackageHelper
-import org.frknkrc44.pib_oss.databinding.AppItemViewBinding
+import it.eldavo.pib_oss.databinding.AppItemViewBinding
 
 class AppItemView @JvmOverloads constructor(
     context: Context,

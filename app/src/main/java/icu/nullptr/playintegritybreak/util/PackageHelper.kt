@@ -25,8 +25,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import org.frknkrc44.pib_oss.BuildConfig
-import org.frknkrc44.pib_oss.R
+import it.eldavo.pib_oss.BuildConfig
+import it.eldavo.pib_oss.R
 import java.text.Collator
 import java.util.Locale
 

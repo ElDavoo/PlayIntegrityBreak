@@ -6,7 +6,7 @@ import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.ui.view.AppItemView
-import org.frknkrc44.pib_oss.R
+import it.eldavo.pib_oss.R
 
 class AppManageAdapter(
     private val onItemClickListener: (String) -> Unit

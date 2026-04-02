@@ -2,7 +2,7 @@ package icu.nullptr.playintegritybreak.xposed
 
 import android.util.Log
 import de.robv.android.xposed.XposedBridge
-import org.frknkrc44.pib_oss.common.BuildConfig
+import it.eldavo.pib_oss.common.BuildConfig
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

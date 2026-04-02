@@ -13,11 +13,11 @@
     <a href="https://github.com/frknkrc44/PIB-OSS/releases/latest" style="text-decoration:none">
       <img src="https://img.shields.io/github/v/release/frknkrc44/PIB-OSS?label=Release">
     </a>
-    <a href="https://apt.izzysoft.de/fdroid/index/apk/org.frknkrc44.pib_oss" style="text-decoration:none">
-      <img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/org.frknkrc44.pib_oss&label=IzzyOnDroid">
+    <a href="https://apt.izzysoft.de/fdroid/index/apk/it.eldavo.pib_oss" style="text-decoration:none">
+      <img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/it.eldavo.pib_oss&label=IzzyOnDroid">
     </a>
-    <a href="https://shields.rbtlog.dev/org.frknkrc44.pib_oss" style="text-decoration:none">
-      <img src="https://shields.rbtlog.dev/simple/org.frknkrc44.pib_oss">
+    <a href="https://shields.rbtlog.dev/it.eldavo.pib_oss" style="text-decoration:none">
+      <img src="https://shields.rbtlog.dev/simple/it.eldavo.pib_oss">
     </a>
     <a href="https://github.com/frknkrc44/PIB-OSS/releases/latest" style="text-decoration:none">
       <img src="https://img.shields.io/github/downloads/frknkrc44/PIB-OSS/total">

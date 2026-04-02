@@ -1,6 +1,6 @@
 package icu.nullptr.playintegritybreak.common
 
-import org.frknkrc44.pib_oss.common.BuildConfig
+import it.eldavo.pib_oss.common.BuildConfig
 
 object Constants {
     const val PROVIDER_AUTHORITY = "${BuildConfig.APP_PACKAGE_NAME}.ServiceProvider"

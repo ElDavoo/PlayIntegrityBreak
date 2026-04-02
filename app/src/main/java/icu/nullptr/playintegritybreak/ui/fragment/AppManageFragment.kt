@@ -4,8 +4,8 @@ import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.ui.adapter.AppManageAdapter
 import icu.nullptr.playintegritybreak.ui.util.navigate
 import icu.nullptr.playintegritybreak.util.PackageHelper
-import org.frknkrc44.pib_oss.R
-import org.frknkrc44.pib_oss.ui.fragment.AppSettingsV2FragmentArgs
+import it.eldavo.pib_oss.R
+import it.eldavo.pib_oss.ui.fragment.AppSettingsV2FragmentArgs
 
 class AppManageFragment : AppSelectFragment() {
 
