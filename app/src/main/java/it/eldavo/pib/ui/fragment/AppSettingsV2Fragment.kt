@@ -180,6 +180,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             return when (key) {
                 "enableIntervention" -> effectiveInterventionEnabled()
                 "enableLogger" -> effectiveRewriteEnabled()
+                "deliverSyntheticResponse" -> if (isDefaultMode) true else pack.config.deliverSyntheticResponse
                 "rewriteIntegrityErrorRemediable" -> if (hasAppRewriteOverride()) {
                     pack.config.rewriteIntegrityErrorRemediable
                 } else {
@@ -213,6 +214,13 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                     pack.config.interventionEnabled = true
                     pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityResponse = value
+                }
+                "deliverSyntheticResponse" -> {
+                    if (isDefaultMode) return
+
+                    pack.enabled = true
+                    pack.config.interventionEnabled = true
+                    pack.config.deliverSyntheticResponse = value
                 }
                 "rewriteIntegrityErrorRemediable" -> {
                     pack.enabled = true
@@ -277,6 +285,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             }
             if (isDefaultMode) {
                 findPreference<Preference>("enableIntervention")?.isVisible = false
+                findPreference<Preference>("deliverSyntheticResponse")?.isVisible = false
             }
 
             findPreference<Preference>("appInfo")?.let {

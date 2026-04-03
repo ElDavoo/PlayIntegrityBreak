@@ -5,15 +5,16 @@ import android.os.IBinder
 import android.os.IInterface
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
-import java.lang.reflect.Field
 import java.lang.reflect.Method
+import java.lang.reflect.Modifier
 import java.util.concurrent.ConcurrentHashMap
 import java.util.regex.Pattern
 
 object IntegrityServiceHook {
     private const val TAG = "IntegrityServiceHook"
     private const val RESPONSE_SOURCE_SERVICE = "service-response"
-    private const val RESPONSE_SOURCE_REWRITTEN_PRE_DELIVERY = "rewritten-before-delivery"
+    private const val RESPONSE_SOURCE_SYNTHETIC_PRE_SERVICE = "synthetic-pre-service"
+    private const val RESPONSE_SOURCE_SHORT_CIRCUIT_NO_DELIVERY = "short-circuit-no-delivery"
 
     private val packageNamePattern =
         Pattern.compile("[a-zA-Z][a-zA-Z0-9_]*(?:\\.[a-zA-Z0-9_]+)+")
@@ -25,7 +26,7 @@ object IntegrityServiceHook {
     )
 
     private val runtimeHookedClasses = ConcurrentHashMap.newKeySet<String>()
-    private val blockedCallbackRewrites = ConcurrentHashMap<String, RewriteSpec>()
+    private val syntheticDeliveryDepth = ThreadLocal<Int>()
 
     @Volatile
     private var hookedMethodCount = 0
@@ -79,18 +80,6 @@ object IntegrityServiceHook {
                 val policy = PIBLoggerService.resolvePolicy(callerPkg)
                 val looksLikeRequest = hasBundleAndCallback(args)
                 val requestPayload = isIntegrityRequestPayload(args)
-                val responsePayload = hasResponsePayload(args)
-                val callbackRewrite = extractRememberedBlockedCallback(args)
-
-                val policyRewrite = if (policy.rewriteResponse) {
-                    RewriteSpec(
-                        packageName = callerPkg,
-                        errorCode = policy.rewriteErrorCode,
-                        remediable = policy.rewriteRemediable,
-                    )
-                } else {
-                    null
-                }
 
                 if (policy.enabled && requestPayload && callerPkg != "unknown") {
                     PIBLoggerService.recordIntegrityRequest(callerPkg)
@@ -100,34 +89,73 @@ object IntegrityServiceHook {
                     logI("Integrity request intercepted from $callerPkg")
                 }
 
-                if (requestPayload) {
-                    policyRewrite?.let { rememberBlockedCallback(args, it) }
-                }
+                val shouldShortCircuit = policy.enabled && policy.rewriteResponse && requestPayload
+                if (shouldShortCircuit) {
+                    val deliveryEnabled = policy.deliverSyntheticResponse
+                    val callback = if (deliveryEnabled) extractCallback(args) else null
 
-                val rewriteSpec = callbackRewrite ?: policyRewrite
-                val shouldRewrite = !requestPayload && responsePayload && rewriteSpec != null
+                    val delivered = if (deliveryEnabled) {
+                        if (callback == null) {
+                            logW("Synthetic callback delivery is enabled, but no callback argument was found for $callerPkg")
+                            false
+                        } else {
+                            deliverSyntheticBlockedResponse(
+                                callback = callback,
+                                errorCode = policy.rewriteErrorCode,
+                                remediable = policy.rewriteRemediable,
+                            )
+                        }
+                    } else {
+                        false
+                    }
 
-                if (shouldRewrite && rewriteResponseToBlockedError(args, rewriteSpec.errorCode, rewriteSpec.remediable)) {
-                    val pkgForLog = if (callerPkg == "unknown") rewriteSpec.packageName else callerPkg
-                    PIBLoggerService.recordIntegrityResponse(
-                        callerPkg = pkgForLog,
-                        success = false,
-                        errorCode = rewriteSpec.errorCode,
-                        retriable = rewriteSpec.remediable,
-                        source = RESPONSE_SOURCE_REWRITTEN_PRE_DELIVERY,
-                    )
-                    logResult(
-                        callerPkg = pkgForLog,
-                        success = false,
-                        errorCode = rewriteSpec.errorCode,
-                        retriable = rewriteSpec.remediable,
-                        source = RESPONSE_SOURCE_REWRITTEN_PRE_DELIVERY,
-                    )
-                    clearRememberedBlockedCallback(args)
+                    if (deliveryEnabled && !delivered) {
+                        logW("Synthetic callback delivery failed for $callerPkg, falling back to original service path")
+                        return
+                    }
+
+                    val responseSource = if (deliveryEnabled) {
+                        RESPONSE_SOURCE_SYNTHETIC_PRE_SERVICE
+                    } else {
+                        RESPONSE_SOURCE_SHORT_CIRCUIT_NO_DELIVERY
+                    }
+
+                    if (callerPkg != "unknown") {
+                        PIBLoggerService.recordIntegrityResponse(
+                            callerPkg = callerPkg,
+                            success = false,
+                            errorCode = policy.rewriteErrorCode,
+                            retriable = policy.rewriteRemediable,
+                            source = responseSource,
+                        )
+                    }
+
+                    val shouldLogSynthetic = callerPkg != "unknown" && policy.logResponse
+
+                    if (shouldLogSynthetic) {
+                        logResult(
+                            callerPkg = callerPkg,
+                            success = false,
+                            errorCode = policy.rewriteErrorCode,
+                            retriable = policy.rewriteRemediable,
+                            source = responseSource,
+                        )
+                    }
+
+                    if (!deliveryEnabled) {
+                        logI("Short-circuited integrity request for $callerPkg without synthetic callback delivery")
+                    }
+
+                    param.result = defaultReturnValue(method.returnType)
+                    return
                 }
             }
 
             override fun afterHookedMethod(param: MethodHookParam) {
+                if (isSyntheticDeliveryInProgress()) {
+                    return
+                }
+
                 val result = param.result
                 when (result) {
                     is IBinder -> hookBundleMethodsIfAny(result.javaClass, "binder-return")
@@ -247,54 +275,107 @@ object IntegrityServiceHook {
         return false
     }
 
-    private fun hasResponsePayload(args: Array<Any?>): Boolean {
-        return args.any {
-            val bundle = it as? Bundle ?: return@any false
-            bundle.containsKey("token") || bundle.containsKey("error")
+    private fun deliverSyntheticBlockedResponse(callback: Any, errorCode: Int, remediable: Boolean): Boolean {
+        val callbackMethod = findCallbackBundleMethod(callback) ?: return false
+        val syntheticResponse = Bundle().apply {
+            putInt("error", errorCode)
+            putBoolean("is.error.remediable", remediable)
         }
+
+        return runCatching {
+            beginSyntheticDelivery()
+            try {
+                callbackMethod.isAccessible = true
+                callbackMethod.invoke(callback, syntheticResponse)
+            } finally {
+                endSyntheticDelivery()
+            }
+        }.onFailure {
+            logW("Failed to deliver synthetic callback response", it)
+        }.isSuccess
     }
 
-    private fun rememberBlockedCallback(args: Array<Any?>, rewriteSpec: RewriteSpec) {
-        extractCallbackKey(args)?.let { blockedCallbackRewrites[it] = rewriteSpec }
-    }
-
-    private fun extractRememberedBlockedCallback(args: Array<Any?>): RewriteSpec? {
-        val key = extractCallbackKey(args) ?: return null
-        return blockedCallbackRewrites[key]
-    }
-
-    private fun clearRememberedBlockedCallback(args: Array<Any?>) {
-        extractCallbackKey(args)?.let(blockedCallbackRewrites::remove)
-    }
-
-    private fun extractCallbackKey(args: Array<Any?>): String? {
+    private fun extractCallback(args: Array<Any?>): Any? {
         args.forEach { arg ->
-            if (arg == null || !isIntegrityCallbackLike(arg)) return@forEach
-            val descriptor = extractDescriptor(arg) ?: "unknown"
-            val remote = extractFieldValue(arg, "mRemote")
-            val keyObj = remote ?: arg
-            return "$descriptor@${System.identityHashCode(keyObj)}"
+            if (arg == null) return@forEach
+            if (hasIntegrityCallbackDescriptor(arg)) {
+                return arg
+            }
+        }
+
+        args.forEach { arg ->
+            if (arg != null && isIntegrityCallbackLike(arg)) {
+                return arg
+            }
         }
         return null
     }
 
-    private fun rewriteResponseToBlockedError(args: Array<Any?>, errorCode: Int, remediable: Boolean): Boolean {
-        var changed = false
-
-        args.forEach { arg ->
-            val bundle = arg as? Bundle ?: return@forEach
-            val hasToken = bundle.containsKey("token")
-            val hasError = bundle.containsKey("error")
-            if (!hasToken && !hasError) return@forEach
-
-            bundle.remove("token")
-            bundle.remove("request.token.sid")
-            bundle.putInt("error", errorCode)
-            bundle.putBoolean("is.error.remediable", remediable)
-            changed = true
+    private fun hasIntegrityCallbackDescriptor(value: Any): Boolean {
+        val descriptor = extractDescriptor(value)
+        if (descriptor != null && descriptor.contains("IIntegrityServiceCallback")) {
+            return true
         }
 
-        return changed
+        if (value.javaClass.name.contains("IIntegrityServiceCallback")) {
+            return true
+        }
+
+        return value.javaClass.interfaces.any { it.name.contains("IIntegrityServiceCallback") }
+    }
+
+    private fun findCallbackBundleMethod(callback: Any): Method? {
+        callback.javaClass.methods.firstOrNull {
+            isBundleCallbackMethod(it) && it.returnType == Void.TYPE
+        }?.let { return it }
+
+        callback.javaClass.declaredMethods.firstOrNull {
+            isBundleCallbackMethod(it) && it.returnType == Void.TYPE
+        }?.let { return it }
+
+        callback.javaClass.methods.firstOrNull(::isBundleCallbackMethod)?.let { return it }
+        callback.javaClass.declaredMethods.firstOrNull(::isBundleCallbackMethod)?.let { return it }
+
+        return null
+    }
+
+    private fun isBundleCallbackMethod(method: Method): Boolean {
+        val params = method.parameterTypes
+        return !Modifier.isStatic(method.modifiers)
+            && params.size == 1
+            && params[0] == Bundle::class.java
+    }
+
+    private fun defaultReturnValue(returnType: Class<*>): Any? {
+        return when (returnType) {
+            java.lang.Boolean.TYPE -> false
+            java.lang.Byte.TYPE -> 0.toByte()
+            java.lang.Short.TYPE -> 0.toShort()
+            java.lang.Integer.TYPE -> 0
+            java.lang.Long.TYPE -> 0L
+            java.lang.Float.TYPE -> 0f
+            java.lang.Double.TYPE -> 0.0
+            java.lang.Character.TYPE -> 0.toChar()
+            else -> null
+        }
+    }
+
+    private fun beginSyntheticDelivery() {
+        val currentDepth = syntheticDeliveryDepth.get() ?: 0
+        syntheticDeliveryDepth.set(currentDepth + 1)
+    }
+
+    private fun endSyntheticDelivery() {
+        val currentDepth = syntheticDeliveryDepth.get() ?: 0
+        if (currentDepth <= 1) {
+            syntheticDeliveryDepth.remove()
+            return
+        }
+        syntheticDeliveryDepth.set(currentDepth - 1)
+    }
+
+    private fun isSyntheticDeliveryInProgress(): Boolean {
+        return (syntheticDeliveryDepth.get() ?: 0) > 0
     }
 
     private fun isIntegrityCallbackLike(value: Any): Boolean {
@@ -335,22 +416,6 @@ object IntegrityServiceHook {
         }.getOrNull()
     }
 
-    private fun extractFieldValue(target: Any, fieldName: String): Any? {
-        return runCatching {
-            var clazz: Class<*>? = target.javaClass
-            while (clazz != null && clazz != Any::class.java) {
-                try {
-                    val field: Field = clazz.getDeclaredField(fieldName)
-                    field.isAccessible = true
-                    return field.get(target)
-                } catch (_: NoSuchFieldException) {
-                }
-                clazz = clazz.superclass
-            }
-            null
-        }.getOrNull()
-    }
-
     private fun logI(message: String) = logI(TAG, message)
 
     private fun logW(message: String, cause: Throwable? = null) = logW(TAG, message, cause)
@@ -361,9 +426,4 @@ object IntegrityServiceHook {
         val retriable: Boolean?,
     )
 
-    private data class RewriteSpec(
-        val packageName: String,
-        val errorCode: Int,
-        val remediable: Boolean,
-    )
 }

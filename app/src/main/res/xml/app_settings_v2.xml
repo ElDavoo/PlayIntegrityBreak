@@ -22,6 +22,14 @@
     <PreferenceCategory
         android:dependency="enableLogger"
         android:title="@string/preferences">
+        <SwitchPreferenceCompat
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="deliverSyntheticResponse"
+            android:defaultValue="true"
+            android:dependency="enableLogger"
+            app:singleLineTitle="false"
+            android:title="@string/app_deliver_synthetic_response"
+            android:summary="@string/app_deliver_synthetic_response_desc" />
         <EditTextPreference
             android:icon="@drawable/outline_bug_report_24"
             android:key="rewriteIntegrityErrorCode"

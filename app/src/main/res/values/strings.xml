@@ -99,6 +99,8 @@
     <string name="app_log_integrity_responses">Log Integrity responses</string>
     <string name="app_rewrite_integrity_response">Rewrite response as controlled error</string>
     <string name="app_rewrite_integrity_response_desc">When enabled and intervention is active, successful Integrity responses for this app are rewritten to an error payload.</string>
+    <string name="app_deliver_synthetic_response">Deliver synthetic response callback</string>
+    <string name="app_deliver_synthetic_response_desc">When enabled, PIB immediately returns a synthetic callback after blocking the service call. Disable only for debugging apps that wait indefinitely for callbacks.</string>
     <string name="app_rewrite_integrity_error_code">Rewrite error code</string>
     <string name="app_rewrite_integrity_error_code_desc">Used in rewritten Integrity responses for this app.</string>
     <string name="app_rewrite_integrity_error_remediable">Rewrite error remediable flag</string>
