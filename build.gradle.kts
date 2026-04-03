@@ -84,7 +84,7 @@ val serviceVerCode by extra(102)
 val minBackupVerCode by extra(65)
 
 @Suppress("unused")
-val appPackageName by extra("it.eldavo.pib_oss")
+val appPackageName by extra("it.eldavo.pib")
 
 @Suppress("unused")
 val localBuild by extra(localProperties.getProperty("localBuild", "false") == "true")

@@ -1,4 +1,4 @@
-package it.eldavo.pib_oss.ui.fragment
+package it.eldavo.pib.ui.fragment
 
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -21,10 +21,10 @@ import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.homeItemBackgroundColor
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.util.PackageHelper.findEnabledAppComponent
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.common.BuildConfig
-import it.eldavo.pib_oss.databinding.FragmentAboutBinding
-import it.eldavo.pib_oss.databinding.FragmentAboutListItemBinding
+import it.eldavo.pib.R
+import it.eldavo.pib.common.BuildConfig
+import it.eldavo.pib.databinding.FragmentAboutBinding
+import it.eldavo.pib.databinding.FragmentAboutListItemBinding
 import org.json.JSONObject
 
 @Suppress("deprecation")

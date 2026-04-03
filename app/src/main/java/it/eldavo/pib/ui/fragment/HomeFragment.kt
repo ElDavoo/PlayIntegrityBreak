@@ -1,4 +1,4 @@
-package it.eldavo.pib_oss.ui.fragment
+package it.eldavo.pib.ui.fragment
 
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
@@ -20,6 +20,7 @@ import icu.nullptr.playintegritybreak.data.fetchLatestUpdate
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.ServiceClient
+import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.attrDrawable
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.getColor
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.homeItemBackgroundColor
@@ -32,9 +33,9 @@ import icu.nullptr.playintegritybreak.ui.util.showToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import it.eldavo.pib_oss.BuildConfig
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.databinding.FragmentHomeBinding
+import it.eldavo.pib.BuildConfig
+import it.eldavo.pib.R
+import it.eldavo.pib.databinding.FragmentHomeBinding
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -104,14 +105,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onStart()
 
         lifecycleScope.launch {
-            val (serviceVersion, serviceHealthy, serviceFilterCount) = withContext(Dispatchers.IO) {
+            val (serviceVersion, serviceHealthy, localEventCount) = withContext(Dispatchers.IO) {
                 runCatching {
                     val version = ServiceClient.serviceVersion
                     val healthTs = ServiceClient.serviceHealthcheckTimestamp
                     val healthy = version > 0 &&
                         healthTs > 0L &&
                         (System.currentTimeMillis() - healthTs) <= SERVICE_HEALTH_STALE_MS
-                    val filterCount = if (version != 0) ServiceClient.filterCount else 0
+                    val filterCount = AppIntegrityEventStore.countEvents()
                     Triple(version, healthy, filterCount)
                 }.getOrDefault(Triple(0, false, 0))
             }
@@ -147,7 +148,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
 
                 if (serviceVersion != 0) {
-                    if (serviceVersion < it.eldavo.pib_oss.common.BuildConfig.SERVICE_VERSION) {
+                    if (serviceVersion < it.eldavo.pib.common.BuildConfig.SERVICE_VERSION) {
                         serviceStatus.text =
                             getString(R.string.home_xposed_service_old)
                     } else if (!serviceHealthy) {
@@ -159,7 +160,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     }
                     filterCount.visibility = View.VISIBLE
                     filterCount.text =
-                        getString(R.string.home_xposed_filter_count, serviceFilterCount)
+                        getString(R.string.home_xposed_filter_count, localEventCount)
                 } else {
                     serviceStatus.setText(R.string.home_xposed_service_off)
                     filterCount.visibility = View.GONE

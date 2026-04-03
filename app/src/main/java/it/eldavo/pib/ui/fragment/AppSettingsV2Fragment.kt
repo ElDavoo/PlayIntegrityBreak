@@ -1,4 +1,4 @@
-package it.eldavo.pib_oss.ui.fragment
+package it.eldavo.pib.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -26,8 +26,8 @@ import icu.nullptr.playintegritybreak.ui.util.setupToolbar
 import icu.nullptr.playintegritybreak.ui.util.showToast
 import icu.nullptr.playintegritybreak.ui.viewmodel.AppSettingsViewModel
 import icu.nullptr.playintegritybreak.util.PackageHelper
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.databinding.FragmentSettingsBinding
+import it.eldavo.pib.R
+import it.eldavo.pib.databinding.FragmentSettingsBinding
 
 class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
     companion object {

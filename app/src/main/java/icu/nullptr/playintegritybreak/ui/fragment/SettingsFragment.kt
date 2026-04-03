@@ -38,10 +38,10 @@ import icu.nullptr.playintegritybreak.util.LangList
 import icu.nullptr.playintegritybreak.util.PackageHelper.findEnabledAppComponent
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.databinding.FragmentSettingsBinding
-import it.eldavo.pib_oss.ui.activity.MainActivity
-import it.eldavo.pib_oss.ui.preference.AppIconPreference
+import it.eldavo.pib.R
+import it.eldavo.pib.databinding.FragmentSettingsBinding
+import it.eldavo.pib.ui.activity.MainActivity
+import it.eldavo.pib.ui.preference.AppIconPreference
 import java.util.Locale
 
 class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {

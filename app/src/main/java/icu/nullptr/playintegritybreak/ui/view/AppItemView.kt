@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import dev.androidbroadcast.vbpd.CreateMethod
 import dev.androidbroadcast.vbpd.viewBinding
 import icu.nullptr.playintegritybreak.util.PackageHelper
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.databinding.AppItemViewBinding
+import it.eldavo.pib.R
+import it.eldavo.pib.databinding.AppItemViewBinding
 
 class AppItemView @JvmOverloads constructor(
     context: Context,

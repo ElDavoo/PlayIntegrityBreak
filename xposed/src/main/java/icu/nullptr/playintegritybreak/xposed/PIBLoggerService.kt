@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
@@ -15,7 +16,7 @@ import icu.nullptr.playintegritybreak.common.TelemetryBatchPayload
 import icu.nullptr.playintegritybreak.common.TelemetryJsonCodec
 import icu.nullptr.playintegritybreak.common.TelemetryQueueSnapshot
 import icu.nullptr.playintegritybreak.common.TelemetryStatsPayload
-import it.eldavo.pib_oss.common.BuildConfig
+import it.eldavo.pib.common.BuildConfig
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
@@ -29,14 +30,20 @@ object PIBLoggerService : IPIBService.Stub() {
     private const val RUNTIME_LOG_OLD_FILE = "integrity_runtime.old.log"
     private const val CONFIG_SNAPSHOT_FILE = "integrity_config_snapshot.json"
     private const val HEARTBEAT_INTERVAL_MS = 10_000L
+    private const val EVENT_TYPE_REQUEST = "request"
+    private const val EVENT_TYPE_RESPONSE = "response"
+    private const val MAX_BUFFERED_EVENTS = 2_000
 
     private val initialized = AtomicBoolean(false)
     private val heartbeatLoopStarted = AtomicBoolean(false)
     private val binderPublished = AtomicBoolean(false)
+    private val publishFlushRunning = AtomicBoolean(false)
     private val capturedEvents = AtomicLong(0)
     private val lastHealthcheckTimestamp = AtomicLong(0)
     private val configLock = Any()
     private val logLock = Any()
+    private val pendingEventLock = Any()
+    private val pendingEvents = ArrayDeque<PendingIntegrityEvent>()
 
     private val heartbeatHandler by lazy { Handler(Looper.getMainLooper()) }
     private val heartbeatRunnable = object : Runnable {
@@ -48,6 +55,7 @@ object PIBLoggerService : IPIBService.Stub() {
 
             touchHealthcheck()
             tryPublishBinderToClientApp()
+            flushPendingEvents()
             heartbeatHandler.postDelayed(this, HEARTBEAT_INTERVAL_MS)
         }
     }
@@ -72,6 +80,16 @@ object PIBLoggerService : IPIBService.Stub() {
         val rewriteResponse: Boolean,
         val rewriteErrorCode: Int,
         val rewriteRemediable: Boolean,
+    )
+
+    private data class PendingIntegrityEvent(
+        val timestampMs: Long,
+        val packageName: String,
+        val eventType: String,
+        val success: Boolean?,
+        val errorCode: Int?,
+        val retriable: Boolean?,
+        val source: String,
     )
 
     fun initialize() {
@@ -184,8 +202,17 @@ object PIBLoggerService : IPIBService.Stub() {
 
     fun recordIntegrityRequest(callerPkg: String) {
         touchHealthcheck()
-        val app = getCurrentApplication() ?: return
-        IntegrityEventStore.recordRequest(app, callerPkg)
+        enqueuePendingEvent(
+            PendingIntegrityEvent(
+                timestampMs = System.currentTimeMillis(),
+                packageName = callerPkg,
+                eventType = EVENT_TYPE_REQUEST,
+                success = null,
+                errorCode = null,
+                retriable = null,
+                source = "request-intercepted",
+            )
+        )
     }
 
     fun recordIntegrityResponse(
@@ -196,25 +223,27 @@ object PIBLoggerService : IPIBService.Stub() {
         source: String,
     ) {
         touchHealthcheck()
-        val app = getCurrentApplication() ?: return
-        IntegrityEventStore.recordResponse(
-            app = app,
-            packageName = callerPkg,
-            success = success,
-            errorCode = errorCode,
-            retriable = retriable,
-            source = source,
+        enqueuePendingEvent(
+            PendingIntegrityEvent(
+                timestampMs = System.currentTimeMillis(),
+                packageName = callerPkg,
+                eventType = EVENT_TYPE_RESPONSE,
+                success = success,
+                errorCode = errorCode,
+                retriable = retriable,
+                source = source,
+            )
         )
     }
 
     fun tryPublishBinderToClientApp(): Boolean {
         touchHealthcheck()
         val app = getCurrentApplication() ?: return false
-        val extras = Bundle().apply { putBinder("binder", this@PIBLoggerService) }
+        val extras = Bundle().apply { putBinder(Constants.PROVIDER_EXTRA_BINDER, this@PIBLoggerService) }
         val uri = Uri.parse("content://${Constants.PROVIDER_AUTHORITY}")
 
         return runCatching {
-            app.contentResolver.call(uri, "link", null, extras) != null
+            app.contentResolver.call(uri, Constants.PROVIDER_METHOD_LINK, null, extras) != null
         }.onSuccess { success ->
             if (success && binderPublished.compareAndSet(false, true)) {
                 logI(TAG, "Published logger binder to app")
@@ -224,6 +253,58 @@ object PIBLoggerService : IPIBService.Stub() {
                 logW(TAG, "Failed to publish logger binder", it)
             }
         }.getOrDefault(false)
+    }
+
+    private fun enqueuePendingEvent(event: PendingIntegrityEvent) {
+        synchronized(pendingEventLock) {
+            if (pendingEvents.size >= MAX_BUFFERED_EVENTS) {
+                pendingEvents.removeFirstOrNull()
+                logW(TAG, "Pending event buffer full, dropping oldest event")
+            }
+            pendingEvents.addLast(event)
+        }
+        flushPendingEvents()
+    }
+
+    private fun flushPendingEvents(): Boolean {
+        val app = getCurrentApplication() ?: return false
+        if (!publishFlushRunning.compareAndSet(false, true)) return false
+
+        try {
+            val uri = Uri.parse("content://${Constants.PROVIDER_AUTHORITY}")
+            while (true) {
+                val event = synchronized(pendingEventLock) {
+                    pendingEvents.firstOrNull()
+                } ?: return true
+
+                val extras = Bundle().apply {
+                    putLong(Constants.PROVIDER_EXTRA_EVENT_TIMESTAMP_MS, event.timestampMs)
+                    putString(Constants.PROVIDER_EXTRA_EVENT_PACKAGE, event.packageName)
+                    putString(Constants.PROVIDER_EXTRA_EVENT_TYPE, event.eventType)
+                    putString(Constants.PROVIDER_EXTRA_EVENT_SOURCE, event.source)
+                    event.success?.let { putBoolean(Constants.PROVIDER_EXTRA_EVENT_SUCCESS, it) }
+                    event.errorCode?.let { putInt(Constants.PROVIDER_EXTRA_EVENT_ERROR_CODE, it) }
+                    event.retriable?.let { putBoolean(Constants.PROVIDER_EXTRA_EVENT_RETRIABLE, it) }
+                }
+
+                val stored = runCatching {
+                    app.contentResolver.call(uri, Constants.PROVIDER_METHOD_PUBLISH_EVENT, null, extras)
+                        ?.getBoolean(Constants.PROVIDER_RESULT_OK, false) == true
+                }.onFailure {
+                    Log.w(TAG, "Failed to publish integrity event to provider", it)
+                }.getOrDefault(false)
+
+                if (!stored) {
+                    return false
+                }
+
+                synchronized(pendingEventLock) {
+                    pendingEvents.removeFirstOrNull()
+                }
+            }
+        } finally {
+            publishFlushRunning.set(false)
+        }
     }
 
     override fun writeConfig(json: String) {
@@ -248,9 +329,8 @@ object PIBLoggerService : IPIBService.Stub() {
 
     override fun getFilterCount(): Int {
         val inMemoryCount = capturedEvents.get().coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
-        val app = getCurrentApplication() ?: return inMemoryCount
-        val dbCount = IntegrityEventStore.countEvents(app)
-        return dbCount.coerceAtLeast(inMemoryCount)
+        val pendingCount = synchronized(pendingEventLock) { pendingEvents.size }
+        return (inMemoryCount + pendingCount).coerceAtLeast(inMemoryCount)
     }
 
     override fun getLogs(): String {
@@ -269,7 +349,9 @@ object PIBLoggerService : IPIBService.Stub() {
                 capturedEvents.set(0)
             }
         }
-        getCurrentApplication()?.let(IntegrityEventStore::clear)
+        synchronized(pendingEventLock) {
+            pendingEvents.clear()
+        }
     }
 
     override fun readConfig(): String = synchronized(configLock) { config.toString() }

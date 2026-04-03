@@ -8,6 +8,6 @@
 -keep class icu.nullptr.playintegritybreak.data.UpdateData$* { *; }
 
 -keep,allowoptimization class * extends androidx.preference.PreferenceFragmentCompat
--keepclassmembers class it.eldavo.pib_oss.databinding.**  {
+-keepclassmembers class it.eldavo.pib.databinding.**  {
     public <methods>;
 }

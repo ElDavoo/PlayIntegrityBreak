@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.AppIconLoader
-import it.eldavo.pib_oss.R
+import it.eldavo.pib.R
 import kotlin.system.exitProcess
 
 lateinit var pibApp: MyApp

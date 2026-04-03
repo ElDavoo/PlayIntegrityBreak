@@ -14,8 +14,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.common.BuildConfig
+import it.eldavo.pib.R
+import it.eldavo.pib.common.BuildConfig
 import java.io.File
 
 object ConfigManager {

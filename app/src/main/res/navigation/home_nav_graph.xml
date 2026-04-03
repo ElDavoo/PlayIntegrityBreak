@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="it.eldavo.pib_oss.ui.fragment.HomeFragment"
+        android:name="it.eldavo.pib.ui.fragment.HomeFragment"
         android:label="@string/title_home" />
 
     <fragment
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="it.eldavo.pib_oss.ui.fragment.AboutFragment"
+        android:name="it.eldavo.pib.ui.fragment.AboutFragment"
         android:label="@string/title_about" />
 
     <fragment
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/nav_app_settings"
-        android:name="it.eldavo.pib_oss.ui.fragment.AppSettingsV2Fragment"
+        android:name="it.eldavo.pib.ui.fragment.AppSettingsV2Fragment"
         android:label="@string/title_app_settings">
 
         <argument

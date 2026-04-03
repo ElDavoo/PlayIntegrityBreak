@@ -110,7 +110,7 @@
             android:summary="@string/settings_hide_icon_summary"
             app:singleLineTitle="false"
             android:title="@string/settings_hide_icon" />
-        <it.eldavo.pib_oss.ui.preference.AppIconPreference
+        <it.eldavo.pib.ui.preference.AppIconPreference
             android:key="launcherIcon"
             android:title="@string/settings_launcher_icon"/>
         <Preference

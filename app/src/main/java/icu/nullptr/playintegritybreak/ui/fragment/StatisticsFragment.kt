@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dev.androidbroadcast.vbpd.viewBinding
-import icu.nullptr.playintegritybreak.service.ServiceClient
+import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.ui.util.setupToolbar
@@ -15,8 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.databinding.FragmentStatisticsBinding
+import it.eldavo.pib.R
+import it.eldavo.pib.databinding.FragmentStatisticsBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -38,7 +38,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         loadJob = lifecycleScope.launch {
             val fromTimestamp = selectedWindow.durationMs?.let { System.currentTimeMillis() - it } ?: 0L
             val stats = withContext(Dispatchers.IO) {
-                ServiceClient.getTelemetryStats(fromTimestamp)
+                AppIntegrityEventStore.getTelemetryStats(fromTimestamp)
             }
 
             if (!isAdded) return@launch

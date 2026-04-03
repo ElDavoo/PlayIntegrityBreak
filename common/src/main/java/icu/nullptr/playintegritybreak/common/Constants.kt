@@ -1,9 +1,21 @@
 package icu.nullptr.playintegritybreak.common
 
-import it.eldavo.pib_oss.common.BuildConfig
+import it.eldavo.pib.common.BuildConfig
 
 object Constants {
     const val PROVIDER_AUTHORITY = "${BuildConfig.APP_PACKAGE_NAME}.ServiceProvider"
+    const val PROVIDER_METHOD_LINK = "link"
+    const val PROVIDER_METHOD_HEALTHCHECK = "healthcheck"
+    const val PROVIDER_METHOD_PUBLISH_EVENT = "publishEvent"
+    const val PROVIDER_EXTRA_BINDER = "binder"
+    const val PROVIDER_EXTRA_EVENT_TIMESTAMP_MS = "eventTimestampMs"
+    const val PROVIDER_EXTRA_EVENT_PACKAGE = "eventPackage"
+    const val PROVIDER_EXTRA_EVENT_TYPE = "eventType"
+    const val PROVIDER_EXTRA_EVENT_SUCCESS = "eventSuccess"
+    const val PROVIDER_EXTRA_EVENT_ERROR_CODE = "eventErrorCode"
+    const val PROVIDER_EXTRA_EVENT_RETRIABLE = "eventRetriable"
+    const val PROVIDER_EXTRA_EVENT_SOURCE = "eventSource"
+    const val PROVIDER_RESULT_OK = "ok"
     const val DEFAULT_APP_PACKAGE_NAME = "default"
     const val GMS_PACKAGE_NAME = "com.google.android.gms"
     const val GSF_PACKAGE_NAME = "com.google.android.gsf"

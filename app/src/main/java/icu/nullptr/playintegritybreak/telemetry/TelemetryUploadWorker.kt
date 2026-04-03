@@ -23,10 +23,15 @@ class TelemetryUploadWorker(
             return Result.success()
         }
 
-        val batch = ServiceClient.dequeueTelemetryBatch(
+        val staleInFlightMs = ConfigManager.telemetryStaleInFlightMinutes * 60_000L
+        if (staleInFlightMs > 0L) {
+            val staleBefore = System.currentTimeMillis() - staleInFlightMs
+            AppIntegrityEventStore.recoverStaleInFlight(staleBefore)
+        }
+
+        val batch = AppIntegrityEventStore.dequeueTelemetryBatch(
             maxEvents = ConfigManager.telemetryBatchSize,
             leaseDurationMs = ConfigManager.telemetryLeaseDurationSeconds * 1000L,
-            staleInFlightMs = ConfigManager.telemetryStaleInFlightMinutes * 60_000L,
         )
 
         if (batch.events.isEmpty()) {
@@ -40,7 +45,7 @@ class TelemetryUploadWorker(
         )
 
         if (outcome.accepted) {
-            ServiceClient.ackTelemetryBatch(batch.batchId, outcome.ackId ?: "")
+            AppIntegrityEventStore.ackTelemetryBatch(batch.batchId, outcome.ackId ?: "")
             ServiceClient.log(
                 Log.INFO,
                 TAG,
@@ -60,7 +65,7 @@ class TelemetryUploadWorker(
             )
             val nextAttemptAt = System.currentTimeMillis() + retryDelayMs
 
-            ServiceClient.nackTelemetryBatch(
+            AppIntegrityEventStore.nackTelemetryBatch(
                 batchId = batch.batchId,
                 retriable = true,
                 nextAttemptTimestampMs = nextAttemptAt,
@@ -74,7 +79,7 @@ class TelemetryUploadWorker(
             return Result.retry()
         }
 
-        ServiceClient.nackTelemetryBatch(
+        AppIntegrityEventStore.nackTelemetryBatch(
             batchId = batch.batchId,
             retriable = false,
             nextAttemptTimestampMs = 0L,

@@ -1,8 +1,8 @@
 package icu.nullptr.playintegritybreak.data
 
 import icu.nullptr.playintegritybreak.common.Constants
-import it.eldavo.pib_oss.BuildConfig
-import it.eldavo.pib_oss.R
+import it.eldavo.pib.BuildConfig
+import it.eldavo.pib.R
 
 object AppConstants {
     const val COMPONENT_NAME_DEFAULT         = "${BuildConfig.APPLICATION_ID}.MainActivityLauncher"

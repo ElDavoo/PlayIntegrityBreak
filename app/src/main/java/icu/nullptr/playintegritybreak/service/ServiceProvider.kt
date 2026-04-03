@@ -7,7 +7,8 @@ import android.os.Binder
 import android.os.Bundle
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
-import it.eldavo.pib_oss.common.BuildConfig
+import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
+import it.eldavo.pib.common.BuildConfig
 import java.io.File
 import kotlin.concurrent.thread
 
@@ -59,20 +60,82 @@ class ServiceProvider : ContentProvider() {
         }
     }
 
-    override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
-        if (!isCallerAllowed()) return null
+    private fun publishEvent(extras: Bundle?): Bundle {
+        val timestampMs = extras?.getLong(Constants.PROVIDER_EXTRA_EVENT_TIMESTAMP_MS)
+            ?: System.currentTimeMillis()
+        val packageName = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_PACKAGE)?.trim().orEmpty()
+        val eventType = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_TYPE)?.trim().orEmpty()
+        val source = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_SOURCE)?.trim().orEmpty()
 
-        if (method == "healthcheck") {
+        if (packageName.isBlank() || eventType.isBlank() || source.isBlank()) {
             return Bundle().apply {
-                putInt("serviceVersion", ServiceClient.serviceVersion)
-                putLong("healthcheckTimestamp", ServiceClient.serviceHealthcheckTimestamp)
+                putBoolean(Constants.PROVIDER_RESULT_OK, false)
             }
         }
 
-        val binder = extras?.getBinder("binder") ?: return null
-        if (ServiceClient.linkService(binder)) {
-            syncConfigSnapshotAsync()
+        val success = extras?.let {
+            if (it.containsKey(Constants.PROVIDER_EXTRA_EVENT_SUCCESS)) {
+                it.getBoolean(Constants.PROVIDER_EXTRA_EVENT_SUCCESS)
+            } else {
+                null
+            }
         }
-        return Bundle()
+
+        val errorCode = extras?.let {
+            if (it.containsKey(Constants.PROVIDER_EXTRA_EVENT_ERROR_CODE)) {
+                it.getInt(Constants.PROVIDER_EXTRA_EVENT_ERROR_CODE)
+            } else {
+                null
+            }
+        }
+
+        val retriable = extras?.let {
+            if (it.containsKey(Constants.PROVIDER_EXTRA_EVENT_RETRIABLE)) {
+                it.getBoolean(Constants.PROVIDER_EXTRA_EVENT_RETRIABLE)
+            } else {
+                null
+            }
+        }
+
+        val stored = AppIntegrityEventStore.appendPublishedEvent(
+            timestampMs = timestampMs,
+            packageName = packageName,
+            eventType = eventType,
+            success = success,
+            errorCode = errorCode,
+            retriable = retriable,
+            source = source,
+        )
+
+        return Bundle().apply {
+            putBoolean(Constants.PROVIDER_RESULT_OK, stored)
+        }
+    }
+
+    override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
+        if (!isCallerAllowed()) return null
+
+        when (method) {
+            Constants.PROVIDER_METHOD_HEALTHCHECK -> {
+                return Bundle().apply {
+                    putInt("serviceVersion", ServiceClient.serviceVersion)
+                    putLong("healthcheckTimestamp", ServiceClient.serviceHealthcheckTimestamp)
+                }
+            }
+
+            Constants.PROVIDER_METHOD_PUBLISH_EVENT -> {
+                return publishEvent(extras)
+            }
+
+            Constants.PROVIDER_METHOD_LINK -> {
+                val binder = extras?.getBinder(Constants.PROVIDER_EXTRA_BINDER) ?: return null
+                if (ServiceClient.linkService(binder)) {
+                    syncConfigSnapshotAsync()
+                }
+                return Bundle()
+            }
+
+            else -> return null
+        }
     }
 }

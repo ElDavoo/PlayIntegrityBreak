@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import it.eldavo.pib_oss.BuildConfig
+import it.eldavo.pib.BuildConfig
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL

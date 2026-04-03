@@ -12,6 +12,7 @@ import dev.androidbroadcast.vbpd.viewBinding
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.ServiceClient
+import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
 import icu.nullptr.playintegritybreak.telemetry.TelemetryUploadScheduler
 import icu.nullptr.playintegritybreak.ui.adapter.LogAdapter
 import icu.nullptr.playintegritybreak.ui.util.contentResolver
@@ -23,8 +24,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import it.eldavo.pib_oss.R
-import it.eldavo.pib_oss.databinding.FragmentLogsBinding
+import it.eldavo.pib.R
+import it.eldavo.pib.databinding.FragmentLogsBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -121,6 +122,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
             R.id.menu_delete -> {
                 lifecycleScope.launch(Dispatchers.IO) {
                     ServiceClient.clearLogs()
+                    AppIntegrityEventStore.clear()
                     withContext(Dispatchers.Main) { updateLogs() }
                 }
             }
@@ -134,7 +136,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
                     }
 
                     TelemetryUploadScheduler.triggerImmediate(reason = "manual-logs")
-                    val snapshot = ServiceClient.getTelemetryQueueSnapshot()
+                    val snapshot = AppIntegrityEventStore.getTelemetryQueueSnapshot()
 
                     withContext(Dispatchers.Main) {
                         showToast(
@@ -150,7 +152,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
             }
             R.id.menu_show_telemetry_queue -> {
                 lifecycleScope.launch(Dispatchers.IO) {
-                    val snapshot = ServiceClient.getTelemetryQueueSnapshot()
+                    val snapshot = AppIntegrityEventStore.getTelemetryQueueSnapshot()
                     withContext(Dispatchers.Main) {
                         showToast(
                             getString(
