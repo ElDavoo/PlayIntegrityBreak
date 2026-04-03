@@ -81,6 +81,7 @@ object PIBLoggerService : IPIBService.Stub() {
         val rewriteErrorCode: Int,
         val rewriteRemediable: Boolean,
         val deliverSyntheticResponse: Boolean,
+        val delaySyntheticResponseDelivery: Boolean,
     )
 
     private data class PendingIntegrityEvent(
@@ -146,6 +147,7 @@ object PIBLoggerService : IPIBService.Stub() {
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
                     rewriteRemediable = config.defaultHookRewriteRemediable,
                     deliverSyntheticResponse = true,
+                    delaySyntheticResponseDelivery = false,
                 )
             }
         }
@@ -163,6 +165,7 @@ object PIBLoggerService : IPIBService.Stub() {
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
                     rewriteRemediable = config.defaultHookRewriteRemediable,
                     deliverSyntheticResponse = true,
+                    delaySyntheticResponseDelivery = false,
                 )
             }
 
@@ -176,6 +179,7 @@ object PIBLoggerService : IPIBService.Stub() {
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
                     rewriteRemediable = config.defaultHookRewriteRemediable,
                     deliverSyntheticResponse = appConfig.deliverSyntheticResponse,
+                    delaySyntheticResponseDelivery = appConfig.delaySyntheticResponseDelivery,
                 )
             }
 
@@ -189,6 +193,7 @@ object PIBLoggerService : IPIBService.Stub() {
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
                     rewriteRemediable = config.defaultHookRewriteRemediable,
                     deliverSyntheticResponse = appConfig.deliverSyntheticResponse,
+                    delaySyntheticResponseDelivery = appConfig.delaySyntheticResponseDelivery,
                 )
             }
 
@@ -202,6 +207,7 @@ object PIBLoggerService : IPIBService.Stub() {
                 rewriteErrorCode = appConfig.rewriteIntegrityErrorCode,
                 rewriteRemediable = appConfig.rewriteIntegrityErrorRemediable,
                 deliverSyntheticResponse = appConfig.deliverSyntheticResponse,
+                delaySyntheticResponseDelivery = appConfig.delaySyntheticResponseDelivery,
             )
         }
     }

@@ -8,6 +8,7 @@ import de.robv.android.xposed.XposedBridge
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ThreadLocalRandom
 import java.util.regex.Pattern
 
 object IntegrityServiceHook {
@@ -15,6 +16,8 @@ object IntegrityServiceHook {
     private const val RESPONSE_SOURCE_SERVICE = "service-response"
     private const val RESPONSE_SOURCE_SYNTHETIC_PRE_SERVICE = "synthetic-pre-service"
     private const val RESPONSE_SOURCE_SHORT_CIRCUIT_NO_DELIVERY = "short-circuit-no-delivery"
+    private const val SYNTHETIC_RESPONSE_DELAY_MIN_MS = 300L
+    private const val SYNTHETIC_RESPONSE_DELAY_MAX_MS = 2_000L
 
     private val packageNamePattern =
         Pattern.compile("[a-zA-Z][a-zA-Z0-9_]*(?:\\.[a-zA-Z0-9_]+)+")
@@ -103,6 +106,8 @@ object IntegrityServiceHook {
                                 callback = callback,
                                 errorCode = policy.rewriteErrorCode,
                                 remediable = policy.rewriteRemediable,
+                                applyDelay = policy.delaySyntheticResponseDelivery,
+                                callerPkg = callerPkg,
                             )
                         }
                     } else {
@@ -275,11 +280,21 @@ object IntegrityServiceHook {
         return false
     }
 
-    private fun deliverSyntheticBlockedResponse(callback: Any, errorCode: Int, remediable: Boolean): Boolean {
+    private fun deliverSyntheticBlockedResponse(
+        callback: Any,
+        errorCode: Int,
+        remediable: Boolean,
+        applyDelay: Boolean,
+        callerPkg: String,
+    ): Boolean {
         val callbackMethod = findCallbackBundleMethod(callback) ?: return false
         val syntheticResponse = Bundle().apply {
             putInt("error", errorCode)
             putBoolean("is.error.remediable", remediable)
+        }
+
+        if (applyDelay) {
+            applyRandomSyntheticResponseDelay(callerPkg)
         }
 
         return runCatching {
@@ -293,6 +308,18 @@ object IntegrityServiceHook {
         }.onFailure {
             logW("Failed to deliver synthetic callback response", it)
         }.isSuccess
+    }
+
+    private fun applyRandomSyntheticResponseDelay(callerPkg: String) {
+        val delayMs = ThreadLocalRandom.current()
+            .nextLong(SYNTHETIC_RESPONSE_DELAY_MIN_MS, SYNTHETIC_RESPONSE_DELAY_MAX_MS + 1)
+
+        try {
+            Thread.sleep(delayMs)
+        } catch (cause: InterruptedException) {
+            Thread.currentThread().interrupt()
+            logW("Synthetic response delay interrupted for $callerPkg", cause)
+        }
     }
 
     private fun extractCallback(args: Array<Any?>): Any? {

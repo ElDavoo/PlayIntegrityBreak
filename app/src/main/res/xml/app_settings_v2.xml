@@ -30,6 +30,14 @@
             app:singleLineTitle="false"
             android:title="@string/app_deliver_synthetic_response"
             android:summary="@string/app_deliver_synthetic_response_desc" />
+        <SwitchPreferenceCompat
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="delaySyntheticResponseDelivery"
+            android:defaultValue="false"
+            android:dependency="deliverSyntheticResponse"
+            app:singleLineTitle="false"
+            android:title="@string/app_delay_synthetic_response"
+            android:summary="@string/app_delay_synthetic_response_desc" />
         <EditTextPreference
             android:icon="@drawable/outline_bug_report_24"
             android:key="rewriteIntegrityErrorCode"

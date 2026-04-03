@@ -44,6 +44,7 @@ data class JsonConfig(
         var rewriteIntegrityErrorCode: Int = -8,
         var rewriteIntegrityErrorRemediable: Boolean = true,
         var deliverSyntheticResponse: Boolean = true,
+        var delaySyntheticResponseDelivery: Boolean = false,
     ) {
         override fun toString() = encoder.encodeToString(this)
 

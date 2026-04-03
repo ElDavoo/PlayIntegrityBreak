@@ -247,6 +247,8 @@ object ConfigManager {
             appConfig.rewriteIntegrityResponse = false
             appConfig.rewriteIntegrityErrorCode = -8
             appConfig.rewriteIntegrityErrorRemediable = true
+            appConfig.deliverSyntheticResponse = true
+            appConfig.delaySyntheticResponseDelivery = false
         }
 
         config.integrityModeMigrated = true
