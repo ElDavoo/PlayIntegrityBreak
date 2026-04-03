@@ -11,6 +11,10 @@ import android.os.Looper
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
+import icu.nullptr.playintegritybreak.common.TelemetryBatchPayload
+import icu.nullptr.playintegritybreak.common.TelemetryJsonCodec
+import icu.nullptr.playintegritybreak.common.TelemetryQueueSnapshot
+import icu.nullptr.playintegritybreak.common.TelemetryStatsPayload
 import it.eldavo.pib_oss.common.BuildConfig
 import java.io.File
 import java.io.FileWriter
@@ -304,6 +308,59 @@ object PIBLoggerService : IPIBService.Stub() {
 
     override fun getLogFileLocation(): String = synchronized(logLock) {
         ensureLogFile()?.absolutePath ?: "unavailable"
+    }
+
+    override fun getTelemetryStatsJson(fromTimestampMs: Long): String {
+        val app = getCurrentApplication() ?: return TelemetryJsonCodec.encodeStats(TelemetryStatsPayload())
+        return TelemetryJsonCodec.encodeStats(
+            IntegrityEventStore.getTelemetryStats(
+                app = app,
+                fromTimestampMs = fromTimestampMs.coerceAtLeast(0L),
+            )
+        )
+    }
+
+    override fun dequeueTelemetryBatchJson(maxEvents: Int, leaseDurationMs: Long, staleInFlightMs: Long): String {
+        val app = getCurrentApplication() ?: return TelemetryJsonCodec.encodeBatch(TelemetryBatchPayload())
+        if (staleInFlightMs > 0L) {
+            val staleBefore = System.currentTimeMillis() - staleInFlightMs
+            IntegrityEventStore.recoverStaleInFlight(app, staleBefore)
+        }
+
+        val batch = IntegrityEventStore.dequeueTelemetryBatch(
+            app = app,
+            maxEvents = maxEvents,
+            leaseDurationMs = leaseDurationMs,
+        )
+        return TelemetryJsonCodec.encodeBatch(batch)
+    }
+
+    override fun ackTelemetryBatch(batchId: String?, serverAckId: String?) {
+        val app = getCurrentApplication() ?: return
+        if (batchId.isNullOrBlank()) return
+        IntegrityEventStore.ackTelemetryBatch(app, batchId, serverAckId)
+    }
+
+    override fun nackTelemetryBatch(
+        batchId: String?,
+        retriable: Boolean,
+        nextAttemptTimestampMs: Long,
+        lastError: String?,
+    ) {
+        val app = getCurrentApplication() ?: return
+        if (batchId.isNullOrBlank()) return
+        IntegrityEventStore.nackTelemetryBatch(
+            app = app,
+            batchId = batchId,
+            retriable = retriable,
+            nextAttemptTimestampMs = nextAttemptTimestampMs,
+            lastError = lastError,
+        )
+    }
+
+    override fun getTelemetryQueueSnapshotJson(): String {
+        val app = getCurrentApplication() ?: return TelemetryJsonCodec.encodeQueueSnapshot(TelemetryQueueSnapshot())
+        return TelemetryJsonCodec.encodeQueueSnapshot(IntegrityEventStore.getTelemetryQueueSnapshot(app))
     }
 
     private fun startHeartbeatLoop() {
