@@ -15,8 +15,6 @@ data class JsonConfig(
     var defaultHookRewriteRemediable: Boolean = true,
     var maxLogSize: Int = 512,
     var telemetryEnabled: Boolean = false,
-    var telemetryEndpointUrl: String = "",
-    var telemetryAuthToken: String = "",
     var telemetryBatchSize: Int = 100,
     var telemetryUploadIntervalMinutes: Int = 30,
     var telemetryWifiOnly: Boolean = false,

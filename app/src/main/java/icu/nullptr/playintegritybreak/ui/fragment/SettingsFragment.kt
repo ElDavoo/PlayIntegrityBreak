@@ -111,8 +111,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor
                 "darkTheme" -> PrefManager.darkTheme.toString()
                 "maxLogSize" -> ConfigManager.maxLogSize.toString()
-                "telemetryEndpointUrl" -> ConfigManager.telemetryEndpointUrl
-                "telemetryAuthToken" -> ConfigManager.telemetryAuthToken
                 "telemetryBatchSize" -> ConfigManager.telemetryBatchSize.toString()
                 "telemetryUploadIntervalMinutes" -> ConfigManager.telemetryUploadIntervalMinutes.toString()
                 else -> throw IllegalArgumentException("Invalid key: $key")
@@ -154,8 +152,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor = value!!
                 "darkTheme" -> PrefManager.darkTheme = value!!.toInt()
                 "maxLogSize" -> ConfigManager.maxLogSize = value!!.toInt()
-                "telemetryEndpointUrl" -> ConfigManager.telemetryEndpointUrl = value.orEmpty()
-                "telemetryAuthToken" -> ConfigManager.telemetryAuthToken = value.orEmpty()
                 "telemetryBatchSize" -> ConfigManager.telemetryBatchSize = value?.toIntOrNull() ?: 100
                 "telemetryUploadIntervalMinutes" -> ConfigManager.telemetryUploadIntervalMinutes = value?.toIntOrNull() ?: 30
                 else -> throw IllegalArgumentException("Invalid key: $key")
@@ -359,15 +355,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 it.inputType = InputType.TYPE_CLASS_NUMBER
             }
 
-            findPreference<EditTextPreference>("telemetryEndpointUrl")?.setOnPreferenceChangeListener { _, value ->
-                val endpoint = (value as? String).orEmpty().trim()
-                val valid = endpoint.isEmpty() || endpoint.startsWith("http://") || endpoint.startsWith("https://")
-                if (!valid) {
-                    showToast(R.string.settings_telemetry_endpoint_invalid)
-                }
-                valid
-            }
-
             findPreference<EditTextPreference>("telemetryBatchSize")?.setOnPreferenceChangeListener { _, value ->
                 val size = (value as? String)?.toIntOrNull() ?: return@setOnPreferenceChangeListener false
                 if (size in 1..500) {
@@ -387,15 +374,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                     false
                 }
             }
-
-            findPreference<EditTextPreference>("telemetryAuthToken")?.summaryProvider =
-                Preference.SummaryProvider<EditTextPreference> {
-                    if (it.text.isNullOrBlank()) {
-                        getString(R.string.settings_telemetry_auth_token_not_set)
-                    } else {
-                        getString(R.string.settings_telemetry_auth_token_set)
-                    }
-                }
 
             lifecycleScope.launch {
                 PrefManager.isLauncherIconInvisible

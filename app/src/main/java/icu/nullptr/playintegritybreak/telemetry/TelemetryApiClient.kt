@@ -16,6 +16,7 @@ object TelemetryApiClient {
     private const val CONNECT_TIMEOUT_MS = 15_000
     private const val READ_TIMEOUT_MS = 15_000
     private const val SCHEMA_VERSION = 1
+    private const val TELEMETRY_ENDPOINT_URL = "http://127.0.0.1:8080/telemetry"
 
     @Serializable
     private data class TelemetryClientInfo(
@@ -58,7 +59,7 @@ object TelemetryApiClient {
         explicitNulls = false
     }
 
-    fun uploadBatch(endpointUrl: String, authToken: String, batch: TelemetryBatchPayload): UploadOutcome {
+    fun uploadBatch(batch: TelemetryBatchPayload): UploadOutcome {
         val requestPayload = TelemetryUploadRequest(
             schemaVersion = SCHEMA_VERSION,
             batchId = batch.batchId,
@@ -74,16 +75,13 @@ object TelemetryApiClient {
         )
 
         val body = json.encodeToString(requestPayload)
-        val connection = (URL(endpointUrl).openConnection() as HttpURLConnection).apply {
+        val connection = (URL(TELEMETRY_ENDPOINT_URL).openConnection() as HttpURLConnection).apply {
             requestMethod = "POST"
             doOutput = true
             connectTimeout = CONNECT_TIMEOUT_MS
             readTimeout = READ_TIMEOUT_MS
             setRequestProperty("Content-Type", "application/json")
             setRequestProperty("Accept", "application/json")
-            if (authToken.isNotBlank()) {
-                setRequestProperty("Authorization", "Bearer $authToken")
-            }
         }
 
         return try {

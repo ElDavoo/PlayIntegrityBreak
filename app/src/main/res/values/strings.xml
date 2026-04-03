@@ -235,19 +235,12 @@
     <string name="settings_telemetry">Telemetry</string>
     <string name="settings_telemetry_enabled">Enable telemetry upload</string>
     <string name="settings_telemetry_enabled_summary">Upload captured request/response events to a backend in reliable batches.</string>
-    <string name="settings_telemetry_endpoint">Telemetry endpoint URL</string>
-    <string name="settings_telemetry_endpoint_summary">Full API URL that receives telemetry batches.</string>
-    <string name="settings_telemetry_auth_token">Telemetry auth token</string>
-    <string name="settings_telemetry_auth_token_summary">Optional Bearer token sent in Authorization header.</string>
-    <string name="settings_telemetry_auth_token_not_set">Not configured</string>
-    <string name="settings_telemetry_auth_token_set">Configured</string>
     <string name="settings_telemetry_batch_size">Telemetry batch size</string>
     <string name="settings_telemetry_batch_size_summary">Number of events sent per request (1-500).</string>
     <string name="settings_telemetry_upload_interval">Telemetry upload interval (minutes)</string>
     <string name="settings_telemetry_upload_interval_summary">Periodic upload cadence (15-1440 minutes).</string>
     <string name="settings_telemetry_wifi_only">Upload only on unmetered network</string>
     <string name="settings_telemetry_wifi_only_summary">When enabled, telemetry upload runs only on Wi-Fi/unmetered connections.</string>
-    <string name="settings_telemetry_endpoint_invalid">Telemetry endpoint must start with http:// or https://</string>
     <string name="settings_telemetry_batch_size_invalid">Telemetry batch size must be between 1 and 500</string>
     <string name="settings_telemetry_upload_interval_invalid">Telemetry interval must be between 15 and 1440 minutes</string>
 

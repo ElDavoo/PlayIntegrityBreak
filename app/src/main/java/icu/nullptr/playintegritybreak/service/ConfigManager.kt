@@ -120,20 +120,6 @@ object ConfigManager {
             saveConfig()
         }
 
-    var telemetryEndpointUrl: String
-        get() = config.telemetryEndpointUrl.trim()
-        set(value) {
-            config.telemetryEndpointUrl = value.trim()
-            saveConfig()
-        }
-
-    var telemetryAuthToken: String
-        get() = config.telemetryAuthToken
-        set(value) {
-            config.telemetryAuthToken = value.trim()
-            saveConfig()
-        }
-
     var telemetryBatchSize: Int
         get() = config.telemetryBatchSize.coerceIn(1, 500)
         set(value) {

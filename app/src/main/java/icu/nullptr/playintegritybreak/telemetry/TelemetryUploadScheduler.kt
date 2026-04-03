@@ -22,7 +22,7 @@ object TelemetryUploadScheduler {
 
     fun syncSchedule(context: Context = pibApp) {
         val workManager = WorkManager.getInstance(context)
-        if (!ConfigManager.telemetryEnabled || ConfigManager.telemetryEndpointUrl.isBlank()) {
+        if (!ConfigManager.telemetryEnabled) {
             workManager.cancelUniqueWork(UNIQUE_PERIODIC_WORK)
             workManager.cancelUniqueWork(UNIQUE_IMMEDIATE_WORK)
             return
@@ -49,7 +49,7 @@ object TelemetryUploadScheduler {
     }
 
     fun triggerImmediate(context: Context = pibApp, reason: String = "manual") {
-        if (!ConfigManager.telemetryEnabled || ConfigManager.telemetryEndpointUrl.isBlank()) {
+        if (!ConfigManager.telemetryEnabled) {
             return
         }
 

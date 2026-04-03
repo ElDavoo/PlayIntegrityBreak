@@ -18,11 +18,6 @@ class TelemetryUploadWorker(
             return Result.success()
         }
 
-        val endpoint = ConfigManager.telemetryEndpointUrl.trim()
-        if (endpoint.isBlank()) {
-            return Result.success()
-        }
-
         val staleInFlightMs = ConfigManager.telemetryStaleInFlightMinutes * 60_000L
         if (staleInFlightMs > 0L) {
             val staleBefore = System.currentTimeMillis() - staleInFlightMs
@@ -38,11 +33,7 @@ class TelemetryUploadWorker(
             return Result.success()
         }
 
-        val outcome = TelemetryApiClient.uploadBatch(
-            endpointUrl = endpoint,
-            authToken = ConfigManager.telemetryAuthToken,
-            batch = batch,
-        )
+        val outcome = TelemetryApiClient.uploadBatch(batch)
 
         if (outcome.accepted) {
             AppIntegrityEventStore.ackTelemetryBatch(batch.batchId, outcome.ackId ?: "")
