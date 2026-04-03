@@ -245,6 +245,16 @@ object IntegrityServiceHook {
             if (!pkg.isNullOrBlank()) {
                 return pkg
             }
+
+            // Fallback: scan all string values in bundle for a package-like token.
+            runCatching {
+                bundle.keySet().forEach { key ->
+                    val value = bundle.get(key) as? String ?: return@forEach
+                    if (packageNamePattern.matcher(value).matches()) {
+                        return value
+                    }
+                }
+            }
         }
 
         args.forEach { arg ->
@@ -271,9 +281,19 @@ object IntegrityServiceHook {
                 || bundle.containsKey("packageName")
                 || bundle.containsKey("package_name")
             val hasNonce = bundle.containsKey("nonce")
+            val hasNonceLikeKey = runCatching {
+                bundle.keySet().any { key -> key.contains("nonce", ignoreCase = true) }
+            }.getOrDefault(false)
+            val hasPackageLikeString = runCatching {
+                bundle.keySet().any { key ->
+                    val value = bundle.get(key) as? String ?: return@any false
+                    packageNamePattern.matcher(value).matches()
+                }
+            }.getOrDefault(false)
             val hasResponse = bundle.containsKey("token") || bundle.containsKey("error")
 
-            if (hasPkg && hasNonce && !hasResponse) {
+            // Keep this permissive: key names can vary across Play Store versions/builds.
+            if (!hasResponse && (hasNonce || hasNonceLikeKey || hasPkg || hasPackageLikeString)) {
                 return true
             }
         }
