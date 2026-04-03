@@ -51,16 +51,16 @@ fun getUncommittedSuffix(): String {
 }
 
 val gitHasUncommittedSuffix = getUncommittedSuffix()
-val gitCommitCount = "git rev-list refs/remotes/origin/master --count".execute().toInt()
+val gitCommitCount = "git rev-list refs/remotes/origin/pib --count".execute().toInt()
 
-// 432 is the count of commits before license changed
-val gitCommitCountAfterOss = gitCommitCount - 432
+// Reset versioning from 1 on the pib branch
+val gitCommitCountAfterReset = gitCommitCount - 626
 
 val minSdkVer by extra(29)
 val targetSdkVer by extra(36)
 
 val appVerCode by extra(gitCommitCount + 0x6f7373) // commit count + 0xOSS
-val appVerName by extra("oss-${gitCommitCountAfterOss}${gitHasUncommittedSuffix}")
+val appVerName by extra("${gitCommitCountAfterReset}${gitHasUncommittedSuffix}")
 
 /*
  * configVerCode, serviceVerCode and minBackupVerCode is used by other build.gradle.kts files
