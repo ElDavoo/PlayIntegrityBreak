@@ -209,7 +209,6 @@ Ez a modul néhány eljárást biztosít annak ellenőrzésére, hogy az alkalma
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>
-    <string name="about_translator">Translator</string>
     <string name="about_developer">Developer</string>
     <string name="about_support">Support and feedback</string>
     <string name="about_open_source">Open source licenses</string>

@@ -25,7 +25,6 @@ import it.eldavo.pib.R
 import it.eldavo.pib.common.BuildConfig
 import it.eldavo.pib.databinding.FragmentAboutBinding
 import it.eldavo.pib.databinding.FragmentAboutListItemBinding
-import org.json.JSONObject
 
 @Suppress("deprecation")
 class AboutFragment : Fragment(R.layout.fragment_about) {
@@ -70,7 +69,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
             }
 
             setOnClickUrl(linkGithub, "https://github.com/frknkrc44/PIB")
-            setOnClickUrl(linkTelegram, "https://t.me/aerathfuns")
+            setOnClickUrl(linkTelegram, "https://t.me/playintegritybreak")
 
             appInfoTop.backgroundTintList = tint
             (appName.parent as View).backgroundTintList = tint
@@ -121,18 +120,6 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
             addDevItem(this, R.drawable.cont_cpp_master,  "LoveSy", "PIB Idea Provider", "https://github.com/yujincheng08")
         }
 
-        with(binding.listTranslator) {
-            backgroundTintList = tint
-            clipToOutline = true
-
-            val jsonObj = JSONObject(String(requireContext().assets.open("translators.json").readBytes()))
-            val jsonKeys = jsonObj.keys().asSequence().sortedWith { a, b -> a.lowercase().compareTo(b.lowercase()) }
-            for (name in jsonKeys) {
-                val avatarUrl = jsonObj.getString(name)
-                addTranslatorItem(this, avatarUrl, name)
-            }
-        }
-
         with(binding.listOpenSource) {
             backgroundTintList = tint
             clipToOutline = true
@@ -165,20 +152,6 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
         newLayout.aboutPersonIcon.isVisible = false
         newLayout.text1.text = name
         newLayout.text2.text = desc
-        layout.addView(newLayout.root)
-    }
-
-    fun addTranslatorItem(layout: LinearLayout, avatarUrl: String, name: String) {
-        val newLayout = FragmentAboutListItemBinding.inflate(layoutInflater)
-
-        Glide.with(this)
-            .load(avatarUrl)
-            .placeholder(R.drawable.outline_info_24)
-            .circleCrop()
-            .into(newLayout.aboutPersonIcon)
-
-        newLayout.text1.text = name
-        newLayout.text2.visibility = View.GONE
         layout.addView(newLayout.root)
     }
 

@@ -105,7 +105,6 @@ jobs:
           files: |
             ${{ steps.buildAll.outputs.releaseFile }}
             ${{ steps.buildAll.outputs.debugFile }}
-            app/src/main/assets/translators.json
           tag_name: pib-${{ steps.buildAll.outputs.versionNum }}
 
       - name: Post to channel

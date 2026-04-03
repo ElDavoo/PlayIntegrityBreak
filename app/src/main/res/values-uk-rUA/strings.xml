@@ -204,7 +204,6 @@
     <string name="about_how_to_use_title">Як користуватися цим модулем</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>
-    <string name="about_translator">Переклад</string>
     <string name="about_developer">Розробник</string>
     <string name="about_support">Підтримка та зворотний звʼязок</string>
     <string name="about_open_source">Ліцензії з відкритим вихідним кодом</string>

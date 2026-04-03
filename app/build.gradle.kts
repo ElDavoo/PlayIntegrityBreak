@@ -1,9 +1,4 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
-import com.google.gson.JsonParser
-import org.jose4j.json.internal.json_simple.JSONObject
-import java.io.DataInputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 plugins {
     alias(libs.plugins.agp.app)
@@ -53,36 +48,6 @@ materialThemeBuilder {
 val appPackageName: String by rootProject.extra
 val localBuild: Boolean by rootProject.extra
 val officialBuild: Boolean by rootProject.extra
-
-@Suppress("deprecation")
-afterEvaluate {
-    val srcDir = android.sourceSets["main"].assets.srcDirs.first()
-    logger.lifecycle("Asset dir: $srcDir")
-    if (!srcDir.exists()) srcDir.mkdirs()
-
-    val translatorsMap = mutableMapOf(
-        // Keep one known translator profile if remote metadata fetch fails.
-        "cvnertnc" to "https://avatars.githubusercontent.com/u/148134890?v=4",
-    )
-
-    runCatching {
-        val urlConnection = URL("https://github.com/frknkrc44/PIB/releases/latest/download/translators.json")
-            .openConnection() as HttpURLConnection
-
-        val inputStream = DataInputStream(urlConnection.getInputStream())
-        val str = String(inputStream.readAllBytes())
-        inputStream.close()
-        urlConnection.disconnect()
-
-        val json = JsonParser.parseString(str).asJsonObject
-        json.keySet().forEach { translatorsMap[it] = json.get(it).asString }
-    }.onFailure {
-        logger.lifecycle("Failed to fetch translators metadata, using bundled defaults")
-    }
-
-    val translatorJson = JSONObject(translatorsMap).toJSONString()
-    File(srcDir, "translators.json").writeText(translatorJson)
-}
 
 android {
     namespace = appPackageName
