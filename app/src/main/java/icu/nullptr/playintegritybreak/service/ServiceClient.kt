@@ -61,7 +61,9 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
     }
 
     fun linkService(binder: IBinder): Boolean {
-        if (linkedBinder == binder && service != null) return false
+        if (linkedBinder == binder && service != null) {
+            return false
+        }
 
         linkedBinder?.let {
             runCatching { it.unlinkToDeath(this, 0) }
@@ -78,6 +80,10 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
         val initialVersion = runCatching { service?.serviceVersion }.getOrNull()
         val initialHealthcheck = runCatching { service?.serviceHealthcheckTimestamp }.getOrNull()
         updateStatusCache(initialVersion, initialHealthcheck)
+        Log.i(
+            TAG,
+            "Service linked: version=${initialVersion ?: 0}, healthcheck=${initialHealthcheck ?: 0L}"
+        )
         return true
     }
 
@@ -122,7 +128,17 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
     override fun readConfig() = service?.readConfig()
 
     override fun writeConfig(json: String) {
-        service?.writeConfig(json)
+        val remote = service
+        if (remote == null) {
+            Log.w(TAG, "writeConfig skipped: service is not linked yet")
+            return
+        }
+
+        runCatching {
+            remote.writeConfig(json)
+        }.onFailure {
+            Log.w(TAG, "writeConfig failed", it)
+        }
     }
 
     override fun log(level: Int, tag: String, message: String) {

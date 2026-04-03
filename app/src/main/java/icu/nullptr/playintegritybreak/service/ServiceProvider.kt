@@ -25,7 +25,13 @@ class ServiceProvider : ContentProvider() {
         BuildConfig.APP_PACKAGE_NAME,
     )
 
-    override fun onCreate() = false
+    override fun onCreate(): Boolean {
+        val ready = context != null
+        if (!ready) {
+            Log.e(TAG, "Provider initialization failed: context is null")
+        }
+        return ready
+    }
 
     override fun query(p0: Uri, p1: Array<out String>?, p2: String?, p3: Array<out String>?, p4: String?) = null
 
@@ -113,7 +119,13 @@ class ServiceProvider : ContentProvider() {
     }
 
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
-        if (!isCallerAllowed()) return null
+        if (!isCallerAllowed()) {
+            Log.w(
+                TAG,
+                "Rejected provider call: method=$method caller=$callingPackage uid=${Binder.getCallingUid()}"
+            )
+            return null
+        }
 
         when (method) {
             Constants.PROVIDER_METHOD_HEALTHCHECK -> {
@@ -132,7 +144,9 @@ class ServiceProvider : ContentProvider() {
                 if (ServiceClient.linkService(binder)) {
                     syncConfigSnapshotAsync()
                 }
-                return Bundle()
+                return Bundle().apply {
+                    putBoolean(Constants.PROVIDER_RESULT_OK, true)
+                }
             }
 
             else -> return null

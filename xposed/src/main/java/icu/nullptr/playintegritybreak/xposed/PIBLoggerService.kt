@@ -255,7 +255,12 @@ object PIBLoggerService : IPIBService.Stub() {
         val uri = Uri.parse("content://${Constants.PROVIDER_AUTHORITY}")
 
         return runCatching {
-            app.contentResolver.call(uri, Constants.PROVIDER_METHOD_LINK, null, extras) != null
+            val response = app.contentResolver.call(uri, Constants.PROVIDER_METHOD_LINK, null, extras)
+            val linked = response?.getBoolean(Constants.PROVIDER_RESULT_OK, false) == true
+            if (!linked) {
+                logW(TAG, "Provider link call returned no acknowledgement")
+            }
+            linked
         }.onSuccess { success ->
             if (success && binderPublished.compareAndSet(false, true)) {
                 logI(TAG, "Published logger binder to app")
