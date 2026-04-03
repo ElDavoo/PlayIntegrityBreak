@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Sistem servisi çalışıyor [%d]</string>
     <string name="home_xposed_service_off">Sistem servisi çalışmıyor</string>
     <string name="home_xposed_service_old">Modül güncellendi, yeniden başlatma gerekiyor</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Yönet</string>
     <string name="home_detection_test">Tespit testi</string>
     <string name="home_download_test_app_title">Test uygulaması indir</string>

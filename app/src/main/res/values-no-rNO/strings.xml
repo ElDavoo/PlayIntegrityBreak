@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">System service funker [%d]</string>
     <string name="home_xposed_service_off">System service funker ikke</string>
     <string name="home_xposed_service_old">Modul oppdatert, trenger restart</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Manage</string>
     <string name="home_detection_test">Detection test</string>
     <string name="home_download_test_app_title">Download test app</string>

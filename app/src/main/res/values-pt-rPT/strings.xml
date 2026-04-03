@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Serviço do sistema em execução [%d]</string>
     <string name="home_xposed_service_off">Serviço do sistema parado</string>
     <string name="home_xposed_service_old">Módulo atualizado, é necessário reiniciar</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Gerir</string>
     <string name="home_detection_test">Teste de deteção</string>
     <string name="home_download_test_app_title">Transferir aplicação de teste</string>

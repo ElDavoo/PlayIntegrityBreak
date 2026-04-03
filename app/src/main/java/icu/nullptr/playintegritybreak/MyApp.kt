@@ -13,6 +13,7 @@ import icu.nullptr.playintegritybreak.ui.util.showToast
 import icu.nullptr.playintegritybreak.util.ConfigUtils.Companion.getLocale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.AppIconLoader
 import it.eldavo.pib_oss.R
 import kotlin.system.exitProcess
@@ -37,6 +38,9 @@ class MyApp : Application() {
         }
         AppChangeReceiver.register(this)
         ConfigManager.init()
+        globalScope.launch {
+            ConfigManager.bootstrapFavoritesIfNeeded()
+        }
         TelemetryUploadScheduler.syncSchedule()
         TelemetryUploadScheduler.triggerImmediate(reason = "app-startup")
 

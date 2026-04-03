@@ -77,7 +77,7 @@ afterEvaluate {
                 setRequestProperty("authorization", "Bearer $crowdinApiKey")
             }
         } else {
-            val primary = URL("https://github.com/frknkrc44/PIB-OSS/releases/latest/download/translators.json")
+            val primary = URL("https://github.com/frknkrc44/PIB/releases/latest/download/translators.json")
                 primary.openConnection() as HttpURLConnection
         }
 

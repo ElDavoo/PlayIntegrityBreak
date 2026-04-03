@@ -41,6 +41,11 @@ object PackageHelper {
     )
 
     object Comparators {
+        val byFavorite = Comparator<String> { o1, o2 ->
+            val n1 = ConfigManager.isFavorite(o1)
+            val n2 = ConfigManager.isFavorite(o2)
+            n2.compareTo(n1)
+        }
         val byLabel = Comparator<String> { o1, o2 ->
             try {
                 val n1 = loadAppLabel(o1).lowercase(Locale.getDefault())
@@ -149,7 +154,7 @@ object PackageHelper {
             PrefManager.SortMethod.BY_UPDATE_TIME -> Comparators.byUpdateTime
         }
         if (PrefManager.appFilter_reverseOrder) comparator = comparator.reversed()
-        val list = appList.first().sortedWith(firstComparator.then(comparator))
+        val list = appList.first().sortedWith(Comparators.byFavorite.then(firstComparator).then(comparator))
         appList.emit(list)
     }
 

@@ -140,6 +140,14 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
     class AppPreferenceDataStore(private val pack: AppSettingsViewModel.Pack) : PreferenceDataStore() {
         private val isDefaultMode = !pack.bulkConfig && pack.app == Constants.DEFAULT_APP_PACKAGE_NAME
 
+        private fun hasAppRewriteOverride(): Boolean {
+            if (isDefaultMode) {
+                return true
+            }
+
+            return pack.enabled && pack.config.interventionEnabled && pack.config.rewriteIntegrityResponseOverridden
+        }
+
         private fun effectiveInterventionEnabled(): Boolean {
             if (isDefaultMode) {
                 return true
@@ -161,7 +169,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                 return pack.config.rewriteIntegrityResponse
             }
 
-            return if (pack.enabled) {
+            return if (hasAppRewriteOverride()) {
                 pack.config.rewriteIntegrityResponse
             } else {
                 ConfigManager.defaultHookRewriteEnabled
@@ -172,7 +180,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             return when (key) {
                 "enableIntervention" -> effectiveInterventionEnabled()
                 "enableLogger" -> effectiveRewriteEnabled()
-                "rewriteIntegrityErrorRemediable" -> if (pack.enabled && pack.config.interventionEnabled) {
+                "rewriteIntegrityErrorRemediable" -> if (hasAppRewriteOverride()) {
                     pack.config.rewriteIntegrityErrorRemediable
                 } else {
                     ConfigManager.defaultHookRewriteRemediable
@@ -183,7 +191,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         override fun getString(key: String, defValue: String?): String {
             return when (key) {
-                "rewriteIntegrityErrorCode" -> if (pack.enabled && pack.config.interventionEnabled) {
+                "rewriteIntegrityErrorCode" -> if (hasAppRewriteOverride()) {
                     pack.config.rewriteIntegrityErrorCode.toString()
                 } else {
                     ConfigManager.defaultHookRewriteErrorCode.toString()
@@ -199,18 +207,17 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
                     pack.enabled = true
                     pack.config.interventionEnabled = value
-                    if (!value) {
-                        pack.config.rewriteIntegrityResponse = false
-                    }
                 }
                 "enableLogger" -> {
                     pack.enabled = true
                     pack.config.interventionEnabled = true
+                    pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityResponse = value
                 }
                 "rewriteIntegrityErrorRemediable" -> {
                     pack.enabled = true
                     pack.config.interventionEnabled = true
+                    pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityErrorRemediable = value
                 }
                 else -> throw IllegalArgumentException("Invalid key: $key")
@@ -222,6 +229,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                 "rewriteIntegrityErrorCode" -> {
                     pack.enabled = true
                     pack.config.interventionEnabled = true
+                    pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityErrorCode = value?.toIntOrNull() ?: -8
                 }
                 else -> throw IllegalArgumentException("Invalid key: $key")

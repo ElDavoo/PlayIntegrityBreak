@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">PIB-OSS</string>
+    <string name="app_name" translatable="false">PIB</string>
 
     <string name="title_home">Home</string>
     <string name="title_logs">Logs</string>
@@ -46,7 +46,7 @@
     <string name="home_xposed_service_off">System service not running</string>
     <string name="home_xposed_service_old">Module updated, need reboot</string>
     <string name="home_xposed_service_health_stale">Service connected, waiting for fresh healthcheck</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Manage</string>
     <string name="home_detection_test">Detection test</string>
     <string name="home_download_test_app_title">Download test app</string>
@@ -116,6 +116,8 @@
     <string name="app_extra_apps_invisible_count">%d additional apps excluded</string>
     <string name="app_warning_risky_package_title">Risky package</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
+    <string name="app_favorite_add">Mark as favorite</string>
+    <string name="app_favorite_remove">Unmark favorite</string>
     <string name="app_spoof">Compatibility options</string>
     <string name="app_hide_installation_source">Spoof installation source</string>
     <string name="app_hide_installation_source_desc">For compatibility testing, pretend installs came from Play Store for this target app.</string>
@@ -275,7 +277,7 @@
 
     <!-- About -->
     <string name="about_description">
-        PIB-OSS is an LSPosed module focused on observing Google Play Integrity traffic.\n\nIt hooks Integrity service calls inside the Play Store process, records high-signal request/result logs, and helps diagnose API behavior per target app.\n\nFor testing scenarios, PIB-OSS can optionally rewrite selected responses into controlled errors.
+        PIB is an LSPosed module focused on observing Google Play Integrity traffic.\n\nIt hooks Integrity service calls inside the Play Store process, records high-signal request/result logs, and helps diagnose API behavior per target app.\n\nFor testing scenarios, PIB can optionally rewrite selected responses into controlled errors.
     </string>
     <string name="about_fork_description">
         The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.

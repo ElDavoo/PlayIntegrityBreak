@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">บริการระบบกำลังทำงาน [%d]</string>
     <string name="home_xposed_service_off">บริการระบบไม่ทำงาน</string>
     <string name="home_xposed_service_old">โมดูลได้รับการอัปเดต จำเป็นต้องรีบูต</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">จัดการ</string>
     <string name="home_detection_test">ทดสอบการตรวจจับ</string>
     <string name="home_download_test_app_title">ดาวน์โหลดแอปทดสอบ</string>

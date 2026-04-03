@@ -69,7 +69,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                 linkTelegram.background.alpha = 0xAA
             }
 
-            setOnClickUrl(linkGithub, "https://github.com/frknkrc44/PIB-OSS")
+            setOnClickUrl(linkGithub, "https://github.com/frknkrc44/PIB")
             setOnClickUrl(linkTelegram, "https://t.me/aerathfuns")
 
             appInfoTop.backgroundTintList = tint
@@ -106,10 +106,10 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
             }
         }
 
-        // PIB-OSS devs
+        // PIB devs
         with(binding.listPibOss) {
-            addDevItem(this, R.drawable.cont_fk, "frknkrc44", "PIB-OSS Developer", "https://github.com/frknkrc44")
-            addDevItem(this, R.drawable.cont_oukaromf, "OukaroMF", "PIB-OSS Alt Icon Designer", "https://github.com/OukaroMF")
+            addDevItem(this, R.drawable.cont_fk, "frknkrc44", "PIB Developer", "https://github.com/frknkrc44")
+            addDevItem(this, R.drawable.cont_oukaromf, "OukaroMF", "PIB Alt Icon Designer", "https://github.com/OukaroMF")
         }
 
         // Original PIB devs

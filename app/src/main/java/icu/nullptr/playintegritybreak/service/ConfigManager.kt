@@ -4,6 +4,8 @@ import android.os.Build
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.JsonConfig
+import icu.nullptr.playintegritybreak.data.AppConstants
+import icu.nullptr.playintegritybreak.data.FavoritesBootstrapApiClient
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.telemetry.TelemetryUploadScheduler
 import icu.nullptr.playintegritybreak.ui.util.showToast
@@ -262,6 +264,53 @@ object ConfigManager {
         config.defaultHookRewriteErrorCode = errorCode
         config.defaultHookRewriteRemediable = remediable
         saveConfig()
+    }
+
+    fun bootstrapFavoritesIfNeeded() {
+        if (PrefManager.appFavoritesBootstrapDone) return
+
+        val fetchedFavorites = runCatching {
+            FavoritesBootstrapApiClient.fetchFavoritePackages(AppConstants.FAVORITES_BOOTSTRAP_URL)
+        }.onFailure {
+            Log.w(TAG, "Failed to fetch favorite packages from remote endpoint, using fallback", it)
+        }.getOrNull()
+
+        val selectedFavorites = fetchedFavorites ?: AppConstants.FAVORITES_BOOTSTRAP_FALLBACK
+        val normalizedFavorites = selectedFavorites
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .toSet()
+
+        if (normalizedFavorites.isNotEmpty()) {
+            val mergedFavorites = config.favoritePackages.toMutableSet().apply {
+                addAll(normalizedFavorites)
+            }
+            if (mergedFavorites != config.favoritePackages) {
+                config.favoritePackages = mergedFavorites
+                saveConfig()
+            }
+        }
+
+        PrefManager.appFavoritesBootstrapDone = true
+    }
+
+    fun isFavorite(packageName: String): Boolean {
+        return config.favoritePackages.contains(packageName)
+    }
+
+    fun setFavorite(packageName: String, favorite: Boolean) {
+        val normalizedPackage = packageName.trim()
+        if (normalizedPackage.isEmpty()) return
+
+        val changed = if (favorite) {
+            config.favoritePackages.add(normalizedPackage)
+        } else {
+            config.favoritePackages.remove(normalizedPackage)
+        }
+
+        if (changed) {
+            saveConfig()
+        }
     }
 
     fun isLoggerEnabled(packageName: String): Boolean {

@@ -9,7 +9,7 @@ object Constants {
     const val GSF_PACKAGE_NAME = "com.google.android.gsf"
     const val VENDING_PACKAGE_NAME = "com.android.vending"
     const val ANDROID_PACKAGE_NAME = "android"
-    const val TRANSLATE_URL = "https://crowdin.com/project/frknkrc44-pib-oss"
+    const val TRANSLATE_URL = "https://crowdin.com/project/frknkrc44-pib"
 
     const val UID_SYSTEM = 1000
 

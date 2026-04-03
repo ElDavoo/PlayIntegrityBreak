@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Systeem Service Actief [%d]</string>
     <string name="home_xposed_service_off">Systeem Service Niet Actief</string>
     <string name="home_xposed_service_old">Module Geüpdate Herstarten Nodig</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Beheren</string>
     <string name="home_detection_test">Detectie Test</string>
     <string name="home_download_test_app_title">Download Test app</string>

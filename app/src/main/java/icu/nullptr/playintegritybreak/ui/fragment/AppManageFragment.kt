@@ -11,10 +11,15 @@ class AppManageFragment : AppSelectFragment() {
 
     override val firstComparator: Comparator<String> = Comparator.comparing(ConfigManager::isLoggerEnabled).reversed()
 
-    override val adapter = AppManageAdapter {
-        if (PackageHelper.exists(it)) {
-            val args = AppSettingsV2FragmentArgs(it)
-            navigate(R.id.nav_app_settings, args.toBundle())
+    override val adapter = AppManageAdapter(
+        onItemClickListener = {
+            if (PackageHelper.exists(it)) {
+                val args = AppSettingsV2FragmentArgs(it)
+                navigate(R.id.nav_app_settings, args.toBundle())
+            }
+        },
+        onFavoriteChanged = {
+            sortList()
         }
-    }
+    )
 }

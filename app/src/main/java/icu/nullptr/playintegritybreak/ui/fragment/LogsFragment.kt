@@ -116,7 +116,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
             R.id.menu_refresh -> updateLogs()
             R.id.menu_save -> {
                 val date = SimpleDateFormat("yyyy-MM-dd_HH.mm.ss", Locale.getDefault()).format(Date())
-                saveSAFLauncher.launch("PIB-OSS_logs_$date.log")
+                saveSAFLauncher.launch("PIB_logs_$date.log")
             }
             R.id.menu_delete -> {
                 lifecycleScope.launch(Dispatchers.IO) {

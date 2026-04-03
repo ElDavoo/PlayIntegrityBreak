@@ -30,6 +30,7 @@ object PrefManager {
     private const val PREF_APP_FILTER_SHOW_SYSTEM = "app_filter_show_system"
     private const val PREF_APP_FILTER_SORT_METHOD = "app_filter_sort_method"
     private const val PREF_APP_FILTER_REVERSE_ORDER = "app_filter_reverse_order"
+    private const val PREF_APP_FAVORITES_BOOTSTRAP_DONE = "app_favorites_bootstrap_done"
     private const val PREF_LOG_FILTER_LEVEL = "log_filter_level"
     private const val PREF_LOG_FILTER_REVERSE_ORDER = "log_filter_reverse_order"
 
@@ -108,6 +109,10 @@ object PrefManager {
     var appFilter_reverseOrder: Boolean
         get() = pref.getBoolean(PREF_APP_FILTER_REVERSE_ORDER, false)
         set(value) = pref.edit { putBoolean(PREF_APP_FILTER_REVERSE_ORDER, value) }
+
+    var appFavoritesBootstrapDone: Boolean
+        get() = pref.getBoolean(PREF_APP_FAVORITES_BOOTSTRAP_DONE, false)
+        set(value) = pref.edit { putBoolean(PREF_APP_FAVORITES_BOOTSTRAP_DONE, value) }
 
     var logFilter_level: Int
         get() = pref.getInt(PREF_LOG_FILTER_LEVEL, 0)

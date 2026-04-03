@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">سرویس سیستم درحال اجرا [%d]</string>
     <string name="home_xposed_service_off">سرویس سیستم درحال اجرا نیست</string>
     <string name="home_xposed_service_old">ماژول بروزرسانی شد، ریبوت لازم</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">مدیریت </string>
     <string name="home_detection_test">تست تشخیص </string>
     <string name="home_download_test_app_title">دانلود برنامه تست</string>

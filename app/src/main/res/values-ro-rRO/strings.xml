@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Serviciul de sistem rulează [%d]</string>
     <string name="home_xposed_service_off">Serviciul de sistem nu funcționează</string>
     <string name="home_xposed_service_old">Modul actualizat, trebuie repornire</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Administrare</string>
     <string name="home_detection_test">Test de detectare</string>
     <string name="home_download_test_app_title">Descărcă aplicație pentru test</string>

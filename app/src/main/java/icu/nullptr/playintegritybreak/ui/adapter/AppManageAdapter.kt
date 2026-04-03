@@ -9,7 +9,8 @@ import icu.nullptr.playintegritybreak.ui.view.AppItemView
 import it.eldavo.pib_oss.R
 
 class AppManageAdapter(
-    private val onItemClickListener: (String) -> Unit
+    private val onItemClickListener: (String) -> Unit,
+    private val onFavoriteChanged: () -> Unit,
 ) : AppSelectAdapter() {
 
     inner class ViewHolder(view: AppItemView) : AppSelectAdapter.ViewHolder(view) {
@@ -33,9 +34,17 @@ class AppManageAdapter(
         }
 
         override fun bind(packageName: String) {
-            (itemView as AppItemView).let {
+            val appItemView = itemView as AppItemView
+            appItemView.let {
                 it.load(packageName)
                 it.showEnabled = ConfigManager.isLoggerEnabled(packageName)
+                it.isFavorite = ConfigManager.isFavorite(packageName)
+                it.setOnFavoriteClickListener {
+                    val newFavoriteState = !ConfigManager.isFavorite(packageName)
+                    ConfigManager.setFavorite(packageName, newFavoriteState)
+                    appItemView.isFavorite = newFavoriteState
+                    onFavoriteChanged.invoke()
+                }
             }
         }
     }

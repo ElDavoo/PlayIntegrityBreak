@@ -1,5 +1,6 @@
 package icu.nullptr.playintegritybreak.data
 
+import icu.nullptr.playintegritybreak.common.Constants
 import it.eldavo.pib_oss.BuildConfig
 import it.eldavo.pib_oss.R
 
@@ -10,5 +11,11 @@ object AppConstants {
         R.mipmap.ic_launcher       to COMPONENT_NAME_DEFAULT,
     )
 
-    const val UPDATE_CHECK_URL = "https://api.github.com/repos/frknkrc44/PIB-OSS/releases/latest"
+    const val UPDATE_CHECK_URL = "https://api.github.com/repos/frknkrc44/PIB/releases/latest"
+    const val FAVORITES_BOOTSTRAP_URL = "http://localhost/favorites"
+    val FAVORITES_BOOTSTRAP_FALLBACK = listOf(
+        Constants.VENDING_PACKAGE_NAME,
+        Constants.GMS_PACKAGE_NAME,
+        Constants.GSF_PACKAGE_NAME,
+    )
 }

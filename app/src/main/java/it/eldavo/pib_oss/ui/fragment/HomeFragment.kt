@@ -315,7 +315,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             setOnClickListener {
                 val date = SimpleDateFormat("yyyy-MM-dd_HH.mm.ss", Locale.getDefault()).format(Date())
-                backupSAFLauncher.launch("PIB-OSS_config_$date.json")
+                backupSAFLauncher.launch("PIB_config_$date.json")
             }
         }
 

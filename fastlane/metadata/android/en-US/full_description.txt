@@ -1,6 +1,6 @@
 A FOSS Play Integrity instrumentation module.
 
-Features of PIB-OSS:
+Features of PIB:
 
 * Hooks Google Play Integrity service calls in com.android.vending
 * Per-app policy controls for request/response logging
@@ -9,4 +9,4 @@ Features of PIB-OSS:
 * Runtime log buffer with clear/export support
 * Nix-friendly reproducible build workflow
 
-For more information, check this wiki page: https://github.com/frknkrc44/PIB-OSS/wiki
+For more information, check this wiki page: https://github.com/frknkrc44/PIB/wiki

@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Dịch vụ hệ thống đang chạy [%d]</string>
     <string name="home_xposed_service_off">Dịch vụ hệ thống đang không chạy</string>
     <string name="home_xposed_service_old">Mô-đun đã cập nhật, cần khởi động lại</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Quản lý</string>
     <string name="home_detection_test">Thử phát hiện</string>
     <string name="home_download_test_app_title">Tải ứng dụng kiểm tra</string>

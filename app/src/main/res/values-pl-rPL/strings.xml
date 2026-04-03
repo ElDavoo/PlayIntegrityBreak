@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Uruchomiono usługę systemową [%d]</string>
     <string name="home_xposed_service_off">Usługa systemowa nie jest uruchomiona</string>
     <string name="home_xposed_service_old">Moduł zaktualizowany, wymaga reboota</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Zarządzaj</string>
     <string name="home_detection_test">Test wykrywalności</string>
     <string name="home_download_test_app_title">Pobierz aplikację testową</string>

@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Systémová služba běží [%d]</string>
     <string name="home_xposed_service_off">Systémová služba neběží</string>
     <string name="home_xposed_service_old">Modul aktualizován, je třeba restartovat</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Spravovat</string>
     <string name="home_detection_test">Detekční test</string>
     <string name="home_download_test_app_title">Stáhněte si testovací aplikaci</string>

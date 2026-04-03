@@ -1,17 +1,17 @@
 <div align="center">
-  <h2>PIB-OSS</h2>
+  <h2>PIB</h2>
 
-  <img src="PIB-OSS.svg" alt="PIB-OSS Logo" style="max-width:360px;width:60%;height:auto;">
+  <img src="PIB.svg" alt="PIB Logo" style="max-width:360px;width:60%;height:auto;">
 
   <p>
-    <a href="https://github.com/frknkrc44/PIB-OSS" style="text-decoration:none">
-      <img src="https://img.shields.io/github/stars/frknkrc44/PIB-OSS?label=Stars&logo=github">
+    <a href="https://github.com/frknkrc44/PIB" style="text-decoration:none">
+      <img src="https://img.shields.io/github/stars/frknkrc44/PIB?label=Stars&logo=github">
     </a>
-    <a href="https://github.com/frknkrc44/PIB-OSS/actions" style="text-decoration:none">
-      <img src="https://img.shields.io/github/actions/workflow/status/frknkrc44/PIB-OSS/main.yml?branch=master&logo=github">
+    <a href="https://github.com/frknkrc44/PIB/actions" style="text-decoration:none">
+      <img src="https://img.shields.io/github/actions/workflow/status/frknkrc44/PIB/main.yml?branch=master&logo=github">
     </a>
-    <a href="https://github.com/frknkrc44/PIB-OSS/releases/latest" style="text-decoration:none">
-      <img src="https://img.shields.io/github/v/release/frknkrc44/PIB-OSS?label=Release">
+    <a href="https://github.com/frknkrc44/PIB/releases/latest" style="text-decoration:none">
+      <img src="https://img.shields.io/github/v/release/frknkrc44/PIB?label=Release">
     </a>
     <a href="https://apt.izzysoft.de/fdroid/index/apk/it.eldavo.pib_oss" style="text-decoration:none">
       <img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/it.eldavo.pib_oss&label=IzzyOnDroid">
@@ -19,14 +19,14 @@
     <a href="https://shields.rbtlog.dev/it.eldavo.pib_oss" style="text-decoration:none">
       <img src="https://shields.rbtlog.dev/simple/it.eldavo.pib_oss">
     </a>
-    <a href="https://github.com/frknkrc44/PIB-OSS/releases/latest" style="text-decoration:none">
-      <img src="https://img.shields.io/github/downloads/frknkrc44/PIB-OSS/total">
+    <a href="https://github.com/frknkrc44/PIB/releases/latest" style="text-decoration:none">
+      <img src="https://img.shields.io/github/downloads/frknkrc44/PIB/total">
     </a>
     <a href="https://t.me/aerathfuns" style="text-decoration:none">
       <img src="https://img.shields.io/badge/Telegram-Channel-blue.svg?logo=telegram">
     </a>
     <a href="https://choosealicense.com/licenses/gpl-3.0/" style="text-decoration:none">
-      <img src="https://img.shields.io/github/license/frknkrc44/PIB-OSS?label=License">
+      <img src="https://img.shields.io/github/license/frknkrc44/PIB?label=License">
     </a>
   </p>
 </div>
@@ -45,4 +45,4 @@
 该模块提供了一些检测方式用于测试您是否成功地隐藏了某些特定的包名，如 Magisk/Edxposed Manager；同时可作为 Xposed 模块用于隐藏应用列表或特定应用，保护隐私。  
 
 ## 更新日志
-[参考发布页面](https://github.com/frknkrc44/PIB-OSS/commits)  
+[参考发布页面](https://github.com/frknkrc44/PIB/commits)  

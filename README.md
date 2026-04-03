@@ -13,11 +13,11 @@
 
 This project is focused on Google Play API observability.
 
-PIB-OSS runs as an LSPosed/Xposed module in the Play Store process and intercepts Integrity service request/response activity per target app. It is designed for debugging and telemetry workflows, and supports optional response rewriting for controlled testing scenarios.
+PIB runs as an LSPosed/Xposed module in the Play Store process and intercepts Integrity service request/response activity per target app. It is designed for debugging and telemetry workflows, and supports optional response rewriting for controlled testing scenarios.
 
 ## Build with Nix
 
-PIB-OSS ships a repo-local Nix development shell for reproducible Android builds.
+PIB ships a repo-local Nix development shell for reproducible Android builds.
 
 1. Enter the shell:
 

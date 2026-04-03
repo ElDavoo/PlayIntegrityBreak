@@ -30,6 +30,7 @@ data class JsonConfig(
     var altVoldAppDataIsolation: Boolean = false,
     var skipSystemAppDataIsolation: Boolean = true,
     var packageQueryWorkaround: Boolean = false,
+    var favoritePackages: MutableSet<String> = mutableSetOf(),
     val scope: MutableMap<String, AppConfig> = mutableMapOf()
 ) {
     @Serializable

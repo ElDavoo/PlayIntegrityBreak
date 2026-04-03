@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PIB-OSS"
+rootProject.name = "PIB"
 
 include(
     ":app",

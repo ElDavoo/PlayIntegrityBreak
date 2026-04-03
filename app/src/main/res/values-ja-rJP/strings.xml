@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">システムサービスが実行中 [%d]</string>
     <string name="home_xposed_service_off">システムサービスは実行されていません</string>
     <string name="home_xposed_service_old">モジュールが更新されました。再起動してください</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">管理</string>
     <string name="home_detection_test">検出のテスト</string>
     <string name="home_download_test_app_title">テストアプリのダウンロード</string>

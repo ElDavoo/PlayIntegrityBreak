@@ -39,7 +39,7 @@
     <string name="home_xposed_service_on">Системна служба працює [%d]</string>
     <string name="home_xposed_service_off">Системна служба не працює</string>
     <string name="home_xposed_service_old">Модуль оновлено, потрібно перезавантажити</string>
-    <string name="home_xposed_filter_count">PIB-OSS has captured total %d events</string>
+    <string name="home_xposed_filter_count">PIB has captured total %d events</string>
     <string name="home_manage">Керувати</string>
     <string name="home_detection_test">Перевірка на виявлення</string>
     <string name="home_download_test_app_title">Завантажити додаток для перевірки</string>

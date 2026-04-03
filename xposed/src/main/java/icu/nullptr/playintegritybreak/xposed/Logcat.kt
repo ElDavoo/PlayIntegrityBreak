@@ -34,11 +34,11 @@ fun logWithLevel(level: Int, tag: String, msg: String, cause: Throwable? = null)
 
     if (PIBLoggerService.isActive()) {
         PIBLoggerService.appendParsedLog(parsedLog)
-        XposedBridge.log("[PIB-OSS] $parsedLog")
+        XposedBridge.log("[PIB] $parsedLog")
         return
     }
 
-    XposedBridge.log("[PIB-OSS] $parsedLog")
+    XposedBridge.log("[PIB] $parsedLog")
 }
 
 fun logV(tag: String, msg: String, cause: Throwable? = null) = logWithLevel(Log.VERBOSE, tag, msg, cause)
