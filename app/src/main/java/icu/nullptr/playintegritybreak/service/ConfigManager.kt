@@ -270,11 +270,7 @@ object ConfigManager {
         }
 
         val appConfig = config.scope[packageName] ?: return false
-        if (!appConfig.interventionEnabled) {
-            return false
-        }
-
-        return appConfig.rewriteIntegrityResponse
+        return appConfig.interventionEnabled
     }
 
     fun getAppConfig(packageName: String): JsonConfig.AppConfig? {
