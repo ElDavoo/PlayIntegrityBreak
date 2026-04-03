@@ -74,7 +74,7 @@ jobs:
           echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
           echo "releaseFile=$(ls app/build/outputs/apk/release/*.apk)" >> $GITHUB_OUTPUT
           echo "debugFile=$(ls app/build/outputs/apk/debug/*.apk)" >> $GITHUB_OUTPUT
-          echo "ossNum=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}' | cut -f4 -d'-')" >> $GITHUB_OUTPUT
+          echo "versionNum=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}' | cut -f2 -d'-')" >> $GITHUB_OUTPUT
 
       - name: Upload release
         if: success()
@@ -100,16 +100,16 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: oss-${{ steps.buildAll.outputs.ossNum }}
+          name: PIB-${{ steps.buildAll.outputs.versionNum }}
           body: ${{ github.event.head_commit.message }}
           files: |
             ${{ steps.buildAll.outputs.releaseFile }}
             ${{ steps.buildAll.outputs.debugFile }}
             app/src/main/assets/translators.json
-          tag_name: oss-${{ steps.buildAll.outputs.ossNum }}
+          tag_name: pib-${{ steps.buildAll.outputs.versionNum }}
 
       - name: Post to channel
-        if: ${{ github.event_name != 'pull_request' && success() && github.ref == 'refs/heads/master' }}
+        if: ${{ github.event_name != 'pull_request' && success() && github.ref == 'refs/heads/pib' }}
         env:
           CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL }}
           BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}

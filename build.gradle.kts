@@ -37,7 +37,7 @@ fun getUncommittedSuffix(): String {
 
     try {
         val branch = "git rev-parse --abbrev-ref HEAD".execute().split("/").last()
-        if (branch != "master") {
+        if (branch != "pib") {
             returnedVal += "-$branch"
         }
     } catch (_: Throwable) {}
@@ -54,7 +54,7 @@ val gitHasUncommittedSuffix = getUncommittedSuffix()
 val gitCommitCount = "git rev-list refs/remotes/origin/pib --count".execute().toInt()
 
 // Reset versioning from 1 on the pib branch
-val gitCommitCountAfterReset = gitCommitCount - 626
+val gitCommitCountAfterReset = gitCommitCount - 627
 
 val minSdkVer by extra(29)
 val targetSdkVer by extra(36)
