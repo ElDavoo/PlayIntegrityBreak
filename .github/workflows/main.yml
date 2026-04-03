@@ -2,7 +2,9 @@ name: Main
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - 'master'
+      - 'pib'
     paths-ignore:
       - '.github/ISSUE_TEMPLATE/**'
       - '.github/workflows/issue.yml'
