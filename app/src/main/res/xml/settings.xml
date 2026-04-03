@@ -152,4 +152,59 @@
             app:singleLineTitle="false"
             android:title="@string/settings_disable_update" />
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_telemetry">
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="telemetryEnabled"
+            app:singleLineTitle="false"
+            android:title="@string/settings_telemetry_enabled"
+            android:summary="@string/settings_telemetry_enabled_summary" />
+
+        <EditTextPreference
+            android:icon="@drawable/outline_language_24"
+            android:key="telemetryEndpointUrl"
+            android:dependency="telemetryEnabled"
+            app:singleLineTitle="false"
+            android:title="@string/settings_telemetry_endpoint"
+            android:dialogMessage="@string/settings_telemetry_endpoint_summary"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="telemetryAuthToken"
+            android:dependency="telemetryEnabled"
+            app:singleLineTitle="false"
+            android:title="@string/settings_telemetry_auth_token"
+            android:dialogMessage="@string/settings_telemetry_auth_token_summary" />
+
+        <EditTextPreference
+            android:icon="@drawable/outline_sd_storage_24"
+            android:key="telemetryBatchSize"
+            android:defaultValue="100"
+            android:dependency="telemetryEnabled"
+            app:singleLineTitle="false"
+            android:title="@string/settings_telemetry_batch_size"
+            android:dialogMessage="@string/settings_telemetry_batch_size_summary"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:icon="@drawable/outline_update_disabled_24"
+            android:key="telemetryUploadIntervalMinutes"
+            android:defaultValue="30"
+            android:dependency="telemetryEnabled"
+            app:singleLineTitle="false"
+            android:title="@string/settings_telemetry_upload_interval"
+            android:dialogMessage="@string/settings_telemetry_upload_interval_summary"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/baseline_apps_24"
+            android:key="telemetryWifiOnly"
+            android:dependency="telemetryEnabled"
+            app:singleLineTitle="false"
+            android:title="@string/settings_telemetry_wifi_only"
+            android:summary="@string/settings_telemetry_wifi_only_summary" />
+    </PreferenceCategory>
 </PreferenceScreen>

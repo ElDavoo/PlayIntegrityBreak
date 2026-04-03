@@ -4,6 +4,7 @@
 
     <string name="title_home">Home</string>
     <string name="title_logs">Logs</string>
+    <string name="title_statistics">Statistics</string>
     <string name="title_settings">Settings</string>
     <string name="title_template_manage">Manage logging profiles</string>
     <string name="title_template_settings">Logging profile settings</string>
@@ -158,11 +159,27 @@
     <!-- Logs -->
     <string name="logs_save">Save logs</string>
     <string name="logs_clear">Clear logs</string>
+    <string name="logs_upload_telemetry">Upload telemetry now</string>
+    <string name="logs_show_telemetry_queue">Show telemetry queue status</string>
     <string name="logs_empty">No logs to save</string>
     <string name="logs_saved">Logs saved</string>
+    <string name="logs_telemetry_disabled">Telemetry upload is disabled</string>
+    <string name="logs_telemetry_upload_enqueued">Telemetry upload queued: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Queue status: pending=%1$d retry=%2$d in-flight=%3$d acked=%4$d failed=%5$d</string>
 
     <!-- Filter logs -->
     <string name="title_filter_logs">Event statistics</string>
+    <string name="statistics_time_window">Time window</string>
+    <string name="statistics_window_all">All time</string>
+    <string name="statistics_window_24h">Last 24 hours</string>
+    <string name="statistics_window_7d">Last 7 days</string>
+    <string name="statistics_updated_at">Updated: %1$s</string>
+    <string name="statistics_summary_title">Capture summary</string>
+    <string name="statistics_summary_body">Total events: %1$d\nRequests: %2$d\nResponses: %3$d\nSuccessful responses: %4$d\nFailed responses: %5$d</string>
+    <string name="statistics_queue_title">Telemetry queue</string>
+    <string name="statistics_queue_body">Pending: %1$d\nRetry: %2$d\nIn-flight: %3$d\nAcknowledged: %4$d\nFailed: %5$d</string>
+    <string name="statistics_top_packages_title">Top packages by requests</string>
+    <string name="statistics_top_packages_empty">No package activity in this time window.</string>
 
     <!-- Settings -->
     <string name="settings_module">Module</string>
@@ -205,6 +222,25 @@
     <string name="settings_package_query_workaround_summary">Don\'t enable this option if you see the package list in this app correctly.</string>
     <string name="settings_launcher_icon">Launcher icon</string>
     <string name="settings_error_only_log">Error-only log</string>
+
+    <string name="settings_telemetry">Telemetry</string>
+    <string name="settings_telemetry_enabled">Enable telemetry upload</string>
+    <string name="settings_telemetry_enabled_summary">Upload captured request/response events to a backend in reliable batches.</string>
+    <string name="settings_telemetry_endpoint">Telemetry endpoint URL</string>
+    <string name="settings_telemetry_endpoint_summary">Full API URL that receives telemetry batches.</string>
+    <string name="settings_telemetry_auth_token">Telemetry auth token</string>
+    <string name="settings_telemetry_auth_token_summary">Optional Bearer token sent in Authorization header.</string>
+    <string name="settings_telemetry_auth_token_not_set">Not configured</string>
+    <string name="settings_telemetry_auth_token_set">Configured</string>
+    <string name="settings_telemetry_batch_size">Telemetry batch size</string>
+    <string name="settings_telemetry_batch_size_summary">Number of events sent per request (1-500).</string>
+    <string name="settings_telemetry_upload_interval">Telemetry upload interval (minutes)</string>
+    <string name="settings_telemetry_upload_interval_summary">Periodic upload cadence (15-1440 minutes).</string>
+    <string name="settings_telemetry_wifi_only">Upload only on unmetered network</string>
+    <string name="settings_telemetry_wifi_only_summary">When enabled, telemetry upload runs only on Wi-Fi/unmetered connections.</string>
+    <string name="settings_telemetry_endpoint_invalid">Telemetry endpoint must start with http:// or https://</string>
+    <string name="settings_telemetry_batch_size_invalid">Telemetry batch size must be between 1 and 500</string>
+    <string name="settings_telemetry_upload_interval_invalid">Telemetry interval must be between 15 and 1440 minutes</string>
 
     <string name="settings_language">Language</string>
     <string name="settings_translate">Participate in translation</string>

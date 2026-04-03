@@ -9,8 +9,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.ServiceClient
+import icu.nullptr.playintegritybreak.telemetry.TelemetryUploadScheduler
 import icu.nullptr.playintegritybreak.ui.adapter.LogAdapter
 import icu.nullptr.playintegritybreak.ui.util.contentResolver
 import icu.nullptr.playintegritybreak.ui.util.navController
@@ -120,6 +122,47 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     ServiceClient.clearLogs()
                     withContext(Dispatchers.Main) { updateLogs() }
+                }
+            }
+            R.id.menu_upload_telemetry -> {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    if (!ConfigManager.telemetryEnabled) {
+                        withContext(Dispatchers.Main) {
+                            showToast(R.string.logs_telemetry_disabled)
+                        }
+                        return@launch
+                    }
+
+                    TelemetryUploadScheduler.triggerImmediate(reason = "manual-logs")
+                    val snapshot = ServiceClient.getTelemetryQueueSnapshot()
+
+                    withContext(Dispatchers.Main) {
+                        showToast(
+                            getString(
+                                R.string.logs_telemetry_upload_enqueued,
+                                snapshot.pending,
+                                snapshot.retry,
+                                snapshot.inFlight,
+                            )
+                        )
+                    }
+                }
+            }
+            R.id.menu_show_telemetry_queue -> {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val snapshot = ServiceClient.getTelemetryQueueSnapshot()
+                    withContext(Dispatchers.Main) {
+                        showToast(
+                            getString(
+                                R.string.logs_telemetry_queue_snapshot,
+                                snapshot.pending,
+                                snapshot.retry,
+                                snapshot.inFlight,
+                                snapshot.acknowledged,
+                                snapshot.failed,
+                            )
+                        )
+                    }
                 }
             }
             R.id.menu_filter_debug -> {

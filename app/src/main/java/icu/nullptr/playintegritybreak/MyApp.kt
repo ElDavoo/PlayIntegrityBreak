@@ -8,6 +8,7 @@ import icu.nullptr.playintegritybreak.receiver.AppChangeReceiver
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.ServiceClient
+import icu.nullptr.playintegritybreak.telemetry.TelemetryUploadScheduler
 import icu.nullptr.playintegritybreak.ui.util.showToast
 import icu.nullptr.playintegritybreak.util.ConfigUtils.Companion.getLocale
 import kotlinx.coroutines.CoroutineScope
@@ -36,6 +37,8 @@ class MyApp : Application() {
         }
         AppChangeReceiver.register(this)
         ConfigManager.init()
+        TelemetryUploadScheduler.syncSchedule()
+        TelemetryUploadScheduler.triggerImmediate(reason = "app-startup")
 
         AppCompatDelegate.setDefaultNightMode(PrefManager.darkTheme)
         val config = resources.configuration

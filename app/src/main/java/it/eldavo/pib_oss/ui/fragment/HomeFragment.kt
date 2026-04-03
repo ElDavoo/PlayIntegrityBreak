@@ -276,6 +276,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
+        with(binding.navStatistics) {
+            text1.text = getString(R.string.title_statistics)
+            icon.setImageResource(R.drawable.baseline_call_split_24)
+            root.setOnClickListener {
+                navigate(R.id.nav_statistics)
+            }
+        }
+
         with(binding.navSettings) {
             text1.text = getString(R.string.title_settings)
             icon.setImageResource(R.drawable.outline_settings_24)

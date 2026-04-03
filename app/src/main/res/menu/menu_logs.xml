@@ -18,6 +18,14 @@
         app:showAsAction="ifRoom"
         android:title="@string/logs_clear" />
     <item
+        android:id="@+id/menu_upload_telemetry"
+        app:showAsAction="never"
+        android:title="@string/logs_upload_telemetry" />
+    <item
+        android:id="@+id/menu_show_telemetry_queue"
+        app:showAsAction="never"
+        android:title="@string/logs_show_telemetry_queue" />
+    <item
         app:showAsAction="never"
         android:title="@string/filter">
         <menu>

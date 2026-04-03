@@ -4,6 +4,7 @@ import android.os.Build
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.JsonConfig
 import icu.nullptr.playintegritybreak.pibApp
+import icu.nullptr.playintegritybreak.telemetry.TelemetryUploadScheduler
 import icu.nullptr.playintegritybreak.ui.util.showToast
 import icu.nullptr.playintegritybreak.util.PackageHelper
 import kotlinx.coroutines.CoroutineScope
@@ -59,6 +60,12 @@ object ConfigManager {
                 Log.w(TAG, "Failed to sync config to service", it)
             }
         }
+
+        runCatching {
+            TelemetryUploadScheduler.syncSchedule()
+        }.onFailure {
+            Log.w(TAG, "Failed to sync telemetry scheduler", it)
+        }
     }
 
     var detailLog: Boolean
@@ -100,6 +107,76 @@ object ConfigManager {
         get() = config.maxLogSize
         set(value) {
             config.maxLogSize = value
+            saveConfig()
+        }
+
+    var telemetryEnabled: Boolean
+        get() = config.telemetryEnabled
+        set(value) {
+            config.telemetryEnabled = value
+            saveConfig()
+        }
+
+    var telemetryEndpointUrl: String
+        get() = config.telemetryEndpointUrl.trim()
+        set(value) {
+            config.telemetryEndpointUrl = value.trim()
+            saveConfig()
+        }
+
+    var telemetryAuthToken: String
+        get() = config.telemetryAuthToken
+        set(value) {
+            config.telemetryAuthToken = value.trim()
+            saveConfig()
+        }
+
+    var telemetryBatchSize: Int
+        get() = config.telemetryBatchSize.coerceIn(1, 500)
+        set(value) {
+            config.telemetryBatchSize = value.coerceIn(1, 500)
+            saveConfig()
+        }
+
+    var telemetryUploadIntervalMinutes: Int
+        get() = config.telemetryUploadIntervalMinutes.coerceIn(15, 1440)
+        set(value) {
+            config.telemetryUploadIntervalMinutes = value.coerceIn(15, 1440)
+            saveConfig()
+        }
+
+    var telemetryWifiOnly: Boolean
+        get() = config.telemetryWifiOnly
+        set(value) {
+            config.telemetryWifiOnly = value
+            saveConfig()
+        }
+
+    var telemetryMaxAttempts: Int
+        get() = config.telemetryMaxAttempts.coerceIn(1, 20)
+        set(value) {
+            config.telemetryMaxAttempts = value.coerceIn(1, 20)
+            saveConfig()
+        }
+
+    var telemetryBaseRetrySeconds: Int
+        get() = config.telemetryBaseRetrySeconds.coerceIn(5, 600)
+        set(value) {
+            config.telemetryBaseRetrySeconds = value.coerceIn(5, 600)
+            saveConfig()
+        }
+
+    var telemetryLeaseDurationSeconds: Int
+        get() = config.telemetryLeaseDurationSeconds.coerceIn(30, 900)
+        set(value) {
+            config.telemetryLeaseDurationSeconds = value.coerceIn(30, 900)
+            saveConfig()
+        }
+
+    var telemetryStaleInFlightMinutes: Int
+        get() = config.telemetryStaleInFlightMinutes.coerceIn(5, 120)
+        set(value) {
+            config.telemetryStaleInFlightMinutes = value.coerceIn(5, 120)
             saveConfig()
         }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_statistics_refresh"
+        android:icon="@drawable/baseline_refresh_24"
+        android:title="@string/refresh"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:title="@string/statistics_time_window"
+        app:showAsAction="never">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_statistics_window_all"
+                    android:title="@string/statistics_window_all" />
+                <item
+                    android:id="@+id/menu_statistics_window_24h"
+                    android:title="@string/statistics_window_24h" />
+                <item
+                    android:id="@+id/menu_statistics_window_7d"
+                    android:title="@string/statistics_window_7d" />
+            </group>
+        </menu>
+    </item>
+</menu>
