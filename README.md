@@ -36,3 +36,17 @@ The shell uses Android SDK components from nixpkgs by default and only falls bac
 ## Translation
 
 Thanks to Crowdin contributors for the original project!
+
+## AI Policy
+
+This project has been vibe coded.  
+I didn't read the code at all (and I don't have Kotlin android skills). It is probably badly written.  
+I hate delivering unpolished things, but for this project I made an exception.  
+Having said that, it seems to work. So... yeah.  
+
+## Fork
+
+This project is a fork of frknkrc44/HMA-OSS , which is a very good project.  
+Thank you frknkrc44 and contributors!    
+This is why this project is working nicely: It has a solid base.  
+
