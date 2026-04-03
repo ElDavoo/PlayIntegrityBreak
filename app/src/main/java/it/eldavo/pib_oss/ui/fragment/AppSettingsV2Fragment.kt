@@ -15,6 +15,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceDataStore
 import androidx.preference.PreferenceFragmentCompat
 import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.JsonConfig
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.ServiceClient
@@ -36,22 +37,34 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
     private val binding by viewBinding(FragmentSettingsBinding::bind)
     private val viewModel by viewModels<AppSettingsViewModel>() {
         val args by navArgs<AppSettingsV2FragmentArgs>()
+        val isDefaultMode = !args.bulkConfigMode && args.packageName == Constants.DEFAULT_APP_PACKAGE_NAME
         val cfg: JsonConfig.AppConfig? = if (args.bulkConfigMode) {
             if (args.bulkConfig != null) JsonConfig.AppConfig.parse(args.bulkConfig!!)
             else null
+        } else if (isDefaultMode) {
+            JsonConfig.AppConfig(
+                interventionEnabled = true,
+                rewriteIntegrityResponseOverridden = true,
+                rewriteIntegrityResponse = ConfigManager.defaultHookRewriteEnabled,
+                rewriteIntegrityErrorCode = ConfigManager.defaultHookRewriteErrorCode,
+                rewriteIntegrityErrorRemediable = ConfigManager.defaultHookRewriteRemediable,
+            )
         } else {
             ConfigManager.getAppConfig(args.packageName)
         }
 
         val pack = AppSettingsViewModel.Pack(
             app = args.packageName,
-            enabled = cfg != null,
+            enabled = if (isDefaultMode) true else cfg != null,
             bulkConfig =  args.bulkConfigMode,
             config = cfg ?: JsonConfig.AppConfig(),
             bulkApps = args.bulkConfigApps,
         )
         AppSettingsViewModel.Factory(pack)
     }
+
+    private val isDefaultMode: Boolean
+        get() = !viewModel.pack.bulkConfig && viewModel.pack.app == Constants.DEFAULT_APP_PACKAGE_NAME
 
     private fun saveConfig() {
         if (viewModel.pack.bulkConfig) {
@@ -61,6 +74,12 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                     if (viewModel.pack.enabled) viewModel.pack.config.toString() else null,
                 )
             })
+        } else if (isDefaultMode) {
+            ConfigManager.setDefaultRewriteConfig(
+                enabled = viewModel.pack.config.rewriteIntegrityResponse,
+                errorCode = viewModel.pack.config.rewriteIntegrityErrorCode,
+                remediable = viewModel.pack.config.rewriteIntegrityErrorRemediable,
+            )
         } else {
             ConfigManager.setAppConfig(
                 viewModel.pack.app,
@@ -92,6 +111,10 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             }
         }
 
+        if (isDefaultMode) {
+            return@lazy viewModel.pack.app
+        }
+
         return@lazy PackageHelper.loadAppLabel(viewModel.pack.app)
     }
 
@@ -115,23 +138,41 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
     }
 
     class AppPreferenceDataStore(private val pack: AppSettingsViewModel.Pack) : PreferenceDataStore() {
+        private val isDefaultMode = !pack.bulkConfig && pack.app == Constants.DEFAULT_APP_PACKAGE_NAME
 
-        private fun isRewriteOverridden(): Boolean {
-            return pack.config.rewriteIntegrityResponseOverridden
-                    || pack.config.rewriteIntegrityResponse
-                    || pack.config.rewriteIntegrityErrorCode != ConfigManager.defaultHookRewriteErrorCode
-                    || pack.config.rewriteIntegrityErrorRemediable != ConfigManager.defaultHookRewriteRemediable
-                    || !pack.config.integrityLoggerEnabled
+        private fun effectiveInterventionEnabled(): Boolean {
+            if (isDefaultMode) {
+                return true
+            }
+
+            return if (pack.enabled) {
+                pack.config.interventionEnabled
+            } else {
+                ConfigManager.defaultHookRewriteEnabled
+            }
+        }
+
+        private fun effectiveRewriteEnabled(): Boolean {
+            if (!effectiveInterventionEnabled()) {
+                return false
+            }
+
+            if (isDefaultMode) {
+                return pack.config.rewriteIntegrityResponse
+            }
+
+            return if (pack.enabled) {
+                pack.config.rewriteIntegrityResponse
+            } else {
+                ConfigManager.defaultHookRewriteEnabled
+            }
         }
 
         override fun getBoolean(key: String, defValue: Boolean): Boolean {
             return when (key) {
-                "enableLogger" -> if (isRewriteOverridden()) {
-                    pack.config.rewriteIntegrityResponse
-                } else {
-                    ConfigManager.defaultHookRewriteEnabled
-                }
-                "rewriteIntegrityErrorRemediable" -> if (isRewriteOverridden()) {
+                "enableIntervention" -> effectiveInterventionEnabled()
+                "enableLogger" -> effectiveRewriteEnabled()
+                "rewriteIntegrityErrorRemediable" -> if (pack.enabled && pack.config.interventionEnabled) {
                     pack.config.rewriteIntegrityErrorRemediable
                 } else {
                     ConfigManager.defaultHookRewriteRemediable
@@ -142,7 +183,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         override fun getString(key: String, defValue: String?): String {
             return when (key) {
-                "rewriteIntegrityErrorCode" -> if (isRewriteOverridden()) {
+                "rewriteIntegrityErrorCode" -> if (pack.enabled && pack.config.interventionEnabled) {
                     pack.config.rewriteIntegrityErrorCode.toString()
                 } else {
                     ConfigManager.defaultHookRewriteErrorCode.toString()
@@ -153,14 +194,23 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         override fun putBoolean(key: String, value: Boolean) {
             when (key) {
+                "enableIntervention" -> {
+                    if (isDefaultMode) return
+
+                    pack.enabled = true
+                    pack.config.interventionEnabled = value
+                    if (!value) {
+                        pack.config.rewriteIntegrityResponse = false
+                    }
+                }
                 "enableLogger" -> {
                     pack.enabled = true
-                    pack.config.rewriteIntegrityResponseOverridden = true
+                    pack.config.interventionEnabled = true
                     pack.config.rewriteIntegrityResponse = value
                 }
                 "rewriteIntegrityErrorRemediable" -> {
                     pack.enabled = true
-                    pack.config.rewriteIntegrityResponseOverridden = true
+                    pack.config.interventionEnabled = true
                     pack.config.rewriteIntegrityErrorRemediable = value
                 }
                 else -> throw IllegalArgumentException("Invalid key: $key")
@@ -171,7 +221,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             when (key) {
                 "rewriteIntegrityErrorCode" -> {
                     pack.enabled = true
-                    pack.config.rewriteIntegrityResponseOverridden = true
+                    pack.config.interventionEnabled = true
                     pack.config.rewriteIntegrityErrorCode = value?.toIntOrNull() ?: -8
                 }
                 else -> throw IllegalArgumentException("Invalid key: $key")
@@ -183,6 +233,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         private val parent get() = requireParentFragment() as AppSettingsV2Fragment
         private val pack get() = parent.viewModel.pack
+        private val isDefaultMode get() = !pack.bulkConfig && pack.app == Constants.DEFAULT_APP_PACKAGE_NAME
 
         private fun launchMainActivity(packageName: String, userId: Int) {
             if (userId != 0) {
@@ -216,6 +267,9 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             findPreference<EditTextPreference>("rewriteIntegrityErrorCode")?.setOnBindEditTextListener {
                 it.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_SIGNED
             }
+            if (isDefaultMode) {
+                findPreference<Preference>("enableIntervention")?.isVisible = false
+            }
 
             findPreference<Preference>("appInfo")?.let {
                 if (pack.bulkConfig) {
@@ -225,6 +279,11 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                         it.isSingleLineTitle = true
                         it.summary = getString(R.string.title_bulk_config_wizard)
                     }
+                } else if (isDefaultMode) {
+                    it.icon = R.drawable.outline_shield_24.asDrawable(requireContext())
+                    it.title = pack.app
+                    it.summary = pack.app
+                    it.isSelectable = false
                 } else {
                     it.icon = PackageHelper.loadAppIcon(pack.app)
                     it.title = PackageHelper.loadAppLabel(pack.app)

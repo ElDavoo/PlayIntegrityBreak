@@ -34,6 +34,7 @@ data class JsonConfig(
 ) {
     @Serializable
     data class AppConfig(
+        var interventionEnabled: Boolean = true,
         var integrityLoggerEnabled: Boolean = true,
         var logIntegrityRequests: Boolean = true,
         var logIntegrityResponses: Boolean = true,

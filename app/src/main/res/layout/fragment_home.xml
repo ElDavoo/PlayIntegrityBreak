@@ -52,6 +52,10 @@
                     layout="@layout/view_home_item" />
 
                 <include
+                    android:id="@+id/default_policy"
+                    layout="@layout/view_home_item" />
+
+                <include
                     android:id="@+id/nav_logs"
                     layout="@layout/view_home_item" />
 

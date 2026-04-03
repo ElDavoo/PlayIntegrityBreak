@@ -4,6 +4,7 @@ import it.eldavo.pib_oss.common.BuildConfig
 
 object Constants {
     const val PROVIDER_AUTHORITY = "${BuildConfig.APP_PACKAGE_NAME}.ServiceProvider"
+    const val DEFAULT_APP_PACKAGE_NAME = "default"
     const val GMS_PACKAGE_NAME = "com.google.android.gms"
     const val GSF_PACKAGE_NAME = "com.google.android.gsf"
     const val VENDING_PACKAGE_NAME = "com.android.vending"

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -49,8 +51,12 @@ class AppIconPreference(context: Context, attrs: AttributeSet?) : Preference(con
             (view.layoutParams as RelativeLayout.LayoutParams).addRule(RelativeLayout.BELOW, android.R.id.title)
 
             val appIconSelector: RadioGroup = view.findViewById(R.id.app_icon_selector)
+            val selectedComponent = findEnabledAppComponent(context)?.className
+            val selectableIcons = allAppIcons
+                .sortedByDescending { it.second == selectedComponent }
+                .distinctBy { fingerprintIcon(it.first) }
 
-            for (idx in 0 ..< allAppIcons.size) {
+            for (idx in 0 ..< selectableIcons.size) {
                 val radioButton = object : AppCompatRadioButton(context) {
                     override fun setChecked(checked: Boolean) {
                         if (PrefManager.hideIcon) {
@@ -72,7 +78,7 @@ class AppIconPreference(context: Context, attrs: AttributeSet?) : Preference(con
 
                     id = idx
                     gravity = Gravity.CENTER_VERTICAL
-                    buttonDrawable = allAppIcons[idx].first.asDrawable(context)
+                    buttonDrawable = selectableIcons[idx].first.asDrawable(context)
                     text = ""
                     buttonTintList = null
                 }
@@ -80,17 +86,30 @@ class AppIconPreference(context: Context, attrs: AttributeSet?) : Preference(con
                 appIconSelector.addView(radioButton)
             }
 
-            val selected = findEnabledAppComponent(context)
-            if (selected != null) {
-                appIconSelector.check(allAppIcons.indexOfFirst { it.second == selected.className })
+            if (selectedComponent != null) {
+                appIconSelector.check(selectableIcons.indexOfFirst { it.second == selectedComponent })
             }
 
             appIconSelector.setOnCheckedChangeListener { _, checkedId ->
-                setEnabledComponent(allAppIcons[checkedId].second)
+                setEnabledComponent(selectableIcons[checkedId].second)
             }
 
             parent.addView(view)
         }
+    }
+
+    private fun fingerprintIcon(drawableResId: Int): Int {
+        return runCatching {
+            val drawable = context.getDrawable(drawableResId) ?: return drawableResId
+            val size = 96
+            val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0, 0, size, size)
+            drawable.draw(canvas)
+            val pixels = IntArray(size * size)
+            bitmap.getPixels(pixels, 0, size, 0, 0, size, size)
+            pixels.contentHashCode()
+        }.getOrDefault(drawableResId)
     }
 
     private fun disableAppIcon() {

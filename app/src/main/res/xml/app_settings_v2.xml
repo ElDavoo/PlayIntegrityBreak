@@ -6,7 +6,14 @@
             android:key="appInfo" />
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_shield_24"
+            android:key="enableIntervention"
+            app:singleLineTitle="false"
+            android:title="@string/app_enable_intervention"
+            android:summary="@string/app_enable_intervention_desc" />
+        <SwitchPreferenceCompat
+            android:icon="@drawable/outline_shield_24"
             android:key="enableLogger"
+            android:dependency="enableIntervention"
             app:singleLineTitle="false"
             android:title="@string/app_rewrite_integrity_response"
             android:summary="@string/app_rewrite_integrity_response_desc" />

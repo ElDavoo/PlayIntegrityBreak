@@ -90,8 +90,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "blackDarkTheme" -> PrefManager.blackDarkTheme
                 "detailLog" -> ConfigManager.detailLog
                 "errorOnlyLog" -> ConfigManager.errorOnlyLog
-                "defaultHookRewriteEnabled" -> ConfigManager.defaultHookRewriteEnabled
-                "defaultHookRewriteRemediable" -> ConfigManager.defaultHookRewriteRemediable
                 "hideIcon" -> PrefManager.hideIcon
                 "bypassRiskyPackageWarning" -> PrefManager.bypassRiskyPackageWarning
                 "appDataIsolation" -> ConfigManager.altAppDataIsolation
@@ -113,7 +111,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor
                 "darkTheme" -> PrefManager.darkTheme.toString()
                 "maxLogSize" -> ConfigManager.maxLogSize.toString()
-                "defaultHookRewriteErrorCode" -> ConfigManager.defaultHookRewriteErrorCode.toString()
                 "telemetryEndpointUrl" -> ConfigManager.telemetryEndpointUrl
                 "telemetryAuthToken" -> ConfigManager.telemetryAuthToken
                 "telemetryBatchSize" -> ConfigManager.telemetryBatchSize.toString()
@@ -136,8 +133,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "blackDarkTheme" -> PrefManager.blackDarkTheme = value
                 "detailLog" -> ConfigManager.detailLog = value
                 "errorOnlyLog" -> ConfigManager.errorOnlyLog = value
-                "defaultHookRewriteEnabled" -> ConfigManager.defaultHookRewriteEnabled = value
-                "defaultHookRewriteRemediable" -> ConfigManager.defaultHookRewriteRemediable = value
                 "forceMountData" -> ConfigManager.forceMountData = value
                 "disableUpdate" -> PrefManager.disableUpdate = value
                 "hideIcon" -> PrefManager.hideIcon = value
@@ -159,7 +154,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor = value!!
                 "darkTheme" -> PrefManager.darkTheme = value!!.toInt()
                 "maxLogSize" -> ConfigManager.maxLogSize = value!!.toInt()
-                "defaultHookRewriteErrorCode" -> ConfigManager.defaultHookRewriteErrorCode = value?.toIntOrNull() ?: -8
                 "telemetryEndpointUrl" -> ConfigManager.telemetryEndpointUrl = value.orEmpty()
                 "telemetryAuthToken" -> ConfigManager.telemetryAuthToken = value.orEmpty()
                 "telemetryBatchSize" -> ConfigManager.telemetryBatchSize = value?.toIntOrNull() ?: 100
@@ -355,10 +349,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
 
                     true
                 }
-            }
-
-            findPreference<EditTextPreference>("defaultHookRewriteErrorCode")?.setOnBindEditTextListener {
-                it.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_SIGNED
             }
 
             findPreference<EditTextPreference>("telemetryBatchSize")?.setOnBindEditTextListener {

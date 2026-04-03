@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="@string/settings_default_rewrite_section">
-        <SwitchPreferenceCompat
-            android:icon="@drawable/syringe_24px"
-            android:key="defaultHookRewriteEnabled"
-            app:singleLineTitle="false"
-            android:title="@string/settings_default_hook_rewrite_enabled"
-            android:summary="@string/settings_default_hook_rewrite_enabled_summary" />
-        <EditTextPreference
-            android:icon="@drawable/outline_bug_report_24"
-            android:key="defaultHookRewriteErrorCode"
-            android:defaultValue="-8"
-            app:singleLineTitle="false"
-            app:useSimpleSummaryProvider="true"
-            android:title="@string/settings_default_hook_error_code"
-            android:dialogMessage="@string/settings_default_hook_error_code_summary" />
-        <SwitchPreferenceCompat
-            android:icon="@drawable/outline_bug_report_24"
-            android:key="defaultHookRewriteRemediable"
-            android:defaultValue="true"
-            app:singleLineTitle="false"
-            android:title="@string/settings_default_hook_remediable"
-            android:summary="@string/settings_default_hook_remediable_summary" />
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/settings_language">
         <ListPreference
             android:defaultValue="SYSTEM"

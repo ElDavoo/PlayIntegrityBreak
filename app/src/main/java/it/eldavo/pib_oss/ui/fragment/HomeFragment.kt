@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.data.fetchLatestUpdate
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
@@ -265,6 +266,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             icon.setImageResource(R.drawable.outline_android_24)
             root.setOnClickListener {
                 navigate(R.id.nav_app_manage)
+            }
+        }
+
+        with(binding.defaultPolicy) {
+            text1.text = getString(R.string.title_default_app)
+            icon.setImageResource(R.drawable.outline_shield_24)
+            root.setOnClickListener {
+                val args = AppSettingsV2FragmentArgs(Constants.DEFAULT_APP_PACKAGE_NAME)
+                navigate(R.id.nav_app_settings, args.toBundle())
             }
         }
 

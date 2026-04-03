@@ -10,6 +10,7 @@
     <string name="title_template_settings">Logging profile settings</string>
     <string name="title_settings_template_conf">Advanced logger configuration</string>
     <string name="title_app_manage">Target apps</string>
+    <string name="title_default_app" translatable="false">default</string>
     <string name="title_app_select">Select apps</string>
     <string name="title_app_settings">App settings</string>
     <string name="title_about">About</string>
@@ -92,10 +93,12 @@
 
     <!-- App settings -->
     <string name="app_enable_hide">Rewrite response as controlled error</string>
+    <string name="app_enable_intervention">Enable intervention for this app</string>
+    <string name="app_enable_intervention_desc">When disabled, this app always bypasses PIB interception even if default interception is enabled.</string>
     <string name="app_log_integrity_requests">Log Integrity requests</string>
     <string name="app_log_integrity_responses">Log Integrity responses</string>
     <string name="app_rewrite_integrity_response">Rewrite response as controlled error</string>
-    <string name="app_rewrite_integrity_response_desc">When enabled, successful Integrity responses for this app are rewritten to an error payload.</string>
+    <string name="app_rewrite_integrity_response_desc">When enabled and intervention is active, successful Integrity responses for this app are rewritten to an error payload.</string>
     <string name="app_rewrite_integrity_error_code">Rewrite error code</string>
     <string name="app_rewrite_integrity_error_code_desc">Used in rewritten Integrity responses for this app.</string>
     <string name="app_rewrite_integrity_error_remediable">Rewrite error remediable flag</string>

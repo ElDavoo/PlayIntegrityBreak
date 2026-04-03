@@ -117,12 +117,13 @@ object PIBLoggerService : IPIBService.Stub() {
         val unknownCaller = callerPkg.isBlank() || callerPkg == "unknown"
         if (unknownCaller) {
             return synchronized(configLock) {
+                val defaultRewriteEnabled = config.defaultHookRewriteEnabled
                 IntegrityPolicy(
-                    enabled = true,
+                    enabled = defaultRewriteEnabled,
                     logRequest = true,
                     logResponse = true,
                     errorOnly = config.errorOnlyLog,
-                    rewriteResponse = config.defaultHookRewriteEnabled,
+                    rewriteResponse = defaultRewriteEnabled,
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
                     rewriteRemediable = config.defaultHookRewriteRemediable,
                 )
@@ -131,33 +132,20 @@ object PIBLoggerService : IPIBService.Stub() {
 
         synchronized(configLock) {
             val appConfig = config.scope[callerPkg]
-            val hasScopedApps = config.scope.isNotEmpty()
-            val defaultRewriteEnabled = config.defaultHookRewriteEnabled
-            val appOverrideEnabled = appConfig?.let {
-                it.rewriteIntegrityResponseOverridden
-                        || it.rewriteIntegrityResponse
-                        || it.rewriteIntegrityErrorCode != config.defaultHookRewriteErrorCode
-                        || it.rewriteIntegrityErrorRemediable != config.defaultHookRewriteRemediable
-                        || !it.integrityLoggerEnabled
-            } == true
-
-            val resolvedRewriteResponse = if (appOverrideEnabled) {
-                appConfig.rewriteIntegrityResponse
-            } else {
-                defaultRewriteEnabled
-            }
-            val resolvedRewriteErrorCode = if (appOverrideEnabled) {
-                appConfig.rewriteIntegrityErrorCode
-            } else {
-                config.defaultHookRewriteErrorCode
-            }
-            val resolvedRewriteRemediable = if (appOverrideEnabled) {
-                appConfig.rewriteIntegrityErrorRemediable
-            } else {
-                config.defaultHookRewriteRemediable
+            if (appConfig == null) {
+                val defaultRewriteEnabled = config.defaultHookRewriteEnabled
+                return IntegrityPolicy(
+                    enabled = defaultRewriteEnabled,
+                    logRequest = true,
+                    logResponse = true,
+                    errorOnly = config.errorOnlyLog,
+                    rewriteResponse = defaultRewriteEnabled,
+                    rewriteErrorCode = config.defaultHookRewriteErrorCode,
+                    rewriteRemediable = config.defaultHookRewriteRemediable,
+                )
             }
 
-            if (appConfig == null && hasScopedApps && !defaultRewriteEnabled) {
+            if (!appConfig.interventionEnabled) {
                 return IntegrityPolicy(
                     enabled = false,
                     logRequest = true,
@@ -170,14 +158,14 @@ object PIBLoggerService : IPIBService.Stub() {
             }
 
             return IntegrityPolicy(
-                enabled = appConfig?.integrityLoggerEnabled ?: true,
+                enabled = true,
                 // Request/response logging is always enabled; only logger enable/error-only may filter output.
                 logRequest = true,
                 logResponse = true,
                 errorOnly = config.errorOnlyLog,
-                rewriteResponse = resolvedRewriteResponse,
-                rewriteErrorCode = resolvedRewriteErrorCode,
-                rewriteRemediable = resolvedRewriteRemediable,
+                rewriteResponse = appConfig.rewriteIntegrityResponse,
+                rewriteErrorCode = appConfig.rewriteIntegrityErrorCode,
+                rewriteRemediable = appConfig.rewriteIntegrityErrorRemediable,
             )
         }
     }

@@ -2,6 +2,7 @@ package icu.nullptr.playintegritybreak.service
 
 import android.os.Build
 import android.util.Log
+import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.JsonConfig
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.telemetry.TelemetryUploadScheduler
@@ -236,6 +237,7 @@ object ConfigManager {
         if (config.integrityModeMigrated) return
 
         config.scope.values.forEach { appConfig ->
+            appConfig.interventionEnabled = true
             appConfig.integrityLoggerEnabled = true
             appConfig.logIntegrityRequests = true
             appConfig.logIntegrityResponses = true
@@ -255,21 +257,24 @@ object ConfigManager {
         }
     }
 
-    private fun isRewriteOverridden(appConfig: JsonConfig.AppConfig): Boolean {
-        return appConfig.rewriteIntegrityResponseOverridden
-                || appConfig.rewriteIntegrityResponse
-                || appConfig.rewriteIntegrityErrorCode != config.defaultHookRewriteErrorCode
-                || appConfig.rewriteIntegrityErrorRemediable != config.defaultHookRewriteRemediable
-                || !appConfig.integrityLoggerEnabled
+    fun setDefaultRewriteConfig(enabled: Boolean, errorCode: Int, remediable: Boolean) {
+        config.defaultHookRewriteEnabled = enabled
+        config.defaultHookRewriteErrorCode = errorCode
+        config.defaultHookRewriteRemediable = remediable
+        saveConfig()
     }
 
     fun isLoggerEnabled(packageName: String): Boolean {
-        val appConfig = config.scope[packageName] ?: return config.defaultHookRewriteEnabled
-        return if (isRewriteOverridden(appConfig)) {
-            appConfig.rewriteIntegrityResponse
-        } else {
-            config.defaultHookRewriteEnabled
+        if (packageName == Constants.DEFAULT_APP_PACKAGE_NAME) {
+            return config.defaultHookRewriteEnabled
         }
+
+        val appConfig = config.scope[packageName] ?: return false
+        if (!appConfig.interventionEnabled) {
+            return false
+        }
+
+        return appConfig.rewriteIntegrityResponse
     }
 
     fun getAppConfig(packageName: String): JsonConfig.AppConfig? {
