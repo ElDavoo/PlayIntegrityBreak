@@ -25,12 +25,6 @@ if (localPropertiesFile.exists()) {
 val ciBuild = providers.environmentVariable("CI").isPresent
 val officialBuild by extra(localProperties.getProperty("officialBuild", "false") == "true")
 
-@Suppress("unused")
-val crowdinProjectId: String by extra(localProperties.getProperty("crowdinProjectId", ""))
-
-@Suppress("unused")
-val crowdinApiKey: String by extra(localProperties.getProperty("crowdinApiKey", ""))
-
 fun getUncommittedSuffix(): String {
     if (officialBuild) return ""
 

@@ -32,3 +32,7 @@ nix develop -c ./gradlew :common:assembleDebug :xposed:assembleDebug :app:assemb
 ```
 
 The shell uses Android SDK components from nixpkgs by default and only falls back to a host SDK when the required platform/build-tools are already present.
+
+## Translation
+
+Thanks to Crowdin contributors for the original project!

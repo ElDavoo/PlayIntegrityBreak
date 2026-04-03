@@ -48,7 +48,7 @@ Selain itu, beberapa aplikasi menggunakan berbagai celah untuk memperoleh daftar
 Modul ini dapat berfungsi sebagai modul Xposed untuk menyembunyikan aplikasi atau menolak permintaan daftar aplikasi.
 
 ## Saya ingin berkontribusi dalam terjemahan
-Anda dapat berkontribusi dalam penerjemahan [Di Sini](https://crowdin.com/project/frknkrc44-pib).
+Anda dapat berkontribusi dalam penerjemahan [Di Sini](https://github.com/frknkrc44/PIB/tree/master/app/src/main/res).
 
 ## Catatan pembaruan
 [Referensi ke halaman commit](https://github.com/frknkrc44/PIB/commits)  

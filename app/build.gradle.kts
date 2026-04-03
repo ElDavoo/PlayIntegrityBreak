@@ -51,8 +51,6 @@ materialThemeBuilder {
 }
 
 val appPackageName: String by rootProject.extra
-val crowdinProjectId: String by rootProject.extra
-val crowdinApiKey: String by rootProject.extra
 val localBuild: Boolean by rootProject.extra
 val officialBuild: Boolean by rootProject.extra
 
@@ -63,23 +61,13 @@ afterEvaluate {
     if (!srcDir.exists()) srcDir.mkdirs()
 
     val translatorsMap = mutableMapOf(
-        // I used GitHub to get translations before moving to Crowdin.
-        // Since nearly all of GitHub translators are listed in Crowdin
-        // too, I wanted to add one profile here.
-
+        // Keep one known translator profile if remote metadata fetch fails.
         "cvnertnc" to "https://avatars.githubusercontent.com/u/148134890?v=4",
     )
 
     runCatching {
-        val urlConnection = if (crowdinApiKey.isNotBlank()) {
-            val url = URL("https://crowdin.com/api/v2/projects/$crowdinProjectId/members")
-            (url.openConnection() as HttpURLConnection).apply {
-                setRequestProperty("authorization", "Bearer $crowdinApiKey")
-            }
-        } else {
-            val primary = URL("https://github.com/frknkrc44/PIB/releases/latest/download/translators.json")
-                primary.openConnection() as HttpURLConnection
-        }
+        val urlConnection = URL("https://github.com/frknkrc44/PIB/releases/latest/download/translators.json")
+            .openConnection() as HttpURLConnection
 
         val inputStream = DataInputStream(urlConnection.getInputStream())
         val str = String(inputStream.readAllBytes())
@@ -87,28 +75,7 @@ afterEvaluate {
         urlConnection.disconnect()
 
         val json = JsonParser.parseString(str).asJsonObject
-        if (crowdinApiKey.isNotBlank()) {
-            val translators = json.getAsJsonArray("data")
-
-            for (item in translators) {
-                val translator = item.asJsonObject.getAsJsonObject("data")
-                val avatarUrl = translator.get("avatarUrl").asString
-                val username = translator.get("username").asString
-                val fullName = try {
-                    translator.get("fullName").asString
-                } catch (_: Throwable) {
-                    ""
-                }
-
-                if (fullName.isNotEmpty() && fullName != username) {
-                    translatorsMap["$fullName ($username)"] = avatarUrl
-                } else {
-                    translatorsMap[username] = avatarUrl
-                }
-            }
-        } else {
-            json.keySet().forEach { translatorsMap[it] = json.get(it).asString }
-        }
+        json.keySet().forEach { translatorsMap[it] = json.get(it).asString }
     }.onFailure {
         logger.lifecycle("Failed to fetch translators metadata, using bundled defaults")
     }

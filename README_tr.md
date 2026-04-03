@@ -48,7 +48,7 @@ Ayrıca bazı uygulamalar uygulama listenizi ele geçirmek, parmak izi verileri 
 Bu modül, uygulamaları gizlemek veya uygulama listesi isteklerini reddetmek için çalışabilen bir Xposed modülüdür.
 
 ## Çeviriye katkıda bulunmak istiyorum
-[Buraya tıklayarak](https://crowdin.com/project/frknkrc44-pib) çeviriye katkıda bulunabilirsiniz. 
+[Buraya tıklayarak](https://github.com/frknkrc44/PIB/tree/master/app/src/main/res) çeviriye katkıda bulunabilirsiniz. 
 
 ## Güncelleme detayları
 [Commit sayfası](https://github.com/frknkrc44/PIB/commits)  

@@ -48,7 +48,7 @@
 このモジュールは、アプリを非表示にしたり、アプリリストの要求を拒否したりする Xposed モジュールとして機能します。
 
 ## 翻訳に貢献する
-[こちら](https://crowdin.com/project/frknkrc44-pib)から翻訳に貢献することができます。
+[こちら](https://github.com/frknkrc44/PIB/tree/master/app/src/main/res)から翻訳に貢献することができます。
 
 ## 更新ログ
 [コミットページへの参照](https://github.com/frknkrc44/PIB/commits)  

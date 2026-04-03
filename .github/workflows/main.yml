@@ -51,8 +51,6 @@ jobs:
           echo keyAlias='${{ secrets.ALIAS }}' >> local.properties
           echo keyPassword='${{ secrets.ALIAS_KEY_PASSWORD }}' >> local.properties
           echo fileDir=`pwd`/key.jks >> local.properties
-          echo crowdinProjectId='${{ secrets.CROWDIN_PROJECT_ID }}' >> local.properties
-          echo crowdinApiKey='${{ secrets.CROWDIN_LIST_MEMBERS_API_TOKEN }}' >> local.properties
           echo "${{ secrets.KEY_STORE }}" | base64 --decode > key.jks
 
       - name: Cache gradle
