@@ -16,8 +16,6 @@ data class JsonConfig(
     var maxLogSize: Int = 512,
     var telemetryEnabled: Boolean = false,
     var telemetryBatchSize: Int = 100,
-    var telemetryUploadIntervalMinutes: Int = 30,
-    var telemetryWifiOnly: Boolean = false,
     var telemetryMaxAttempts: Int = 8,
     var telemetryBaseRetrySeconds: Int = 30,
     var telemetryLeaseDurationSeconds: Int = 120,

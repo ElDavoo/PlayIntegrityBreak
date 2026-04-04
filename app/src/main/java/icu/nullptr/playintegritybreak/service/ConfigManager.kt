@@ -130,20 +130,6 @@ object ConfigManager {
             saveConfig()
         }
 
-    var telemetryUploadIntervalMinutes: Int
-        get() = config.telemetryUploadIntervalMinutes.coerceIn(15, 1440)
-        set(value) {
-            config.telemetryUploadIntervalMinutes = value.coerceIn(15, 1440)
-            saveConfig()
-        }
-
-    var telemetryWifiOnly: Boolean
-        get() = config.telemetryWifiOnly
-        set(value) {
-            config.telemetryWifiOnly = value
-            saveConfig()
-        }
-
     var telemetryMaxAttempts: Int
         get() = config.telemetryMaxAttempts.coerceIn(1, 20)
         set(value) {

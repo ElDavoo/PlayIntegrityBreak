@@ -19,6 +19,7 @@ object TelemetryUploadScheduler {
     private const val UNIQUE_PERIODIC_WORK = "telemetry.periodic.upload"
     private const val UNIQUE_IMMEDIATE_WORK = "telemetry.immediate.upload"
     private const val INPUT_REASON = "reason"
+    private const val TELEMETRY_SYNC_INTERVAL_MINUTES = 300L
 
     fun syncSchedule(context: Context = pibApp) {
         val workManager = WorkManager.getInstance(context)
@@ -29,7 +30,7 @@ object TelemetryUploadScheduler {
         }
 
         val request = PeriodicWorkRequestBuilder<TelemetryUploadWorker>(
-            ConfigManager.telemetryUploadIntervalMinutes.toLong(),
+            TELEMETRY_SYNC_INTERVAL_MINUTES,
             TimeUnit.MINUTES,
         ).setConstraints(createConstraints())
             .setBackoffCriteria(
@@ -73,10 +74,8 @@ object TelemetryUploadScheduler {
 
     private fun createConstraints(): Constraints {
         return Constraints.Builder()
-            .setRequiredNetworkType(
-                if (ConfigManager.telemetryWifiOnly) NetworkType.UNMETERED
-                else NetworkType.CONNECTED
-            )
+            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .setRequiresCharging(true)
             .build()
     }
 }

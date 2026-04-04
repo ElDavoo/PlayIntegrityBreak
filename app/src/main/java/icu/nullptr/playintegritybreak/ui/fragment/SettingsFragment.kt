@@ -100,7 +100,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "disableUpdate" -> PrefManager.disableUpdate
                 "packageQueryWorkaround" -> ConfigManager.packageQueryWorkaround
                 "telemetryEnabled" -> ConfigManager.telemetryEnabled
-                "telemetryWifiOnly" -> ConfigManager.telemetryWifiOnly
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -112,7 +111,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "darkTheme" -> PrefManager.darkTheme.toString()
                 "maxLogSize" -> ConfigManager.maxLogSize.toString()
                 "telemetryBatchSize" -> ConfigManager.telemetryBatchSize.toString()
-                "telemetryUploadIntervalMinutes" -> ConfigManager.telemetryUploadIntervalMinutes.toString()
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -141,7 +139,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "skipSystemAppDataIsolation" -> ConfigManager.skipSystemAppDataIsolation = value
                 "packageQueryWorkaround" -> ConfigManager.packageQueryWorkaround = value
                 "telemetryEnabled" -> ConfigManager.telemetryEnabled = value
-                "telemetryWifiOnly" -> ConfigManager.telemetryWifiOnly = value
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -153,7 +150,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "darkTheme" -> PrefManager.darkTheme = value!!.toInt()
                 "maxLogSize" -> ConfigManager.maxLogSize = value!!.toInt()
                 "telemetryBatchSize" -> ConfigManager.telemetryBatchSize = value?.toIntOrNull() ?: 100
-                "telemetryUploadIntervalMinutes" -> ConfigManager.telemetryUploadIntervalMinutes = value?.toIntOrNull() ?: 30
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -273,14 +269,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 }
             }
 
-            findPreference<Preference>("translation")?.let {
-                it.summary = getString(R.string.settings_translate_summary, getString(R.string.app_name))
-                it.setOnPreferenceClickListener {
-                    startActivity(Intent(Intent.ACTION_VIEW, Constants.TRANSLATE_URL.toUri()))
-                    true
-                }
-            }
-
             findPreference<SwitchPreferenceCompat>("followSystemAccent")?.also {
                 it.isVisible = DynamicColors.isDynamicColorAvailable()
 
@@ -351,26 +339,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 it.inputType = InputType.TYPE_CLASS_NUMBER
             }
 
-            findPreference<EditTextPreference>("telemetryUploadIntervalMinutes")?.setOnBindEditTextListener {
-                it.inputType = InputType.TYPE_CLASS_NUMBER
-            }
-
             findPreference<EditTextPreference>("telemetryBatchSize")?.setOnPreferenceChangeListener { _, value ->
                 val size = (value as? String)?.toIntOrNull() ?: return@setOnPreferenceChangeListener false
                 if (size in 1..500) {
                     true
                 } else {
                     showToast(R.string.settings_telemetry_batch_size_invalid)
-                    false
-                }
-            }
-
-            findPreference<EditTextPreference>("telemetryUploadIntervalMinutes")?.setOnPreferenceChangeListener { _, value ->
-                val minutes = (value as? String)?.toIntOrNull() ?: return@setOnPreferenceChangeListener false
-                if (minutes in 15..1440) {
-                    true
-                } else {
-                    showToast(R.string.settings_telemetry_upload_interval_invalid)
                     false
                 }
             }

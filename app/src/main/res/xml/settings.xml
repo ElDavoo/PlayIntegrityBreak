@@ -8,11 +8,6 @@
             android:key="language"
             android:summary="%s"
             android:title="@string/settings_language" />
-        <Preference
-            android:icon="@drawable/outline_translate_24"
-            android:key="translation"
-            app:singleLineTitle="false"
-            android:title="@string/settings_translate" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_theme">
@@ -147,23 +142,5 @@
             android:title="@string/settings_telemetry_batch_size"
             android:dialogMessage="@string/settings_telemetry_batch_size_summary"
             app:useSimpleSummaryProvider="true" />
-
-        <EditTextPreference
-            android:icon="@drawable/outline_update_disabled_24"
-            android:key="telemetryUploadIntervalMinutes"
-            android:defaultValue="30"
-            android:dependency="telemetryEnabled"
-            app:singleLineTitle="false"
-            android:title="@string/settings_telemetry_upload_interval"
-            android:dialogMessage="@string/settings_telemetry_upload_interval_summary"
-            app:useSimpleSummaryProvider="true" />
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/baseline_apps_24"
-            android:key="telemetryWifiOnly"
-            android:dependency="telemetryEnabled"
-            app:singleLineTitle="false"
-            android:title="@string/settings_telemetry_wifi_only"
-            android:summary="@string/settings_telemetry_wifi_only_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

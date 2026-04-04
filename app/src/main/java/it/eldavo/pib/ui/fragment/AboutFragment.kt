@@ -68,7 +68,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                 linkTelegram.background.alpha = 0xAA
             }
 
-            setOnClickUrl(linkGithub, "https://github.com/frknkrc44/PIB")
+            setOnClickUrl(linkGithub, "https://github.com/ElDavoo/PlayIntegrityBreak")
             setOnClickUrl(linkTelegram, "https://t.me/playintegritybreak")
 
             appInfoTop.backgroundTintList = tint
