@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 12px;
+      color: #202124;
+      background: #ffffff;
+      line-height: 1.35;
+    }
+    h2 {
+      margin: 16px 0 8px;
+      font-size: 16px;
+    }
+    p {
+      margin: 8px 0;
+      font-size: 13px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      margin: 8px 0 16px;
+    }
+    table {
+      border-collapse: collapse;
+      min-width: 760px;
+      width: 100%;
+      font-size: 12px;
+    }
+    th, td {
+      border-bottom: 1px solid #eceff1;
+      padding: 8px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #f5f7fa;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    code {
+      white-space: nowrap;
+      font-family: monospace;
+      background: #f1f3f4;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    tbody tr {
+      cursor: pointer;
+    }
+    tbody tr:hover {
+      background: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+  <p>Use this as a quick reference when selecting an injected Integrity error code.</p>
+
+  <h2>IntegrityErrorCode</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Error</th>
+          <th>Name</th>
+          <th>Retryable</th>
+          <th>Meaning / Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Java classic</td><td>-1</td><td><code>API_NOT_AVAILABLE</code></td><td>No</td><td>Play Store/API setup issue. Enable API and update Play Store.</td></tr>
+        <tr><td>Java classic</td><td>-2</td><td><code>PLAY_STORE_NOT_FOUND</code></td><td>No</td><td>Play Store missing. Install or enable Play Store.</td></tr>
+        <tr><td>Java classic</td><td>-3</td><td><code>NETWORK_ERROR</code></td><td>Yes</td><td>Connectivity issue. Retry with backoff.</td></tr>
+        <tr><td>Java classic</td><td>-4</td><td><code>PLAY_STORE_ACCOUNT_NOT_FOUND</code></td><td>No</td><td>Classic-only on old Play Store. Update and sign in.</td></tr>
+        <tr><td>Java classic</td><td>-5</td><td><code>APP_NOT_INSTALLED</code></td><td>No</td><td>App identity/install mismatch. Treat as failed checks.</td></tr>
+        <tr><td>Java classic</td><td>-6</td><td><code>PLAY_SERVICES_NOT_FOUND</code></td><td>No</td><td>Play Services missing/outdated. Install/update/enable.</td></tr>
+        <tr><td>Java classic</td><td>-7</td><td><code>APP_UID_MISMATCH</code></td><td>No</td><td>UID mismatch. Treat as failed checks.</td></tr>
+        <tr><td>Java classic</td><td>-8</td><td><code>TOO_MANY_REQUESTS</code></td><td>Yes</td><td>Throttled/quota exceeded. Retry with backoff.</td></tr>
+        <tr><td>Java classic</td><td>-9</td><td><code>CANNOT_BIND_TO_SERVICE</code></td><td>No</td><td>Play Store bind failed. Update Play Store.</td></tr>
+        <tr><td>Java classic</td><td>-10</td><td><code>NONCE_TOO_SHORT</code></td><td>No</td><td>Nonce under minimum size.</td></tr>
+        <tr><td>Java classic</td><td>-11</td><td><code>NONCE_TOO_LONG</code></td><td>No</td><td>Nonce over maximum size.</td></tr>
+        <tr><td>Java classic</td><td>-12</td><td><code>GOOGLE_SERVER_UNAVAILABLE</code></td><td>Yes</td><td>Server-side transient error. Retry with backoff.</td></tr>
+        <tr><td>Java classic</td><td>-13</td><td><code>NONCE_IS_NOT_BASE64</code></td><td>No</td><td>Nonce format invalid.</td></tr>
+        <tr><td>Java classic</td><td>-14</td><td><code>PLAY_STORE_VERSION_OUTDATED</code></td><td>No</td><td>Update Play Store.</td></tr>
+        <tr><td>Java classic</td><td>-15</td><td><code>PLAY_SERVICES_VERSION_OUTDATED</code></td><td>No</td><td>Update Play Services.</td></tr>
+        <tr><td>Java classic</td><td>-16</td><td><code>CLOUD_PROJECT_NUMBER_IS_INVALID</code></td><td>No</td><td>Wrong cloud project number.</td></tr>
+        <tr><td>Java classic</td><td>-17</td><td><code>CLIENT_TRANSIENT_ERROR</code></td><td>Yes</td><td>Classic-only transient client error.</td></tr>
+        <tr><td>Java classic</td><td>-100</td><td><code>INTERNAL_ERROR</code></td><td>Yes</td><td>Unknown internal error. Retry with backoff.</td></tr>
+        <tr><td>Native classic</td><td>-100</td><td><code>INTEGRITY_INTERNAL_ERROR</code></td><td>Yes</td><td>Unknown internal error.</td></tr>
+        <tr><td>Native classic</td><td>-101</td><td><code>INTEGRITY_INITIALIZATION_NEEDED</code></td><td>No</td><td>Initialize manager first.</td></tr>
+        <tr><td>Native classic</td><td>-102</td><td><code>INTEGRITY_INITIALIZATION_FAILED</code></td><td>Yes</td><td>Initialization failure; retry with backoff.</td></tr>
+        <tr><td>Native classic</td><td>-103</td><td><code>INTEGRITY_INVALID_ARGUMENT</code></td><td>No</td><td>Invalid API argument.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>StandardIntegrityErrorCode</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Error</th>
+          <th>Name</th>
+          <th>Retryable</th>
+          <th>Meaning / Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Java standard</td><td>-1</td><td><code>API_NOT_AVAILABLE</code></td><td>No</td><td>Play Store/API setup issue.</td></tr>
+        <tr><td>Java standard</td><td>-2</td><td><code>PLAY_STORE_NOT_FOUND</code></td><td>No</td><td>Play Store missing.</td></tr>
+        <tr><td>Java standard</td><td>-3</td><td><code>NETWORK_ERROR</code></td><td>Yes</td><td>Connectivity issue. Retry with backoff.</td></tr>
+        <tr><td>Java standard</td><td>-5</td><td><code>APP_NOT_INSTALLED</code></td><td>No</td><td>App identity/install mismatch.</td></tr>
+        <tr><td>Java standard</td><td>-6</td><td><code>PLAY_SERVICES_NOT_FOUND</code></td><td>No</td><td>Play Services missing/outdated.</td></tr>
+        <tr><td>Java standard</td><td>-7</td><td><code>APP_UID_MISMATCH</code></td><td>No</td><td>UID mismatch.</td></tr>
+        <tr><td>Java standard</td><td>-8</td><td><code>TOO_MANY_REQUESTS</code></td><td>Yes</td><td>Throttled/quota exceeded.</td></tr>
+        <tr><td>Java standard</td><td>-9</td><td><code>CANNOT_BIND_TO_SERVICE</code></td><td>No</td><td>Play Store bind failed.</td></tr>
+        <tr><td>Java standard</td><td>-12</td><td><code>GOOGLE_SERVER_UNAVAILABLE</code></td><td>Yes</td><td>Server-side transient error.</td></tr>
+        <tr><td>Java standard</td><td>-14</td><td><code>PLAY_STORE_VERSION_OUTDATED</code></td><td>No</td><td>Update Play Store.</td></tr>
+        <tr><td>Java standard</td><td>-15</td><td><code>PLAY_SERVICES_VERSION_OUTDATED</code></td><td>No</td><td>Update Play Services.</td></tr>
+        <tr><td>Java standard</td><td>-16</td><td><code>CLOUD_PROJECT_NUMBER_IS_INVALID</code></td><td>No</td><td>Wrong cloud project number.</td></tr>
+        <tr><td>Java standard</td><td>-17</td><td><code>REQUEST_HASH_TOO_LONG</code></td><td>No</td><td>requestHash must be shorter than 500 chars.</td></tr>
+        <tr><td>Java standard</td><td>-18</td><td><code>CLIENT_TRANSIENT_ERROR</code></td><td>Yes</td><td>Standard-only transient client error.</td></tr>
+        <tr><td>Java standard</td><td>-19</td><td><code>INTEGRITY_TOKEN_PROVIDER_INVALID</code></td><td>No</td><td>Request a new token provider.</td></tr>
+        <tr><td>Java standard</td><td>-100</td><td><code>INTERNAL_ERROR</code></td><td>Yes</td><td>Unknown internal error.</td></tr>
+        <tr><td>Native standard</td><td>-100</td><td><code>STANDARD_INTEGRITY_INTERNAL_ERROR</code></td><td>Yes</td><td>Unknown internal error.</td></tr>
+        <tr><td>Native standard</td><td>-101</td><td><code>STANDARD_INTEGRITY_INITIALIZATION_NEEDED</code></td><td>No</td><td>Call <code>StandardIntegrityManager_init()</code> first.</td></tr>
+        <tr><td>Native standard</td><td>-102</td><td><code>STANDARD_INTEGRITY_INITIALIZATION_FAILED</code></td><td>Yes</td><td>Initialization failure; retry with backoff.</td></tr>
+        <tr><td>Native standard</td><td>-103</td><td><code>STANDARD_INTEGRITY_INVALID_ARGUMENT</code></td><td>No</td><td>Invalid API argument.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener("click", function (event) {
+      var row = event.target.closest("tbody tr");
+      if (!row) return;
+      var cells = row.querySelectorAll("td");
+      if (!cells || cells.length < 2) return;
+      var code = (cells[1].textContent || "").trim();
+      if (!code) return;
+      window.location.href = "pibcopy://copy?value=" + encodeURIComponent(code);
+    });
+  </script>
+</body>
+</html>

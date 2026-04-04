@@ -291,6 +291,11 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             findPreference<EditTextPreference>("rewriteIntegrityErrorCode")?.setOnBindEditTextListener {
                 it.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_SIGNED
             }
+            findPreference<Preference>("rewriteIntegrityErrorCodeReference")?.setOnPreferenceClickListener {
+                IntegrityErrorCodeReferenceDialogFragment()
+                    .show(parentFragmentManager, "IntegrityErrorCodeReferenceDialog")
+                true
+            }
             if (isDefaultMode) {
                 findPreference<Preference>("enableIntervention")?.isVisible = false
                 findPreference<Preference>("deliverSyntheticResponse")?.isVisible = false

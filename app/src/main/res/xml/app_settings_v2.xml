@@ -47,6 +47,13 @@
             app:useSimpleSummaryProvider="true"
             android:title="@string/app_rewrite_integrity_error_code"
             android:dialogMessage="@string/app_rewrite_integrity_error_code_desc" />
+        <Preference
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="rewriteIntegrityErrorCodeReference"
+            android:dependency="enableLogger"
+            app:singleLineTitle="false"
+            android:title="@string/app_rewrite_integrity_error_code_reference"
+            android:summary="@string/app_rewrite_integrity_error_code_reference_desc" />
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_bug_report_24"
             android:key="rewriteIntegrityErrorRemediable"

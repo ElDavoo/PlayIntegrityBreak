@@ -105,8 +105,12 @@
     <string name="app_delay_synthetic_response_desc">Adds a random delay between 300 and 2000 ms before delivering synthetic callbacks. Disabled by default.</string>
     <string name="app_rewrite_integrity_error_code">Rewrite error code</string>
     <string name="app_rewrite_integrity_error_code_desc">Used in rewritten Integrity responses for this app.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Error code reference</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Open a quick table of IntegrityErrorCode and StandardIntegrityErrorCode values.</string>
     <string name="app_rewrite_integrity_error_remediable">Rewrite error remediable flag</string>
     <string name="app_rewrite_integrity_error_remediable_desc">Controls the is.error.remediable flag in rewritten responses.</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integrity error code reference</string>
+    <string name="app_rewrite_integrity_error_code_copied">Copied error code: %1$s</string>
     <string name="app_template_config">Logger profile</string>
     <string name="app_choose_template">Choose logging profile</string>
     <string name="app_choose_preset">Choose recommended profile</string>

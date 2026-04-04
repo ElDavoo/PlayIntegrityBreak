@@ -4,7 +4,7 @@ Fix Google Play Integrity... by BREAKING it!
 
 ## What does PIB do?
 
-PIB is an Xposed module that logs and optionally intercepts Play Integrity service requests/responses activity per target app.
+PIB is an Xposed module that logs, and optionally intercepts, Play Integrity service requests/responses activity per target app.
 
 ### Why do we want to do this? (Project vision)
 
@@ -29,6 +29,9 @@ From
 
 What are we exploiting here is that many apps do not actually treat the failure as "no integrity", OR that they only require a single successful response during the first launch and/or during login.  
 
+Why?  
+Well, put yourself in the shoes of a bank. You want to use Play Integrity to protect your app, but you also don't want to lock out users when Google servers are down. So what do you do? You basically go down whenever Google goes down?  
+
 In other words: Depending on your apps, you might only want to have a working PI with unrevoked keybox during your app's setup. After that, you don't need Play Integrity to work at all.  
 
 #### 2. Reduce number of Play Integrity requests
@@ -42,6 +45,29 @@ By intercepting requests, PIB can reduce the number of requests sent to the Play
 This app includes optional opt-in telemetry that sends anonymized data about Play Integrity usage to a central server.  
 This data can be used to understand how apps use Play Integrity.  
 The long-term goal is to create and maintain a database of apps and their Play Integrity usage patterns.  
+
+## What does PIB NOT do?
+
+PIB does NOT help you to:
+
+- Hide root and modifications
+- Get a working Keybox
+- Help you get a BASIC, DEVICE or STRONG verdict.
+
+PIB starts with the assumption that you already have a working root hiding mechanism, and that you get a DEVICE verdict (at least for setup time).  
+
+## How to correct the weaknesses that PIB exploits?
+
+### 1. Google: Authenticate errors
+
+This project exploits the fact that Play Integrity errors are not authenticated at all. This makes sense for a few errors (unreachable network, internal error...), but some errors (rate limit, server reachable but unhealthy...) could be authenticated (maybe with a different set of generic keys).
+
+### 2. Developers: Treat errors as "no integrity"
+
+As Google says, implement PI correctly and treat errors as "no integrity".  
+Log out users when you get an error.  
+You chose to lock-in to Google, deal with the consequences.  
+Maybe you can not use it and let us live in peace?  
 
 ## Build with Nix
 
@@ -61,10 +87,6 @@ nix develop -c ./gradlew :common:assembleDebug :xposed:assembleDebug :app:assemb
 
 The shell uses Android SDK components from nixpkgs by default and only falls back to a host SDK when the required platform/build-tools are already present.
 
-## Translation
-
-Thanks to Crowdin contributors for the original project!
-
 ## AI Policy
 
 This project has been vibe coded.  
@@ -78,3 +100,6 @@ This project is a fork of frknkrc44/HMA-OSS , which is a very good project.
 Thank you frknkrc44 and contributors!    
 This is why this project is working nicely: It has a solid base.  
 
+### Translation
+
+Thanks to Crowdin contributors for the original project!
