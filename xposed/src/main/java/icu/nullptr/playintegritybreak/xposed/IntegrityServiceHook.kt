@@ -293,7 +293,7 @@ object IntegrityServiceHook {
         }
 
         keys.forEach { key ->
-            val value = runCatching { bundle.get(key) }.getOrNull()
+            val value = runCatching { bundleGetAnyCompat(bundle, key) }.getOrNull()
             when (value) {
                 is Bundle -> {
                     XposedBridge.log(
@@ -345,6 +345,9 @@ object IntegrityServiceHook {
         }
     }
 
+    @Suppress("DEPRECATION")
+    private fun bundleGetAnyCompat(bundle: Bundle, key: String): Any? = bundle.get(key)
+
     private fun describeBundleValue(value: Any?): String {
         if (value == null) return "null"
         return when (value) {
@@ -368,7 +371,7 @@ object IntegrityServiceHook {
             // Fallback: scan all string values in bundle for a package-like token.
             runCatching {
                 bundle.keySet().forEach { key ->
-                    val value = bundle.get(key) as? String ?: return@forEach
+                    val value = bundle.getString(key) ?: return@forEach
                     if (packageNamePattern.matcher(value).matches()) {
                         return value
                     }

@@ -37,6 +37,13 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?textAppearanceBodyMedium" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/user_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?textAppearanceBodyMedium" />
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

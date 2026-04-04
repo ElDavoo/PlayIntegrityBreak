@@ -187,6 +187,7 @@
     <string name="statistics_window_24h">Last 24 hours</string>
     <string name="statistics_window_7d">Last 7 days</string>
     <string name="statistics_updated_at">Updated: %1$s</string>
+    <string name="statistics_user_id">User ID: %1$s</string>
     <string name="statistics_summary_title">Capture summary</string>
     <string name="statistics_summary_body">Total events: %1$d\nRequests: %2$d\nResponses: %3$d\nSuccessful responses: %4$d\nFailed responses: %5$d</string>
     <string name="statistics_queue_title">Telemetry queue</string>

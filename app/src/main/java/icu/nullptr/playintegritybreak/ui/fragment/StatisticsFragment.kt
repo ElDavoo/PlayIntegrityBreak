@@ -12,6 +12,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
@@ -54,6 +55,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             val updatedAt = if (stats.generatedAtMs > 0L) stats.generatedAtMs else System.currentTimeMillis()
             val updatedAtText = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(updatedAt))
             binding.updatedAt.text = getString(R.string.statistics_updated_at, updatedAtText)
+            binding.userId.text = getString(R.string.statistics_user_id, ConfigManager.userId)
             binding.summaryText.text = getString(
                 R.string.statistics_summary_body,
                 stats.totalEvents,
