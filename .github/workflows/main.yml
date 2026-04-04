@@ -106,6 +106,7 @@ jobs:
             ${{ steps.buildAll.outputs.releaseFile }}
             ${{ steps.buildAll.outputs.debugFile }}
           tag_name: pib-${{ steps.buildAll.outputs.versionNum }}
+          draft: true
 
       - name: Post to channel
         if: ${{ github.event_name != 'pull_request' && success() && github.ref == 'refs/heads/pib' }}
