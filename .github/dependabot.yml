@@ -1,0 +1,47 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: UTC
+    labels:
+      - dependencies
+      - gradle
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 10
+    groups:
+      gradle-build:
+        patterns:
+          - "org.gradle*"
+          - "com.android*"
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin*"
+          - "org.jetbrains*"
+      androidx:
+        patterns:
+          - "androidx*"
+      testing:
+        patterns:
+          - "junit*"
+          - "org.junit*"
+          - "org.mockito*"
+          - "org.robolectric*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: UTC
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 10
