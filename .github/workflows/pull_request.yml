@@ -64,7 +64,7 @@ jobs:
 
       - name: Upload debug
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.buildDebug.outputs.debugName }}
           path: "app/build/outputs/apk/debug/*.apk"
