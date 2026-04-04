@@ -70,6 +70,9 @@ class ServiceProvider : ContentProvider() {
         val timestampMs = extras?.getLong(Constants.PROVIDER_EXTRA_EVENT_TIMESTAMP_MS)
             ?: System.currentTimeMillis()
         val packageName = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_PACKAGE)?.trim().orEmpty()
+        val playIntegrityVersionMajor = extras?.getIntOrNull(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MAJOR)
+        val playIntegrityVersionMinor = extras?.getIntOrNull(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MINOR)
+        val playIntegrityVersionPatch = extras?.getIntOrNull(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_PATCH)
         val eventType = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_TYPE)?.trim().orEmpty()
         val source = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_SOURCE)?.trim().orEmpty()
 
@@ -106,6 +109,9 @@ class ServiceProvider : ContentProvider() {
         val stored = AppIntegrityEventStore.appendPublishedEvent(
             timestampMs = timestampMs,
             packageName = packageName,
+            playIntegrityVersionMajor = playIntegrityVersionMajor,
+            playIntegrityVersionMinor = playIntegrityVersionMinor,
+            playIntegrityVersionPatch = playIntegrityVersionPatch,
             eventType = eventType,
             success = success,
             errorCode = errorCode,
@@ -116,6 +122,11 @@ class ServiceProvider : ContentProvider() {
         return Bundle().apply {
             putBoolean(Constants.PROVIDER_RESULT_OK, stored)
         }
+    }
+
+    private fun Bundle.getIntOrNull(key: String): Int? {
+        if (!containsKey(key)) return null
+        return getInt(key)
     }
 
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {

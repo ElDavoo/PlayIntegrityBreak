@@ -16,12 +16,15 @@ import java.util.UUID
 
 object AppIntegrityEventStore {
     private const val DB_NAME = "integrity_events.db"
-    private const val DB_VERSION = 2
+    private const val DB_VERSION = 3
 
     private const val TABLE_EVENTS = "events"
     private const val COL_ID = "_id"
     private const val COL_TS = "ts"
     private const val COL_PACKAGE = "package_name"
+    private const val COL_PLAY_INTEGRITY_VERSION_MAJOR = "play_integrity_version_major"
+    private const val COL_PLAY_INTEGRITY_VERSION_MINOR = "play_integrity_version_minor"
+    private const val COL_PLAY_INTEGRITY_VERSION_PATCH = "play_integrity_version_patch"
     private const val COL_EVENT_TYPE = "event_type"
     private const val COL_SUCCESS = "success"
     private const val COL_ERROR_CODE = "error_code"
@@ -66,6 +69,9 @@ object AppIntegrityEventStore {
         recordResponse(
             app = pibApp,
             packageName = packageName,
+            playIntegrityVersionMajor = null,
+            playIntegrityVersionMinor = null,
+            playIntegrityVersionPatch = null,
             success = success,
             errorCode = errorCode,
             retriable = retriable,
@@ -76,6 +82,9 @@ object AppIntegrityEventStore {
     fun appendPublishedEvent(
         timestampMs: Long,
         packageName: String,
+        playIntegrityVersionMajor: Int?,
+        playIntegrityVersionMinor: Int?,
+        playIntegrityVersionPatch: Int?,
         eventType: String,
         success: Boolean?,
         errorCode: Int?,
@@ -89,6 +98,9 @@ object AppIntegrityEventStore {
         return insertEvent(
             app = pibApp,
             packageName = packageName,
+            playIntegrityVersionMajor = playIntegrityVersionMajor,
+            playIntegrityVersionMinor = playIntegrityVersionMinor,
+            playIntegrityVersionPatch = playIntegrityVersionPatch,
             eventType = eventType,
             success = success,
             errorCode = errorCode,
@@ -102,6 +114,9 @@ object AppIntegrityEventStore {
         insertEvent(
             app = app,
             packageName = packageName,
+            playIntegrityVersionMajor = null,
+            playIntegrityVersionMinor = null,
+            playIntegrityVersionPatch = null,
             eventType = EVENT_TYPE_REQUEST,
             success = null,
             errorCode = null,
@@ -113,6 +128,9 @@ object AppIntegrityEventStore {
     fun recordResponse(
         app: Application,
         packageName: String,
+        playIntegrityVersionMajor: Int?,
+        playIntegrityVersionMinor: Int?,
+        playIntegrityVersionPatch: Int?,
         success: Boolean,
         errorCode: Int?,
         retriable: Boolean?,
@@ -121,6 +139,9 @@ object AppIntegrityEventStore {
         insertEvent(
             app = app,
             packageName = packageName,
+            playIntegrityVersionMajor = playIntegrityVersionMajor,
+            playIntegrityVersionMinor = playIntegrityVersionMinor,
+            playIntegrityVersionPatch = playIntegrityVersionPatch,
             eventType = EVENT_TYPE_RESPONSE,
             success = success,
             errorCode = errorCode,
@@ -196,7 +217,7 @@ object AppIntegrityEventStore {
                 val selectedRows = mutableListOf<QueuedEvent>()
                 db.rawQuery(
                     """
-                    SELECT $COL_ID, $COL_TS, $COL_PACKAGE, $COL_EVENT_TYPE, $COL_SUCCESS, $COL_ERROR_CODE, $COL_RETRIABLE, $COL_SOURCE, $COL_TELEMETRY_ATTEMPT_COUNT
+                    SELECT $COL_ID, $COL_TS, $COL_PACKAGE, $COL_PLAY_INTEGRITY_VERSION_MAJOR, $COL_PLAY_INTEGRITY_VERSION_MINOR, $COL_PLAY_INTEGRITY_VERSION_PATCH, $COL_EVENT_TYPE, $COL_SUCCESS, $COL_ERROR_CODE, $COL_RETRIABLE, $COL_SOURCE, $COL_TELEMETRY_ATTEMPT_COUNT
                     FROM $TABLE_EVENTS
                     WHERE ($COL_TELEMETRY_STATE = ? OR $COL_TELEMETRY_STATE = ?)
                       AND $COL_TELEMETRY_NEXT_ATTEMPT_TS <= ?
@@ -214,12 +235,15 @@ object AppIntegrityEventStore {
                         val id = cursor.getLong(0)
                         val ts = cursor.getLong(1)
                         val packageName = cursor.getString(2)
-                        val eventType = cursor.getString(3)
-                        val success = if (cursor.isNull(4)) null else cursor.getInt(4) == 1
-                        val errorCode = if (cursor.isNull(5)) null else cursor.getInt(5)
-                        val retriable = if (cursor.isNull(6)) null else cursor.getInt(6) == 1
-                        val source = cursor.getString(7)
-                        val attemptCount = cursor.getInt(8)
+                        val playIntegrityVersionMajor = if (cursor.isNull(3)) null else cursor.getInt(3)
+                        val playIntegrityVersionMinor = if (cursor.isNull(4)) null else cursor.getInt(4)
+                        val playIntegrityVersionPatch = if (cursor.isNull(5)) null else cursor.getInt(5)
+                        val eventType = cursor.getString(6)
+                        val success = if (cursor.isNull(7)) null else cursor.getInt(7) == 1
+                        val errorCode = if (cursor.isNull(8)) null else cursor.getInt(8)
+                        val retriable = if (cursor.isNull(9)) null else cursor.getInt(9) == 1
+                        val source = cursor.getString(10)
+                        val attemptCount = cursor.getInt(11)
 
                         selectedRows += QueuedEvent(
                             id = id,
@@ -227,6 +251,9 @@ object AppIntegrityEventStore {
                                 id = id,
                                 timestampMs = ts,
                                 packageName = packageName,
+                                playIntegrityVersionMajor = playIntegrityVersionMajor,
+                                playIntegrityVersionMinor = playIntegrityVersionMinor,
+                                playIntegrityVersionPatch = playIntegrityVersionPatch,
                                 eventType = eventType,
                                 success = success,
                                 errorCode = errorCode,
@@ -490,6 +517,9 @@ object AppIntegrityEventStore {
     private fun insertEvent(
         app: Application,
         packageName: String,
+        playIntegrityVersionMajor: Int?,
+        playIntegrityVersionMinor: Int?,
+        playIntegrityVersionPatch: Int?,
         eventType: String,
         success: Boolean?,
         errorCode: Int?,
@@ -503,6 +533,9 @@ object AppIntegrityEventStore {
                 val now = timestampMs.coerceAtLeast(0L)
                 put(COL_TS, now)
                 put(COL_PACKAGE, packageName)
+                if (playIntegrityVersionMajor == null) putNull(COL_PLAY_INTEGRITY_VERSION_MAJOR) else put(COL_PLAY_INTEGRITY_VERSION_MAJOR, playIntegrityVersionMajor)
+                if (playIntegrityVersionMinor == null) putNull(COL_PLAY_INTEGRITY_VERSION_MINOR) else put(COL_PLAY_INTEGRITY_VERSION_MINOR, playIntegrityVersionMinor)
+                if (playIntegrityVersionPatch == null) putNull(COL_PLAY_INTEGRITY_VERSION_PATCH) else put(COL_PLAY_INTEGRITY_VERSION_PATCH, playIntegrityVersionPatch)
                 put(COL_EVENT_TYPE, eventType)
                 if (success == null) putNull(COL_SUCCESS) else put(COL_SUCCESS, if (success) 1 else 0)
                 if (errorCode == null) putNull(COL_ERROR_CODE) else put(COL_ERROR_CODE, errorCode)
@@ -528,6 +561,9 @@ object AppIntegrityEventStore {
                     $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                     $COL_TS INTEGER NOT NULL,
                     $COL_PACKAGE TEXT NOT NULL,
+                    $COL_PLAY_INTEGRITY_VERSION_MAJOR INTEGER,
+                    $COL_PLAY_INTEGRITY_VERSION_MINOR INTEGER,
+                    $COL_PLAY_INTEGRITY_VERSION_PATCH INTEGER,
                     $COL_EVENT_TYPE TEXT NOT NULL,
                     $COL_SUCCESS INTEGER,
                     $COL_ERROR_CODE INTEGER,
@@ -573,6 +609,12 @@ object AppIntegrityEventStore {
                     WHERE $COL_TELEMETRY_NEXT_ATTEMPT_TS = 0
                     """.trimIndent()
                 )
+            }
+
+            if (oldVersion < 3) {
+                addColumnIfMissing(db, COL_PLAY_INTEGRITY_VERSION_MAJOR, "INTEGER")
+                addColumnIfMissing(db, COL_PLAY_INTEGRITY_VERSION_MINOR, "INTEGER")
+                addColumnIfMissing(db, COL_PLAY_INTEGRITY_VERSION_PATCH, "INTEGER")
             }
 
             createIndexes(db)

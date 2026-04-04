@@ -32,6 +32,9 @@ object PIBLoggerService : IPIBService.Stub() {
     private const val EVENT_TYPE_REQUEST = "request"
     private const val EVENT_TYPE_RESPONSE = "response"
     private const val MAX_BUFFERED_EVENTS = 2_000
+    private const val PLAY_INTEGRITY_VERSION_MAJOR = "playcore.integrity.version.major"
+    private const val PLAY_INTEGRITY_VERSION_MINOR = "playcore.integrity.version.minor"
+    private const val PLAY_INTEGRITY_VERSION_PATCH = "playcore.integrity.version.patch"
 
     private val initialized = AtomicBoolean(false)
     private val heartbeatLoopStarted = AtomicBoolean(false)
@@ -87,6 +90,9 @@ object PIBLoggerService : IPIBService.Stub() {
     private data class PendingIntegrityEvent(
         val timestampMs: Long,
         val packageName: String,
+        val playIntegrityVersionMajor: Int?,
+        val playIntegrityVersionMinor: Int?,
+        val playIntegrityVersionPatch: Int?,
         val eventType: String,
         val success: Boolean?,
         val errorCode: Int?,
@@ -212,12 +218,20 @@ object PIBLoggerService : IPIBService.Stub() {
         }
     }
 
-    fun recordIntegrityRequest(callerPkg: String) {
+    fun recordIntegrityRequest(
+        callerPkg: String,
+        playIntegrityVersionMajor: Int?,
+        playIntegrityVersionMinor: Int?,
+        playIntegrityVersionPatch: Int?,
+    ) {
         touchHealthcheck()
         enqueuePendingEvent(
             PendingIntegrityEvent(
                 timestampMs = System.currentTimeMillis(),
                 packageName = callerPkg,
+                playIntegrityVersionMajor = playIntegrityVersionMajor,
+                playIntegrityVersionMinor = playIntegrityVersionMinor,
+                playIntegrityVersionPatch = playIntegrityVersionPatch,
                 eventType = EVENT_TYPE_REQUEST,
                 success = null,
                 errorCode = null,
@@ -229,6 +243,9 @@ object PIBLoggerService : IPIBService.Stub() {
 
     fun recordIntegrityResponse(
         callerPkg: String,
+        playIntegrityVersionMajor: Int?,
+        playIntegrityVersionMinor: Int?,
+        playIntegrityVersionPatch: Int?,
         success: Boolean,
         errorCode: Int?,
         retriable: Boolean?,
@@ -239,6 +256,9 @@ object PIBLoggerService : IPIBService.Stub() {
             PendingIntegrityEvent(
                 timestampMs = System.currentTimeMillis(),
                 packageName = callerPkg,
+                playIntegrityVersionMajor = playIntegrityVersionMajor,
+                playIntegrityVersionMinor = playIntegrityVersionMinor,
+                playIntegrityVersionPatch = playIntegrityVersionPatch,
                 eventType = EVENT_TYPE_RESPONSE,
                 success = success,
                 errorCode = errorCode,
@@ -303,6 +323,9 @@ object PIBLoggerService : IPIBService.Stub() {
                 val extras = Bundle().apply {
                     putLong(Constants.PROVIDER_EXTRA_EVENT_TIMESTAMP_MS, event.timestampMs)
                     putString(Constants.PROVIDER_EXTRA_EVENT_PACKAGE, event.packageName)
+                    event.playIntegrityVersionMajor?.let { putInt(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MAJOR, it) }
+                    event.playIntegrityVersionMinor?.let { putInt(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MINOR, it) }
+                    event.playIntegrityVersionPatch?.let { putInt(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_PATCH, it) }
                     putString(Constants.PROVIDER_EXTRA_EVENT_TYPE, event.eventType)
                     putString(Constants.PROVIDER_EXTRA_EVENT_SOURCE, event.source)
                     event.success?.let { putBoolean(Constants.PROVIDER_EXTRA_EVENT_SUCCESS, it) }
@@ -423,6 +446,11 @@ object PIBLoggerService : IPIBService.Stub() {
                 fromTimestampMs = fromTimestampMs.coerceAtLeast(0L),
             )
         )
+    }
+
+    private fun Bundle.getIntOrNull(key: String): Int? {
+        if (!containsKey(key)) return null
+        return getInt(key)
     }
 
     override fun dequeueTelemetryBatchJson(maxEvents: Int, leaseDurationMs: Long, staleInFlightMs: Long): String {
