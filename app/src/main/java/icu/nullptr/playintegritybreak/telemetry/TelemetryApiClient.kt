@@ -1,13 +1,11 @@
 package icu.nullptr.playintegritybreak.telemetry
 
-import android.os.Build
 import icu.nullptr.playintegritybreak.common.TelemetryBatchPayload
 import icu.nullptr.playintegritybreak.common.TelemetryEventPayload
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import it.eldavo.pib.BuildConfig
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -16,23 +14,13 @@ object TelemetryApiClient {
     private const val CONNECT_TIMEOUT_MS = 15_000
     private const val READ_TIMEOUT_MS = 15_000
     private const val SCHEMA_VERSION = 1
-    private const val TELEMETRY_ENDPOINT_URL = "http://127.0.0.1:8080/telemetry"
-
-    @Serializable
-    private data class TelemetryClientInfo(
-        val appVersionName: String,
-        val appVersionCode: Int,
-        val sdkInt: Int,
-        val device: String,
-        val model: String,
-    )
+    private const val TELEMETRY_ENDPOINT_URL = "https://www.davidepalma.it/pib/telemetry"
 
     @Serializable
     private data class TelemetryUploadRequest(
         val schemaVersion: Int,
         val batchId: String,
         val sentAtMs: Long,
-        val client: TelemetryClientInfo,
         val events: List<TelemetryEventPayload>,
     )
 
@@ -64,13 +52,6 @@ object TelemetryApiClient {
             schemaVersion = SCHEMA_VERSION,
             batchId = batch.batchId,
             sentAtMs = System.currentTimeMillis(),
-            client = TelemetryClientInfo(
-                appVersionName = BuildConfig.VERSION_NAME,
-                appVersionCode = BuildConfig.VERSION_CODE,
-                sdkInt = Build.VERSION.SDK_INT,
-                device = Build.DEVICE,
-                model = Build.MODEL,
-            ),
             events = batch.events,
         )
 
