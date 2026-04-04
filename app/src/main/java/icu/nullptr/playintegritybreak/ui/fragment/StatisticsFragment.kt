@@ -3,6 +3,11 @@ package icu.nullptr.playintegritybreak.ui.fragment
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import android.widget.HorizontalScrollView
+import android.widget.LinearLayout
+import android.widget.TableLayout
+import android.widget.TableRow
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import it.eldavo.pib.R
 import it.eldavo.pib.databinding.FragmentStatisticsBinding
+import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -65,37 +71,120 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 stats.queue.failed,
             )
 
-            binding.topPackagesHeader.text = getString(R.string.statistics_top_packages_header)
-            binding.topPackagesText.text = if (stats.topPackages.isEmpty()) {
-                getString(R.string.statistics_top_packages_empty)
+            renderTopPackages(stats.topPackages)
+        }
+    }
+
+    private fun renderTopPackages(packages: List<icu.nullptr.playintegritybreak.common.TelemetryPackageStat>) {
+        val table = binding.topPackagesTable
+        table.removeAllViews()
+
+        if (packages.isEmpty()) {
+            table.visibility = View.GONE
+            binding.topPackagesEmpty.visibility = View.VISIBLE
+            return
+        }
+
+        table.visibility = View.VISIBLE
+        binding.topPackagesEmpty.visibility = View.GONE
+
+        table.addView(createHeaderRow())
+        packages.forEachIndexed { index, stat ->
+            table.addView(createPackageRow(index + 1, stat))
+        }
+    }
+
+    private fun createHeaderRow(): TableRow {
+        return createTableRow(isHeader = true).apply {
+            addView(createCell("#", 0.7f, alignEnd = true, isHeader = true))
+            addView(createCell("Req", 1.0f, alignEnd = true, isHeader = true))
+            addView(createCell("Resp", 1.0f, alignEnd = true, isHeader = true))
+            addView(createCell("Err", 1.0f, alignEnd = true, isHeader = true))
+            addView(createCell("Ok%", 1.0f, alignEnd = true, isHeader = true))
+            addView(createCell("Package", 4.0f, alignEnd = false, isHeader = true))
+        }
+    }
+
+    private fun createPackageRow(rank: Int, stat: icu.nullptr.playintegritybreak.common.TelemetryPackageStat): TableRow {
+        val successRatio = if (stat.responseCount > 0) {
+            (((stat.responseCount - stat.errorCount).coerceAtLeast(0) * 100f) / stat.responseCount).toInt()
+        } else {
+            100
+        }
+        val appLabel = runCatching { PackageHelper.loadAppLabel(stat.packageName) }
+            .getOrDefault(getString(R.string.statistics_package_unknown_label))
+
+        return createTableRow(isHeader = false).apply {
+            addView(createCell(rank.toString(), 0.7f, alignEnd = true))
+            addView(createCell(stat.requestCount.toString(), 1.0f, alignEnd = true))
+            addView(createCell(stat.responseCount.toString(), 1.0f, alignEnd = true))
+            addView(createCell(stat.errorCount.toString(), 1.0f, alignEnd = true))
+            addView(createCell("$successRatio%", 1.0f, alignEnd = true))
+            addView(createPackageCell(stat.packageName, appLabel, 4.0f))
+        }
+    }
+
+    private fun createTableRow(isHeader: Boolean): TableRow {
+        return TableRow(requireContext()).apply {
+            layoutParams = TableLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            )
+            isClickable = false
+            isFocusable = false
+            if (isHeader) {
+                setPadding(0, 0, 0, 12)
             } else {
-                stats.topPackages.mapIndexed { index, stat ->
-                    val successRatio = if (stat.responseCount > 0) {
-                        (((stat.responseCount - stat.errorCount).coerceAtLeast(0) * 100f) / stat.responseCount).toInt()
-                    } else {
-                        100
-                    }
-                    val appLabel = runCatching { PackageHelper.loadAppLabel(stat.packageName) }
-                        .getOrDefault(getString(R.string.statistics_package_unknown_label))
-                    buildString {
-                        append(
-                            String.format(
-                                Locale.getDefault(),
-                                "%2d  %4d  %4d  %3d  %3d%%  %s",
-                                index + 1,
-                                stat.requestCount,
-                                stat.responseCount,
-                                stat.errorCount,
-                                successRatio,
-                                stat.packageName,
-                            )
-                        )
-                        append('\n')
-                        append("    ")
-                        append(appLabel)
-                    }
-                }.joinToString("\n\n")
+                setPadding(0, 8, 0, 8)
             }
+        }
+    }
+
+    private fun createCell(
+        text: String,
+        weight: Float,
+        alignEnd: Boolean,
+        isHeader: Boolean = false,
+    ): MaterialTextView {
+        return MaterialTextView(requireContext()).apply {
+            layoutParams = TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, weight).apply {
+                marginEnd = if (isHeader) 0 else 8
+            }
+            this.text = text
+            textAlignment = if (alignEnd) View.TEXT_ALIGNMENT_TEXT_END else View.TEXT_ALIGNMENT_TEXT_START
+            setTextAppearance(
+                if (isHeader) {
+                    com.google.android.material.R.style.TextAppearance_Material3_LabelMedium
+                } else {
+                    com.google.android.material.R.style.TextAppearance_Material3_BodyMedium
+                }
+            )
+            setTypeface(typeface, if (isHeader) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
+            maxLines = 1
+        }
+    }
+
+    private fun createPackageCell(packageName: String, appLabel: String, weight: Float): LinearLayout {
+        val packageView = MaterialTextView(requireContext()).apply {
+            text = packageName
+            setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium)
+            maxLines = 1
+            ellipsize = android.text.TextUtils.TruncateAt.END
+        }
+
+        val labelView = MaterialTextView(requireContext()).apply {
+            text = appLabel
+            setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_LabelMedium)
+            maxLines = 1
+            ellipsize = android.text.TextUtils.TruncateAt.END
+            alpha = 0.75f
+        }
+
+        return LinearLayout(requireContext()).apply {
+            layoutParams = TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, weight)
+            orientation = LinearLayout.VERTICAL
+            addView(packageView)
+            addView(labelView)
         }
     }
 
