@@ -5,7 +5,7 @@ kotlin = "2.3.0"
 material = "1.13.0"
 hidden-api = "4.4.0"
 androidx-navigation = "2.9.7"
-androidx-work = "2.10.0"
+androidx-work = "2.11.2"
 vbpd = "2.0.4"
 
 [plugins]
