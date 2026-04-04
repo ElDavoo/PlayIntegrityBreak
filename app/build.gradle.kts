@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.agp.app)
     alias(libs.plugins.autoresconfig)
     alias(libs.plugins.refine)
-    alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.nav.safeargs.kotlin)
     alias(libs.plugins.materialthemebuilder)

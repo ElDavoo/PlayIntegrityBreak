@@ -22,7 +22,7 @@
 
           androidComposition = pkgs.androidenv.composeAndroidPackages {
             platformVersions = [ "36" ];
-            buildToolsVersions = [ "35.0.0" "36.1.0" ];
+            buildToolsVersions = [ "35.0.0" "36.0.0" "36.1.0" ];
             includeEmulator = false;
             includeNDK = false;
           };
