@@ -122,7 +122,7 @@ jobs:
           });
     - name: Close stale
       if: github.event_name != 'issues'
-      uses: actions/stale@v9
+      uses: actions/stale@v10
       with:
         days-before-stale: 14
         stale-issue-label: stale
