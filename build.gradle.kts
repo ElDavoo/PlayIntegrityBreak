@@ -1,5 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.gradle.BaseExtension
+import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
@@ -90,17 +90,15 @@ tasks.register("clean", Delete::class) {
     delete(rootProject.layout.buildDirectory)
 }
 
-fun Project.configureBaseExtension() {
-    extensions.findByType<BaseExtension>()?.run {
-        compileSdkVersion(targetSdkVer)
+fun Project.configureApplicationExtension() {
+    extensions.findByType(ApplicationExtension::class.java)?.run {
+        compileSdk = targetSdkVer
 
         defaultConfig {
             minSdk = minSdkVer
             targetSdk = targetSdkVer
             versionCode = appVerCode
             versionName = appVerName
-
-            consumerProguardFiles("proguard-rules.pro")
         }
 
         val config = localProperties.getProperty("fileDir")?.let {
@@ -114,10 +112,11 @@ fun Project.configureBaseExtension() {
 
         buildTypes {
             all {
-                signingConfig = config ?: signingConfigs["debug"]
+                signingConfig = config ?: signingConfigs.getByName("debug")
             }
             named("release") {
                 isMinifyEnabled = true
+                isShrinkResources = true
                 proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             }
         }
@@ -125,14 +124,6 @@ fun Project.configureBaseExtension() {
         compileOptions {
             sourceCompatibility = androidSourceCompatibility
             targetCompatibility = androidTargetCompatibility
-        }
-    }
-
-    extensions.findByType<ApplicationExtension>()?.run {
-        buildTypes {
-            named("release") {
-                isShrinkResources = true
-            }
         }
 
         dependenciesInfo {
@@ -144,11 +135,34 @@ fun Project.configureBaseExtension() {
     }
 }
 
+fun Project.configureLibraryExtension() {
+    extensions.findByType(LibraryExtension::class.java)?.run {
+        compileSdk = targetSdkVer
+
+        defaultConfig {
+            minSdk = minSdkVer
+            consumerProguardFiles("proguard-rules.pro")
+        }
+
+        buildTypes {
+            named("release") {
+                isMinifyEnabled = true
+                proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            }
+        }
+
+        compileOptions {
+            sourceCompatibility = androidSourceCompatibility
+            targetCompatibility = androidTargetCompatibility
+        }
+    }
+}
+
 subprojects {
     plugins.withId("com.android.application") {
-        configureBaseExtension()
+        configureApplicationExtension()
     }
     plugins.withId("com.android.library") {
-        configureBaseExtension()
+        configureLibraryExtension()
     }
 }

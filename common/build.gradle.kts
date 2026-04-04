@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.LibraryExtension
+
 plugins {
     alias(libs.plugins.agp.lib)
     alias(libs.plugins.refine)
@@ -11,7 +13,7 @@ val appPackageName: String by rootProject.extra
 val appVerName: String by rootProject.extra
 val appVerCode: Int by rootProject.extra
 
-android {
+extensions.configure<LibraryExtension>("android") {
     namespace = "$appPackageName.common"
 
     buildFeatures {

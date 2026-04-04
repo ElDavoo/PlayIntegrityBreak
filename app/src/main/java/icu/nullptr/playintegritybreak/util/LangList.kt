@@ -1,0 +1,40 @@
+package icu.nullptr.playintegritybreak.util
+
+object LangList {
+    @JvmField
+    val LOCALES: Array<String> = arrayOf(
+        "SYSTEM",
+        "af-ZA",
+        "ar-SA",
+        "ca-ES",
+        "cs-CZ",
+        "da-DK",
+        "de-DE",
+        "el-GR",
+        "es-ES",
+        "fa-IR",
+        "fi-FI",
+        "fr-FR",
+        "hu-HU",
+        "in-ID",
+        "it-IT",
+        "iw-IL",
+        "ja-JP",
+        "ko-KR",
+        "nl-NL",
+        "no-NO",
+        "pl-PL",
+        "pt-BR",
+        "pt-PT",
+        "ro-RO",
+        "ru-RU",
+        "sr-SP",
+        "sv-SE",
+        "th-TH",
+        "tr-TR",
+        "uk-UA",
+        "vi-VN",
+        "zh-CN",
+        "zh-TW",
+    )
+}

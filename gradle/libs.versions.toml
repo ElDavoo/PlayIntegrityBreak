@@ -16,7 +16,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 nav-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
 autoresconfig = { id = "dev.rikka.tools.autoresconfig", version = "1.2.2" }
 refine = { id = "dev.rikka.tools.refine", version = "4.4.0" }
-materialthemebuilder = { id = "dev.rikka.tools.materialthemebuilder", version = "1.5.1" }
 
 [libraries]
 androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.1" }

@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.LibraryExtension
+
 plugins {
     alias(libs.plugins.agp.lib)
     alias(libs.plugins.refine)
@@ -5,7 +7,7 @@ plugins {
 
 val appPackageName: String by rootProject.extra
 
-android {
+extensions.configure<LibraryExtension>("android") {
     namespace = "$appPackageName.xposed"
 
     buildFeatures {

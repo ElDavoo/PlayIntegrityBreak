@@ -405,7 +405,7 @@ object IntegrityServiceHook {
             }.getOrDefault(false)
             val hasPackageLikeString = runCatching {
                 bundle.keySet().any { key ->
-                    val value = bundle.get(key) as? String ?: return@any false
+                    val value = bundle.getString(key) ?: return@any false
                     packageNamePattern.matcher(value).matches()
                 }
             }.getOrDefault(false)
