@@ -51,7 +51,7 @@ fun getUncommittedSuffix(): String {
 }
 
 val gitHasUncommittedSuffix = getUncommittedSuffix()
-val gitCommitCount = "git rev-list refs/remotes/origin/pib --count".execute().toInt()
+val gitCommitCount = "git rev-list HEAD --count".execute().toInt()
 
 // Reset versioning from 1 on the pib branch
 val gitCommitCountAfterReset = gitCommitCount - 627
