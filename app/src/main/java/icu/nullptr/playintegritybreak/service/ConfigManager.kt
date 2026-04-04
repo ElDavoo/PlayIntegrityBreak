@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import it.eldavo.pib.R
 import it.eldavo.pib.common.BuildConfig
 import java.io.File
+import java.util.UUID
 
 object ConfigManager {
     private const val TAG = "ConfigManager"
@@ -36,6 +37,7 @@ object ConfigManager {
             if (configVersion < BuildConfig.MIN_BACKUP_VERSION) throw RuntimeException("Config version too old")
             config.configVersion = BuildConfig.CONFIG_VERSION
             applyLoggerMigrationIfNeeded()
+            ensureUserId()
         }.onSuccess {
             saveConfig()
         }.onFailure { catch ->
@@ -43,6 +45,7 @@ object ConfigManager {
                 config = JsonConfig.parse(ServiceClient.readConfig() ?: throw RuntimeException("Service config is unavailable"))
                 config.configVersion = BuildConfig.CONFIG_VERSION
                 applyLoggerMigrationIfNeeded()
+                ensureUserId()
                 showToast(R.string.home_restore_config)
             }.onSuccess {
                 saveConfig()
@@ -169,6 +172,9 @@ object ConfigManager {
             saveConfig()
         }
 
+    val userId: String
+        get() = config.userId
+
     var forceMountData: Boolean
         get() =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) config.forceMountData
@@ -252,6 +258,21 @@ object ConfigManager {
         config.defaultHookRewriteErrorCode = errorCode
         config.defaultHookRewriteRemediable = remediable
         saveConfig()
+    }
+
+    private fun ensureUserId() {
+        val existing = config.userId.trim()
+        if (existing.isNotEmpty()) {
+            if (PrefManager.telemetryUserId != existing) {
+                PrefManager.telemetryUserId = existing
+            }
+            return
+        }
+
+        val fallback = PrefManager.telemetryUserId.trim()
+        val resolved = if (fallback.isNotEmpty()) fallback else UUID.randomUUID().toString()
+        config.userId = resolved
+        PrefManager.telemetryUserId = resolved
     }
 
     fun bootstrapFavoritesIfNeeded() {

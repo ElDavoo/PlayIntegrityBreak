@@ -31,6 +31,7 @@ object PrefManager {
     private const val PREF_APP_FILTER_SORT_METHOD = "app_filter_sort_method"
     private const val PREF_APP_FILTER_REVERSE_ORDER = "app_filter_reverse_order"
     private const val PREF_APP_FAVORITES_BOOTSTRAP_DONE = "app_favorites_bootstrap_done"
+    private const val PREF_TELEMETRY_USER_ID = "telemetry_user_id"
     private const val PREF_LOG_FILTER_LEVEL = "log_filter_level"
     private const val PREF_LOG_FILTER_REVERSE_ORDER = "log_filter_reverse_order"
 
@@ -113,6 +114,10 @@ object PrefManager {
     var appFavoritesBootstrapDone: Boolean
         get() = pref.getBoolean(PREF_APP_FAVORITES_BOOTSTRAP_DONE, false)
         set(value) = pref.edit { putBoolean(PREF_APP_FAVORITES_BOOTSTRAP_DONE, value) }
+
+    var telemetryUserId: String
+        get() = pref.getString(PREF_TELEMETRY_USER_ID, "") ?: ""
+        set(value) = pref.edit { putString(PREF_TELEMETRY_USER_ID, value) }
 
     var logFilter_level: Int
         get() = pref.getInt(PREF_LOG_FILTER_LEVEL, 0)

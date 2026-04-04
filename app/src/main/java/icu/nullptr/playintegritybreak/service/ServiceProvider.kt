@@ -73,6 +73,7 @@ class ServiceProvider : ContentProvider() {
         val playIntegrityVersionMajor = extras?.getIntOrNull(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MAJOR)
         val playIntegrityVersionMinor = extras?.getIntOrNull(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MINOR)
         val playIntegrityVersionPatch = extras?.getIntOrNull(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_PATCH)
+        val userId = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_USER_ID)?.trim()
         val eventType = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_TYPE)?.trim().orEmpty()
         val source = extras?.getString(Constants.PROVIDER_EXTRA_EVENT_SOURCE)?.trim().orEmpty()
 
@@ -112,6 +113,7 @@ class ServiceProvider : ContentProvider() {
             playIntegrityVersionMajor = playIntegrityVersionMajor,
             playIntegrityVersionMinor = playIntegrityVersionMinor,
             playIntegrityVersionPatch = playIntegrityVersionPatch,
+            userId = userId,
             eventType = eventType,
             success = success,
             errorCode = errorCode,

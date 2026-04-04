@@ -18,6 +18,7 @@ object Constants {
     const val PROVIDER_EXTRA_EVENT_ERROR_CODE = "eventErrorCode"
     const val PROVIDER_EXTRA_EVENT_RETRIABLE = "eventRetriable"
     const val PROVIDER_EXTRA_EVENT_SOURCE = "eventSource"
+    const val PROVIDER_EXTRA_EVENT_USER_ID = "eventUserId"
     const val PROVIDER_RESULT_OK = "ok"
     const val DEFAULT_APP_PACKAGE_NAME = "default"
     const val GMS_PACKAGE_NAME = "com.google.android.gms"

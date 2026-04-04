@@ -93,6 +93,7 @@ object PIBLoggerService : IPIBService.Stub() {
         val playIntegrityVersionMajor: Int?,
         val playIntegrityVersionMinor: Int?,
         val playIntegrityVersionPatch: Int?,
+        val userId: String?,
         val eventType: String,
         val success: Boolean?,
         val errorCode: Int?,
@@ -232,6 +233,7 @@ object PIBLoggerService : IPIBService.Stub() {
                 playIntegrityVersionMajor = playIntegrityVersionMajor,
                 playIntegrityVersionMinor = playIntegrityVersionMinor,
                 playIntegrityVersionPatch = playIntegrityVersionPatch,
+                userId = currentUserId(),
                 eventType = EVENT_TYPE_REQUEST,
                 success = null,
                 errorCode = null,
@@ -259,6 +261,7 @@ object PIBLoggerService : IPIBService.Stub() {
                 playIntegrityVersionMajor = playIntegrityVersionMajor,
                 playIntegrityVersionMinor = playIntegrityVersionMinor,
                 playIntegrityVersionPatch = playIntegrityVersionPatch,
+                userId = currentUserId(),
                 eventType = EVENT_TYPE_RESPONSE,
                 success = success,
                 errorCode = errorCode,
@@ -326,6 +329,7 @@ object PIBLoggerService : IPIBService.Stub() {
                     event.playIntegrityVersionMajor?.let { putInt(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MAJOR, it) }
                     event.playIntegrityVersionMinor?.let { putInt(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_MINOR, it) }
                     event.playIntegrityVersionPatch?.let { putInt(Constants.PROVIDER_EXTRA_EVENT_PLAY_INTEGRITY_VERSION_PATCH, it) }
+                    event.userId?.let { putString(Constants.PROVIDER_EXTRA_EVENT_USER_ID, it) }
                     putString(Constants.PROVIDER_EXTRA_EVENT_TYPE, event.eventType)
                     putString(Constants.PROVIDER_EXTRA_EVENT_SOURCE, event.source)
                     event.success?.let { putBoolean(Constants.PROVIDER_EXTRA_EVENT_SUCCESS, it) }
@@ -451,6 +455,11 @@ object PIBLoggerService : IPIBService.Stub() {
     private fun Bundle.getIntOrNull(key: String): Int? {
         if (!containsKey(key)) return null
         return getInt(key)
+    }
+
+    private fun currentUserId(): String? {
+        val value = synchronized(configLock) { config.userId.trim() }
+        return value.takeIf { it.isNotEmpty() }
     }
 
     override fun dequeueTelemetryBatchJson(maxEvents: Int, leaseDurationMs: Long, staleInFlightMs: Long): String {

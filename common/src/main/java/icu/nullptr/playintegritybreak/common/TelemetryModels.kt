@@ -17,6 +17,7 @@ object TelemetryQueueState {
 data class TelemetryEventPayload(
     val id: Long,
     val timestampMs: Long,
+    val userId: String? = null,
     val packageName: String,
     val playIntegrityVersionMajor: Int? = null,
     val playIntegrityVersionMinor: Int? = null,

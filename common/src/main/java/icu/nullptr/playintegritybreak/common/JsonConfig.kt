@@ -22,6 +22,7 @@ data class JsonConfig(
     var telemetryBaseRetrySeconds: Int = 30,
     var telemetryLeaseDurationSeconds: Int = 120,
     var telemetryStaleInFlightMinutes: Int = 15,
+    var userId: String = "",
     var forceMountData: Boolean = true,
     var disableActivityLaunchProtection: Boolean = false,
     var altAppDataIsolation: Boolean = false,
