@@ -29,7 +29,7 @@ com-github-bumptech-glide = { module = "com.github.bumptech.glide:glide", versio
 dev-androidbroadcast-vbpd = { module = "dev.androidbroadcast.vbpd:vbpd", version.ref = "vbpd" }
 dev-androidbroadcast-vbpd-reflection = { module = "dev.androidbroadcast.vbpd:vbpd-reflection", version.ref = "vbpd" }
 #noinspection NewerVersionAvailable
-com-github-kyuubiran-ezxhelper = { module = "com.github.kyuubiran:EzXHelper", version = "1.0.3" }
+com-github-kyuubiran-ezxhelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.2.1" }
 com-github-topjohnwu-libsu-core = { module = "com.github.topjohnwu.libsu:core", version = "6.0.0" }
 de-robv-android-xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
 dev-rikka-hidden-compat = { module = "dev.rikka.hidden:compat", version.ref = "hidden-api" }
