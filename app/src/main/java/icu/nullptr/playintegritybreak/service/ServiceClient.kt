@@ -3,10 +3,6 @@ package icu.nullptr.playintegritybreak.service
 import android.os.IBinder
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.IPIBService
-import icu.nullptr.playintegritybreak.common.TelemetryBatchPayload
-import icu.nullptr.playintegritybreak.common.TelemetryJsonCodec
-import icu.nullptr.playintegritybreak.common.TelemetryQueueSnapshot
-import icu.nullptr.playintegritybreak.common.TelemetryStatsPayload
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
@@ -153,48 +149,4 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
     ) = service?.getPackageInfo(packageName, userId)
 
     override fun getLogFileLocation() = service?.logFileLocation ?: "the log file"
-
-    override fun getTelemetryStatsJson(fromTimestampMs: Long): String {
-        return service?.getTelemetryStatsJson(fromTimestampMs) ?: TelemetryJsonCodec.encodeStats(
-            TelemetryStatsPayload(
-                generatedAtMs = System.currentTimeMillis(),
-                fromTimestampMs = fromTimestampMs.coerceAtLeast(0L),
-                toTimestampMs = System.currentTimeMillis(),
-            )
-        )
-    }
-
-    override fun dequeueTelemetryBatchJson(maxEvents: Int, leaseDurationMs: Long, staleInFlightMs: Long): String {
-        return service?.dequeueTelemetryBatchJson(maxEvents, leaseDurationMs, staleInFlightMs)
-            ?: TelemetryJsonCodec.encodeBatch(TelemetryBatchPayload())
-    }
-
-    override fun ackTelemetryBatch(batchId: String?, serverAckId: String?) {
-        if (batchId.isNullOrBlank()) return
-        service?.ackTelemetryBatch(batchId, serverAckId ?: "")
-    }
-
-    override fun nackTelemetryBatch(batchId: String?, retriable: Boolean, nextAttemptTimestampMs: Long, lastError: String?) {
-        if (batchId.isNullOrBlank()) return
-        service?.nackTelemetryBatch(batchId, retriable, nextAttemptTimestampMs, lastError ?: "")
-    }
-
-    override fun getTelemetryQueueSnapshotJson(): String {
-        return service?.getTelemetryQueueSnapshotJson()
-            ?: TelemetryJsonCodec.encodeQueueSnapshot(TelemetryQueueSnapshot())
-    }
-
-    fun getTelemetryStats(fromTimestampMs: Long): TelemetryStatsPayload {
-        return TelemetryJsonCodec.decodeStats(getTelemetryStatsJson(fromTimestampMs))
-    }
-
-    fun dequeueTelemetryBatch(maxEvents: Int, leaseDurationMs: Long, staleInFlightMs: Long): TelemetryBatchPayload {
-        return TelemetryJsonCodec.decodeBatch(
-            dequeueTelemetryBatchJson(maxEvents, leaseDurationMs, staleInFlightMs)
-        )
-    }
-
-    fun getTelemetryQueueSnapshot(): TelemetryQueueSnapshot {
-        return TelemetryJsonCodec.decodeQueueSnapshot(getTelemetryQueueSnapshotJson())
-    }
 }
