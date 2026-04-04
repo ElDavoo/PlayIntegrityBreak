@@ -27,8 +27,9 @@ fun logWithLevel(level: Int, tag: String, msg: String, cause: Throwable? = null)
     val errorOnly = PIBLoggerService.isErrorOnlyLogging()
     val detailLogEnabled = PIBLoggerService.isDetailLogging()
 
+    // detailLog acts as a master switch: when disabled, emit no logs at all.
+    if (!detailLogEnabled) return
     if (level != Log.ERROR && errorOnly) return
-    if (level <= Log.DEBUG && !detailLogEnabled) return
     if (level == Log.VERBOSE && !BuildConfig.DEBUG) return
     val parsedLog = parseLog(level, tag, msg, cause)
 

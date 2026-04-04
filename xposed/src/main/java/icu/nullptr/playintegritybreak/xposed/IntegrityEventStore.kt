@@ -37,7 +37,6 @@ object IntegrityEventStore {
     private const val EVENT_TYPE_REQUEST = "request"
     private const val EVENT_TYPE_RESPONSE = "response"
     private const val MAX_BATCH_EVENTS = 500
-    private const val DEFAULT_TOP_PACKAGES_LIMIT = 10
     private const val MIN_BATCH_LEASE_MS = 5_000L
     private const val MAX_BATCH_LEASE_MS = 30 * 60_000L
 
@@ -364,14 +363,12 @@ object IntegrityEventStore {
                 WHERE $COL_TS >= ?
                 GROUP BY $COL_PACKAGE
                 ORDER BY req_count DESC, resp_count DESC
-                LIMIT ?
                 """.trimIndent(),
                 arrayOf(
                     EVENT_TYPE_REQUEST,
                     EVENT_TYPE_RESPONSE,
                     EVENT_TYPE_RESPONSE,
                     fromTs.toString(),
-                    DEFAULT_TOP_PACKAGES_LIMIT.toString(),
                 ),
             ).use { cursor ->
                 val stats = mutableListOf<TelemetryPackageStat>()

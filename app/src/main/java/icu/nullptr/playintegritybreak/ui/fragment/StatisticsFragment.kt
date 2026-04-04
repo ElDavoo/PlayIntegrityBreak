@@ -11,6 +11,7 @@ import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.ui.util.setupToolbar
+import icu.nullptr.playintegritybreak.util.PackageHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -64,12 +65,36 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 stats.queue.failed,
             )
 
+            binding.topPackagesHeader.text = getString(R.string.statistics_top_packages_header)
             binding.topPackagesText.text = if (stats.topPackages.isEmpty()) {
                 getString(R.string.statistics_top_packages_empty)
             } else {
                 stats.topPackages.mapIndexed { index, stat ->
-                    "${index + 1}. ${stat.packageName}\n   req=${stat.requestCount}, resp=${stat.responseCount}, err=${stat.errorCount}"
-                }.joinToString("\n")
+                    val successRatio = if (stat.responseCount > 0) {
+                        (((stat.responseCount - stat.errorCount).coerceAtLeast(0) * 100f) / stat.responseCount).toInt()
+                    } else {
+                        100
+                    }
+                    val appLabel = runCatching { PackageHelper.loadAppLabel(stat.packageName) }
+                        .getOrDefault(getString(R.string.statistics_package_unknown_label))
+                    buildString {
+                        append(
+                            String.format(
+                                Locale.getDefault(),
+                                "%2d  %4d  %4d  %3d  %3d%%  %s",
+                                index + 1,
+                                stat.requestCount,
+                                stat.responseCount,
+                                stat.errorCount,
+                                successRatio,
+                                stat.packageName,
+                            )
+                        )
+                        append('\n')
+                        append("    ")
+                        append(appLabel)
+                    }
+                }.joinToString("\n\n")
             }
         }
     }

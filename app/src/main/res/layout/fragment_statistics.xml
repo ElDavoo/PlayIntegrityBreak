@@ -115,10 +115,20 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/top_packages_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="monospace"
+                        android:textAppearance="?textAppearanceLabelMedium"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/top_packages_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="monospace"
                         android:textAppearance="?textAppearanceBodyMedium" />
                 </LinearLayout>
 

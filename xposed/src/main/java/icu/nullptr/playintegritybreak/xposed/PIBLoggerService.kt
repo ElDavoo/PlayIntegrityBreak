@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
@@ -40,6 +39,7 @@ object PIBLoggerService : IPIBService.Stub() {
     private val publishFlushRunning = AtomicBoolean(false)
     private val capturedEvents = AtomicLong(0)
     private val lastHealthcheckTimestamp = AtomicLong(0)
+    private val lastProviderMissingLogTimestamp = AtomicLong(0)
     private val configLock = Any()
     private val logLock = Any()
     private val pendingEventLock = Any()
@@ -254,6 +254,12 @@ object PIBLoggerService : IPIBService.Stub() {
         val extras = Bundle().apply { putBinder(Constants.PROVIDER_EXTRA_BINDER, this@PIBLoggerService) }
         val uri = Uri.parse("content://${Constants.PROVIDER_AUTHORITY}")
 
+        // During startup the provider authority may not be registered yet.
+        if (!isProviderRegistered(app, uri)) {
+            maybeLogProviderNotReady()
+            return false
+        }
+
         return runCatching {
             val response = app.contentResolver.call(uri, Constants.PROVIDER_METHOD_LINK, null, extras)
             val linked = response?.getBoolean(Constants.PROVIDER_RESULT_OK, false) == true
@@ -308,7 +314,7 @@ object PIBLoggerService : IPIBService.Stub() {
                     app.contentResolver.call(uri, Constants.PROVIDER_METHOD_PUBLISH_EVENT, null, extras)
                         ?.getBoolean(Constants.PROVIDER_RESULT_OK, false) == true
                 }.onFailure {
-                    Log.w(TAG, "Failed to publish integrity event to provider", it)
+                    logW(TAG, "Failed to publish integrity event to provider", it)
                 }.getOrDefault(false)
 
                 if (!stored) {
@@ -546,5 +552,20 @@ object PIBLoggerService : IPIBService.Stub() {
             val currentApplication: Method = activityThread.getDeclaredMethod("currentApplication")
             currentApplication.invoke(null) as? Application
         }.getOrNull()
+    }
+
+    private fun isProviderRegistered(app: Application, uri: Uri): Boolean {
+        return runCatching {
+            app.contentResolver.acquireUnstableContentProviderClient(uri)?.close() != null
+        }.getOrDefault(false)
+    }
+
+    private fun maybeLogProviderNotReady() {
+        val now = System.currentTimeMillis()
+        val last = lastProviderMissingLogTimestamp.get()
+        if (now - last < 30_000L) return
+        if (lastProviderMissingLogTimestamp.compareAndSet(last, now)) {
+            logI(TAG, "Provider not ready yet; binder publish will retry")
+        }
     }
 }

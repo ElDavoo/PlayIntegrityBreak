@@ -187,8 +187,10 @@
     <string name="statistics_summary_body">Total events: %1$d\nRequests: %2$d\nResponses: %3$d\nSuccessful responses: %4$d\nFailed responses: %5$d</string>
     <string name="statistics_queue_title">Telemetry queue</string>
     <string name="statistics_queue_body">Pending: %1$d\nRetry: %2$d\nIn-flight: %3$d\nAcknowledged: %4$d\nFailed: %5$d</string>
-    <string name="statistics_top_packages_title">Top packages by requests</string>
+    <string name="statistics_top_packages_title">Package activity (all)</string>
+    <string name="statistics_top_packages_header">#  Req   Resp  Err  Ok%%  Package</string>
     <string name="statistics_top_packages_empty">No package activity in this time window.</string>
+    <string name="statistics_package_unknown_label">Unknown app</string>
 
     <!-- Settings -->
     <string name="settings_module">Module</string>
