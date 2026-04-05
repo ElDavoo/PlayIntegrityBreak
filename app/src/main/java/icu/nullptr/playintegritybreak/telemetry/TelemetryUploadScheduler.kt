@@ -33,11 +33,6 @@ object TelemetryUploadScheduler {
             TELEMETRY_SYNC_INTERVAL_MINUTES,
             TimeUnit.MINUTES,
         ).setConstraints(createConstraints())
-            .setBackoffCriteria(
-                BackoffPolicy.EXPONENTIAL,
-                WorkRequest.MIN_BACKOFF_MILLIS,
-                TimeUnit.MILLISECONDS,
-            )
             .setInputData(workDataOf(INPUT_REASON to "periodic"))
             .addTag(UNIQUE_PERIODIC_WORK)
             .build()
@@ -56,11 +51,6 @@ object TelemetryUploadScheduler {
 
         val request = OneTimeWorkRequestBuilder<TelemetryUploadWorker>()
             .setConstraints(createConstraints())
-            .setBackoffCriteria(
-                BackoffPolicy.EXPONENTIAL,
-                WorkRequest.MIN_BACKOFF_MILLIS,
-                TimeUnit.MILLISECONDS,
-            )
             .setInputData(workDataOf(INPUT_REASON to reason))
             .addTag(UNIQUE_IMMEDIATE_WORK)
             .build()
