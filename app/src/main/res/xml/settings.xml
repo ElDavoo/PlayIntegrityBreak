@@ -71,6 +71,13 @@
             android:title="@string/settings_package_query_workaround"
             android:summary="@string/settings_package_query_workaround_summary" />
         <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="intentApiEnabled"
+            app:singleLineTitle="false"
+            android:title="@string/settings_intent_api_enabled"
+            android:summary="@string/settings_intent_api_enabled_summary" />
+        <SwitchPreferenceCompat
             android:icon="@drawable/outline_android_24"
             android:key="disableActivityLaunchProtection"
             app:singleLineTitle="false"

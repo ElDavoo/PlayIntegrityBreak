@@ -20,6 +20,31 @@ object Constants {
     const val PROVIDER_EXTRA_EVENT_SOURCE = "eventSource"
     const val PROVIDER_EXTRA_EVENT_USER_ID = "eventUserId"
     const val PROVIDER_RESULT_OK = "ok"
+
+    const val INTENT_API_ACTION_SET_APP_SETTING = "${BuildConfig.APP_PACKAGE_NAME}.action.SET_APP_SETTING"
+    const val INTENT_API_EXTRA_TARGET_PACKAGE = "targetPackage"
+    const val INTENT_API_EXTRA_SETTING_KEY = "settingKey"
+    const val INTENT_API_EXTRA_BOOLEAN_VALUE = "booleanValue"
+    const val INTENT_API_EXTRA_INT_VALUE = "intValue"
+    const val INTENT_API_RESULT_STATUS = "status"
+    const val INTENT_API_RESULT_MESSAGE = "message"
+    const val INTENT_API_RESULT_TARGET_PACKAGE = "targetPackage"
+    const val INTENT_API_RESULT_SETTING_KEY = "settingKey"
+    const val INTENT_API_STATUS_APPLIED = 0
+    const val INTENT_API_STATUS_API_DISABLED = 1
+    const val INTENT_API_STATUS_INVALID_ACTION = 2
+    const val INTENT_API_STATUS_MISSING_EXTRA = 3
+    const val INTENT_API_STATUS_INVALID_PACKAGE = 4
+    const val INTENT_API_STATUS_INVALID_KEY = 5
+    const val INTENT_API_STATUS_INVALID_VALUE = 6
+    const val INTENT_API_STATUS_INTERNAL_ERROR = 7
+    const val INTENT_API_KEY_ENABLE_INTERVENTION = "enableIntervention"
+    const val INTENT_API_KEY_ENABLE_LOGGER = "enableLogger"
+    const val INTENT_API_KEY_DELIVER_SYNTHETIC_RESPONSE = "deliverSyntheticResponse"
+    const val INTENT_API_KEY_DELAY_SYNTHETIC_RESPONSE = "delaySyntheticResponseDelivery"
+    const val INTENT_API_KEY_REWRITE_ERROR_CODE = "rewriteIntegrityErrorCode"
+    const val INTENT_API_KEY_REWRITE_ERROR_REMEDIABLE = "rewriteIntegrityErrorRemediable"
+
     const val DEFAULT_APP_PACKAGE_NAME = "default"
     const val GMS_PACKAGE_NAME = "com.google.android.gms"
     const val GSF_PACKAGE_NAME = "com.google.android.gsf"

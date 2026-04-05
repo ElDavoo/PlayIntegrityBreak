@@ -179,6 +179,13 @@ object ConfigManager {
             saveConfig()
         }
 
+    var intentApiEnabled: Boolean
+        get() = config.intentApiEnabled
+        set(value) {
+            config.intentApiEnabled = value
+            saveConfig()
+        }
+
     val userId: String
         get() = config.userId
 

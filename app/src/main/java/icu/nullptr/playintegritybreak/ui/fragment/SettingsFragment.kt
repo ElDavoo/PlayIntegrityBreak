@@ -100,6 +100,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "disableUpdate" -> PrefManager.disableUpdate
                 "packageQueryWorkaround" -> ConfigManager.packageQueryWorkaround
                 "telemetryEnabled" -> ConfigManager.telemetryEnabled
+                "intentApiEnabled" -> ConfigManager.intentApiEnabled
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -139,6 +140,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "skipSystemAppDataIsolation" -> ConfigManager.skipSystemAppDataIsolation = value
                 "packageQueryWorkaround" -> ConfigManager.packageQueryWorkaround = value
                 "telemetryEnabled" -> ConfigManager.telemetryEnabled = value
+                "intentApiEnabled" -> ConfigManager.intentApiEnabled = value
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -347,6 +349,28 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                     showToast(R.string.settings_telemetry_batch_size_invalid)
                     false
                 }
+            }
+
+            var bypassIntentApiEnableConfirmation = false
+            findPreference<SwitchPreferenceCompat>("intentApiEnabled")?.setOnPreferenceChangeListener { pref, value ->
+                val enableIntentApi = value as Boolean
+                if (!enableIntentApi || bypassIntentApiEnableConfirmation) {
+                    return@setOnPreferenceChangeListener true
+                }
+
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.settings_intent_api_enable_title)
+                    .setMessage(R.string.settings_intent_api_enable_message)
+                    .setPositiveButton(R.string.settings_intent_api_enable_confirm) { _, _ ->
+                        bypassIntentApiEnableConfirmation = true
+                        (pref as SwitchPreferenceCompat).isChecked = true
+                        bypassIntentApiEnableConfirmation = false
+                    }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setCancelable(false)
+                    .show()
+
+                false
             }
 
             lifecycleScope.launch {

@@ -240,6 +240,11 @@
     <string name="settings_no_undone_warning">This action cannot be undone.</string>
     <string name="settings_package_query_workaround">Alternative package query</string>
     <string name="settings_package_query_workaround_summary">Don\'t enable this option if you see the package list in this app correctly.</string>
+    <string name="settings_intent_api_enabled">Enable external Intents API</string>
+    <string name="settings_intent_api_enabled_summary">Allow other apps to change per-app PIB settings using explicit broadcast Intents.</string>
+    <string name="settings_intent_api_enable_title">Enable external Intents API?</string>
+    <string name="settings_intent_api_enable_message">When enabled, any app on the device can send API Intents to modify per-app PIB settings. Only enable this if you trust the apps you install.</string>
+    <string name="settings_intent_api_enable_confirm">Enable API</string>
     <string name="settings_launcher_icon">Launcher icon</string>
     <string name="settings_error_only_log">Error-only log</string>
 

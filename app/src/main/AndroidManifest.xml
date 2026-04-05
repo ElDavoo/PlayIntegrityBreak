@@ -81,6 +81,14 @@
             android:exported="true"
             tools:ignore="ExportedContentProvider" />
 
+        <receiver
+            android:name="icu.nullptr.playintegritybreak.receiver.IntentApiReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.action.SET_APP_SETTING" />
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

@@ -83,6 +83,16 @@ Data will be retented as long as they are useful (a few years?)
 
 Contact me with your user ID and I will delete all data associated with it.  
 
+## Intents API (opt-in)
+
+PIB includes an optional external Intents API that can change per-app settings and default policy settings.
+
+- Disabled by default.
+- Must be enabled manually in Settings by turning on External Intents API and confirming the warning.
+- When enabled, any app on the device can send supported Intents to update per-app settings or default policy values.
+
+Full action/extras/result contract and examples are documented in [INTENTS_API.md](INTENTS_API.md).
+
 ## How to correct the weaknesses that PIB exploits?
 
 ### 1. Google: Authenticate errors
