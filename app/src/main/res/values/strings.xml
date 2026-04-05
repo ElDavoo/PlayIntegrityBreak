@@ -245,6 +245,12 @@
     <string name="settings_telemetry_batch_size">Telemetry batch size</string>
     <string name="settings_telemetry_batch_size_summary">Number of events sent per request (1-500).</string>
     <string name="settings_telemetry_batch_size_invalid">Telemetry batch size must be between 1 and 500</string>
+    <string name="telemetry_consent_title">Would you like to enable telemetry?</string>
+    <string name="telemetry_consent_message">Telemetry helps improve PIB reliability by sharing captured integrity request and response events for diagnostics.
+
+Privacy-friendly by design: uploads are batched, sent only when charging and on unmetered Wi-Fi, and you can disable telemetry at any time in Settings.</string>
+    <string name="telemetry_consent_enable">Enable telemetry</string>
+    <string name="telemetry_consent_not_now">Not now</string>
 
     <string name="settings_language">Language</string>
     <string name="settings_translate">Participate in translation</string>

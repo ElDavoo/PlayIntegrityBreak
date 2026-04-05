@@ -104,6 +104,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onStart() {
         super.onStart()
 
+        showTelemetryConsentDialogIfNeeded()
+
         lifecycleScope.launch {
             val (serviceVersion, serviceHealthy, localEventCount) = withContext(Dispatchers.IO) {
                 runCatching {
@@ -331,6 +333,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         lifecycleScope.launch {
             loadUpdateDialog()
         }
+    }
+
+    private fun showTelemetryConsentDialogIfNeeded() {
+        if (PrefManager.telemetryConsentPromptShown) return
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setCancelable(false)
+            .setTitle(R.string.telemetry_consent_title)
+            .setMessage(R.string.telemetry_consent_message)
+            .setPositiveButton(R.string.telemetry_consent_enable) { _, _ ->
+                ConfigManager.telemetryEnabled = true
+                PrefManager.telemetryConsentPromptShown = true
+            }
+            .setNegativeButton(R.string.telemetry_consent_not_now) { _, _ ->
+                PrefManager.telemetryConsentPromptShown = true
+            }
+            .show()
     }
 
     private fun loadUpdateDialog() {
