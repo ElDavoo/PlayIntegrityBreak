@@ -10,6 +10,7 @@ import icu.nullptr.playintegritybreak.common.TelemetryEventPayload
 import icu.nullptr.playintegritybreak.common.TelemetryPackageStat
 import icu.nullptr.playintegritybreak.common.TelemetryQueueSnapshot
 import icu.nullptr.playintegritybreak.common.TelemetryQueueState
+import icu.nullptr.playintegritybreak.common.TelemetryRecentRequest
 import icu.nullptr.playintegritybreak.common.TelemetryStatsPayload
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.service.ConfigManager
@@ -495,6 +496,32 @@ object AppIntegrityEventStore {
                 stats
             }
 
+            val recentRequests = db.rawQuery(
+                """
+                SELECT
+                    $COL_TS,
+                    $COL_PACKAGE
+                FROM $TABLE_EVENTS
+                WHERE $COL_TS >= ?
+                  AND $COL_EVENT_TYPE = ?
+                ORDER BY $COL_TS DESC
+                LIMIT 10
+                """.trimIndent(),
+                arrayOf(
+                    fromTs.toString(),
+                    EVENT_TYPE_REQUEST,
+                ),
+            ).use { cursor ->
+                val requests = mutableListOf<TelemetryRecentRequest>()
+                while (cursor.moveToNext()) {
+                    requests += TelemetryRecentRequest(
+                        timestampMs = cursor.getLong(0),
+                        packageName = cursor.getString(1),
+                    )
+                }
+                requests
+            }
+
             TelemetryStatsPayload(
                 generatedAtMs = generatedAt,
                 fromTimestampMs = fromTs,
@@ -506,6 +533,7 @@ object AppIntegrityEventStore {
                 totalErrorResponses = totals.errors,
                 queue = getTelemetryQueueSnapshot(app),
                 topPackages = topPackages,
+                recentRequests = recentRequests,
             )
         }.getOrElse {
             Log.w("IntegrityEventStore", "Failed to read telemetry statistics", it)

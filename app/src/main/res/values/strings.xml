@@ -196,6 +196,10 @@
     <string name="statistics_top_packages_header">#  Req   Resp  Err  Ok%%  Package</string>
     <string name="statistics_top_packages_empty">No package activity in this time window.</string>
     <string name="statistics_package_unknown_label">Unknown app</string>
+    <string name="statistics_package_resolving_label">Resolving app name...</string>
+    <string name="statistics_recent_requests_title">Last 10 requests</string>
+    <string name="statistics_recent_requests_empty">No requests in this time window.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
 
     <!-- Settings -->
     <string name="settings_module">Module</string>

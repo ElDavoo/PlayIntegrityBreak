@@ -4,36 +4,41 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.textview.MaterialTextView
 import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.common.TelemetryPackageStat
+import icu.nullptr.playintegritybreak.common.TelemetryRecentRequest
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.ui.util.setupToolbar
 import icu.nullptr.playintegritybreak.util.PackageHelper
+import it.eldavo.pib.R
+import it.eldavo.pib.databinding.FragmentStatisticsBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import it.eldavo.pib.R
-import it.eldavo.pib.databinding.FragmentStatisticsBinding
-import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 
 class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
     private val binding by viewBinding(FragmentStatisticsBinding::bind)
     private var loadJob: Job? = null
+    private var resolvePackageNamesJob: Job? = null
     private var selectedWindow: StatsWindow = StatsWindow.ALL
+    private var packageResolveToken: Long = 0L
+    private val packageLabelCache = ConcurrentHashMap<String, String>()
 
     private enum class StatsWindow(@param:StringRes val titleRes: Int, val durationMs: Long?) {
         ALL(R.string.statistics_window_all, null),
@@ -41,8 +46,14 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         WEEK(R.string.statistics_window_7d, 7 * 24 * 60 * 60 * 1000L),
     }
 
+    private data class PackageCell(
+        val container: LinearLayout,
+        val labelView: MaterialTextView,
+    )
+
     private fun refreshStats() {
         loadJob?.cancel()
+        resolvePackageNamesJob?.cancel()
         loadJob = lifecycleScope.launch {
             val fromTimestamp = selectedWindow.durationMs?.let { System.currentTimeMillis() - it } ?: 0L
             val stats = withContext(Dispatchers.IO) {
@@ -53,7 +64,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
             binding.toolbar.subtitle = getString(selectedWindow.titleRes)
             val updatedAt = if (stats.generatedAtMs > 0L) stats.generatedAtMs else System.currentTimeMillis()
-            val updatedAtText = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(updatedAt))
+            val updatedAtText = formatTimestamp(updatedAt)
             binding.updatedAt.text = getString(R.string.statistics_updated_at, updatedAtText)
             binding.userId.text = getString(R.string.statistics_user_id, ConfigManager.userId)
             binding.summaryText.text = getString(
@@ -73,11 +84,17 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 stats.queue.failed,
             )
 
-            renderTopPackages(stats.topPackages)
+            val unresolvedPackageTargets = mutableMapOf<String, MutableList<MaterialTextView>>()
+            renderTopPackages(stats.topPackages, unresolvedPackageTargets)
+            renderRecentRequests(stats.recentRequests, unresolvedPackageTargets)
+            resolvePackageNamesAsync(unresolvedPackageTargets)
         }
     }
 
-    private fun renderTopPackages(packages: List<icu.nullptr.playintegritybreak.common.TelemetryPackageStat>) {
+    private fun renderTopPackages(
+        packages: List<TelemetryPackageStat>,
+        unresolvedPackageTargets: MutableMap<String, MutableList<MaterialTextView>>,
+    ) {
         val table = binding.topPackagesTable
         table.removeAllViews()
 
@@ -92,7 +109,28 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
         table.addView(createHeaderRow())
         packages.forEachIndexed { index, stat ->
-            table.addView(createPackageRow(index + 1, stat))
+            table.addView(createPackageRow(index + 1, stat, unresolvedPackageTargets))
+        }
+    }
+
+    private fun renderRecentRequests(
+        requests: List<TelemetryRecentRequest>,
+        unresolvedPackageTargets: MutableMap<String, MutableList<MaterialTextView>>,
+    ) {
+        val container = binding.recentRequestsContainer
+        container.removeAllViews()
+
+        if (requests.isEmpty()) {
+            container.visibility = View.GONE
+            binding.recentRequestsEmpty.visibility = View.VISIBLE
+            return
+        }
+
+        container.visibility = View.VISIBLE
+        binding.recentRequestsEmpty.visibility = View.GONE
+
+        requests.forEachIndexed { index, request ->
+            container.addView(createRecentRequestRow(index + 1, request, unresolvedPackageTargets))
         }
     }
 
@@ -107,14 +145,26 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         }
     }
 
-    private fun createPackageRow(rank: Int, stat: icu.nullptr.playintegritybreak.common.TelemetryPackageStat): TableRow {
+    private fun createPackageRow(
+        rank: Int,
+        stat: TelemetryPackageStat,
+        unresolvedPackageTargets: MutableMap<String, MutableList<MaterialTextView>>,
+    ): TableRow {
         val successRatio = if (stat.responseCount > 0) {
             (((stat.responseCount - stat.errorCount).coerceAtLeast(0) * 100f) / stat.responseCount).toInt()
         } else {
             100
         }
-        val appLabel = runCatching { PackageHelper.loadAppLabel(stat.packageName) }
-            .getOrDefault(getString(R.string.statistics_package_unknown_label))
+        val cachedLabel = packageLabelCache[stat.packageName]
+        val packageCell = createPackageCell(
+            packageName = stat.packageName,
+            appLabel = cachedLabel ?: getString(R.string.statistics_package_resolving_label),
+            weight = 4.0f,
+        )
+        if (cachedLabel == null) {
+            unresolvedPackageTargets.getOrPut(stat.packageName) { mutableListOf() }
+                .add(packageCell.labelView)
+        }
 
         return createTableRow(isHeader = false).apply {
             addView(createCell(rank.toString(), 0.7f, alignEnd = true))
@@ -122,7 +172,54 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             addView(createCell(stat.responseCount.toString(), 1.0f, alignEnd = true))
             addView(createCell(stat.errorCount.toString(), 1.0f, alignEnd = true))
             addView(createCell("$successRatio%", 1.0f, alignEnd = true))
-            addView(createPackageCell(stat.packageName, appLabel, 4.0f))
+            addView(packageCell.container)
+        }
+    }
+
+    private fun createRecentRequestRow(
+        rank: Int,
+        request: TelemetryRecentRequest,
+        unresolvedPackageTargets: MutableMap<String, MutableList<MaterialTextView>>,
+    ): LinearLayout {
+        val cachedLabel = packageLabelCache[request.packageName]
+        val labelView = MaterialTextView(requireContext()).apply {
+            text = cachedLabel ?: getString(R.string.statistics_package_resolving_label)
+            setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_LabelMedium)
+            maxLines = 1
+            ellipsize = android.text.TextUtils.TruncateAt.END
+            alpha = 0.75f
+        }
+        if (cachedLabel == null) {
+            unresolvedPackageTargets.getOrPut(request.packageName) { mutableListOf() }
+                .add(labelView)
+        }
+
+        return LinearLayout(requireContext()).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            ).apply {
+                topMargin = if (rank == 1) 0 else 12
+            }
+            orientation = LinearLayout.VERTICAL
+
+            addView(MaterialTextView(requireContext()).apply {
+                text = getString(
+                    R.string.statistics_recent_requests_item_meta,
+                    rank,
+                    formatTimestamp(request.timestampMs),
+                )
+                setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_LabelMedium)
+            })
+
+            addView(MaterialTextView(requireContext()).apply {
+                text = request.packageName
+                setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium)
+                maxLines = 1
+                ellipsize = android.text.TextUtils.TruncateAt.END
+            })
+
+            addView(labelView)
         }
     }
 
@@ -166,7 +263,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         }
     }
 
-    private fun createPackageCell(packageName: String, appLabel: String, weight: Float): LinearLayout {
+    private fun createPackageCell(packageName: String, appLabel: String, weight: Float): PackageCell {
         val packageView = MaterialTextView(requireContext()).apply {
             text = packageName
             setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium)
@@ -182,12 +279,43 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             alpha = 0.75f
         }
 
-        return LinearLayout(requireContext()).apply {
+        val container = LinearLayout(requireContext()).apply {
             layoutParams = TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, weight)
             orientation = LinearLayout.VERTICAL
             addView(packageView)
             addView(labelView)
         }
+
+        return PackageCell(container = container, labelView = labelView)
+    }
+
+    private fun resolvePackageNamesAsync(unresolvedPackageTargets: Map<String, List<MaterialTextView>>) {
+        resolvePackageNamesJob?.cancel()
+        if (unresolvedPackageTargets.isEmpty()) return
+
+        val unknownLabel = getString(R.string.statistics_package_unknown_label)
+        val resolveToken = ++packageResolveToken
+
+        resolvePackageNamesJob = lifecycleScope.launch(Dispatchers.IO) {
+            unresolvedPackageTargets.forEach { (packageName, labelViews) ->
+                val appLabel = packageLabelCache[packageName] ?: runCatching {
+                    PackageHelper.loadAppLabel(packageName)
+                }.getOrDefault(unknownLabel).also { resolved ->
+                    packageLabelCache[packageName] = resolved
+                }
+
+                withContext(Dispatchers.Main) {
+                    if (!isAdded || resolveToken != packageResolveToken) return@withContext
+                    labelViews.forEach { labelView ->
+                        labelView.text = appLabel
+                    }
+                }
+            }
+        }
+    }
+
+    private fun formatTimestamp(timestampMs: Long): String {
+        return SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(timestampMs))
     }
 
     private fun onMenuOptionSelected(item: MenuItem) {
@@ -229,6 +357,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
     override fun onDestroyView() {
         loadJob?.cancel()
+        resolvePackageNamesJob?.cancel()
         super.onDestroyView()
     }
 }

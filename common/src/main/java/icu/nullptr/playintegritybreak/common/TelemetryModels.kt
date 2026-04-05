@@ -55,6 +55,12 @@ data class TelemetryPackageStat(
 )
 
 @Serializable
+data class TelemetryRecentRequest(
+    val timestampMs: Long,
+    val packageName: String,
+)
+
+@Serializable
 data class TelemetryStatsPayload(
     val generatedAtMs: Long = 0L,
     val fromTimestampMs: Long = 0L,
@@ -66,6 +72,7 @@ data class TelemetryStatsPayload(
     val totalErrorResponses: Int = 0,
     val queue: TelemetryQueueSnapshot = TelemetryQueueSnapshot(),
     val topPackages: List<TelemetryPackageStat> = emptyList(),
+    val recentRequests: List<TelemetryRecentRequest> = emptyList(),
 )
 
 object TelemetryJsonCodec {
