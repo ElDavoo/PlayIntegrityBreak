@@ -19,7 +19,7 @@ data class JsonConfig(
     var defaultDelaySyntheticResponseDelivery: Boolean = false,
     var maxLogSize: Int = 512,
     var telemetryEnabled: Boolean = false,
-    var telemetryBatchSize: Int = 100,
+    var telemetryBatchSize: Int = 10,
     var telemetryMaxAttempts: Int = 8,
     var telemetryBaseRetrySeconds: Int = 30,
     var telemetryLeaseDurationSeconds: Int = 120,

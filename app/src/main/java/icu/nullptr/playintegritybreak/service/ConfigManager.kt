@@ -21,6 +21,7 @@ import java.util.UUID
 
 object ConfigManager {
     private const val TAG = "ConfigManager"
+    private const val TELEMETRY_BATCH_SIZE_FIXED = 10
     private lateinit var config: JsonConfig
     private val serviceSyncScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     val configFile = File("${pibApp.filesDir.absolutePath}/config.json")
@@ -38,6 +39,7 @@ object ConfigManager {
             config.configVersion = BuildConfig.CONFIG_VERSION
             applyLoggerMigrationIfNeeded()
             ensureUserId()
+            normalizeFixedTelemetryConfig()
         }.onSuccess {
             saveConfig()
         }.onFailure { catch ->
@@ -46,6 +48,7 @@ object ConfigManager {
                 config.configVersion = BuildConfig.CONFIG_VERSION
                 applyLoggerMigrationIfNeeded()
                 ensureUserId()
+                normalizeFixedTelemetryConfig()
                 showToast(R.string.home_restore_config)
             }.onSuccess {
                 saveConfig()
@@ -145,9 +148,13 @@ object ConfigManager {
         }
 
     var telemetryBatchSize: Int
-        get() = config.telemetryBatchSize.coerceIn(1, 500)
-        set(value) {
-            config.telemetryBatchSize = value.coerceIn(1, 500)
+        get() = TELEMETRY_BATCH_SIZE_FIXED
+        set(_) {
+            if (config.telemetryBatchSize == TELEMETRY_BATCH_SIZE_FIXED) {
+                return
+            }
+
+            config.telemetryBatchSize = TELEMETRY_BATCH_SIZE_FIXED
             saveConfig()
         }
 
@@ -238,7 +245,12 @@ object ConfigManager {
         config = JsonConfig.parse(json)
         config.configVersion = BuildConfig.CONFIG_VERSION
         applyLoggerMigrationIfNeeded()
+        normalizeFixedTelemetryConfig()
         saveConfig()
+    }
+
+    private fun normalizeFixedTelemetryConfig() {
+        config.telemetryBatchSize = TELEMETRY_BATCH_SIZE_FIXED
     }
 
     private fun applyLoggerMigrationIfNeeded() {

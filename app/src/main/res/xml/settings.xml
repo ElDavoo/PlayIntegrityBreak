@@ -139,15 +139,5 @@
             app:singleLineTitle="false"
             android:title="@string/settings_telemetry_enabled"
             android:summary="@string/settings_telemetry_enabled_summary" />
-
-        <EditTextPreference
-            android:icon="@drawable/outline_sd_storage_24"
-            android:key="telemetryBatchSize"
-            android:defaultValue="100"
-            android:dependency="telemetryEnabled"
-            app:singleLineTitle="false"
-            android:title="@string/settings_telemetry_batch_size"
-            android:dialogMessage="@string/settings_telemetry_batch_size_summary"
-            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 </PreferenceScreen>

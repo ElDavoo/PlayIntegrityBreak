@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.text.InputType
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceDataStore
@@ -111,7 +109,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor
                 "darkTheme" -> PrefManager.darkTheme.toString()
                 "maxLogSize" -> ConfigManager.maxLogSize.toString()
-                "telemetryBatchSize" -> ConfigManager.telemetryBatchSize.toString()
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -151,7 +148,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "themeColor" -> PrefManager.themeColor = value!!
                 "darkTheme" -> PrefManager.darkTheme = value!!.toInt()
                 "maxLogSize" -> ConfigManager.maxLogSize = value!!.toInt()
-                "telemetryBatchSize" -> ConfigManager.telemetryBatchSize = value?.toIntOrNull() ?: 100
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -334,20 +330,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                     detailLog?.isEnabled = !(value as Boolean)
 
                     true
-                }
-            }
-
-            findPreference<EditTextPreference>("telemetryBatchSize")?.setOnBindEditTextListener {
-                it.inputType = InputType.TYPE_CLASS_NUMBER
-            }
-
-            findPreference<EditTextPreference>("telemetryBatchSize")?.setOnPreferenceChangeListener { _, value ->
-                val size = (value as? String)?.toIntOrNull() ?: return@setOnPreferenceChangeListener false
-                if (size in 1..500) {
-                    true
-                } else {
-                    showToast(R.string.settings_telemetry_batch_size_invalid)
-                    false
                 }
             }
 
