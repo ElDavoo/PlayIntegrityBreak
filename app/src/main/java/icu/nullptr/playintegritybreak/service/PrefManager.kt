@@ -15,6 +15,7 @@ import kotlinx.coroutines.runBlocking
 object PrefManager {
 
     private const val PREF_LOCALE = "language"
+    private const val PREF_LOCALE_MIGRATED_TO_APP_COMPAT = "language_migrated_to_app_compat"
 
     private const val PREF_SYSTEM_WALLPAPER = "system_wallpaper"
     private const val PREF_SYSTEM_WALLPAPER_ALPHA = "system_wallpaper_alpha"
@@ -46,6 +47,10 @@ object PrefManager {
     var locale: String
         get() = pref.getString(PREF_LOCALE, "SYSTEM")!!
         set(value) = pref.edit { putString(PREF_LOCALE, value) }
+
+    var localeMigratedToAppCompat: Boolean
+        get() = pref.getBoolean(PREF_LOCALE_MIGRATED_TO_APP_COMPAT, false)
+        set(value) = pref.edit { putBoolean(PREF_LOCALE_MIGRATED_TO_APP_COMPAT, value) }
 
     var darkTheme: Int
         get() = pref.getInt(PREF_DARK_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)

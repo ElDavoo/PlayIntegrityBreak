@@ -10,7 +10,7 @@ import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.ServiceClient
 import icu.nullptr.playintegritybreak.telemetry.TelemetryUploadScheduler
 import icu.nullptr.playintegritybreak.ui.util.showToast
-import icu.nullptr.playintegritybreak.util.ConfigUtils.Companion.getLocale
+import icu.nullptr.playintegritybreak.util.ConfigUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,9 +45,7 @@ class MyApp : Application() {
         TelemetryUploadScheduler.triggerImmediate(reason = "app-startup")
 
         AppCompatDelegate.setDefaultNightMode(PrefManager.darkTheme)
-        val config = resources.configuration
-        config.setLocale(getLocale())
-        resources.updateConfiguration(config, resources.displayMetrics)
+        ConfigUtils.initializeAppLocale()
 
         val handler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->

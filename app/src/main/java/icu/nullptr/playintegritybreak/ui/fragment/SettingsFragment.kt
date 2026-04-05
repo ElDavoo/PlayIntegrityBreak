@@ -3,7 +3,6 @@ package icu.nullptr.playintegritybreak.ui.fragment
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
@@ -31,7 +30,7 @@ import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.ui.util.setupToolbar
 import icu.nullptr.playintegritybreak.ui.util.showToast
 import icu.nullptr.playintegritybreak.ui.util.withAnimations
-import icu.nullptr.playintegritybreak.util.ConfigUtils.Companion.getLocale
+import icu.nullptr.playintegritybreak.util.ConfigUtils
 import icu.nullptr.playintegritybreak.util.LangList
 import icu.nullptr.playintegritybreak.util.PackageHelper.findEnabledAppComponent
 import kotlinx.coroutines.launch
@@ -105,7 +104,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
 
         override fun getString(key: String, defValue: String?): String {
             return when (key) {
-                "language" -> PrefManager.locale
+                "language" -> ConfigUtils.getAppLocaleTag()
                 "themeColor" -> PrefManager.themeColor
                 "darkTheme" -> PrefManager.darkTheme.toString()
                 "maxLogSize" -> ConfigManager.maxLogSize.toString()
@@ -144,7 +143,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
 
         override fun putString(key: String, value: String?) {
             when (key) {
-                "language" -> PrefManager.locale = value!!
+                "language" -> ConfigUtils.setAppLocale(value!!)
                 "themeColor" -> PrefManager.themeColor = value!!
                 "darkTheme" -> PrefManager.darkTheme = value!!.toInt()
                 "maxLogSize" -> ConfigManager.maxLogSize = value!!.toInt()
@@ -202,6 +201,19 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
     }
 
     class SettingsPreferenceFragment : PreferenceFragmentCompat() {
+        private fun getLocaleSummary(tag: String): String {
+            if (tag == "SYSTEM") return getString(R.string.follow_system)
+
+            val locale = Locale.forLanguageTag(tag)
+            val displayLocale = ConfigUtils.getCurrentDisplayLocale()
+
+            return if (locale.script.isNotEmpty()) {
+                locale.getDisplayScript(displayLocale)
+            } else {
+                locale.getDisplayName(displayLocale)
+            }
+        }
+
         private fun configureDataIsolation() {
             findPreference<Preference>("dataIsolation")?.let {
                 it.isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
@@ -239,7 +251,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
             setPreferencesFromResource(R.xml.settings, rootKey)
 
             findPreference<ListPreference>("language")?.let {
-                val userLocale = getLocale()
                 val entries = buildList {
                     for (lang in LangList.LOCALES) {
                         if (lang == "SYSTEM") add(getString(R.string.follow_system))
@@ -251,17 +262,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 }
                 it.entries = entries.toTypedArray()
                 it.entryValues = LangList.LOCALES
-                if (it.value == "SYSTEM") {
-                    it.summary = getString(R.string.follow_system)
-                } else {
-                    val locale = Locale.forLanguageTag(it.value)
-                    it.summary = if (!TextUtils.isEmpty(locale.script)) locale.getDisplayScript(userLocale) else locale.getDisplayName(userLocale)
-                }
+                it.summary = getLocaleSummary(it.value)
                 it.setOnPreferenceChangeListener { _, newValue ->
-                    val locale = getLocale()
-                    val config = resources.configuration
-                    config.setLocale(locale)
-                    pibApp.resources.updateConfiguration(config, resources.displayMetrics)
+                    val localeTag = newValue as String
+                    ConfigUtils.setAppLocale(localeTag)
+                    it.summary = getLocaleSummary(localeTag)
                     recreateMainActivity()
                     true
                 }

@@ -1,6 +1,5 @@
 package it.eldavo.pib.ui.activity
 
-import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
@@ -10,10 +9,8 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.navigation.findNavController
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.DynamicColorsOptions
-import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils
-import icu.nullptr.playintegritybreak.util.ConfigUtils
 import it.eldavo.pib.R
 import it.eldavo.pib.databinding.ActivityMainBinding
 
@@ -70,10 +67,6 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(getLocaleAppliedContext(newBase))
-    }
-
     fun applyWallpaperBackgroundColor(value: Int = PrefManager.systemWallpaperAlpha) {
         if (PrefManager.systemWallpaper) {
             val color = (value shl 24) + if (ThemeUtils.isNightMode(this)) {
@@ -84,13 +77,6 @@ class MainActivity : AppCompatActivity() {
 
             window.setBackgroundDrawable(color.toDrawable())
         }
-    }
-
-    private fun getLocaleAppliedContext(context: Context?): Context? {
-        val config = pibApp.resources.configuration
-        config.setLocale(ConfigUtils.getLocale())
-
-        return context?.createConfigurationContext(config)
     }
 
     private fun isNightModeEnabled(config: Configuration?) = config?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
