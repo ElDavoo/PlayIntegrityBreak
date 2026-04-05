@@ -2,6 +2,7 @@ package icu.nullptr.playintegritybreak.common
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import it.eldavo.pib.common.BuildConfig
 
 @Serializable
@@ -10,9 +11,12 @@ data class JsonConfig(
     var integrityModeMigrated: Boolean = false,
     var detailLog: Boolean = false,
     var errorOnlyLog: Boolean = false,
+    var defaultInterventionEnabled: Boolean = false,
     var defaultHookRewriteEnabled: Boolean = false,
     var defaultHookRewriteErrorCode: Int = -8,
     var defaultHookRewriteRemediable: Boolean = true,
+    var defaultDeliverSyntheticResponse: Boolean = true,
+    var defaultDelaySyntheticResponseDelivery: Boolean = false,
     var maxLogSize: Int = 512,
     var telemetryEnabled: Boolean = false,
     var telemetryBatchSize: Int = 100,
@@ -51,7 +55,16 @@ data class JsonConfig(
     }
 
     companion object {
-        fun parse(json: String) = encoder.decodeFromString<JsonConfig>(json)
+        fun parse(json: String): JsonConfig {
+            val parsed = encoder.decodeFromString<JsonConfig>(json)
+            val root = runCatching { encoder.parseToJsonElement(json).jsonObject }.getOrNull()
+
+            if (root != null && !root.containsKey("defaultInterventionEnabled")) {
+                parsed.defaultInterventionEnabled = parsed.defaultHookRewriteEnabled
+            }
+
+            return parsed
+        }
 
         private val encoder = Json {
             encodeDefaults = true

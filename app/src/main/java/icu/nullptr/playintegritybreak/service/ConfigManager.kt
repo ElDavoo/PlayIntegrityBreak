@@ -88,6 +88,13 @@ object ConfigManager {
             saveConfig()
         }
 
+    var defaultInterventionEnabled: Boolean
+        get() = config.defaultInterventionEnabled
+        set(value) {
+            config.defaultInterventionEnabled = value
+            saveConfig()
+        }
+
     var defaultHookRewriteEnabled: Boolean
         get() = config.defaultHookRewriteEnabled
         set(value) {
@@ -106,6 +113,20 @@ object ConfigManager {
         get() = config.defaultHookRewriteRemediable
         set(value) {
             config.defaultHookRewriteRemediable = value
+            saveConfig()
+        }
+
+    var defaultDeliverSyntheticResponse: Boolean
+        get() = config.defaultDeliverSyntheticResponse
+        set(value) {
+            config.defaultDeliverSyntheticResponse = value
+            saveConfig()
+        }
+
+    var defaultDelaySyntheticResponseDelivery: Boolean
+        get() = config.defaultDelaySyntheticResponseDelivery
+        set(value) {
+            config.defaultDelaySyntheticResponseDelivery = value
             saveConfig()
         }
 
@@ -239,11 +260,33 @@ object ConfigManager {
         }
     }
 
-    fun setDefaultRewriteConfig(enabled: Boolean, errorCode: Int, remediable: Boolean) {
-        config.defaultHookRewriteEnabled = enabled
+    fun setDefaultPolicyConfig(
+        interventionEnabled: Boolean,
+        rewriteEnabled: Boolean,
+        errorCode: Int,
+        remediable: Boolean,
+        deliverSyntheticResponse: Boolean,
+        delaySyntheticResponseDelivery: Boolean,
+    ) {
+        config.defaultInterventionEnabled = interventionEnabled
+        config.defaultHookRewriteEnabled = rewriteEnabled
         config.defaultHookRewriteErrorCode = errorCode
         config.defaultHookRewriteRemediable = remediable
+        config.defaultDeliverSyntheticResponse = deliverSyntheticResponse
+        config.defaultDelaySyntheticResponseDelivery = delaySyntheticResponseDelivery
         saveConfig()
+    }
+
+    fun setDefaultRewriteConfig(enabled: Boolean, errorCode: Int, remediable: Boolean) {
+        // Keep legacy behavior for existing call sites that expect rewrite and intervention to move together.
+        setDefaultPolicyConfig(
+            interventionEnabled = enabled,
+            rewriteEnabled = enabled,
+            errorCode = errorCode,
+            remediable = remediable,
+            deliverSyntheticResponse = config.defaultDeliverSyntheticResponse,
+            delaySyntheticResponseDelivery = config.defaultDelaySyntheticResponseDelivery,
+        )
     }
 
     private fun ensureUserId() {
@@ -310,7 +353,7 @@ object ConfigManager {
 
     fun isLoggerEnabled(packageName: String): Boolean {
         if (packageName == Constants.DEFAULT_APP_PACKAGE_NAME) {
-            return config.defaultHookRewriteEnabled
+            return config.defaultInterventionEnabled
         }
 
         val appConfig = config.scope[packageName] ?: return false

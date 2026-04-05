@@ -43,11 +43,13 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             else null
         } else if (isDefaultMode) {
             JsonConfig.AppConfig(
-                interventionEnabled = true,
+                interventionEnabled = ConfigManager.defaultInterventionEnabled,
                 rewriteIntegrityResponseOverridden = true,
                 rewriteIntegrityResponse = ConfigManager.defaultHookRewriteEnabled,
                 rewriteIntegrityErrorCode = ConfigManager.defaultHookRewriteErrorCode,
                 rewriteIntegrityErrorRemediable = ConfigManager.defaultHookRewriteRemediable,
+                deliverSyntheticResponse = ConfigManager.defaultDeliverSyntheticResponse,
+                delaySyntheticResponseDelivery = ConfigManager.defaultDelaySyntheticResponseDelivery,
             )
         } else {
             ConfigManager.getAppConfig(args.packageName)
@@ -75,10 +77,13 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                 )
             })
         } else if (isDefaultMode) {
-            ConfigManager.setDefaultRewriteConfig(
-                enabled = viewModel.pack.config.rewriteIntegrityResponse,
+            ConfigManager.setDefaultPolicyConfig(
+                interventionEnabled = viewModel.pack.config.interventionEnabled,
+                rewriteEnabled = viewModel.pack.config.rewriteIntegrityResponse,
                 errorCode = viewModel.pack.config.rewriteIntegrityErrorCode,
                 remediable = viewModel.pack.config.rewriteIntegrityErrorRemediable,
+                deliverSyntheticResponse = viewModel.pack.config.deliverSyntheticResponse,
+                delaySyntheticResponseDelivery = viewModel.pack.config.delaySyntheticResponseDelivery,
             )
         } else {
             ConfigManager.setAppConfig(
@@ -100,7 +105,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
         saveConfig()
     }
 
-    val subtitle: String by lazy {
+    val subtitle: String? by lazy {
         if (viewModel.pack.bulkConfig) {
             if (viewModel.pack.bulkApps.isNullOrEmpty()) {
                 return@lazy getString(R.string.title_bulk_config_wizard)
@@ -112,7 +117,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
         }
 
         if (isDefaultMode) {
-            return@lazy viewModel.pack.app
+            return@lazy null
         }
 
         return@lazy PackageHelper.loadAppLabel(viewModel.pack.app)
@@ -150,13 +155,13 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         private fun effectiveInterventionEnabled(): Boolean {
             if (isDefaultMode) {
-                return true
+                return pack.config.interventionEnabled
             }
 
             return if (pack.enabled) {
                 pack.config.interventionEnabled
             } else {
-                ConfigManager.defaultHookRewriteEnabled
+                ConfigManager.defaultInterventionEnabled
             }
         }
 
@@ -179,9 +184,9 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
         override fun getBoolean(key: String, defValue: Boolean): Boolean {
             return when (key) {
                 "enableIntervention" -> effectiveInterventionEnabled()
-                "enableLogger" -> effectiveRewriteEnabled()
-                "deliverSyntheticResponse" -> if (isDefaultMode) true else pack.config.deliverSyntheticResponse
-                "delaySyntheticResponseDelivery" -> if (isDefaultMode) false else pack.config.delaySyntheticResponseDelivery
+                "enableLogger" -> if (isDefaultMode) pack.config.rewriteIntegrityResponse else effectiveRewriteEnabled()
+                "deliverSyntheticResponse" -> pack.config.deliverSyntheticResponse
+                "delaySyntheticResponseDelivery" -> pack.config.delaySyntheticResponseDelivery
                 "rewriteIntegrityErrorRemediable" -> if (hasAppRewriteOverride()) {
                     pack.config.rewriteIntegrityErrorRemediable
                 } else {
@@ -205,34 +210,40 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
         override fun putBoolean(key: String, value: Boolean) {
             when (key) {
                 "enableIntervention" -> {
-                    if (isDefaultMode) return
-
                     pack.enabled = true
                     pack.config.interventionEnabled = value
                 }
                 "enableLogger" -> {
+                    if (isDefaultMode) {
+                        pack.enabled = true
+                        pack.config.rewriteIntegrityResponse = value
+                        return
+                    }
+
                     pack.enabled = true
                     pack.config.interventionEnabled = true
                     pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityResponse = value
                 }
                 "deliverSyntheticResponse" -> {
-                    if (isDefaultMode) return
-
                     pack.enabled = true
-                    pack.config.interventionEnabled = true
+                    if (!isDefaultMode) {
+                        pack.config.interventionEnabled = true
+                    }
                     pack.config.deliverSyntheticResponse = value
                 }
                 "delaySyntheticResponseDelivery" -> {
-                    if (isDefaultMode) return
-
                     pack.enabled = true
-                    pack.config.interventionEnabled = true
+                    if (!isDefaultMode) {
+                        pack.config.interventionEnabled = true
+                    }
                     pack.config.delaySyntheticResponseDelivery = value
                 }
                 "rewriteIntegrityErrorRemediable" -> {
                     pack.enabled = true
-                    pack.config.interventionEnabled = true
+                    if (!isDefaultMode) {
+                        pack.config.interventionEnabled = true
+                    }
                     pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityErrorRemediable = value
                 }
@@ -244,7 +255,9 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
             when (key) {
                 "rewriteIntegrityErrorCode" -> {
                     pack.enabled = true
-                    pack.config.interventionEnabled = true
+                    if (!isDefaultMode) {
+                        pack.config.interventionEnabled = true
+                    }
                     pack.config.rewriteIntegrityResponseOverridden = true
                     pack.config.rewriteIntegrityErrorCode = value?.toIntOrNull() ?: -8
                 }
@@ -296,11 +309,6 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                     .show(parentFragmentManager, "IntegrityErrorCodeReferenceDialog")
                 true
             }
-            if (isDefaultMode) {
-                findPreference<Preference>("enableIntervention")?.isVisible = false
-                findPreference<Preference>("deliverSyntheticResponse")?.isVisible = false
-                findPreference<Preference>("delaySyntheticResponseDelivery")?.isVisible = false
-            }
 
             findPreference<Preference>("appInfo")?.let {
                 if (pack.bulkConfig) {
@@ -311,10 +319,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                         it.summary = getString(R.string.title_bulk_config_wizard)
                     }
                 } else if (isDefaultMode) {
-                    it.icon = R.drawable.outline_shield_24.asDrawable(requireContext())
-                    it.title = pack.app
-                    it.summary = pack.app
-                    it.isSelectable = false
+                    it.isVisible = false
                 } else {
                     it.icon = PackageHelper.loadAppIcon(pack.app)
                     it.title = PackageHelper.loadAppLabel(pack.app)

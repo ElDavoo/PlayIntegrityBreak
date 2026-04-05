@@ -140,35 +140,37 @@ object PIBLoggerService : IPIBService.Stub() {
         val unknownCaller = callerPkg.isBlank() || callerPkg == "unknown"
         if (unknownCaller) {
             return synchronized(configLock) {
-                val defaultRewriteEnabled = config.defaultHookRewriteEnabled
+                val defaultInterventionEnabled = config.defaultInterventionEnabled
+                val defaultRewriteEnabled = defaultInterventionEnabled && config.defaultHookRewriteEnabled
                 IntegrityPolicy(
-                    enabled = defaultRewriteEnabled,
+                    enabled = defaultInterventionEnabled,
                     logRequest = true,
                     logResponse = true,
                     errorOnly = config.errorOnlyLog,
                     rewriteResponse = defaultRewriteEnabled,
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
                     rewriteRemediable = config.defaultHookRewriteRemediable,
-                    deliverSyntheticResponse = true,
-                    delaySyntheticResponseDelivery = false,
+                    deliverSyntheticResponse = config.defaultDeliverSyntheticResponse,
+                    delaySyntheticResponseDelivery = config.defaultDelaySyntheticResponseDelivery,
                 )
             }
         }
 
         synchronized(configLock) {
             val appConfig = config.scope[callerPkg]
-            val defaultRewriteEnabled = config.defaultHookRewriteEnabled
+            val defaultInterventionEnabled = config.defaultInterventionEnabled
+            val defaultRewriteEnabled = defaultInterventionEnabled && config.defaultHookRewriteEnabled
             if (appConfig == null) {
                 return IntegrityPolicy(
-                    enabled = defaultRewriteEnabled,
+                    enabled = defaultInterventionEnabled,
                     logRequest = true,
                     logResponse = true,
                     errorOnly = config.errorOnlyLog,
                     rewriteResponse = defaultRewriteEnabled,
                     rewriteErrorCode = config.defaultHookRewriteErrorCode,
                     rewriteRemediable = config.defaultHookRewriteRemediable,
-                    deliverSyntheticResponse = true,
-                    delaySyntheticResponseDelivery = false,
+                    deliverSyntheticResponse = config.defaultDeliverSyntheticResponse,
+                    delaySyntheticResponseDelivery = config.defaultDelaySyntheticResponseDelivery,
                 )
             }
 
@@ -188,7 +190,7 @@ object PIBLoggerService : IPIBService.Stub() {
 
             if (!appConfig.rewriteIntegrityResponseOverridden) {
                 return IntegrityPolicy(
-                    enabled = defaultRewriteEnabled,
+                    enabled = defaultInterventionEnabled,
                     logRequest = true,
                     logResponse = true,
                     errorOnly = config.errorOnlyLog,

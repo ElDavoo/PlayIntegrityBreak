@@ -115,9 +115,8 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
         // Original HMA-OSS devs
         with(binding.listPib) {
-            addDevItem(this, R.drawable.cont_fk, "frknkrc44", "HMA-OSS Developer", "https://github.com/frknkrc44")
-            addDevItem(this, R.drawable.cont_oukaromf, "OukaroMF", "HMA-OSS Alt Icon Designer", "https://github.com/OukaroMF")
-            addDevItem(this, R.drawable.cont_fk, "Everyone else", "All contributors of HMA-OSS", "https://github.com/frknkrc44/HMA-OSS")
+
+            addDevItem(this, R.drawable.cont_fk, "Everyone", "All contributors of HMA-OSS", "https://github.com/frknkrc44/HMA-OSS")
         }
 
         with(binding.listOpenSource) {
