@@ -107,23 +107,24 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
         // PIB devs
         with(binding.listPibOss) {
-            addDevItem(this, R.drawable.cont_fk, "frknkrc44", "PIB Developer", "https://github.com/frknkrc44")
-            addDevItem(this, R.drawable.cont_oukaromf, "OukaroMF", "PIB Alt Icon Designer", "https://github.com/OukaroMF")
+            backgroundTintList = tint
+            clipToOutline = true
+
+            addDevItem(this, R.drawable.cont_davo, "ElDavoo", "PIB Lead Developer", "https://github.com/ElDavoo")
         }
 
-        // Original PIB devs
+        // Original HMA-OSS devs
         with(binding.listPib) {
-            addDevItem(this, R.drawable.cont_nullptr, "nullptr", "PIB Developer", "https://github.com/Dr-TSNG")
-            addDevItem(this, R.drawable.cont_k, "Ketal", "PIB Collaborator", "https://github.com/keta1")
-            addDevItem(this, R.drawable.cont_aviraxp, "aviraxp", "PIB Collaborator", "https://github.com/aviraxp")
-            addDevItem(this, R.drawable.cont_icon_designer, "辉少菌", "PIB Icon Designer", "http://www.coolapk.com/u/1560270")
-            addDevItem(this, R.drawable.cont_cpp_master,  "LoveSy", "PIB Idea Provider", "https://github.com/yujincheng08")
+            addDevItem(this, R.drawable.cont_fk, "frknkrc44", "HMA-OSS Developer", "https://github.com/frknkrc44")
+            addDevItem(this, R.drawable.cont_oukaromf, "OukaroMF", "HMA-OSS Alt Icon Designer", "https://github.com/OukaroMF")
+            addDevItem(this, R.drawable.cont_fk, "Everyone else", "All contributors of HMA-OSS", "https://github.com/frknkrc44/HMA-OSS")
         }
 
         with(binding.listOpenSource) {
             backgroundTintList = tint
             clipToOutline = true
 
+            addLibraryItem(this, "HMA-OSS", "Affero General Public License 3.0", "https://github.com/frknkrc44/HMA-OSS")
             addLibraryItem(this, "EzXHelper", "Apache Software License 2.0", "https://github.com/KyuubiRan/EzXHelper")
             addLibraryItem(this, "Glide", "Simplified BSD License", "https://github.com/bumptech/glide")
         }

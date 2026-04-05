@@ -74,7 +74,9 @@ object TelemetryUploadScheduler {
 
     private fun createConstraints(): Constraints {
         return Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresBatteryNotLow(true)
+            .setRequiresDeviceIdle(true)
             .setRequiresCharging(true)
             .build()
     }
