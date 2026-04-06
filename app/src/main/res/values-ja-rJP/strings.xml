@@ -4,8 +4,6 @@
     <string name="title_logs">ログ</string>
     <string name="title_settings">設定</string>
     <string name="title_template_manage">Manage logging profiles</string>
-    <string name="title_template_settings">Logging profile settings</string>
-    <string name="title_settings_template_conf">Advanced logger configuration</string>
     <string name="title_app_manage">アプリの管理</string>
     <string name="title_app_select">アプリの選択</string>
     <string name="title_app_settings">アプリの設定</string>
@@ -14,24 +12,15 @@
     <string name="do_not_dual">PIB をセカンダリユーザーにインストールしないでください</string>
     <string name="show_crash_log">クラッシュログの表示</string>
     <string name="config_damaged">設定ファイルが破損しています。アプリデータを削除してください</string>
-    <string name="edit_list">リストの編集</string>
     <string name="delete">削除</string>
     <string name="enabled">有効</string>
     <string name="disabled">無効</string>
-    <string name="work_mode">作業モード</string>
-    <string name="blacklist">ブラックリスト</string>
-    <string name="whitelist">ホワイトリスト</string>
     <string name="application">アプリ</string>
     <string name="preferences">環境設定</string>
     <string name="refresh">更新</string>
     <string name="filter">フィルター</string>
-    <string name="yes">はい</string>
-    <string name="no">いいえ</string>
     <string name="search">検索</string>
-    <string name="system">システム</string>
-    <string name="add">追加</string>
     <string name="edit">編集</string>
-    <string name="apply">適用</string>
     <string name="follow_system">システムに従う</string>
     <!-- Home -->
     <string name="home_xposed_activated">モジュールは有効です [%s]</string>
@@ -40,22 +29,14 @@
     <string name="home_xposed_service_off">システムサービスは実行されていません</string>
     <string name="home_xposed_service_old">モジュールが更新されました。再起動してください</string>
     <string name="home_xposed_filter_count">PIB has captured total %d events</string>
-    <string name="home_manage">管理</string>
-    <string name="home_detection_test">検出のテスト</string>
-    <string name="home_download_test_app_title">テストアプリのダウンロード</string>
-    <string name="home_download_test_app_message">個別検知テストアプリを開発し、検知テストを移行しました。今すぐダウンロードしますか？</string>
-    <string name="home_backup_and_restore">バックアップ &amp; 復元</string>
     <string name="home_backup_config">バックアップ</string>
     <string name="home_restore_config">復元</string>
     <string name="home_import_successful">インポートしました</string>
     <string name="home_import_failed">インポートできませんでした</string>
-    <string name="home_import_app_version_too_old">モジュールのバージョンが古すぎます</string>
-    <string name="home_import_backup_version_too_old">バックアップのバージョンが古すぎます</string>
     <string name="home_import_file_damaged">バックアップファイルが破損しています</string>
     <string name="home_export_failed">エクスポートできませんでした</string>
     <string name="home_exported">設定をバックアップしました</string>
     <string name="home_new_update">利用可能なアップデート: %s</string>
-    <string name="home_update">アップデート: %s</string>
     <!-- App select -->
     <string name="list_show_system">システムアプリを表示</string>
     <string name="list_sorting">並び替え</string>
@@ -64,72 +45,19 @@
     <string name="list_sort_by_package_name">パッケージ名</string>
     <string name="list_sort_by_install_time">インストール日時</string>
     <string name="list_sort_by_update_time">アップデート日時</string>
-    <string name="list_empty_no_enabled">Enable Integrity logging for apps and they will appear here</string>
     <string name="list_empty_no_apps">アプリが見つかりませんでした。このアプリがすべてのパッケージを照会することを許可していない可能性があります</string>
-    <string name="list_empty_preset">No apps configured yet</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Use logging profiles to group target apps and quickly apply logger behavior.\n\nYou can assign profiles from app settings.</string>
-    <string name="template_new_blacklist">Create logging profile</string>
-    <string name="template_new_whitelist">Create strict logging profile</string>
-    <string name="template_new_setting">Create advanced logger profile</string>
-    <string name="template_delete">Are you sure you want to delete this logging profile?</string>
-    <string name="template_name">Profile name</string>
-    <string name="template_name_invalid">Profile name is invalid</string>
-    <string name="template_delete_title">Delete profile</string>
-    <string name="template_name_already_exist">Profile name already exists</string>
-    <string name="template_applied_count">Applied to %d apps</string>
-    <string name="template_setting_count">%d logger options configured</string>
-    <string name="template_apps_visible_count">%d apps targeted</string>
-    <string name="template_apps_invisible_count">%d apps excluded</string>
     <!-- App settings -->
-    <string name="app_enable_hide">Enable Integrity logging</string>
-    <string name="app_template_config">Logger profile</string>
-    <string name="app_choose_template">Choose logging profile</string>
-    <string name="app_choose_preset">Choose recommended profile</string>
     <string name="app_exclude_system_apps">Include system apps</string>
-    <string name="app_exclude_system_apps_summary">Enable only for troubleshooting; this can reduce stability.</string>
-    <string name="app_template_using">Using %d logging profiles</string>
-    <string name="app_preset_using">Using %d recommended profiles</string>
-    <string name="app_settings_preset_using">Using %d advanced profiles</string>
-    <string name="app_settings_template_using">Using %d logger templates</string>
-    <string name="app_extra_apps_visible_count">%d additional apps targeted</string>
-    <string name="app_extra_apps_invisible_count">%d additional apps excluded</string>
     <string name="app_warning_risky_package_title">危険なパッケージ</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
-    <string name="app_spoof">Compatibility options</string>
-    <string name="app_hide_installation_source">Spoof installation source</string>
-    <string name="app_hide_installation_source_desc">For compatibility testing, pretend installs came from Play Store for this target app.</string>
-    <string name="app_hide_installation_source_system">Also spoof system apps</string>
-    <string name="app_hide_installation_source_system_desc">Include system packages in spoofed installation source behavior.</string>
-    <string name="app_exclude_target_installation_source">Exclude target package</string>
-    <string name="app_exclude_target_installation_source_desc">Enable if this package is not distributed via Play Store.</string>
-    <string name="app_force_stop_warning">Force-stop the target app after changing configuration.</string>
-    <string name="app_invert_activity_launch_protection">アクティビティ起動保護を反転</string>
-    <string name="app_invert_activity_launch_protection_desc">このオプションは、設定の「アクティビティ起動保護を無効化」の選択を反転します。</string>
-    <string name="app_global_activity_launch_protection_state">保護はグローバルで%sです</string>
     <string name="app_force_stop_launch">Restart and launch</string>
     <string name="app_launch">起動</string>
     <string name="app_launch_failed">アプリの起動に失敗しました。詳細はログを確認してください</string>
-    <string name="app_restrict_zygote_permissions">Zygote 権限を制限</string>
-    <string name="app_restrict_zygote_permissions_desc">このオプションはクラッシュや誤検知を引き起こす可能性があります。慎重に選択してください。</string>
     <!-- Presets -->
-    <string name="title_preset">Recommended profiles</string>
-    <string name="title_settings_preset">Advanced profiles</string>
-    <string name="title_preset_manage">Show recommended profiles</string>
-    <string name="preset_xposed">LSPosed/Xposed environment</string>
-    <string name="preset_root_apps">Root-related apps</string>
-    <string name="preset_custom_rom">Custom ROM components</string>
-    <string name="preset_sus_apps">Suspicious apps</string>
-    <string name="preset_detector_apps">Detector/Checker apps</string>
-    <string name="preset_shizuku_dhizuku">Shizuku/Dhizuku apps</string>
     <!-- Settings preset names -->
-    <string name="settings_preset_accessibility">Accessibility preset</string>
-    <string name="settings_preset_dev_options">Developer options preset</string>
     <string name="settings_preset_input_method">Input method preset</string>
     <!-- Settings templates -->
-    <string name="settings_templates_database">Settings source</string>
-    <string name="settings_templates_name">Setting key</string>
-    <string name="settings_templates_value">Setting value</string>
     <!-- Settings templates - basic configuration types -->
     <string name="settings_templates_custom">Custom value</string>
     <string name="settings_templates_random_ssaid">Randomize SSAID</string>
@@ -139,7 +67,6 @@
     <string name="logs_empty">保存するログがありません</string>
     <string name="logs_saved">ログを保存しました</string>
     <!-- Filter logs -->
-    <string name="title_filter_logs">Event statistics</string>
     <!-- Settings -->
     <string name="settings_module">モジュール</string>
     <string name="settings_overwrite">上書き</string>
@@ -147,15 +74,13 @@
     <string name="settings_overwrite_summary">このカテゴリの項目は、スイッチがチェックされている場合、強制的に有効になります</string>
     <string name="settings_default_value">デフォルト値: %s</string>
     <string name="settings_data_isolation">データ分離</string>
-    <string name="settings_data_isolation_summary">アプリデータ: %s\nVold アプリデータ: %s\n強制マウント: %s</string>
+    <string name="settings_data_isolation_summary">アプリデータ: %1$s\nVold アプリデータ: %2$s\n強制マウント: %3$s</string>
     <string name="settings_data_isolation_unsupported">このオプションは Android 11 以上で使用できます</string>
     <string name="settings_app_data_isolation">アプリのデータ分離</string>
     <string name="settings_vold_app_data_isolation">Vold アプリのデータ分離</string>
     <string name="settings_warning">警告</string>
     <string name="settings_vold_warning">This enables an AOSP isolation feature for app external private storage. It may improve compatibility but can reduce stability and may stop working in future Android versions.</string>
-    <string name="settings_change_require_root">変更には root 権限が必要です</string>
     <string name="settings_need_reboot">変更には再起動が必要です</string>
-    <string name="settings_permission_denied">権限が拒否されました</string>
     <string name="settings_force_mount_data">すべてのアプリでデータ分離を強制</string>
     <string name="settings_force_mount_data_summary">ターゲット API が 30 未満のアプリに対してはデフォルトでデータ分離が無効になっています</string>
     <string name="settings_detail_log">デバッグ用詳細ログ</string>
@@ -175,26 +100,13 @@
     <string name="settings_launcher_icon">ランチャーアイコン</string>
     <string name="settings_error_only_log">エラーのみのログ</string>
     <string name="settings_language">言語</string>
-    <string name="settings_translate">翻訳に参加</string>
-    <string name="settings_translate_summary">%s をあなたの言語に翻訳するのにご協力ください</string>
     <string name="settings_theme">テーマ</string>
     <string name="settings_system_theme_color">システムのテーマカラー</string>
     <string name="settings_theme_color">テーマカラー</string>
-    <string name="settings_dark_theme">ダークテーマ</string>
     <string name="settings_pure_black_dark_theme">ピュアブラックテーマ</string>
     <string name="settings_pure_black_dark_theme_summary">ダークテーマが有効になっている場合、ピュアブラックテーマを使用します</string>
-    <string name="settings_service">Logger service</string>
-    <string name="settings_stop_system_service">Stop logger service</string>
-    <string name="settings_stop_system_service_summary">Reboot to start it again</string>
-    <string name="settings_is_clean_env">Clean logger runtime cache too?</string>
-    <string name="settings_is_clean_env_summary">Remove logger runtime cache in /data/misc/play_integrity_break_*.</string>
-    <string name="settings_force_clean_env">Force clean logger runtime cache (root)</string>
-    <string name="settings_force_clean_env_summary">Use only if logger service fails to start.</string>
-    <string name="settings_force_clean_env_toast_successful">Logger runtime cache cleaned</string>
     <string name="settings_update">アップデート</string>
     <string name="settings_disable_update">アップデートの通知を無効化</string>
-    <string name="settings_receive_beta_update">ベータ版アップデートを受け取る</string>
-    <string name="settings_receive_beta_update_summary">ベータ版は不安定である可能性があります</string>
     <!-- Bulk config wizard -->
     <string name="title_bulk_config_wizard">Bulk logger configuration</string>
     <!-- About -->

@@ -4,8 +4,6 @@
     <string name="title_logs">Logger</string>
     <string name="title_settings">Innstillinger</string>
     <string name="title_template_manage">Manage logging profiles</string>
-    <string name="title_template_settings">Logging profile settings</string>
-    <string name="title_settings_template_conf">Advanced logger configuration</string>
     <string name="title_app_manage">Velg applikasjoner</string>
     <string name="title_app_select">Velg applikasjoner</string>
     <string name="title_app_settings">Applikasjon innstillinger</string>
@@ -14,24 +12,15 @@
     <string name="do_not_dual">Ikke installer PIB til en sekundær bruker</string>
     <string name="show_crash_log">Show crash log</string>
     <string name="config_damaged">Config file damaged. Please clean the app data</string>
-    <string name="edit_list">Edit list</string>
     <string name="delete">Slett</string>
     <string name="enabled">Aktivert</string>
     <string name="disabled">Disabled</string>
-    <string name="work_mode">Work mode</string>
-    <string name="blacklist">Blacklist</string>
-    <string name="whitelist">Whitelist</string>
     <string name="application">Applikasjon</string>
     <string name="preferences">Preferanser</string>
     <string name="refresh">Refresh</string>
     <string name="filter">Filter</string>
-    <string name="yes">Ja</string>
-    <string name="no">Nei</string>
     <string name="search">Søk</string>
-    <string name="system">System</string>
-    <string name="add">Add</string>
     <string name="edit">Edit</string>
-    <string name="apply">Apply</string>
     <string name="follow_system">Follow system</string>
     <!-- Home -->
     <string name="home_xposed_activated">Modul aktivert [%s]</string>
@@ -40,22 +29,14 @@
     <string name="home_xposed_service_off">System service funker ikke</string>
     <string name="home_xposed_service_old">Modul oppdatert, trenger restart</string>
     <string name="home_xposed_filter_count">PIB has captured total %d events</string>
-    <string name="home_manage">Manage</string>
-    <string name="home_detection_test">Detection test</string>
-    <string name="home_download_test_app_title">Download test app</string>
-    <string name="home_download_test_app_message">We have developed an individual detection test app and migrated detection test to it. Do you want to download it now?</string>
-    <string name="home_backup_and_restore">Backup &amp; Restore</string>
     <string name="home_backup_config">Backup config</string>
     <string name="home_restore_config">Restore config</string>
     <string name="home_import_successful">Import successful</string>
     <string name="home_import_failed">Import failed</string>
-    <string name="home_import_app_version_too_old">Module version lower than the backup</string>
-    <string name="home_import_backup_version_too_old">Backup version too old</string>
     <string name="home_import_file_damaged">Backup file was damaged</string>
     <string name="home_export_failed">Export failed</string>
     <string name="home_exported">Backed up config</string>
     <string name="home_new_update">New update available: %s</string>
-    <string name="home_update">Update: %s</string>
     <!-- App select -->
     <string name="list_show_system">Show system apps</string>
     <string name="list_sorting">Sorting</string>
@@ -64,72 +45,19 @@
     <string name="list_sort_by_package_name">By package name</string>
     <string name="list_sort_by_install_time">By install time</string>
     <string name="list_sort_by_update_time">By update time</string>
-    <string name="list_empty_no_enabled">Enable Integrity logging for apps and they will appear here</string>
     <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
-    <string name="list_empty_preset">No apps configured yet</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Use logging profiles to group target apps and quickly apply logger behavior.\n\nYou can assign profiles from app settings.</string>
-    <string name="template_new_blacklist">Create logging profile</string>
-    <string name="template_new_whitelist">Create strict logging profile</string>
-    <string name="template_new_setting">Create advanced logger profile</string>
-    <string name="template_delete">Are you sure you want to delete this logging profile?</string>
-    <string name="template_name">Profile name</string>
-    <string name="template_name_invalid">Profile name is invalid</string>
-    <string name="template_delete_title">Delete profile</string>
-    <string name="template_name_already_exist">Profile name already exists</string>
-    <string name="template_applied_count">Applied to %d apps</string>
-    <string name="template_setting_count">%d logger options configured</string>
-    <string name="template_apps_visible_count">%d apps targeted</string>
-    <string name="template_apps_invisible_count">%d apps excluded</string>
     <!-- App settings -->
-    <string name="app_enable_hide">Enable Integrity logging</string>
-    <string name="app_template_config">Logger profile</string>
-    <string name="app_choose_template">Choose logging profile</string>
-    <string name="app_choose_preset">Choose recommended profile</string>
     <string name="app_exclude_system_apps">Include system apps</string>
-    <string name="app_exclude_system_apps_summary">Enable only for troubleshooting; this can reduce stability.</string>
-    <string name="app_template_using">Using %d logging profiles</string>
-    <string name="app_preset_using">Using %d recommended profiles</string>
-    <string name="app_settings_preset_using">Using %d advanced profiles</string>
-    <string name="app_settings_template_using">Using %d logger templates</string>
-    <string name="app_extra_apps_visible_count">%d additional apps targeted</string>
-    <string name="app_extra_apps_invisible_count">%d additional apps excluded</string>
     <string name="app_warning_risky_package_title">Risky package</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
-    <string name="app_spoof">Compatibility options</string>
-    <string name="app_hide_installation_source">Spoof installation source</string>
-    <string name="app_hide_installation_source_desc">For compatibility testing, pretend installs came from Play Store for this target app.</string>
-    <string name="app_hide_installation_source_system">Also spoof system apps</string>
-    <string name="app_hide_installation_source_system_desc">Include system packages in spoofed installation source behavior.</string>
-    <string name="app_exclude_target_installation_source">Exclude target package</string>
-    <string name="app_exclude_target_installation_source_desc">Enable if this package is not distributed via Play Store.</string>
-    <string name="app_force_stop_warning">Force-stop the target app after changing configuration.</string>
-    <string name="app_invert_activity_launch_protection">Invert Activity launch protection</string>
-    <string name="app_invert_activity_launch_protection_desc">This option will invert \"Disable Activity launch protection\" selection in Settings.</string>
-    <string name="app_global_activity_launch_protection_state">Protection is %s globally</string>
     <string name="app_force_stop_launch">Restart and launch</string>
     <string name="app_launch">Launch</string>
     <string name="app_launch_failed">App launch failed, check logs for more details</string>
-    <string name="app_restrict_zygote_permissions">Restrict Zygote permissions</string>
-    <string name="app_restrict_zygote_permissions_desc">This option can cause crashes or false positives, choose wisely.</string>
     <!-- Presets -->
-    <string name="title_preset">Recommended profiles</string>
-    <string name="title_settings_preset">Advanced profiles</string>
-    <string name="title_preset_manage">Show recommended profiles</string>
-    <string name="preset_xposed">LSPosed/Xposed environment</string>
-    <string name="preset_root_apps">Root-related apps</string>
-    <string name="preset_custom_rom">Custom ROM components</string>
-    <string name="preset_sus_apps">Suspicious apps</string>
-    <string name="preset_detector_apps">Detector/Checker apps</string>
-    <string name="preset_shizuku_dhizuku">Shizuku/Dhizuku apps</string>
     <!-- Settings preset names -->
-    <string name="settings_preset_accessibility">Accessibility preset</string>
-    <string name="settings_preset_dev_options">Developer options preset</string>
     <string name="settings_preset_input_method">Input method preset</string>
     <!-- Settings templates -->
-    <string name="settings_templates_database">Settings source</string>
-    <string name="settings_templates_name">Setting key</string>
-    <string name="settings_templates_value">Setting value</string>
     <!-- Settings templates - basic configuration types -->
     <string name="settings_templates_custom">Custom value</string>
     <string name="settings_templates_random_ssaid">Randomize SSAID</string>
@@ -139,7 +67,6 @@
     <string name="logs_empty">No logs to save</string>
     <string name="logs_saved">Logs saved</string>
     <!-- Filter logs -->
-    <string name="title_filter_logs">Event statistics</string>
     <!-- Settings -->
     <string name="settings_module">Module</string>
     <string name="settings_overwrite">Overwrite</string>
@@ -147,15 +74,13 @@
     <string name="settings_overwrite_summary">This category items will be forced as enabled if the switches are checked</string>
     <string name="settings_default_value">Default value: %s</string>
     <string name="settings_data_isolation">Data isolation</string>
-    <string name="settings_data_isolation_summary">App data: %s\nVold app data: %s\nForce mount: %s</string>
+    <string name="settings_data_isolation_summary">App data: %1$s\nVold app data: %2$s\nForce mount: %3$s</string>
     <string name="settings_data_isolation_unsupported">This option is only available on Android 11 and above</string>
     <string name="settings_app_data_isolation">App data isolation</string>
     <string name="settings_vold_app_data_isolation">Vold app data isolation</string>
     <string name="settings_warning">Warning</string>
     <string name="settings_vold_warning">This enables an AOSP isolation feature for app external private storage. It may improve compatibility but can reduce stability and may stop working in future Android versions.</string>
-    <string name="settings_change_require_root">Changing requires root permission</string>
     <string name="settings_need_reboot">Changing requires reboot</string>
-    <string name="settings_permission_denied">Permission denied</string>
     <string name="settings_force_mount_data">Enforce data isolation for all apps</string>
     <string name="settings_force_mount_data_summary">Data isolation is disabled for apps target API lower than 30 by default</string>
     <string name="settings_detail_log">Detail log for debugging</string>
@@ -175,26 +100,13 @@
     <string name="settings_launcher_icon">Launcher icon</string>
     <string name="settings_error_only_log">Error-only log</string>
     <string name="settings_language">Language</string>
-    <string name="settings_translate">Participate in translation</string>
-    <string name="settings_translate_summary">Help us translate %s into your language</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_system_theme_color">System theme color</string>
     <string name="settings_theme_color">Theme color</string>
-    <string name="settings_dark_theme">Dark theme</string>
     <string name="settings_pure_black_dark_theme">Pure black dark theme</string>
     <string name="settings_pure_black_dark_theme_summary">Use the pure black theme if dark theme is enabled</string>
-    <string name="settings_service">Logger service</string>
-    <string name="settings_stop_system_service">Stop logger service</string>
-    <string name="settings_stop_system_service_summary">Reboot to start it again</string>
-    <string name="settings_is_clean_env">Clean logger runtime cache too?</string>
-    <string name="settings_is_clean_env_summary">Remove logger runtime cache in /data/misc/play_integrity_break_*.</string>
-    <string name="settings_force_clean_env">Force clean logger runtime cache (root)</string>
-    <string name="settings_force_clean_env_summary">Use only if logger service fails to start.</string>
-    <string name="settings_force_clean_env_toast_successful">Logger runtime cache cleaned</string>
     <string name="settings_update">Update</string>
     <string name="settings_disable_update">Disable update notification</string>
-    <string name="settings_receive_beta_update">Receive beta update</string>
-    <string name="settings_receive_beta_update_summary">Beta version may be unstable</string>
     <!-- Bulk config wizard -->
     <string name="title_bulk_config_wizard">Bulk logger configuration</string>
     <!-- About -->

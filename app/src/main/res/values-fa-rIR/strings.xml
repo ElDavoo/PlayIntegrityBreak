@@ -4,8 +4,6 @@
     <string name="title_logs">لاگ ها</string>
     <string name="title_settings">تنظیمات </string>
     <string name="title_template_manage">Manage logging profiles</string>
-    <string name="title_template_settings">Logging profile settings</string>
-    <string name="title_settings_template_conf">Advanced logger configuration</string>
     <string name="title_app_manage">مدیریت برنامه ها</string>
     <string name="title_app_select">انتخاب برنامه ها</string>
     <string name="title_app_settings">تنظیمات برنامه</string>
@@ -14,24 +12,15 @@
     <string name="do_not_dual">برنامه PIB را در یوزر دوم نصب نکنید</string>
     <string name="show_crash_log">نمایش لاگ کرش</string>
     <string name="config_damaged">کانفیگ فایل آسیب دیده است. لطفاً کلیر دیتا کنید</string>
-    <string name="edit_list">ویرایش لیست</string>
     <string name="delete">حذف</string>
     <string name="enabled">فعال شده</string>
     <string name="disabled">غیرفعال شده</string>
-    <string name="work_mode">حالت کار</string>
-    <string name="blacklist">لیست سیاه</string>
-    <string name="whitelist">لیست سفید</string>
     <string name="application">برنامه</string>
     <string name="preferences">تنظیمات برگزیده </string>
     <string name="refresh">تازه کردن </string>
     <string name="filter">فیلتر</string>
-    <string name="yes">بله</string>
-    <string name="no">خیر</string>
     <string name="search">جستجو </string>
-    <string name="system">سیستم</string>
-    <string name="add">Add</string>
     <string name="edit">Edit</string>
-    <string name="apply">Apply</string>
     <string name="follow_system">دنبال کردن سیستم</string>
     <!-- Home -->
     <string name="home_xposed_activated">ماژول فعال شده [%s]</string>
@@ -40,22 +29,14 @@
     <string name="home_xposed_service_off">سرویس سیستم درحال اجرا نیست</string>
     <string name="home_xposed_service_old">ماژول بروزرسانی شد، ریبوت لازم</string>
     <string name="home_xposed_filter_count">PIB has captured total %d events</string>
-    <string name="home_manage">مدیریت </string>
-    <string name="home_detection_test">تست تشخیص </string>
-    <string name="home_download_test_app_title">دانلود برنامه تست</string>
-    <string name="home_download_test_app_message">ما یک برنامه تست تشخیص فردی ساختیم و تست تشخیص را به آن منتقل کردیم. آیا می‌خواهید آن را دانلود کنید؟</string>
-    <string name="home_backup_and_restore">پشتیبان گیری &amp; بازیابی</string>
     <string name="home_backup_config">پشتیبان گیری کانفیگ </string>
     <string name="home_restore_config">بازیابی کانفیگ </string>
     <string name="home_import_successful">با موفقیت وارد شد</string>
     <string name="home_import_failed">وارد نشد</string>
-    <string name="home_import_app_version_too_old">نسخه ماژول پایین‌تر از نسخه پشتیبان </string>
-    <string name="home_import_backup_version_too_old">نسخه پشتیبان خیلی قدیمی است</string>
     <string name="home_import_file_damaged">فایل پشتیبان آسیب دیده است</string>
     <string name="home_export_failed">صادر ناموفق بود</string>
     <string name="home_exported">کانفیگ پشتیبان گیری شده</string>
     <string name="home_new_update">بروزرسانی جدید در دسترس است: %s</string>
-    <string name="home_update">Update: %s</string>
     <!-- App select -->
     <string name="list_show_system">نمایش برنامه های سیستمی</string>
     <string name="list_sorting">مرتب‌سازی</string>
@@ -64,72 +45,19 @@
     <string name="list_sort_by_package_name">بر اساس بسته برنامه</string>
     <string name="list_sort_by_install_time">بر اساس زمان نصب</string>
     <string name="list_sort_by_update_time">بر اساس زمان بروزرسانی </string>
-    <string name="list_empty_no_enabled">Enable Integrity logging for apps and they will appear here</string>
     <string name="list_empty_no_apps">هیچ برنامه ای پیدا نشد، شاید به این برنامه اجازه نداده‌اید که همه بسته ها را جستجو کند</string>
-    <string name="list_empty_preset">No apps configured yet</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Use logging profiles to group target apps and quickly apply logger behavior.\n\nYou can assign profiles from app settings.</string>
-    <string name="template_new_blacklist">Create logging profile</string>
-    <string name="template_new_whitelist">Create strict logging profile</string>
-    <string name="template_new_setting">Create advanced logger profile</string>
-    <string name="template_delete">Are you sure you want to delete this logging profile?</string>
-    <string name="template_name">Profile name</string>
-    <string name="template_name_invalid">Profile name is invalid</string>
-    <string name="template_delete_title">Delete profile</string>
-    <string name="template_name_already_exist">Profile name already exists</string>
-    <string name="template_applied_count">Applied to %d apps</string>
-    <string name="template_setting_count">%d logger options configured</string>
-    <string name="template_apps_visible_count">%d apps targeted</string>
-    <string name="template_apps_invisible_count">%d apps excluded</string>
     <!-- App settings -->
-    <string name="app_enable_hide">Enable Integrity logging</string>
-    <string name="app_template_config">Logger profile</string>
-    <string name="app_choose_template">Choose logging profile</string>
-    <string name="app_choose_preset">Choose recommended profile</string>
     <string name="app_exclude_system_apps">Include system apps</string>
-    <string name="app_exclude_system_apps_summary">Enable only for troubleshooting; this can reduce stability.</string>
-    <string name="app_template_using">Using %d logging profiles</string>
-    <string name="app_preset_using">Using %d recommended profiles</string>
-    <string name="app_settings_preset_using">Using %d advanced profiles</string>
-    <string name="app_settings_template_using">Using %d logger templates</string>
-    <string name="app_extra_apps_visible_count">%d additional apps targeted</string>
-    <string name="app_extra_apps_invisible_count">%d additional apps excluded</string>
     <string name="app_warning_risky_package_title">بسته‌ی پرخطر</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
-    <string name="app_spoof">Compatibility options</string>
-    <string name="app_hide_installation_source">Spoof installation source</string>
-    <string name="app_hide_installation_source_desc">For compatibility testing, pretend installs came from Play Store for this target app.</string>
-    <string name="app_hide_installation_source_system">Also spoof system apps</string>
-    <string name="app_hide_installation_source_system_desc">Include system packages in spoofed installation source behavior.</string>
-    <string name="app_exclude_target_installation_source">Exclude target package</string>
-    <string name="app_exclude_target_installation_source_desc">Enable if this package is not distributed via Play Store.</string>
-    <string name="app_force_stop_warning">Force-stop the target app after changing configuration.</string>
-    <string name="app_invert_activity_launch_protection">محافظت در برابر اجرای فعالیت معکوس</string>
-    <string name="app_invert_activity_launch_protection_desc">این گزینه، گزینه‌ی «محافظت در برابر اجرای فعالیت معکوس» را در تنظیمات فعال می‌کند.</string>
-    <string name="app_global_activity_launch_protection_state">حفاظت %s فعال است</string>
     <string name="app_force_stop_launch">Restart and launch</string>
     <string name="app_launch">شروع</string>
     <string name="app_launch_failed">شروع برنامه شکست خورد، لاگ‌ها را بررسی کنید</string>
-    <string name="app_restrict_zygote_permissions">Restrict Zygote permissions</string>
-    <string name="app_restrict_zygote_permissions_desc">This option can cause crashes or false positives, choose wisely.</string>
     <!-- Presets -->
-    <string name="title_preset">Recommended profiles</string>
-    <string name="title_settings_preset">Advanced profiles</string>
-    <string name="title_preset_manage">Show recommended profiles</string>
-    <string name="preset_xposed">LSPosed/Xposed environment</string>
-    <string name="preset_root_apps">Root-related apps</string>
-    <string name="preset_custom_rom">Custom ROM components</string>
-    <string name="preset_sus_apps">Suspicious apps</string>
-    <string name="preset_detector_apps">Detector/Checker apps</string>
-    <string name="preset_shizuku_dhizuku">Shizuku/Dhizuku apps</string>
     <!-- Settings preset names -->
-    <string name="settings_preset_accessibility">Accessibility preset</string>
-    <string name="settings_preset_dev_options">Developer options preset</string>
     <string name="settings_preset_input_method">Input method preset</string>
     <!-- Settings templates -->
-    <string name="settings_templates_database">Settings source</string>
-    <string name="settings_templates_name">Setting key</string>
-    <string name="settings_templates_value">Setting value</string>
     <!-- Settings templates - basic configuration types -->
     <string name="settings_templates_custom">Custom value</string>
     <string name="settings_templates_random_ssaid">Randomize SSAID</string>
@@ -139,7 +67,6 @@
     <string name="logs_empty">هیچ لاگی برای ذخیره نیست</string>
     <string name="logs_saved">لاگ‌ها ذخیره شدند</string>
     <!-- Filter logs -->
-    <string name="title_filter_logs">Event statistics</string>
     <!-- Settings -->
     <string name="settings_module">ماژول</string>
     <string name="settings_overwrite">بازنویسی</string>
@@ -147,15 +74,13 @@
     <string name="settings_overwrite_summary">اگر سوئیچ‌ها علامت زده شوند، موارد این دسته به صورت اجباری فعال می‌شوند.</string>
     <string name="settings_default_value">مقدار پیشفرض: %s</string>
     <string name="settings_data_isolation">جداسازی داده‌ها</string>
-    <string name="settings_data_isolation_summary">داده‌های برنامه: %s\nحذف داده‌های برنامه: %s\nنصب اجباری: %s</string>
+    <string name="settings_data_isolation_summary">داده‌های برنامه: %1$s\nحذف داده‌های برنامه: %2$s\nنصب اجباری: %3$s</string>
     <string name="settings_data_isolation_unsupported">این قابلیت فقط در اندروید 11 و بالاتر در دسترس است</string>
     <string name="settings_app_data_isolation">جداسازی داده‌های برنامه</string>
     <string name="settings_vold_app_data_isolation">جداسازی داده‌های برنامه خشونت</string>
     <string name="settings_warning">هشدار</string>
     <string name="settings_vold_warning">This enables an AOSP isolation feature for app external private storage. It may improve compatibility but can reduce stability and may stop working in future Android versions.</string>
-    <string name="settings_change_require_root">Changing requires root permission</string>
     <string name="settings_need_reboot">Changing requires reboot</string>
-    <string name="settings_permission_denied">Permission denied</string>
     <string name="settings_force_mount_data">Enforce data isolation for all apps</string>
     <string name="settings_force_mount_data_summary">Data isolation is disabled for apps target API lower than 30 by default</string>
     <string name="settings_detail_log">Detail log for debugging</string>
@@ -175,26 +100,13 @@
     <string name="settings_launcher_icon">Launcher icon</string>
     <string name="settings_error_only_log">Error-only log</string>
     <string name="settings_language">Language</string>
-    <string name="settings_translate">Participate in translation</string>
-    <string name="settings_translate_summary">Help us translate %s into your language</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_system_theme_color">System theme color</string>
     <string name="settings_theme_color">Theme color</string>
-    <string name="settings_dark_theme">Dark theme</string>
     <string name="settings_pure_black_dark_theme">Pure black dark theme</string>
     <string name="settings_pure_black_dark_theme_summary">Use the pure black theme if dark theme is enabled</string>
-    <string name="settings_service">Logger service</string>
-    <string name="settings_stop_system_service">Stop logger service</string>
-    <string name="settings_stop_system_service_summary">Reboot to start it again</string>
-    <string name="settings_is_clean_env">Clean logger runtime cache too?</string>
-    <string name="settings_is_clean_env_summary">Remove logger runtime cache in /data/misc/play_integrity_break_*.</string>
-    <string name="settings_force_clean_env">Force clean logger runtime cache (root)</string>
-    <string name="settings_force_clean_env_summary">Use only if logger service fails to start.</string>
-    <string name="settings_force_clean_env_toast_successful">Logger runtime cache cleaned</string>
     <string name="settings_update">Update</string>
     <string name="settings_disable_update">Disable update notification</string>
-    <string name="settings_receive_beta_update">Receive beta update</string>
-    <string name="settings_receive_beta_update_summary">Beta version may be unstable</string>
     <!-- Bulk config wizard -->
     <string name="title_bulk_config_wizard">Bulk logger configuration</string>
     <!-- About -->

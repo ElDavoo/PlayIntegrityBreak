@@ -4,8 +4,6 @@
     <string name="title_logs">บันทึกการทำงาน</string>
     <string name="title_settings">การตั้งค่า</string>
     <string name="title_template_manage">Manage logging profiles</string>
-    <string name="title_template_settings">Logging profile settings</string>
-    <string name="title_settings_template_conf">Advanced logger configuration</string>
     <string name="title_app_manage">จัดการแอป</string>
     <string name="title_app_select">เลือกแอป</string>
     <string name="title_app_settings">การตั้งค่าแอป</string>
@@ -14,24 +12,15 @@
     <string name="do_not_dual">ไม่ต้องติดตั้ง PIB สำหรับผู้ใช้รอง</string>
     <string name="show_crash_log">แสดงบันทึกข้อขัดข้อง</string>
     <string name="config_damaged">ไฟล์การตั้งค่าเสียหาย กรุณาล้างข้อมูลแอป</string>
-    <string name="edit_list">แก้ไขรายการ</string>
     <string name="delete">ลบ</string>
     <string name="enabled">เปิดใช้งาน</string>
     <string name="disabled">ปิดใช้งาน</string>
-    <string name="work_mode">โหมดการทำงาน</string>
-    <string name="blacklist">บัญชีดำ</string>
-    <string name="whitelist">รายการอนุญาต</string>
     <string name="application">แอปพลิเคชัน</string>
     <string name="preferences">การตั้งค่า</string>
     <string name="refresh">รีเฟรช</string>
     <string name="filter">ตัวกรอง</string>
-    <string name="yes">ใช่</string>
-    <string name="no">ไม่</string>
     <string name="search">ค้นหา</string>
-    <string name="system">ระบบ</string>
-    <string name="add">เพิ่ม</string>
     <string name="edit">แก้ไข</string>
-    <string name="apply">นำไปใช้</string>
     <string name="follow_system">ตามระบบ</string>
     <!-- Home -->
     <string name="home_xposed_activated">โมดูลถูกเปิดใช้งานแล้ว [%s]</string>
@@ -40,22 +29,14 @@
     <string name="home_xposed_service_off">บริการระบบไม่ทำงาน</string>
     <string name="home_xposed_service_old">โมดูลได้รับการอัปเดต จำเป็นต้องรีบูต</string>
     <string name="home_xposed_filter_count">PIB has captured total %d events</string>
-    <string name="home_manage">จัดการ</string>
-    <string name="home_detection_test">ทดสอบการตรวจจับ</string>
-    <string name="home_download_test_app_title">ดาวน์โหลดแอปทดสอบ</string>
-    <string name="home_download_test_app_message">เราได้พัฒนาแอปทดสอบการตรวจจับแยกต่างหาก และย้ายระบบทดสอบไปยังแอปนั้นแล้ว คุณต้องการดาวน์โหลดตอนนี้หรือไม่?</string>
-    <string name="home_backup_and_restore">สำรองข้อมูลและกู้คืน</string>
     <string name="home_backup_config">สำรองการตั้งค่า</string>
     <string name="home_restore_config">กู้คืนการตั้งค่า</string>
     <string name="home_import_successful">นำเข้าสำเร็จ</string>
     <string name="home_import_failed">นำเข้าไม่สำเร็จ</string>
-    <string name="home_import_app_version_too_old">เวอร์ชันโมดูลต่ำกว่าการสำรองข้อมูล</string>
-    <string name="home_import_backup_version_too_old">เวอร์ชันไฟล์สำรองเก่าเกินไป</string>
     <string name="home_import_file_damaged">ไฟล์สำรองข้อมูลเสียหาย</string>
     <string name="home_export_failed">ส่งออกล้มเหลว</string>
     <string name="home_exported">สำรองการตั้งค่าแล้ว</string>
     <string name="home_new_update">มีอัปเดตใหม่: %s</string>
-    <string name="home_update">อัปเดต: %s</string>
     <!-- App select -->
     <string name="list_show_system">แสดงแอประบบ</string>
     <string name="list_sorting">การจัดเรียง</string>
@@ -64,72 +45,19 @@
     <string name="list_sort_by_package_name">ตามชื่อแพ็กเกจ</string>
     <string name="list_sort_by_install_time">ตามเวลาติดตั้ง</string>
     <string name="list_sort_by_update_time">ตามเวลาอัปเดต</string>
-    <string name="list_empty_no_enabled">Enable Integrity logging for apps and they will appear here</string>
     <string name="list_empty_no_apps">ไม่พบแอปพลิเคชัน อาจเป็นเพราะคุณยังไม่ได้อนุญาตให้แอปนี้ค้นหาทุกแพ็กเกจ</string>
-    <string name="list_empty_preset">No apps configured yet</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Use logging profiles to group target apps and quickly apply logger behavior.\n\nYou can assign profiles from app settings.</string>
-    <string name="template_new_blacklist">Create logging profile</string>
-    <string name="template_new_whitelist">Create strict logging profile</string>
-    <string name="template_new_setting">Create advanced logger profile</string>
-    <string name="template_delete">Are you sure you want to delete this logging profile?</string>
-    <string name="template_name">Profile name</string>
-    <string name="template_name_invalid">Profile name is invalid</string>
-    <string name="template_delete_title">Delete profile</string>
-    <string name="template_name_already_exist">Profile name already exists</string>
-    <string name="template_applied_count">Applied to %d apps</string>
-    <string name="template_setting_count">%d logger options configured</string>
-    <string name="template_apps_visible_count">%d apps targeted</string>
-    <string name="template_apps_invisible_count">%d apps excluded</string>
     <!-- App settings -->
-    <string name="app_enable_hide">Enable Integrity logging</string>
-    <string name="app_template_config">Logger profile</string>
-    <string name="app_choose_template">Choose logging profile</string>
-    <string name="app_choose_preset">Choose recommended profile</string>
     <string name="app_exclude_system_apps">Include system apps</string>
-    <string name="app_exclude_system_apps_summary">Enable only for troubleshooting; this can reduce stability.</string>
-    <string name="app_template_using">Using %d logging profiles</string>
-    <string name="app_preset_using">Using %d recommended profiles</string>
-    <string name="app_settings_preset_using">Using %d advanced profiles</string>
-    <string name="app_settings_template_using">Using %d logger templates</string>
-    <string name="app_extra_apps_visible_count">%d additional apps targeted</string>
-    <string name="app_extra_apps_invisible_count">%d additional apps excluded</string>
     <string name="app_warning_risky_package_title">แพ็กเกจที่มีความเสี่ยง</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
-    <string name="app_spoof">Compatibility options</string>
-    <string name="app_hide_installation_source">Spoof installation source</string>
-    <string name="app_hide_installation_source_desc">For compatibility testing, pretend installs came from Play Store for this target app.</string>
-    <string name="app_hide_installation_source_system">Also spoof system apps</string>
-    <string name="app_hide_installation_source_system_desc">Include system packages in spoofed installation source behavior.</string>
-    <string name="app_exclude_target_installation_source">Exclude target package</string>
-    <string name="app_exclude_target_installation_source_desc">Enable if this package is not distributed via Play Store.</string>
-    <string name="app_force_stop_warning">Force-stop the target app after changing configuration.</string>
-    <string name="app_invert_activity_launch_protection">กลับค่าการป้องกันการเปิด Activity</string>
-    <string name="app_invert_activity_launch_protection_desc">ตัวเลือกนี้จะกลับค่าการตั้งค่า “ปิดการป้องกันการเปิด Activity” ในการตั้งค่า</string>
-    <string name="app_global_activity_launch_protection_state">การป้องกันถูกตั้งค่าเป็น %s ทั่วทั้งระบบ</string>
     <string name="app_force_stop_launch">Restart and launch</string>
     <string name="app_launch">เปิดแอป</string>
     <string name="app_launch_failed">ไม่สามารถเปิดแอปได้ โปรดตรวจสอบ log เพื่อดูรายละเอียดเพิ่มเติม</string>
-    <string name="app_restrict_zygote_permissions">จำกัดสิทธิ์ของ Zygote</string>
-    <string name="app_restrict_zygote_permissions_desc">ตัวเลือกนี้อาจทำให้แอปแครชหรือเกิดการตรวจจับผิดพลาด โปรดเลือกใช้อย่างระมัดระวัง</string>
     <!-- Presets -->
-    <string name="title_preset">Recommended profiles</string>
-    <string name="title_settings_preset">Advanced profiles</string>
-    <string name="title_preset_manage">Show recommended profiles</string>
-    <string name="preset_xposed">LSPosed/Xposed environment</string>
-    <string name="preset_root_apps">Root-related apps</string>
-    <string name="preset_custom_rom">Custom ROM components</string>
-    <string name="preset_sus_apps">Suspicious apps</string>
-    <string name="preset_detector_apps">Detector/Checker apps</string>
-    <string name="preset_shizuku_dhizuku">Shizuku/Dhizuku apps</string>
     <!-- Settings preset names -->
-    <string name="settings_preset_accessibility">Accessibility preset</string>
-    <string name="settings_preset_dev_options">Developer options preset</string>
     <string name="settings_preset_input_method">Input method preset</string>
     <!-- Settings templates -->
-    <string name="settings_templates_database">Settings source</string>
-    <string name="settings_templates_name">Setting key</string>
-    <string name="settings_templates_value">Setting value</string>
     <!-- Settings templates - basic configuration types -->
     <string name="settings_templates_custom">Custom value</string>
     <string name="settings_templates_random_ssaid">Randomize SSAID</string>
@@ -139,7 +67,6 @@
     <string name="logs_empty">ไม่มีบันทึกให้บันทึก</string>
     <string name="logs_saved">บันทึกถูกบันทึกแล้ว</string>
     <!-- Filter logs -->
-    <string name="title_filter_logs">Event statistics</string>
     <!-- Settings -->
     <string name="settings_module">โมดูล</string>
     <string name="settings_overwrite">เขียนทับ</string>
@@ -147,17 +74,15 @@
     <string name="settings_overwrite_summary">รายการในหมวดหมู่นี้จะถูกบังคับให้เปิดใช้งานหากสวิตช์ถูกเลือก</string>
     <string name="settings_default_value">ค่าเริ่มต้น: %s</string>
     <string name="settings_data_isolation">การแยกข้อมูล</string>
-    <string name="settings_data_isolation_summary">ข้อมูลแอป: %s
-Vold ข้อมูลแอป: %s
-บังคับเมานต์: %s</string>
+    <string name="settings_data_isolation_summary">ข้อมูลแอป: %1$s
+Vold ข้อมูลแอป: %2$s
+บังคับเมานต์: %3$s</string>
     <string name="settings_data_isolation_unsupported">ตัวเลือกนี้รองรับเฉพาะ Android 11 ขึ้นไปเท่านั้น</string>
     <string name="settings_app_data_isolation">แยกข้อมูลแอป</string>
     <string name="settings_vold_app_data_isolation">การแยกข้อมูลแอปด้วย Vold</string>
     <string name="settings_warning">คำเตือน</string>
     <string name="settings_vold_warning">This enables an AOSP isolation feature for app external private storage. It may improve compatibility but can reduce stability and may stop working in future Android versions.</string>
-    <string name="settings_change_require_root">การเปลี่ยนแปลงต้องใช้สิทธิ์รูท</string>
     <string name="settings_need_reboot">การเปลี่ยนแปลงต้องรีบูต</string>
-    <string name="settings_permission_denied">การอนุญาตถูกปฏิเสธ</string>
     <string name="settings_force_mount_data">บังคับแยกข้อมูลสำหรับทุกแอป</string>
     <string name="settings_force_mount_data_summary">ค่าเริ่มต้นจะปิดการแยกข้อมูลสำหรับแอปที่ target API ต่ำกว่า 30</string>
     <string name="settings_detail_log">บันทึกรายละเอียดสำหรับการดีบัก</string>
@@ -177,26 +102,13 @@ Vold ข้อมูลแอป: %s
     <string name="settings_launcher_icon">ไอคอนตัวเรียกใช้งาน</string>
     <string name="settings_error_only_log">บันทึกเฉพาะข้อผิดพลาด</string>
     <string name="settings_language">ภาษา</string>
-    <string name="settings_translate">เข้าร่วมการแปลภาษา</string>
-    <string name="settings_translate_summary">ช่วยเราแปล %s เป็นภาษาของคุณ</string>
     <string name="settings_theme">ธีม</string>
     <string name="settings_system_theme_color">สีธีมของระบบ</string>
     <string name="settings_theme_color">สีธีม</string>
-    <string name="settings_dark_theme">ธีมมืด</string>
     <string name="settings_pure_black_dark_theme">ธีมมืดสีดำสนิท</string>
     <string name="settings_pure_black_dark_theme_summary">ใช้ธีมสีดำสนิทเมื่อเปิดใช้งานธีมมืด</string>
-    <string name="settings_service">Logger service</string>
-    <string name="settings_stop_system_service">Stop logger service</string>
-    <string name="settings_stop_system_service_summary">Reboot to start it again</string>
-    <string name="settings_is_clean_env">Clean logger runtime cache too?</string>
-    <string name="settings_is_clean_env_summary">Remove logger runtime cache in /data/misc/play_integrity_break_*.</string>
-    <string name="settings_force_clean_env">Force clean logger runtime cache (root)</string>
-    <string name="settings_force_clean_env_summary">Use only if logger service fails to start.</string>
-    <string name="settings_force_clean_env_toast_successful">Logger runtime cache cleaned</string>
     <string name="settings_update">อัปเดต</string>
     <string name="settings_disable_update">ปิดการแจ้งเตือนอัปเดต</string>
-    <string name="settings_receive_beta_update">รับการอัปเดตเวอร์ชันทดลอง (เบต้า)</string>
-    <string name="settings_receive_beta_update_summary">เวอร์ชันเบต้าอาจไม่เสถียร</string>
     <!-- Bulk config wizard -->
     <string name="title_bulk_config_wizard">Bulk logger configuration</string>
     <!-- About -->

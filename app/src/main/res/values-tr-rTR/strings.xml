@@ -4,8 +4,6 @@
     <string name="title_logs">Kayıtlar</string>
     <string name="title_settings">Ayarlar</string>
     <string name="title_template_manage">Manage logging profiles</string>
-    <string name="title_template_settings">Logging profile settings</string>
-    <string name="title_settings_template_conf">Advanced logger configuration</string>
     <string name="title_app_manage">Uygulamaları yönet</string>
     <string name="title_app_select">Uygulama seç</string>
     <string name="title_app_settings">Uygulama ayarları</string>
@@ -14,24 +12,15 @@
     <string name="do_not_dual">PIB’yı ikincil kullanıcıya yüklemeyin</string>
     <string name="show_crash_log">Çökme kaydını göster</string>
     <string name="config_damaged">Yapılandırma dosyası hasarlı. Lütfen uygulama verilerini temizleyin</string>
-    <string name="edit_list">Listeyi düzenle</string>
     <string name="delete">Sil</string>
     <string name="enabled">Etkin</string>
     <string name="disabled">Devre dışı</string>
-    <string name="work_mode">Çalışma modu</string>
-    <string name="blacklist">Kara liste</string>
-    <string name="whitelist">Beyaz liste</string>
     <string name="application">Uygulama</string>
     <string name="preferences">Tercihler</string>
     <string name="refresh">Yenile</string>
     <string name="filter">Filtrele</string>
-    <string name="yes">Evet</string>
-    <string name="no">Hayır</string>
     <string name="search">Ara</string>
-    <string name="system">Sistem</string>
-    <string name="add">Ekle</string>
     <string name="edit">Düzenle</string>
-    <string name="apply">Uygula</string>
     <string name="follow_system">Sistemi takip et</string>
     <!-- Home -->
     <string name="home_xposed_activated">Modül Etkin [%s]</string>
@@ -40,22 +29,14 @@
     <string name="home_xposed_service_off">Sistem servisi çalışmıyor</string>
     <string name="home_xposed_service_old">Modül güncellendi, yeniden başlatma gerekiyor</string>
     <string name="home_xposed_filter_count">PIB has captured total %d events</string>
-    <string name="home_manage">Yönet</string>
-    <string name="home_detection_test">Tespit testi</string>
-    <string name="home_download_test_app_title">Test uygulaması indir</string>
-    <string name="home_download_test_app_message">Bireysel bir tespit test uygulaması geliştirdik ve tespit testini bu uygulamaya taşıdık. Şimdi indirmek ister misiniz?</string>
-    <string name="home_backup_and_restore">Yedekle &amp; Geri Yükle</string>
     <string name="home_backup_config">Yedekle</string>
     <string name="home_restore_config">Geri yükle</string>
     <string name="home_import_successful">İçe aktarma başarılı</string>
     <string name="home_import_failed">İçe aktarma başarısız</string>
-    <string name="home_import_app_version_too_old">Modül sürümü yedeğin sürümünden düşük</string>
-    <string name="home_import_backup_version_too_old">Yedek sürümü çok eski</string>
     <string name="home_import_file_damaged">Yedek dosyası hasarlı</string>
     <string name="home_export_failed">Dışa aktarma başarısız</string>
     <string name="home_exported">Yapılandırma yedeklendi</string>
     <string name="home_new_update">Yeni güncelleme mevcut: %s</string>
-    <string name="home_update">Güncelleme: %s</string>
     <!-- App select -->
     <string name="list_show_system">Sistem uygulamalarını göster</string>
     <string name="list_sorting">Sıralama</string>
@@ -64,72 +45,19 @@
     <string name="list_sort_by_package_name">Paket adına göre</string>
     <string name="list_sort_by_install_time">Yükleme zamanına göre</string>
     <string name="list_sort_by_update_time">Güncelleme zamanına göre</string>
-    <string name="list_empty_no_enabled">Enable Integrity logging for apps and they will appear here</string>
     <string name="list_empty_no_apps">Hiçbir uygulama bulunamadı, belki de bu uygulamanın tüm paketleri görmesine izin verilmemiştir</string>
-    <string name="list_empty_preset">No apps configured yet</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Use logging profiles to group target apps and quickly apply logger behavior.\n\nYou can assign profiles from app settings.</string>
-    <string name="template_new_blacklist">Create logging profile</string>
-    <string name="template_new_whitelist">Create strict logging profile</string>
-    <string name="template_new_setting">Create advanced logger profile</string>
-    <string name="template_delete">Are you sure you want to delete this logging profile?</string>
-    <string name="template_name">Profile name</string>
-    <string name="template_name_invalid">Profile name is invalid</string>
-    <string name="template_delete_title">Delete profile</string>
-    <string name="template_name_already_exist">Profile name already exists</string>
-    <string name="template_applied_count">Applied to %d apps</string>
-    <string name="template_setting_count">%d logger options configured</string>
-    <string name="template_apps_visible_count">%d apps targeted</string>
-    <string name="template_apps_invisible_count">%d apps excluded</string>
     <!-- App settings -->
-    <string name="app_enable_hide">Enable Integrity logging</string>
-    <string name="app_template_config">Logger profile</string>
-    <string name="app_choose_template">Choose logging profile</string>
-    <string name="app_choose_preset">Choose recommended profile</string>
     <string name="app_exclude_system_apps">Include system apps</string>
-    <string name="app_exclude_system_apps_summary">Enable only for troubleshooting; this can reduce stability.</string>
-    <string name="app_template_using">Using %d logging profiles</string>
-    <string name="app_preset_using">Using %d recommended profiles</string>
-    <string name="app_settings_preset_using">Using %d advanced profiles</string>
-    <string name="app_settings_template_using">Using %d logger templates</string>
-    <string name="app_extra_apps_visible_count">%d additional apps targeted</string>
-    <string name="app_extra_apps_invisible_count">%d additional apps excluded</string>
     <string name="app_warning_risky_package_title">Riskli paket</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
-    <string name="app_spoof">Compatibility options</string>
-    <string name="app_hide_installation_source">Spoof installation source</string>
-    <string name="app_hide_installation_source_desc">For compatibility testing, pretend installs came from Play Store for this target app.</string>
-    <string name="app_hide_installation_source_system">Also spoof system apps</string>
-    <string name="app_hide_installation_source_system_desc">Include system packages in spoofed installation source behavior.</string>
-    <string name="app_exclude_target_installation_source">Exclude target package</string>
-    <string name="app_exclude_target_installation_source_desc">Enable if this package is not distributed via Play Store.</string>
-    <string name="app_force_stop_warning">Force-stop the target app after changing configuration.</string>
-    <string name="app_invert_activity_launch_protection">Etkinlik başlatma korumasını tersine çevir</string>
-    <string name="app_invert_activity_launch_protection_desc">Bu özellik Ayarlar ekranındaki \"Etkinlik başlatma korumasını devre dışı bırak\" seçeneğinin işlevini tersine çevirir.</string>
-    <string name="app_global_activity_launch_protection_state">Koruma genel olarak %s</string>
     <string name="app_force_stop_launch">Restart and launch</string>
     <string name="app_launch">Başlat</string>
     <string name="app_launch_failed">Uygulama başlatılamadı, daha fazla detay için günlükleri inceleyin</string>
-    <string name="app_restrict_zygote_permissions">Zygote izinlerini kısıtla</string>
-    <string name="app_restrict_zygote_permissions_desc">Bu özellik çökmelere ya da yanlış pozitiflere sebep olabileceğinden dikkatlice kullanın.</string>
     <!-- Presets -->
-    <string name="title_preset">Recommended profiles</string>
-    <string name="title_settings_preset">Advanced profiles</string>
-    <string name="title_preset_manage">Show recommended profiles</string>
-    <string name="preset_xposed">LSPosed/Xposed environment</string>
-    <string name="preset_root_apps">Root-related apps</string>
-    <string name="preset_custom_rom">Custom ROM components</string>
-    <string name="preset_sus_apps">Suspicious apps</string>
-    <string name="preset_detector_apps">Detector/Checker apps</string>
-    <string name="preset_shizuku_dhizuku">Shizuku/Dhizuku apps</string>
     <!-- Settings preset names -->
-    <string name="settings_preset_accessibility">Accessibility preset</string>
-    <string name="settings_preset_dev_options">Developer options preset</string>
     <string name="settings_preset_input_method">Input method preset</string>
     <!-- Settings templates -->
-    <string name="settings_templates_database">Settings source</string>
-    <string name="settings_templates_name">Setting key</string>
-    <string name="settings_templates_value">Setting value</string>
     <!-- Settings templates - basic configuration types -->
     <string name="settings_templates_custom">Custom value</string>
     <string name="settings_templates_random_ssaid">Randomize SSAID</string>
@@ -139,7 +67,6 @@
     <string name="logs_empty">Kaydedilecek kayıt yok</string>
     <string name="logs_saved">Kayıtlar kaydedildi</string>
     <!-- Filter logs -->
-    <string name="title_filter_logs">Event statistics</string>
     <!-- Settings -->
     <string name="settings_module">Modül</string>
     <string name="settings_overwrite">Üzerine yaz</string>
@@ -147,15 +74,13 @@
     <string name="settings_overwrite_summary">Anahtarlar açıldığında ilgili ayar zorla etkin kılınacak</string>
     <string name="settings_default_value">Varsayılan değer: %s</string>
     <string name="settings_data_isolation">Veri izolasyonu</string>
-    <string name="settings_data_isolation_summary">Uygulama verisi: %s\nVold uygulama verisi: %s\nZorla bağla: %s</string>
+    <string name="settings_data_isolation_summary">Uygulama verisi: %1$s\nVold uygulama verisi: %2$s\nZorla bağla: %3$s</string>
     <string name="settings_data_isolation_unsupported">Bu seçenek yalnızca Android 11 ve üstünde kullanılabilir</string>
     <string name="settings_app_data_isolation">Uygulama verisi izolasyonu</string>
     <string name="settings_vold_app_data_isolation">Vold uygulama verisi izolasyonu</string>
     <string name="settings_warning">Uyarı</string>
     <string name="settings_vold_warning">This enables an AOSP isolation feature for app external private storage. It may improve compatibility but can reduce stability and may stop working in future Android versions.</string>
-    <string name="settings_change_require_root">Değişiklik için root izni gerekiyor</string>
     <string name="settings_need_reboot">Değişiklik için yeniden başlatma gerekiyor</string>
-    <string name="settings_permission_denied">İzin reddedildi</string>
     <string name="settings_force_mount_data">Tüm uygulamalar için veri izolasyonunu zorla</string>
     <string name="settings_force_mount_data_summary">API seviyesi 30’un altında olan uygulamalar için veri izolasyonu varsayılan olarak devre dışıdır</string>
     <string name="settings_detail_log">Hata ayıklama için detaylı kayıt</string>
@@ -175,26 +100,13 @@
     <string name="settings_launcher_icon">Başlatıcı simgesi</string>
     <string name="settings_error_only_log">Sadece hataları kaydet</string>
     <string name="settings_language">Dil</string>
-    <string name="settings_translate">Çeviriye katkıda bulun</string>
-    <string name="settings_translate_summary">%s’i kendi dilinize çevirmemize yardımcı olun</string>
     <string name="settings_theme">Tema</string>
     <string name="settings_system_theme_color">Sistem tema rengi</string>
     <string name="settings_theme_color">Tema rengi</string>
-    <string name="settings_dark_theme">Koyu tema</string>
     <string name="settings_pure_black_dark_theme">Saf siyah koyu tema</string>
     <string name="settings_pure_black_dark_theme_summary">Koyu tema etkinse saf siyah temayı kullan</string>
-    <string name="settings_service">Logger service</string>
-    <string name="settings_stop_system_service">Stop logger service</string>
-    <string name="settings_stop_system_service_summary">Reboot to start it again</string>
-    <string name="settings_is_clean_env">Clean logger runtime cache too?</string>
-    <string name="settings_is_clean_env_summary">Remove logger runtime cache in /data/misc/play_integrity_break_*.</string>
-    <string name="settings_force_clean_env">Force clean logger runtime cache (root)</string>
-    <string name="settings_force_clean_env_summary">Use only if logger service fails to start.</string>
-    <string name="settings_force_clean_env_toast_successful">Logger runtime cache cleaned</string>
     <string name="settings_update">Güncelleme</string>
     <string name="settings_disable_update">Güncelleme bildirimini devre dışı bırak</string>
-    <string name="settings_receive_beta_update">Beta güncellemelerini al</string>
-    <string name="settings_receive_beta_update_summary">Beta sürümleri kararsız olabilir</string>
     <!-- Bulk config wizard -->
     <string name="title_bulk_config_wizard">Bulk logger configuration</string>
     <!-- About -->
