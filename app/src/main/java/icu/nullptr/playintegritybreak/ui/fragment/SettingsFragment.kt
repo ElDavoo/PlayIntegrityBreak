@@ -11,6 +11,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceDataStore
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SeekBarPreference
@@ -250,25 +251,30 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
             preferenceManager.preferenceDataStore = SettingsPreferenceDataStore()
             setPreferencesFromResource(R.xml.settings, rootKey)
 
-            findPreference<ListPreference>("language")?.let {
-                val entries = buildList {
-                    for (lang in LangList.LOCALES) {
-                        if (lang == "SYSTEM") add(getString(R.string.follow_system))
-                        else {
-                            val locale = Locale.forLanguageTag(lang)
-                            add(locale.getDisplayName(locale))
+            val isSystemLanguagePickerAvailable = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+            findPreference<PreferenceCategory>("languageCategory")?.isVisible = !isSystemLanguagePickerAvailable
+
+            if (!isSystemLanguagePickerAvailable) {
+                findPreference<ListPreference>("language")?.let {
+                    val entries = buildList {
+                        for (lang in LangList.LOCALES) {
+                            if (lang == "SYSTEM") add(getString(R.string.follow_system))
+                            else {
+                                val locale = Locale.forLanguageTag(lang)
+                                add(locale.getDisplayName(locale))
+                            }
                         }
                     }
-                }
-                it.entries = entries.toTypedArray()
-                it.entryValues = LangList.LOCALES
-                it.summary = getLocaleSummary(it.value)
-                it.setOnPreferenceChangeListener { _, newValue ->
-                    val localeTag = newValue as String
-                    ConfigUtils.setAppLocale(localeTag)
-                    it.summary = getLocaleSummary(localeTag)
-                    recreateMainActivity()
-                    true
+                    it.entries = entries.toTypedArray()
+                    it.entryValues = LangList.LOCALES
+                    it.summary = getLocaleSummary(it.value)
+                    it.setOnPreferenceChangeListener { _, newValue ->
+                        val localeTag = newValue as String
+                        ConfigUtils.setAppLocale(localeTag)
+                        it.summary = getLocaleSummary(localeTag)
+                        recreateMainActivity()
+                        true
+                    }
                 }
             }
 

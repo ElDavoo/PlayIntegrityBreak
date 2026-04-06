@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">PIB</string>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
 
     <string name="title_home">Home</string>
     <string name="title_logs">Logs</string>
@@ -9,8 +9,8 @@
     <string name="title_template_manage">Manage logging profiles</string>
     <string name="title_template_settings">Logging profile settings</string>
     <string name="title_settings_template_conf">Advanced logger configuration</string>
-    <string name="title_app_manage">Target apps</string>
-    <string name="title_default_app" translatable="false">default</string>
+    <string name="title_app_manage">Per-app options</string>
+    <string name="title_default_app">Default options</string>
     <string name="title_app_select">Select apps</string>
     <string name="title_app_settings">App settings</string>
     <string name="title_about">About</string>
@@ -41,9 +41,9 @@
 
     <!-- Home -->
     <string name="home_xposed_activated">Module Activated [%s]</string>
-    <string name="home_xposed_not_activated">Module Not Activated</string>
+    <string name="home_xposed_not_activated">Cannot communicate with Play Store</string>
     <string name="home_xposed_service_on">System service running [%d]</string>
-    <string name="home_xposed_service_off">System service not running</string>
+    <string name="home_xposed_service_off">The module is disabled or Play Store is not running. Try starting it.</string>
     <string name="home_xposed_service_old">Module updated, need reboot</string>
     <string name="home_xposed_service_health_stale">Service connected, waiting for fresh healthcheck</string>
     <string name="home_xposed_filter_count">PIB has captured total %d events</string>
@@ -93,22 +93,22 @@
 
     <!-- App settings -->
     <string name="app_enable_hide">Rewrite response as controlled error</string>
-    <string name="app_enable_intervention">Enable intervention for this app</string>
-    <string name="app_enable_intervention_desc">When disabled, this app always bypasses PIB interception even if default interception is enabled.</string>
+    <string name="app_enable_intervention">Enable PIB</string>
+    <string name="app_enable_intervention_desc">Disable to allow Play Integrity requests even when interception is enabled by default.</string>
     <string name="app_log_integrity_requests">Log Integrity requests</string>
     <string name="app_log_integrity_responses">Log Integrity responses</string>
-    <string name="app_rewrite_integrity_response">Rewrite response as controlled error</string>
-    <string name="app_rewrite_integrity_response_desc">When enabled and intervention is active, successful Integrity responses for this app are rewritten to an error payload.</string>
-    <string name="app_deliver_synthetic_response">Deliver synthetic response callback</string>
-    <string name="app_deliver_synthetic_response_desc">When enabled, PIB immediately returns a synthetic callback after blocking the service call. Disable only for debugging apps that wait indefinitely for callbacks.</string>
-    <string name="app_delay_synthetic_response">Delay synthetic response delivery</string>
-    <string name="app_delay_synthetic_response_desc">Adds a random delay between 300 and 2000 ms before delivering synthetic callbacks. Disabled by default.</string>
-    <string name="app_rewrite_integrity_error_code">Rewrite error code</string>
-    <string name="app_rewrite_integrity_error_code_desc">Used in rewritten Integrity responses for this app.</string>
+    <string name="app_rewrite_integrity_response">Enable synthetic errors</string>
+    <string name="app_rewrite_integrity_response_desc">When enabled, the app will not communicate with Play Integrity and will instead receive a generated error.</string>
+    <string name="app_deliver_synthetic_response">Deliver synthetic response</string>
+    <string name="app_deliver_synthetic_response_desc">When disabled, the app will not receive a response at all. Use it only to test where exactly the app asks for Play Integrity (as they will likely hang for a long time).</string>
+    <string name="app_delay_synthetic_response">Delay response delivery</string>
+    <string name="app_delay_synthetic_response_desc">Adds a random delay between 300 and 2000 ms before delivering synthetic callbacks. Might prevent timing-based detection?</string>
+    <string name="app_rewrite_integrity_error_code">Error code to inject</string>
+    <string name="app_rewrite_integrity_error_code_desc">The app will receive this error code.</string>
     <string name="app_rewrite_integrity_error_code_reference">Error code reference</string>
-    <string name="app_rewrite_integrity_error_code_reference_desc">Open a quick table of IntegrityErrorCode and StandardIntegrityErrorCode values.</string>
-    <string name="app_rewrite_integrity_error_remediable">Rewrite error remediable flag</string>
-    <string name="app_rewrite_integrity_error_remediable_desc">Controls the is.error.remediable flag in rewritten responses.</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Open a table of possible error values.</string>
+    <string name="app_rewrite_integrity_error_remediable">Remediable flag</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Tells the app the request should be retried (e.g. the error is transient).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integrity error code reference</string>
     <string name="app_rewrite_integrity_error_code_copied">Copied error code: %1$s</string>
     <string name="app_template_config">Logger profile</string>
@@ -241,7 +241,7 @@
     <string name="settings_package_query_workaround">Alternative package query</string>
     <string name="settings_package_query_workaround_summary">Don\'t enable this option if you see the package list in this app correctly.</string>
     <string name="settings_intent_api_enabled">Enable external Intents API</string>
-    <string name="settings_intent_api_enabled_summary">Allow other apps to change per-app PIB settings using explicit broadcast Intents.</string>
+    <string name="settings_intent_api_enabled_summary">Allow other apps to change PIB settings.</string>
     <string name="settings_intent_api_enable_title">Enable external Intents API?</string>
     <string name="settings_intent_api_enable_message">When enabled, any app on the device can send API Intents to modify per-app PIB settings. Only enable this if you trust the apps you install.</string>
     <string name="settings_intent_api_enable_confirm">Enable API</string>
@@ -250,16 +250,19 @@
 
     <string name="settings_telemetry">Telemetry</string>
     <string name="settings_telemetry_enabled">Enable telemetry upload</string>
-    <string name="settings_telemetry_enabled_summary">Upload captured request/response events in reliable batches when the device is charging and on unmetered Wi-Fi.</string>
+    <string name="settings_telemetry_enabled_summary">Uploads apps\' integrity request and response events to the developer\'s server, for statistics and research.</string>
     <string name="settings_telemetry_batch_size">Telemetry batch size</string>
     <string name="settings_telemetry_batch_size_summary">Number of events sent per request (1-500).</string>
     <string name="settings_telemetry_batch_size_invalid">Telemetry batch size must be between 1 and 500</string>
-    <string name="telemetry_consent_title">Would you like to enable telemetry?</string>
-    <string name="telemetry_consent_message">Telemetry helps improve PIB reliability by sharing captured integrity request and response events for diagnostics.
+    <string name="telemetry_consent_title">Welcome to PIB! Would you like to enable telemetry?</string>
+    <string name="telemetry_consent_message">Thanks for installing PIB!
 
-Privacy-friendly by design: uploads are batched, sent only when charging and on unmetered Wi-Fi, and you can disable telemetry at any time in Settings.</string>
-    <string name="telemetry_consent_enable">Enable telemetry</string>
-    <string name="telemetry_consent_not_now">Not now</string>
+Telemetry helps the developer to study how apps interact with Google Play Integrity.
+Privacy friendly: No identifiable data are uploaded. Does not use any battery.
+You can read the extended policy and the source code on GitHub.
+You can disable telemetry at any time in Settings.</string>
+    <string name="telemetry_consent_enable">For shure!</string>
+    <string name="telemetry_consent_not_now">Nope :(</string>
 
     <string name="settings_language">Language</string>
     <string name="settings_translate">Participate in translation</string>
@@ -291,14 +294,14 @@ Privacy-friendly by design: uploads are batched, sent only when charging and on 
 
     <!-- About -->
     <string name="about_description">
-        PIB is an LSPosed module focused on observing Google Play Integrity traffic.\n\nIt hooks Integrity service calls inside the Play Store process, records high-signal request/result logs, and helps diagnose API behavior per target app.\n\nFor testing scenarios, PIB can optionally rewrite selected responses into controlled errors.
+        PIB is an LSPosed module focused on blocking apps from using Google Play Integrity API.
     </string>
     <string name="about_fork_description">
         The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
-    <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
-    <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>
+    <string name="about_how_to_use_description_1">Enable the module in your Xposed manager, and give it the Google Play Store scope (com.android.vending).\nThen, force-stop Google Play Store.</string>
+    <string name="about_how_to_use_description_2">By default, all apps are blocked from accessing Google Play Integrity. Select for which app you want to allow access, or if you want to use a specific error code.</string>
     <string name="about_developer">Developer</string>
     <string name="about_support">Support and feedback</string>
     <string name="about_open_source">Open source licenses</string>

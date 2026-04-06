@@ -4,6 +4,7 @@ object LangList {
     @JvmField
     val LOCALES: Array<String> = arrayOf(
         "SYSTEM",
+        "en-US",
         "af-ZA",
         "ar-SA",
         "ca-ES",
