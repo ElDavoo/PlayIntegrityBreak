@@ -81,12 +81,6 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
             contentDescription.backgroundTintList = tint
         }
 
-        with(binding.aboutForkDescription) {
-            contentTitle.setText(R.string.title_about_fork)
-            contentDescription.setText(R.string.about_fork_description)
-            contentDescription.backgroundTintList = tint
-        }
-
         with(binding.listDeveloper) {
             backgroundTintList = tint
             clipToOutline = true

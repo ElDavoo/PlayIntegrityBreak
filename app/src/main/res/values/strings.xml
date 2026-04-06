@@ -13,7 +13,6 @@
     <string name="title_app_select">Select apps</string>
     <string name="title_app_settings">App settings</string>
     <string name="title_about">About</string>
-    <string name="title_about_fork">About this fork</string>
 
     <string name="do_not_dual">Do not install PIB to secondary user</string>
     <string name="show_crash_log">Show crash log</string>
@@ -56,8 +55,6 @@
     <string name="list_sort_by_update_time">By update time</string>
     <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
 
-    <!-- Manage templates -->
-
     <!-- App settings -->
     <string name="app_enable_intervention">Enable PIB</string>
     <string name="app_enable_intervention_desc">Disable to allow Play Integrity requests even when interception is enabled by default.</string>
@@ -84,12 +81,8 @@
     <string name="app_launch">Launch</string>
     <string name="app_launch_failed">App launch failed, check logs for more details</string>
 
-    <!-- Presets -->
-
     <!-- Settings preset names -->
     <string name="settings_preset_input_method">Input method preset</string>
-
-    <!-- Settings templates -->
 
     <!-- Settings templates - basic configuration types -->
     <string name="settings_templates_custom">Custom value</string>
@@ -184,7 +177,6 @@ You can disable telemetry at any time in Settings.</string>
     <string name="settings_pure_black_dark_theme">Pure black dark theme</string>
     <string name="settings_pure_black_dark_theme_summary">Use the pure black theme if dark theme is enabled</string>
 
-
     <string name="settings_update">Update</string>
     <string name="settings_disable_update">Disable update notification</string>
 
@@ -194,9 +186,6 @@ You can disable telemetry at any time in Settings.</string>
     <!-- About -->
     <string name="about_description">
         PIB is an LSPosed module focused on blocking apps from using Google Play Integrity API.
-    </string>
-    <string name="about_fork_description">
-        The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">Enable the module in your Xposed manager, and give it the Google Play Store scope (com.android.vending).\nThen, force-stop Google Play Store.</string>
