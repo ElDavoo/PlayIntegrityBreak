@@ -8,7 +8,6 @@
     <string name="title_app_select">Select apps</string>
     <string name="title_app_settings">App settings</string>
     <string name="title_about">About</string>
-    <string name="title_about_fork">About this fork</string>
     <string name="do_not_dual">Do not install PIB to secondary user</string>
     <string name="show_crash_log">Show crash log</string>
     <string name="config_damaged">Config file damaged. Please clean the app data</string>
@@ -112,8 +111,7 @@
     <!-- About -->
     <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
     </string>
-    <string name="about_fork_description">        The original PIB project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
-    </string>
+    
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>

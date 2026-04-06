@@ -8,7 +8,6 @@
     <string name="title_app_select">Pilih aplikasi</string>
     <string name="title_app_settings">Setelan aplikasi</string>
     <string name="title_about">Tentang</string>
-    <string name="title_about_fork">Tentang cabang ini</string>
     <string name="do_not_dual">Jangan pasang PIB pada pengguna kedua</string>
     <string name="show_crash_log">Tampilkan log kerusakan</string>
     <string name="config_damaged">File konfigurasi rusak. Harap bersihkan data aplikasi</string>
@@ -112,8 +111,7 @@
     <!-- About -->
     <string name="about_description">        Meskipun tidak tepat untuk mendeteksi instalasi aplikasi tertentu, tidak semua aplikasi yang menggunakan root mendukung nama paket acak. Dalam kasus ini, aplikasi terdeteksi yang menggunakan root (seperti Pemalsuan Lokasi dan Isolasi Data) dianggap sama dengan root itu sendiri.\n\nPada saat yang sama, beberapa aplikasi cerdas memanfaatkan celah untuk mendapatkan daftar aplikasi anda, sehingga mereka bisa membangun profil tentang anda.\n\nModul ini menyediakan beberapa metode untuk menguji apakah anda telah menyembunyikan daftar aplikasi dengan baik. Selain itu, dapat berfungsi sebagai modul Xposed untuk menyembunyikan aplikasi tertentu atau menolak permintaan daftar aplikasi guna melindungi privasi anda.
     </string>
-    <string name="about_fork_description">        Proyek PIB asli telah menjadi sumber tertutup dan kode terbaru mereka tidak memuat beberapa perubahan terbaru, jadi saya membuat percabangan ini untuk melanjutkannya sebagai sumber terbuka lagi.
-    </string>
+    
     <string name="about_how_to_use_title">Cara menggunakan modul ini</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>

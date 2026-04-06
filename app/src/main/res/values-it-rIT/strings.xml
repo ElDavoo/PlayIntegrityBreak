@@ -8,7 +8,6 @@
     <string name="title_app_select">Seleziona applicazioni</string>
     <string name="title_app_settings">Impostazioni app</string>
     <string name="title_about">A proposito</string>
-    <string name="title_about_fork">Informazioni su questo fork</string>
     <string name="do_not_dual">Non installare PIB per l\'utente secondario</string>
     <string name="show_crash_log">Mostra crash log</string>
     <string name="config_damaged">File di configurazione danneggiato. Per favore cancella i dati dell\'app</string>
@@ -112,8 +111,7 @@
     <!-- About -->
     <string name="about_description">        Sebbene non sia corretto rilevare l\'installazione di app specifiche, non tutte le app che utilizzano il root forniscono supporto per nome pacchetto casuale. In questo caso, le app rilevate che utilizzano root (come Fake Location e Storage Isolation) sono uguali al rilevamento del root stesso.\n\nAllo stesso tempo, alcune app intelligenti utilizzano varie scappatoie per acquisire il tuo elenco di app, in modo che possano impersonare un profilo per te.\n\nQuesto modulo fornisce alcuni metodi per verificare se hai già nascosto al meglio la tua lista di applicazioni. Inoltre, può funzionare come modulo Xposed per nascondere alcune app o rifiutare le richieste dell\'elenco di app per proteggere la tua privacy.
     </string>
-    <string name="about_fork_description">        Il progetto PIB originale è diventato closed-source e il suo codice più recente non conteneva alcune delle ultime modifiche, quindi ho creato questo fork per continuarlo nuovamente come open-source.
-    </string>
+    
     <string name="about_how_to_use_title">Come usare questo modulo</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>

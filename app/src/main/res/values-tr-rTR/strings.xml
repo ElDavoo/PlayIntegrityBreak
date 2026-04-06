@@ -8,7 +8,6 @@
     <string name="title_app_select">Uygulama seç</string>
     <string name="title_app_settings">Uygulama ayarları</string>
     <string name="title_about">Hakkında</string>
-    <string name="title_about_fork">Bu çatal hakkında</string>
     <string name="do_not_dual">PIB’yı ikincil kullanıcıya yüklemeyin</string>
     <string name="show_crash_log">Çökme kaydını göster</string>
     <string name="config_damaged">Yapılandırma dosyası hasarlı. Lütfen uygulama verilerini temizleyin</string>
@@ -112,8 +111,7 @@
     <!-- About -->
     <string name="about_description">        Belirli bir uygulamanın yüklü olup olmadığını tespit etmek yanlış olsa da, root kullanan her uygulama rastgele paket adı desteği sunmaz. Bu durumda, root kullanan tespit edilen uygulamalar (örneğin, Sahte Konum ve Depolama İzolasyonu), root’un kendisinin tespit edilmesiyle eşdeğerdir.\n\nAynı zamanda, bazı akıllı uygulamalar, uygulama listenizi elde etmek için çeşitli açıkları kullanır, böylece sizin için bir profil çizebilir.\n\nBu modül, uygulama listenizi başarıyla gizleyip gizlemediğinizi test etmenin bazı yollarını sunar. Ayrıca, bir Xposed modülü olarak çalışarak bazı uygulamaları gizlemek veya uygulama liste isteklerini reddederek gizliliğinizi korumak için kullanılabilir.
     </string>
-    <string name="about_fork_description">        Orijinal PIB projesi kapalı kaynak haline geldi ve en son kodları bazı son değişiklikleri içermiyordu, bu yüzden bu çatalı oluşturup projeyi tekrar açık kaynak olarak sürdürmeye karar verdim.
-    </string>
+    
     <string name="about_how_to_use_title">Bu modül nasıl kullanılır</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>

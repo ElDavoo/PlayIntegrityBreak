@@ -5,6 +5,8 @@
 
 Fix Google Play Integrity... by BREAKING it!
 
+[Telegram group!](https://t.me/playintegritybreak)
+
 ## What does PIB do?
 
 PIB is an Xposed module that logs, and optionally intercepts, Play Integrity service requests/responses activity per target app.

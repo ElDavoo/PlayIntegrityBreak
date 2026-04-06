@@ -8,7 +8,6 @@
     <string name="title_app_select">Chọn ứng dụng</string>
     <string name="title_app_settings">Cài đặt ứng dụng</string>
     <string name="title_about">Giới thiệu</string>
-    <string name="title_about_fork">Thông tin về dự án này</string>
     <string name="do_not_dual">Không cài PIB lên người dùng thứ cấp</string>
     <string name="show_crash_log">Xem nhật ký lỗi</string>
     <string name="config_damaged">Tệp cấu hình bị hỏng. Hãy xóa dữ liệu của ứng dụng</string>
@@ -112,7 +111,6 @@
     <!-- About -->
     <string name="about_description">Mặc dù việc phát hiện cài đặt ứng dụng cụ thể là không chính xác, nhưng không phải mọi ứng dụng sử dụng root đều cung cấp hỗ trợ tên gói ngẫu nhiên. Trong trường hợp này, các ứng dụng được phát hiện sử dụng quyền root (chẳng hạn như Vị trí giả mạo và Cách ly bộ nhớ) tương đương với chính ứng dụng gốc được phát hiện. \n\n Đồng thời, một số ứng dụng thông minh sử dụng nhiều kẽ hở khác nhau để lấy danh sách ứng dụng của bạn, để nó có thể thu hút một cá tính dành cho bạn. \n\nMô-đun này cung cấp một số phương pháp để kiểm tra xem bạn đã ẩn danh sách ứng dụng của mình hay chưa. Ngoài ra, nó có thể hoạt động như một mô-đun Xposed để ẩn một số ứng dụng hoặc từ chối các yêu cầu danh sách ứng dụng để bảo vệ quyền riêng tư của bạn.
  </string>
-    <string name="about_fork_description">Dự án PIB ban đầu đã trở thành mã nguồn đóng và mã mới nhất của họ không chứa một số thay đổi mới nhất, vì vậy tôi đã tạo nhánh này để tiếp tục nó dưới dạng mã nguồn mở một lần nữa.</string>
     <string name="about_how_to_use_title">Làm sao để dùng mô-đun này</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>

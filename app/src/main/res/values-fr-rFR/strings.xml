@@ -8,7 +8,6 @@
     <string name="title_app_select">Sélectionner les applications</string>
     <string name="title_app_settings">Réglages pour l\'application</string>
     <string name="title_about">A propos</string>
-    <string name="title_about_fork">À propos de ce fork</string>
     <string name="do_not_dual">Ne pas installer PIB dans l\'utilisateur secondaire</string>
     <string name="show_crash_log">Afficher le journal de plantage</string>
     <string name="config_damaged">Fichier de configuration endommagé. Merci de nettoyer les données de l\'application</string>
@@ -112,8 +111,7 @@
     <!-- About -->
     <string name="about_description">        Bien qu\'il soit incorrect de détecter l\'installation d\'une application spécifique, toutes les applications utilisant la racine ne prennent pas en charge les noms de paquets aléatoires. Dans ce cas, les applications détectées qui utilisent la racine (telles que Fake Location et Storage Isolation) sont égales à la racine détectée elle-même.\n\nDans le même temps, certaines applications intelligentes utilisent diverses failles pour acquérir votre liste d\'applications, afin de vous dessiner un personnage.\n\nCe module fournit quelques méthodes pour tester si vous avez déjà bien caché votre liste d\'applications. De plus, il peut fonctionner comme un module Xposed pour cacher certaines applications ou rejeter les demandes de liste d\'applications afin de protéger votre vie privée.
     </string>
-    <string name="about_fork_description">        Le projet PIB original est devenu closed-source et leur dernier code ne contenait pas certaines des dernières modifications, j\'ai donc créé ce fork pour le poursuivre à nouveau en open-source.
-    </string>
+    
     <string name="about_how_to_use_title">Comment utiliser ce module</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>

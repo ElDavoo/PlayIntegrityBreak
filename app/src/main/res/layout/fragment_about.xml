@@ -23,10 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/about_fork_description"
-                layout="@layout/fragment_about_text_section" />
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />

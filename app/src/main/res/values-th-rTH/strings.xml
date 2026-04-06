@@ -8,7 +8,6 @@
     <string name="title_app_select">เลือกแอป</string>
     <string name="title_app_settings">การตั้งค่าแอป</string>
     <string name="title_about">เกี่ยวกับ</string>
-    <string name="title_about_fork">เกี่ยวกับเวอร์ชันแยกนี้</string>
     <string name="do_not_dual">ไม่ต้องติดตั้ง PIB สำหรับผู้ใช้รอง</string>
     <string name="show_crash_log">แสดงบันทึกข้อขัดข้อง</string>
     <string name="config_damaged">ไฟล์การตั้งค่าเสียหาย กรุณาล้างข้อมูลแอป</string>
@@ -117,7 +116,6 @@ Vold ข้อมูลแอป: %2$s
 ในขณะเดียวกัน แอปอัจฉริยะบางตัวใช้ช่องโหว่หลากหลายรูปแบบเพื่อเข้าถึงรายชื่อแอปของคุณ และนำไปสร้างโปรไฟล์พฤติกรรมของคุณ
 
 โมดูลนี้มีวิธีการสำหรับทดสอบว่าคุณได้ซ่อนรายชื่อแอปของคุณไว้อย่างเหมาะสมแล้วหรือไม่นอกจากนี้ยังสามารถทำงานเป็นโมดูล Xposedเพื่อซ่อนบางแอป หรือปฏิเสธคำขอรายชื่อแอปเพื่อปกป้องความเป็นส่วนตัวของคุณ</string>
-    <string name="about_fork_description">โปรเจกต์ PIB ดั้งเดิมได้เปลี่ยนเป็นซอร์สโค้ดแบบปิดและโค้ดล่าสุดของพวกเขาไม่ได้รวมการเปลี่ยนแปลงใหม่บางส่วนดังนั้นผมจึงสร้างฟอร์กนี้ขึ้นมาเพื่อให้โปรเจกต์สามารถดำเนินต่อไปในรูปแบบโอเพนซอร์สได้อีกครั้ง</string>
     <string name="about_how_to_use_title">วิธีใช้งานโมดูลนี้</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>

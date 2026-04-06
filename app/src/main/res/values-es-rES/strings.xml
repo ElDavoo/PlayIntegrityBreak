@@ -8,7 +8,6 @@
     <string name="title_app_select">Seleccionar aplicaciones</string>
     <string name="title_app_settings">Configuración de las apps</string>
     <string name="title_about">Acerca de</string>
-    <string name="title_about_fork">Acerca de este fork</string>
     <string name="do_not_dual">No instalar PIB en usuario secundario</string>
     <string name="show_crash_log">Mostrar log del error</string>
     <string name="config_damaged">Archivo de configuración dañado. Por favor limpia los datos de la aplicación</string>
@@ -112,8 +111,7 @@
     <!-- About -->
     <string name="about_description">        Aunque es incorrecto detectar la instalación de una aplicación específica, no todas las aplicaciones que usan root brindan soporte para nombre de paquete aleatorio. En este caso, aplicaciones detectadas que usan root (como los modulos \'Fake Location\' y \'Storage Isolation\') es equivalente a detectar el root en si mismo.\n\nAl mismo tiempo, algunas aplicaciones inteligentes utilizan varias lagunas para adquirir su lista de aplicaciones, de modo que pueden hacerse una idea de \"quien es usted\".\n\nEste módulo proporciona algunos métodos para probar si ya ha ocultado correctamente su lista de aplicaciones. Además, puede funcionar como un módulo Xposed para ocultar algunas aplicaciones o rechazar solicitudes de listas de aplicaciones para proteger su privacidad.
     </string>
-    <string name="about_fork_description">        El proyecto PIB original se ha vuelto de código cerrado y su último código no contiene algunos de los últimos cambios, así que creé este fork para continuar como código abierto de nuevo.
-    </string>
+    
     <string name="about_how_to_use_title">Cómo utilizar este módulo</string>
     <string name="about_how_to_use_description_1">Select target packages in "Target apps" and enable Integrity logging for them.\nConfigure request/response/error-only and optional rewrite behavior in app settings.</string>
     <string name="about_how_to_use_description_2">Enable module scope for Play Store (com.android.vending), reboot or restart Play Store, then inspect logs in the Logs page.</string>
