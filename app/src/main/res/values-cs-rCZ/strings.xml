@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Domů</string>
+    <string name="title_logs">Protokoly</string>
+    <string name="title_statistics">Statistika</string>
+    <string name="title_settings">Nastavení</string>
+    <string name="title_template_manage">Správa profilů protokolování</string>
+    <string name="title_app_manage">Možnosti aplikací</string>
+    <string name="title_default_app">Výchozí nastavení</string>
+    <string name="title_app_select">Vybrat aplikace</string>
+    <string name="title_app_settings">Nastavení aplikace</string>
+    <string name="title_about">O aplikaci</string>
+
+    <string name="do_not_dual">Neinstalovat PIB pro sekundárního uživatele</string>
+    <string name="show_crash_log">Zobrazit chybový záznam</string>
+    <string name="config_damaged">Konfigurační soubor je poškozen. Vymažte data aplikace</string>
+    <string name="delete">Smazat</string>
+    <string name="enabled">Povoleno</string>
+    <string name="disabled">Zakázáno</string>
+    <string name="application">Aplikace</string>
+    <string name="preferences">Předvolby</string>
+    <string name="refresh">Obnovit</string>
+    <string name="filter">Filtr</string>
+    <string name="search">Hledat</string>
+    <string name="edit">Upravit</string>
+    <string name="follow_system">Podle systému</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Modul aktivován [%s]</string>
+    <string name="home_xposed_not_activated">Nelze komunikovat s Obchodem Play</string>
+    <string name="home_xposed_service_on">Systémová služba běží [%d]</string>
+    <string name="home_xposed_service_off">Modul je vypnutý nebo Obchod Play neběží. Zkuste jej spustit.</string>
+    <string name="home_xposed_service_old">Modul aktualizován, je třeba restartovat</string>
+    <string name="home_xposed_service_health_stale">Služba připojena, čeká se na aktuální kontrolu stavu</string>
+    <string name="home_xposed_filter_count">PIB zachytil celkem %d událostí</string>
+    <string name="home_backup_config">Zálohovat konfiguraci</string>
+    <string name="home_restore_config">Obnovit konfiguraci</string>
+    <string name="home_import_successful">Import úspěšný</string>
+    <string name="home_import_failed">Import selhal</string>
+    <string name="home_import_file_damaged">Záložní soubor byl poškozen</string>
+    <string name="home_export_failed">Export selhal</string>
+    <string name="home_exported">Konfigurace zálohována</string>
+    <string name="home_new_update">Dostupná nová aktualizace: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Zobrazit systémové aplikace</string>
+    <string name="list_sorting">Řazení</string>
+    <string name="list_reverse_order">Obrátit pořadí</string>
+    <string name="list_sort_by_label">Podle názvu aplikace</string>
+    <string name="list_sort_by_package_name">Podle názvu balíčku</string>
+    <string name="list_sort_by_install_time">Podle času instalace</string>
+    <string name="list_sort_by_update_time">Podle času aktualizace</string>
+    <string name="list_empty_no_apps">Nebyly nalezeny žádné aplikace; možná této aplikaci nebylo povoleno dotazovat se na všechny balíčky</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Povolit PIB</string>
+    <string name="app_enable_intervention_desc">Vypněte, chcete-li povolit požadavky Play Integrity i když je zachytávání ve výchozím nastavení povoleno.</string>
+    <string name="app_rewrite_integrity_response">Povolit syntetické chyby</string>
+    <string name="app_rewrite_integrity_response_desc">Když je povoleno, aplikace nebude komunikovat s Play Integrity a místo toho obdrží generovanou chybu.</string>
+    <string name="app_deliver_synthetic_response">Doručit syntetickou odpověď</string>
+    <string name="app_deliver_synthetic_response_desc">Při vypnutí aplikace nedostane žádnou odpověď. Používejte pouze k testování, kde přesně aplikace volá Play Integrity (aplikace se pravděpodobně dlouho zasekne).</string>
+    <string name="app_delay_synthetic_response">Zpoždění doručení odpovědi</string>
+    <string name="app_delay_synthetic_response_desc">Přidá náhodné zpoždění mezi 300 a 2000 ms před doručením syntetických callbacků. Může zabránit detekci založené na časování?</string>
+    <string name="app_rewrite_integrity_error_code">Kód chyby k vložení</string>
+    <string name="app_rewrite_integrity_error_code_desc">Aplikace obdrží tento kód chyby.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Reference kódů chyb</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Otevře tabulku možných hodnot chyb.</string>
+    <string name="app_rewrite_integrity_error_remediable">Opravitelné</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Říká aplikaci, že by měl být požadavek opakován (např. chyba je přechodná).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Reference kódů chyb Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Zkopírovaný kód chyby: %1$s</string>
+    <string name="app_exclude_system_apps">Zahrnout systémové aplikace</string>
+    <string name="app_warning_risky_package_title">Rizikový balíček</string>
+    <string name="app_warning_risky_package_desc">Tento balíček je označen jako rizikový a může způsobit nestabilitu. Pokračovat?</string>
+    <string name="app_favorite_add">Přidat mezi oblíbené</string>
+    <string name="app_favorite_remove">Odebrat z oblíbených</string>
+    <string name="app_force_stop_launch">Restartovat a spustit</string>
+    <string name="app_launch">Spustit</string>
+    <string name="app_launch_failed">Spuštění aplikace se nezdařilo, podrobnosti najdete v protokolech</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Přednastavení vstupní metody</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Vlastní hodnota</string>
+    <string name="settings_templates_random_ssaid">Náhodné SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Uložit protokoly</string>
+    <string name="logs_clear">Vymazat protokoly</string>
+    <string name="logs_upload_telemetry">Nahrát telemetrii nyní</string>
+    <string name="logs_show_telemetry_queue">Zobrazit stav fronty telemetrie</string>
+    <string name="logs_empty">Žádné protokoly k uložení</string>
+    <string name="logs_saved">Protokoly uloženy</string>
+    <string name="logs_telemetry_disabled">Nahrávání telemetrie je vypnuto</string>
+    <string name="logs_telemetry_upload_enqueued">Nahrávání telemetrie zařazeno do fronty: čeká=%1$d opakování=%2$d probíhá=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Stav fronty: čeká=%1$d opakování=%2$d probíhá=%3$d potvrzeno=%4$d selháno=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Časové okno</string>
+    <string name="statistics_window_all">Celkem</string>
+    <string name="statistics_window_24h">Posledních 24 hodin</string>
+    <string name="statistics_window_7d">Posledních 7 dní</string>
+    <string name="statistics_updated_at">Aktualizováno: %1$s</string>
+    <string name="statistics_user_id">ID uživatele: %1$s</string>
+    <string name="statistics_summary_title">Souhrn zachycení</string>
+    <string name="statistics_summary_body">Celkem událostí: %1$d\nPožadavky: %2$d\nOdpovědi: %3$d\nÚspěšné odpovědi: %4$d\nNeúspěšné odpovědi: %5$d</string>
+    <string name="statistics_queue_title">Fronta telemetrie</string>
+    <string name="statistics_queue_body">Čeká: %1$d\nOpakování: %2$d\nProbíhá: %3$d\nPotvrzeno: %4$d\nSelháno: %5$d</string>
+    <string name="statistics_top_packages_title">Aktivita balíčků (všechny)</string>
+    <string name="statistics_top_packages_empty">Žádná aktivita balíčků v tomto časovém období.</string>
+    <string name="statistics_package_unknown_label">Neznámá aplikace</string>
+    <string name="statistics_package_resolving_label">Získávání názvu aplikace...</string>
+    <string name="statistics_recent_requests_title">Posledních 10 požadavků</string>
+    <string name="statistics_recent_requests_empty">Žádné požadavky v tomto časovém okně.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Modul</string>
+    <string name="settings_overwrite">Přepsat</string>
+    <string name="settings_overwritten">Přepsáno</string>
+    <string name="settings_overwrite_summary">Položky v této kategorii budou vynuceně povoleny, pokud jsou přepínače zaškrtnuté</string>
+    <string name="settings_default_value">Výchozí hodnota: %s</string>
+    <string name="settings_data_isolation">Izolace dat</string>
+    <string name="settings_data_isolation_summary">Data aplikace: %1$s\nData Vold aplikace: %2$s\nVynutit připojení: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Tato možnost je dostupná pouze na Androidu 11 a vyšším</string>
+    <string name="settings_app_data_isolation">Izolace dat aplikace</string>
+    <string name="settings_vold_app_data_isolation">Izolace dat Vold aplikace</string>
+    <string name="settings_warning">Varování</string>
+    <string name="settings_vold_warning">Tímto povolíte AOSP funkci izolace pro externí soukromé úložiště aplikace. Může to zlepšit kompatibilitu, ale snížit stabilitu a v budoucnu přestat fungovat.</string>
+    <string name="settings_need_reboot">Změna vyžaduje restart</string>
+    <string name="settings_force_mount_data">Vynutit izolaci dat pro všechny aplikace</string>
+    <string name="settings_force_mount_data_summary">Izolace dat je ve výchozím nastavení vypnuta pro aplikace s cílovým API nižším než 30</string>
+    <string name="settings_detail_log">Detailní záznam pro ladění</string>
+    <string name="settings_max_log_size">Velikosti bufferu protokolování</string>
+    <string name="settings_hide_icon">Skrýt ikonu modulu v launcheru</string>
+    <string name="settings_hide_icon_summary">Aplikaci můžete stále otevřít v Xposed manageru</string>
+    <string name="settings_bypass_risky_package_warning">Přeskočit varování o rizikovém balíčku</string>
+    <string name="settings_bypass_risky_package_warning_summary">Pozor: vývojáři neodpovídají za problémy související s rizikovými balíčky před nebo po povolení této funkce</string>
+    <string name="settings_disable_activity_launch_protection">Zakázat ochranu spuštění Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Tímto přepínačem odstraníte všechna omezení startActivity. Pokud si nejste jisti, tento přepínač nepovolujte.</string>
+    <string name="settings_system_wallpaper">Použít systémové pozadí</string>
+    <string name="settings_clear_uninstalled_app_configs">Vymazat konfigurace odinstalovaných aplikací</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Tato volba vám umožní vytvořit konfiguraci bez pozůstatků, ale při opětovné instalaci aplikací je budete muset znovu nakonfigurovat.</string>
+    <string name="settings_no_undone_warning">Tuto akci nelze vrátit zpět.</string>
+    <string name="settings_package_query_workaround">Alternativní dotazování balíčků</string>
+    <string name="settings_package_query_workaround_summary">Nepovolujte tuto možnost, pokud se v této aplikaci správně zobrazuje seznam balíčků.</string>
+    <string name="settings_intent_api_enabled">Povolit externí Intents API</string>
+    <string name="settings_intent_api_enabled_summary">Umožní ostatním aplikacím měnit nastavení PIB.</string>
+    <string name="settings_intent_api_enable_title">Povolit externí Intents API?</string>
+    <string name="settings_intent_api_enable_message">Po povolení může každá aplikace na zařízení posílat Intents API pro změnu nastavení PIB pro konkrétní aplikaci. Povolte pouze pokud důvěřujete nainstalovaným aplikacím.</string>
+    <string name="settings_intent_api_enable_confirm">Povolit API</string>
+    <string name="settings_launcher_icon">Ikona launcheru</string>
+    <string name="settings_error_only_log">Záznam pouze chyb</string>
+
+    <string name="settings_telemetry">Telemetrie</string>
+    <string name="settings_telemetry_enabled">Povolit nahrávání telemetrie</string>
+    <string name="settings_telemetry_enabled_summary">Nahrává události požadavků a odpovědí integrity aplikací na server vývojáře pro statistiku a výzkum.</string>
+    <string name="telemetry_consent_title">Vítejte v PIB! Chcete povolit telemetrii?</string>
+    <string name="telemetry_consent_message">Děkujeme za instalaci PIB!\n\nTelemetrie pomáhá vývojáři zkoumat, jak aplikace komunikují s Google Play Integrity.\nŠetrné k soukromí: Nejsou nahrávána žádná identifikovatelná data. Nevyužívá žádnou baterii.\nProstudovat rozšířenou politiku a zdrojový kód můžete na GitHubu.\nTelemetrii můžete kdykoli vypnout v Nastavení.</string>
+    <string name="telemetry_consent_enable">Určitě!</string>
+    <string name="telemetry_consent_not_now">Ne, děkuji :(</string>
+
+    <string name="settings_language">Jazyk</string>
+
+    <string name="settings_theme">Téma</string>
+    <string name="settings_system_theme_color">Barva tématu systému</string>
+    <string name="settings_theme_color">Barva tématu</string>
+    <string name="settings_pure_black_dark_theme">Čistě černé tmavé téma</string>
+    <string name="settings_pure_black_dark_theme_summary">Použijte čistě černé téma, pokud je povoleno tmavé téma</string>
+
+    <string name="settings_update">Aktualizace</string>
+    <string name="settings_disable_update">Vypnout upozornění na aktualizace</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Hromadné nastavení záznamníku</string>
+
+    <!-- About -->
+    <string name="about_description">PIB je modul pro LSPosed zaměřený na blokování aplikací používajících API Google Play Integrity.</string>
+    <string name="about_how_to_use_title">Jak tento modul používat</string>
+    <string name="about_how_to_use_description_1">Povolte modul ve svém Xposed manageru a udělte mu rozsah pro Obchod Google Play (com.android.vending).\nPoté násilně zastavte Obchod Google Play.</string>
+    <string name="about_how_to_use_description_2">Ve výchozím nastavení jsou všechny aplikace zablokovány v přístupu k Google Play Integrity. Vyberte, které aplikaci chcete povolit přístup, nebo zda chcete použít konkrétní kód chyby.</string>
+    <string name="about_developer">Vývojář</string>
+    <string name="about_support">Podpora a zpětná vazba</string>
+    <string name="about_open_source">Licence open source</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Červená</string>
+    <string name="color_pink">Růžová</string>
+    <string name="color_purple">Fialová</string>
+    <string name="color_deep_purple">Tmavě fialová</string>
+    <string name="color_indigo">Indigo</string>
+    <string name="color_blue">Modrá</string>
+    <string name="color_light_blue">Světlá modrá</string>
+    <string name="color_cyan">Azurová</string>
+    <string name="color_teal">Tyrkysová</string>
+    <string name="color_green">Zelená</string>
+    <string name="color_light_green">Světlá zelená</string>
+    <string name="color_lime">Limetková</string>
+    <string name="color_yellow">Žlutá</string>
+    <string name="color_amber">Jantarová</string>
+    <string name="color_orange">Oranžová</string>
+    <string name="color_deep_orange">Tmavě oranžová</string>
+    <string name="color_brown">Hnědá</string>
+    <string name="color_blue_grey">Modrošedá</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Tmavé téma</string>
+    <string name="dark_theme_off">Vždy vypnuto</string>
+    <string name="dark_theme_on">Vždy zapnuto</string>
+</resources>

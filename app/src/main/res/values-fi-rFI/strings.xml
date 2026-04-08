@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Koti</string>
+    <string name="title_logs">Lokit</string>
+    <string name="title_statistics">Tilastot</string>
+    <string name="title_settings">Asetukset</string>
+    <string name="title_template_manage">Hallinnoi lokiprofiileja</string>
+    <string name="title_app_manage">Sovelluskohtaiset asetukset</string>
+    <string name="title_default_app">Oletusasetukset</string>
+    <string name="title_app_select">Valitse sovellukset</string>
+    <string name="title_app_settings">Sovellusasetukset</string>
+    <string name="title_about">Tietoja</string>
+
+    <string name="do_not_dual">Älä asenna PIB:ää toissijaiseen käyttäjätiliin</string>
+    <string name="show_crash_log">Näytä kaatumisloki</string>
+    <string name="config_damaged">Asetustiedosto vahingoittunut. Tyhjennä sovelluksen tiedot</string>
+    <string name="delete">Poista</string>
+    <string name="enabled">Käytössä</string>
+    <string name="disabled">Pois käytöstä</string>
+    <string name="application">Sovellus</string>
+    <string name="preferences">Asetukset</string>
+    <string name="refresh">Päivitä</string>
+    <string name="filter">Suodatin</string>
+    <string name="search">Hae</string>
+    <string name="edit">Muokkaa</string>
+    <string name="follow_system">Seuraa järjestelmää</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Moduuli aktivoitu [%s]</string>
+    <string name="home_xposed_not_activated">Ei yhteyttä Play-kauppaan</string>
+    <string name="home_xposed_service_on">Järjestelmäpalvelu käynnissä [%d]</string>
+    <string name="home_xposed_service_off">Moduuli on pois päältä tai Play-kauppa ei ole käynnissä. Yritä käynnistää se.</string>
+    <string name="home_xposed_service_old">Moduuli päivitetty, vaatii uudelleenkäynnistyksen</string>
+    <string name="home_xposed_service_health_stale">Palvelu yhdistetty, odotetaan uutta terveystarkistusta</string>
+    <string name="home_xposed_filter_count">PIB on tallentanut yhteensä %d tapahtumaa</string>
+    <string name="home_backup_config">Varmuuskopioi asetukset</string>
+    <string name="home_restore_config">Palauta asetukset</string>
+    <string name="home_import_successful">Tuonti onnistui</string>
+    <string name="home_import_failed">Tuonti epäonnistui</string>
+    <string name="home_import_file_damaged">Varmuuskopiointitiedosto oli vahingoittunut</string>
+    <string name="home_export_failed">Vienti epäonnistui</string>
+    <string name="home_exported">Asetukset varmuuskopioitu</string>
+    <string name="home_new_update">Uusi päivitys saatavilla: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Näytä järjestelmäsovellukset</string>
+    <string name="list_sorting">Lajittelu</string>
+    <string name="list_reverse_order">Käännä järjestys</string>
+    <string name="list_sort_by_label">Sovelluksen nimen mukaan</string>
+    <string name="list_sort_by_package_name">Paketin nimen mukaan</string>
+    <string name="list_sort_by_install_time">Asennusajan mukaan</string>
+    <string name="list_sort_by_update_time">Päivitysajan mukaan</string>
+    <string name="list_empty_no_apps">Sovelluksia ei löytynyt, et ehkä antanut tälle sovellukselle lupaa kysyä kaikkia paketteja</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Ota PIB käyttöön</string>
+    <string name="app_enable_intervention_desc">Poista käytöstä, jotta Play Integrity -pyynnöt sallitaan, vaikka sieppaus olisi oletuksena käytössä.</string>
+    <string name="app_rewrite_integrity_response">Ota synteettiset virheet käyttöön</string>
+    <string name="app_rewrite_integrity_response_desc">Kun käytössä, sovellus ei kommunikoi Play Integrityn kanssa, vaan saa sen sijaan generoituja virheitä.</string>
+    <string name="app_deliver_synthetic_response">Toimita synteettinen vastaus</string>
+    <string name="app_deliver_synthetic_response_desc">Kun pois käytöstä, sovellus ei saa lainkaan vastausta. Käytä vain testatessa, sillä sovellukset voivat jäädä jumiin pitkään.</string>
+    <string name="app_delay_synthetic_response">Viivästytä vastausta</string>
+    <string name="app_delay_synthetic_response_desc">Lisää satunnainen viive 300–2000 ms ennen synteettisten palautusten toimittamista. Voi estää ajoitukseen perustuvan havaitsemisen?</string>
+    <string name="app_rewrite_integrity_error_code">Injektoitava virhekoodi</string>
+    <string name="app_rewrite_integrity_error_code_desc">Sovellus saa tämän virhekoodin.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Virhekoodiviite</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Avaa taulukon mahdollisista virhearvoista.</string>
+    <string name="app_rewrite_integrity_error_remediable">Korjattavissa-lippu</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Ilmoittaa sovellukselle, että pyyntö kannattaa yrittää uudelleen (esim. virhe on väliaikainen).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integrity-virhekoodiviite</string>
+    <string name="app_rewrite_integrity_error_code_copied">Kopioitu virhekoodi: %1$s</string>
+    <string name="app_exclude_system_apps">Sisällytä järjestelmäsovellukset</string>
+    <string name="app_warning_risky_package_title">Riskipaketti</string>
+    <string name="app_warning_risky_package_desc">Tämä paketti on merkitty riskialttiiksi ja saattaa aiheuttaa epävakautta. Jatketaanko?</string>
+    <string name="app_favorite_add">Merkitse suosikiksi</string>
+    <string name="app_favorite_remove">Poista suosikista</string>
+    <string name="app_force_stop_launch">Käynnistä uudelleen ja avaa</string>
+    <string name="app_launch">Avaa</string>
+    <string name="app_launch_failed">Sovelluksen käynnistäminen epäonnistui, tarkista lokit lisätietoja varten</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Syöttötavan esiasetus</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Mukautettu arvo</string>
+    <string name="settings_templates_random_ssaid">Satunnaista SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Tallenna lokit</string>
+    <string name="logs_clear">Tyhjennä lokit</string>
+    <string name="logs_upload_telemetry">Lähetä telemetria nyt</string>
+    <string name="logs_show_telemetry_queue">Näytä telemetrian jono</string>
+    <string name="logs_empty">Ei tallennettavia lokitietoja</string>
+    <string name="logs_saved">Lokit tallennettu</string>
+    <string name="logs_telemetry_disabled">Telemetrian lähetys on pois käytöstä</string>
+    <string name="logs_telemetry_upload_enqueued">Telemetrian lähetys jonossa: odottaa=%1$d yrittää=%2$d käynnissä=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Jonon tila: odottaa=%1$d
+Yritykset: %2$d
+Käynnissä: %3$d
+Kuittaukset: %4$d
+Epäonnistuneet: %5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Aikaväli</string>
+    <string name="statistics_window_all">Koko aika</string>
+    <string name="statistics_window_24h">Viimeiset 24 tuntia</string>
+    <string name="statistics_window_7d">Viimeiset 7 päivää</string>
+    <string name="statistics_updated_at">Päivitetty: %1$s</string>
+    <string name="statistics_user_id">Käyttäjä-ID: %1$s</string>
+    <string name="statistics_summary_title">Tapahtumien yhteenveto</string>
+    <string name="statistics_summary_body">Tapahtumat yhteensä: %1$d\nPyynnöt: %2$d\nVastaukset: %3$d\nOnnistuneet vastaukset: %4$d\nEpäonnistuneet vastaukset: %5$d</string>
+    <string name="statistics_queue_title">Telemetrian jono</string>
+    <string name="statistics_queue_body">Odottavat: %1$d\nYritykset: %2$d\nKäynnissä: %3$d\nKuittaukset: %4$d\nEpäonnistuneet: %5$d</string>
+    <string name="statistics_top_packages_title">Sovellusaktiivisuus (kaikki)</string>
+    <string name="statistics_top_packages_empty">Ei pakettitoimintaa tässä aikavälissä.</string>
+    <string name="statistics_package_unknown_label">Tuntematon sovellus</string>
+    <string name="statistics_package_resolving_label">Selvitetään sovelluksen nimeä...</string>
+    <string name="statistics_recent_requests_title">Viimeiset 10 pyyntöä</string>
+    <string name="statistics_recent_requests_empty">Ei pyyntöjä tässä aikavälissä.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Moduuli</string>
+    <string name="settings_overwrite">Ohita</string>
+    <string name="settings_overwritten">Ohitettu</string>
+    <string name="settings_overwrite_summary">Tämän kategorian kohteet pakotetaan käyttöön, jos kytkimet ovat valittuna</string>
+    <string name="settings_default_value">Oletusarvo: %s</string>
+    <string name="settings_data_isolation">Tietojen eristäminen</string>
+    <string name="settings_data_isolation_summary">Sovellustiedot: %1$s\nVold-sovellustiedot: %2$s\nPakota liitos: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Tämä vaihtoehto on käytettävissä vain Android 11:ssä ja uudemmissa</string>
+    <string name="settings_app_data_isolation">Sovellustietojen eristäminen</string>
+    <string name="settings_vold_app_data_isolation">Vold-sovellustietojen eristäminen</string>
+    <string name="settings_warning">Varoitus</string>
+    <string name="settings_vold_warning">Tämä ottaa käyttöön AOSP:n eristysominaisuuden sovelluksen ulkoiselle yksityiselle tallennustilalle. Se voi parantaa yhteensopivuutta, mutta vähentää vakautta ja voi lakata toimimasta tulevissa Android-versioissa.</string>
+    <string name="settings_need_reboot">Muutoksen jälkeen vaaditaan uudelleenkäynnistys</string>
+    <string name="settings_force_mount_data">Pakota tietojen eristäminen kaikille sovelluksille</string>
+    <string name="settings_force_mount_data_summary">Tietojen eristäminen on oletuksena pois päältä sovelluksille, joiden target API on alle 30</string>
+    <string name="settings_detail_log">Yksityiskohtainen loki vianmääritykseen</string>
+    <string name="settings_max_log_size">Lokkerin puskurikoot</string>
+    <string name="settings_hide_icon">Piilota moduulin kuvake käynnistysohjelmasta</string>
+    <string name="settings_hide_icon_summary">Voit silti avata sovelluksen Xposed-managerista</string>
+    <string name="settings_bypass_risky_package_warning">Ohita riskipaketin varoitus</string>
+    <string name="settings_bypass_risky_package_warning_summary">Huomaa, että kehittäjät eivät ole vastuussa riskipakettiin liittyvistä ongelmista ennen tai jälkeen tämän ominaisuuden ottamisen käyttöön.</string>
+    <string name="settings_disable_activity_launch_protection">Poista Activity-käynnistyssuojaus käytöstä</string>
+    <string name="settings_disable_activity_launch_protection_summary">Tämä kytkin poistaa kaikki startActivity-suojaukset. Jos et ole varma, älä ota käyttöön.</string>
+    <string name="settings_system_wallpaper">Käytä järjestelmän taustakuvaa</string>
+    <string name="settings_clear_uninstalled_app_configs">Tyhjennä poistettujen sovellusten asetukset</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Tämän asetuksen avulla voit luoda konfiguraation ilman jäänteitä, mutta joudut määrittämään sovellukset uudelleen, kun asennat ne uudelleen.</string>
+    <string name="settings_no_undone_warning">Tätä toimintoa ei voi kumota.</string>
+    <string name="settings_package_query_workaround">Vaihtoehtoinen paketinhakumenetelmä</string>
+    <string name="settings_package_query_workaround_summary">Älä ota tätä käyttöön, jos näet pakettien listan tässä sovelluksessa normaalisti.</string>
+    <string name="settings_intent_api_enabled">Ota ulkoinen Intents-rajapinta käyttöön</string>
+    <string name="settings_intent_api_enabled_summary">Salli muiden sovellusten muuttaa PIB-asetuksia.</string>
+    <string name="settings_intent_api_enable_title">Ota ulkoinen Intents API käyttöön?</string>
+    <string name="settings_intent_api_enable_message">Kun käytössä, mikä tahansa laitteella oleva sovellus voi lähettää API-intenttejä muuttaakseen sovelluskohtaisia PIB-asetuksia. Ota käyttöön vain, jos luotat asentamiisi sovelluksiin.</string>
+    <string name="settings_intent_api_enable_confirm">Ota API käyttöön</string>
+    <string name="settings_launcher_icon">Käynnistysohjelman kuvake</string>
+    <string name="settings_error_only_log">Vain virheloki</string>
+
+    <string name="settings_telemetry">Telemetria</string>
+    <string name="settings_telemetry_enabled">Ota telemetrian lähetys käyttöön</string>
+    <string name="settings_telemetry_enabled_summary">Lähettää sovellusten Play Integrity -pyyntö- ja vastaustapahtumia kehittäjän palvelimelle tilastoja ja tutkimusta varten.</string>
+    <string name="telemetry_consent_title">Tervetuloa PIB:iin! Haluatko ottaa telemetrian käyttöön?</string>
+    <string name="telemetry_consent_message">Kiitos PIB:n asentamisesta!\n\nTelemetria auttaa kehittäjää tutkimaan, miten sovellukset käyttävät Google Play Integrity -rajapintaa.\nYksityisyyttä kunnioittaen: ei tunnistettavia tietoja lähetetä. Ei kuluta akkua.\nVoit lukea laajemman tietosuojakäytännön ja lähdekoodin GitHubista.\nVoit poistaa telemetrian käytöstä milloin tahansa asetuksista.</string>
+    <string name="telemetry_consent_enable">Totta kai!</string>
+    <string name="telemetry_consent_not_now">Ei nyt :(</string>
+
+    <string name="settings_language">Kieli</string>
+
+    <string name="settings_theme">Teema</string>
+    <string name="settings_system_theme_color">Järjestelmän teemaväri</string>
+    <string name="settings_theme_color">Teemaväri</string>
+    <string name="settings_pure_black_dark_theme">Täysmustan tumma teema</string>
+    <string name="settings_pure_black_dark_theme_summary">Käytä täysmustaa teemaa, jos tumma teema on käytössä</string>
+
+    <string name="settings_update">Päivitä</string>
+    <string name="settings_disable_update">Poista päivitysilmoitus käytöstä</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Laaja lokikonfigurointi</string>
+
+    <!-- About -->
+    <string name="about_description">PIB on LSPosed-moduuli, joka keskittyy estämään sovelluksia käyttämästä Google Play Integrity -rajapintaa.</string>
+    <string name="about_how_to_use_title">Kuinka käyttää tätä moduulia</string>
+    <string name="about_how_to_use_description_1">Ota moduuli käyttöön Xposed-managerissa ja anna sille Google Play Kaupan käyttöoikeus (com.android.vending).\nSitten pysäytä Google Play Kauppa pakotetusti.</string>
+    <string name="about_how_to_use_description_2">Oletuksena kaikki sovellukset estetään käyttämästä Google Play Integrityä. Valitse, mille sovellukselle haluat sallia pääsyn tai haluatko käyttää tiettyä virhekoodia.</string>
+    <string name="about_developer">Kehittäjä</string>
+    <string name="about_support">Tuki ja palaute</string>
+    <string name="about_open_source">Avoimen lähdekoodin lisenssit</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Punainen</string>
+    <string name="color_pink">Vaaleanpunainen</string>
+    <string name="color_purple">Purppura</string>
+    <string name="color_deep_purple">Syväpurppura</string>
+    <string name="color_indigo">Indigo</string>
+    <string name="color_blue">Sininen</string>
+    <string name="color_light_blue">Vaaleansininen</string>
+    <string name="color_cyan">Syaani</string>
+    <string name="color_teal">Turkoosi</string>
+    <string name="color_green">Vihreä</string>
+    <string name="color_light_green">Vaaleanvihreä</string>
+    <string name="color_lime">Lime</string>
+    <string name="color_yellow">Keltainen</string>
+    <string name="color_amber">Meripihka</string>
+    <string name="color_orange">Oranssi</string>
+    <string name="color_deep_orange">Syväoranssi</string>
+    <string name="color_brown">Ruskea</string>
+    <string name="color_blue_grey">Siniharmaa</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Tumma teema</string>
+    <string name="dark_theme_off">Aina pois käytöstä</string>
+    <string name="dark_theme_on">Aina päällä</string>
+</resources>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Inici</string>
+    <string name="title_logs">Registres</string>
+    <string name="title_statistics">Estadístiques</string>
+    <string name="title_settings">Configuració</string>
+    <string name="title_template_manage">Gestionar perfils de registre</string>
+    <string name="title_app_manage">Opcions per aplicació</string>
+    <string name="title_default_app">Opcions per defecte</string>
+    <string name="title_app_select">Selecciona aplicacions</string>
+    <string name="title_app_settings">Configuració de l\'aplicació</string>
+    <string name="title_about">Informació</string>
+
+    <string name="do_not_dual">No instal·lar PIB a l\'usuari secundari</string>
+    <string name="show_crash_log">Mostra el registre de fallades</string>
+    <string name="config_damaged">Fitxer de configuració malmès. Neteja les dades de l\'aplicació</string>
+    <string name="delete">Eliminar</string>
+    <string name="enabled">Activat</string>
+    <string name="disabled">Desactivat</string>
+    <string name="application">Aplicació</string>
+    <string name="preferences">Preferències</string>
+    <string name="refresh">Actualitza</string>
+    <string name="filter">Filtre</string>
+    <string name="search">Cerca</string>
+    <string name="edit">Edita</string>
+    <string name="follow_system">Seguir el sistema</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Mòdul activat [%s]</string>
+    <string name="home_xposed_not_activated">No es pot comunicar amb Play Store</string>
+    <string name="home_xposed_service_on">Servei del sistema en execució [%d]</string>
+    <string name="home_xposed_service_off">El mòdul està desactivat o Play Store no s\'està executant. Prova d\'iniciar-lo.</string>
+    <string name="home_xposed_service_old">Mòdul actualitzat, cal reiniciar</string>
+    <string name="home_xposed_service_health_stale">Servei connectat, esperant una nova comprovació d\'estat</string>
+    <string name="home_xposed_filter_count">PIB ha capturat un total de %d esdeveniments</string>
+    <string name="home_backup_config">Còpia de seguretat de la configuració</string>
+    <string name="home_restore_config">Restaurar configuració</string>
+    <string name="home_import_successful">Importació correcta</string>
+    <string name="home_import_failed">Error en la importació</string>
+    <string name="home_import_file_damaged">El fitxer de còpia de seguretat estava malmès</string>
+    <string name="home_export_failed">Error en l\'exportació</string>
+    <string name="home_exported">Configuració desada</string>
+    <string name="home_new_update">Nova actualització disponible: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Mostra aplicacions del sistema</string>
+    <string name="list_sorting">Ordenació</string>
+    <string name="list_reverse_order">Ordre invers</string>
+    <string name="list_sort_by_label">Per nom d\'aplicació</string>
+    <string name="list_sort_by_package_name">Per nom de paquet</string>
+    <string name="list_sort_by_install_time">Per data d\'instal·lació</string>
+    <string name="list_sort_by_update_time">Per data d\'actualització</string>
+    <string name="list_empty_no_apps">No s\'han trobat aplicacions; potser no has permès a aquesta aplicació consultar tots els paquets</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Activa PIB</string>
+    <string name="app_enable_intervention_desc">Desactiva per permetre les sol·licituds de Play Integrity encara que la intercepció estigui habilitada per defecte.</string>
+    <string name="app_rewrite_integrity_response">Activa errors sintètics</string>
+    <string name="app_rewrite_integrity_response_desc">Quan està activat, l\'aplicació no es comunicarà amb Play Integrity i rebrà un error generat.</string>
+    <string name="app_deliver_synthetic_response">Enviar resposta sintètica</string>
+    <string name="app_deliver_synthetic_response_desc">Quan està desactivat, l\'aplicació no rebrà cap resposta. Utilitza-ho només per provar on exactament l\'aplicació sol·licita Play Integrity (pot quedar-se penjada durant molt de temps).</string>
+    <string name="app_delay_synthetic_response">Retardar l\'enviament de la resposta</string>
+    <string name="app_delay_synthetic_response_desc">Afegeix un retard aleatori entre 300 i 2000 ms abans d\'entregar les crides de retorn sintètiques. Pot evitar deteccions basades en el temps?</string>
+    <string name="app_rewrite_integrity_error_code">Codi d\'error a injectar</string>
+    <string name="app_rewrite_integrity_error_code_desc">L\'aplicació rebrà aquest codi d\'error.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Referència de codis d\'error</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Obre una taula amb els possibles valors d\'error.</string>
+    <string name="app_rewrite_integrity_error_remediable">Indicador recuperable</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Indica a l\'aplicació que la sol·licitud s\'hauria de reintentar (per exemple, l\'error és temporal).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Referència de codis d\'error d\'Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Codi d\'error copiat: %1$s</string>
+    <string name="app_exclude_system_apps">Inclou aplicacions del sistema</string>
+    <string name="app_warning_risky_package_title">Paquet arriscat</string>
+    <string name="app_warning_risky_package_desc">Aquest paquet està marcat com a arriscat i pot causar inestabilitat. Continuar?</string>
+    <string name="app_favorite_add">Marca com a favorit</string>
+    <string name="app_favorite_remove">Desmarca com a favorit</string>
+    <string name="app_force_stop_launch">Reinicia i llança</string>
+    <string name="app_launch">Obre</string>
+    <string name="app_launch_failed">No s\'ha pogut iniciar l\'aplicació; comprova els registres per més detalls</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Predefinit del mètode d\'entrada</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Valor personalitzat</string>
+    <string name="settings_templates_random_ssaid">Aleatoritza SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Desa registres</string>
+    <string name="logs_clear">Esborra registres</string>
+    <string name="logs_upload_telemetry">Puja telemetria ara</string>
+    <string name="logs_show_telemetry_queue">Mostra l\'estat de la cua de telemetria</string>
+    <string name="logs_empty">No hi ha registres per desar</string>
+    <string name="logs_saved">Registres desats</string>
+    <string name="logs_telemetry_disabled">La pujada de telemetria està desactivada</string>
+    <string name="logs_telemetry_upload_enqueued">Pujada de telemetria en cua: pendent=%1$d reintents=%2$d en trànsit=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Estat de la cua: pendent=%1$d reintents=%2$d en trànsit=%3$d confirmats=%4$d fallats=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Interval de temps</string>
+    <string name="statistics_window_all">Tot el temps</string>
+    <string name="statistics_window_24h">Últimes 24 hores</string>
+    <string name="statistics_window_7d">Últims 7 dies</string>
+    <string name="statistics_updated_at">Actualitzat: %1$s</string>
+    <string name="statistics_user_id">ID d\'usuari: %1$s</string>
+    <string name="statistics_summary_title">Resum de captures</string>
+    <string name="statistics_summary_body">Esdeveniments totals: %1$d\nPeticions: %2$d\nRespostes: %3$d\nRespostes correctes: %4$d\nRespostes fallides: %5$d</string>
+    <string name="statistics_queue_title">Cua de telemetria</string>
+    <string name="statistics_queue_body">Pendent: %1$d\nReintents: %2$d\nEn trànsit: %3$d\nConfirmats: %4$d\nFallats: %5$d</string>
+    <string name="statistics_top_packages_title">Activitat de paquets (tot)</string>
+    <string name="statistics_top_packages_empty">Cap activitat de paquets en aquest interval de temps.</string>
+    <string name="statistics_package_unknown_label">Aplicació desconeguda</string>
+    <string name="statistics_package_resolving_label">Resolvent nom de l\'aplicació...</string>
+    <string name="statistics_recent_requests_title">Últimes 10 peticions</string>
+    <string name="statistics_recent_requests_empty">Cap petició en aquest interval de temps.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Mòdul</string>
+    <string name="settings_overwrite">Sobrescriu</string>
+    <string name="settings_overwritten">Sobrescrit</string>
+    <string name="settings_overwrite_summary">Els elements d\'aquesta categoria s\'activaran forçosament si els commutadors estan marcats</string>
+    <string name="settings_default_value">Valor per defecte: %s</string>
+    <string name="settings_data_isolation">Aïllament de dades</string>
+    <string name="settings_data_isolation_summary">Dades de l\'aplicació: %1$s\nDades Vold de l\'aplicació: %2$s\nForçar muntatge: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Aquesta opció només està disponible a Android 11 o superior</string>
+    <string name="settings_app_data_isolation">Aïllament de dades de l\'aplicació</string>
+    <string name="settings_vold_app_data_isolation">Aïllament de dades Vold de l\'aplicació</string>
+    <string name="settings_warning">Avís</string>
+    <string name="settings_vold_warning">Això activa una funció d\'aïllament AOSP per a l\'emmagatzematge extern privat de l\'aplicació. Pot millorar la compatibilitat però pot reduir l\'estabilitat i pot deixar de funcionar en futures versions d\'Android.</string>
+    <string name="settings_need_reboot">Canviar requereix reinici</string>
+    <string name="settings_force_mount_data">Fer complir l\'aïllament de dades per a totes les aplicacions</string>
+    <string name="settings_force_mount_data_summary">L\'aïllament de dades està desactivat per a aplicacions amb API target inferior a 30 per defecte</string>
+    <string name="settings_detail_log">Registre detallat per a depuració</string>
+    <string name="settings_max_log_size">Mides del buffer del registrador</string>
+    <string name="settings_hide_icon">Amaga la icona del mòdul al llançador</string>
+    <string name="settings_hide_icon_summary">Encara pots obrir l\'aplicació al gestor Xposed</string>
+    <string name="settings_bypass_risky_package_warning">Omet l\'avís de paquet arriscat</string>
+    <string name="settings_bypass_risky_package_warning_summary">Tingues en compte que els desenvolupadors no són responsables dels problemes relacionats amb paquets arriscats abans ni després d\'haver activat aquesta funció</string>
+    <string name="settings_disable_activity_launch_protection">Desactiva la protecció d\'inici d\'Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Aquest interruptor eliminarà totes les proteccions startActivity. Si no estàs segur, no l\'activis.</string>
+    <string name="settings_system_wallpaper">Utilitza el fons de pantalla del sistema</string>
+    <string name="settings_clear_uninstalled_app_configs">Esborra configuracions d\'aplicacions desinstal·lades</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Aquesta opció et permet crear una configuració sense restes però hauràs de reconfigurar les aplicacions quan les tornis a instal·lar.</string>
+    <string name="settings_no_undone_warning">Aquesta acció no es pot desfer.</string>
+    <string name="settings_package_query_workaround">Consulta de paquets alternativa</string>
+    <string name="settings_package_query_workaround_summary">No activis aquesta opció si veus correctament la llista de paquets a aquesta aplicació.</string>
+    <string name="settings_intent_api_enabled">Activa l\'API d\'Intents externs</string>
+    <string name="settings_intent_api_enabled_summary">Permet que altres aplicacions canviïn la configuració de PIB.</string>
+    <string name="settings_intent_api_enable_title">Activa l\'API d\'Intents externs?</string>
+    <string name="settings_intent_api_enable_message">Quan està activat, qualsevol aplicació del dispositiu pot enviar Intents d\'API per modificar la configuració per aplicació de PIB. Activa-ho només si confies en les aplicacions que instal·les.</string>
+    <string name="settings_intent_api_enable_confirm">Activa l\'API</string>
+    <string name="settings_launcher_icon">Icona del llançador</string>
+    <string name="settings_error_only_log">Registre només d\'errors</string>
+
+    <string name="settings_telemetry">Telemetria</string>
+    <string name="settings_telemetry_enabled">Activa la pujada de telemetria</string>
+    <string name="settings_telemetry_enabled_summary">Puja els esdeveniments de sol·licitud i resposta d\'integritat de les aplicacions al servidor del desenvolupador, per a estadístiques i recerca.</string>
+    <string name="telemetry_consent_title">Benvingut a PIB! Vols activar la telemetria?</string>
+    <string name="telemetry_consent_message">Gràcies per instal·lar PIB!\n\nLa telemetria ajuda el desenvolupador a estudiar com interactuen les aplicacions amb Google Play Integrity.\nRespectuós amb la privacitat: no s\'envien dades identificables. No consumeix bateria.\nPots llegir la política extensa i el codi font a GitHub.\nPots desactivar la telemetria en qualsevol moment a Configuració.</string>
+    <string name="telemetry_consent_enable">Clar que sí!</string>
+    <string name="telemetry_consent_not_now">Ara no :(</string>
+
+    <string name="settings_language">Idioma</string>
+
+    <string name="settings_theme">Tema</string>
+    <string name="settings_system_theme_color">Color del tema del sistema</string>
+    <string name="settings_theme_color">Color del tema</string>
+    <string name="settings_pure_black_dark_theme">Tema fosc negre absolut</string>
+    <string name="settings_pure_black_dark_theme_summary">Utilitza el tema negre absolut si el tema fosc està activat</string>
+
+    <string name="settings_update">Actualitza</string>
+    <string name="settings_disable_update">Desactiva la notificació d\'actualització</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Configuració massiva del registrador</string>
+
+    <!-- About -->
+    <string name="about_description">PIB és un mòdul LSPosed centrat en bloquejar les aplicacions que utilitzen l\'API de Google Play Integrity.</string>
+    <string name="about_how_to_use_title">Com usar aquest mòdul</string>
+    <string name="about_how_to_use_description_1">Activa el mòdul al teu gestor Xposed i concedeix-li l\'abast de Google Play Store (com.android.vending).\nDesprés, força l\'aturada de Google Play Store.</string>
+    <string name="about_how_to_use_description_2">Per defecte, totes les aplicacions estan bloquejades per accedir a Google Play Integrity. Selecciona per a quina aplicació vols permetre l\'accés o si vols utilitzar un codi d\'error específic.</string>
+    <string name="about_developer">Desenvolupador</string>
+    <string name="about_support">Suport i comentaris</string>
+    <string name="about_open_source">Llicències de codi obert</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Vermell</string>
+    <string name="color_pink">Rosa</string>
+    <string name="color_purple">Porpra</string>
+    <string name="color_deep_purple">Porpra fosc</string>
+    <string name="color_indigo">Índigo</string>
+    <string name="color_blue">Blau</string>
+    <string name="color_light_blue">Blau clar</string>
+    <string name="color_cyan">Cian</string>
+    <string name="color_teal">Verd maragda</string>
+    <string name="color_green">Verd</string>
+    <string name="color_light_green">Verd clar</string>
+    <string name="color_lime">Llima</string>
+    <string name="color_yellow">Groc</string>
+    <string name="color_amber">Àmbar</string>
+    <string name="color_orange">Taronja</string>
+    <string name="color_deep_orange">Taronja fosc</string>
+    <string name="color_brown">Marró</string>
+    <string name="color_blue_grey">Gris blavós</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Tema fosc</string>
+    <string name="dark_theme_off">Sempre desactivat</string>
+    <string name="dark_theme_on">Sempre activat</string>
+</resources>

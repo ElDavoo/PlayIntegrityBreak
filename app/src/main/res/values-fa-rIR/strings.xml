@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">خانه</string>
+    <string name="title_logs">گزارش‌ها</string>
+    <string name="title_statistics">آمار</string>
+    <string name="title_settings">تنظیمات</string>
+    <string name="title_template_manage">مدیریت پروفایل‌های ثبت</string>
+    <string name="title_app_manage">تنظیمات هر برنامه</string>
+    <string name="title_default_app">تنظیمات پیش‌فرض</string>
+    <string name="title_app_select">انتخاب برنامه‌ها</string>
+    <string name="title_app_settings">تنظیمات برنامه</string>
+    <string name="title_about">درباره</string>
+
+    <string name="do_not_dual">PIB را برای کاربر ثانویه نصب نکن</string>
+    <string name="show_crash_log">نمایش گزارش کرش</string>
+    <string name="config_damaged">فایل پیکربندی خراب است. لطفاً داده‌های برنامه را پاک کنید</string>
+    <string name="delete">حذف</string>
+    <string name="enabled">فعال</string>
+    <string name="disabled">غیرفعال</string>
+    <string name="application">برنامه</string>
+    <string name="preferences">تنظیمات</string>
+    <string name="refresh">به‌روزرسانی</string>
+    <string name="filter">فیلتر</string>
+    <string name="search">جستجو</string>
+    <string name="edit">ویرایش</string>
+    <string name="follow_system">پیروی از سیستم</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">ماژول فعال شد [%s]</string>
+    <string name="home_xposed_not_activated">قادر به ارتباط با فروشگاه Play نیست</string>
+    <string name="home_xposed_service_on">سرویس سیستم در حال اجرا [%d]</string>
+    <string name="home_xposed_service_off">ماژول غیرفعال است یا فروشگاه Play اجرا نمی‌شود. تلاش کنید آن را اجرا کنید.</string>
+    <string name="home_xposed_service_old">ماژول به‌روزرسانی شد، نیاز به راه‌اندازی مجدد دارد</string>
+    <string name="home_xposed_service_health_stale">سرویس متصل است، در انتظار بررسی سلامت تازه</string>
+    <string name="home_xposed_filter_count">PIB در مجموع %d رویداد ثبت کرده است</string>
+    <string name="home_backup_config">پشتیبان‌گیری از پیکربندی</string>
+    <string name="home_restore_config">بازیابی پیکربندی</string>
+    <string name="home_import_successful">واردسازی موفق</string>
+    <string name="home_import_failed">واردسازی ناموفق</string>
+    <string name="home_import_file_damaged">فایل پشتیبان آسیب‌دیده است</string>
+    <string name="home_export_failed">خروجی‌گیری ناموفق</string>
+    <string name="home_exported">پیکربندی پشتیبان‌گیری شد</string>
+    <string name="home_new_update">به‌روزرسانی جدید موجود است: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">نمایش برنامه‌های سیستمی</string>
+    <string name="list_sorting">مرتب‌سازی</string>
+    <string name="list_reverse_order">معکوس کردن ترتیب</string>
+    <string name="list_sort_by_label">بر اساس نام برنامه</string>
+    <string name="list_sort_by_package_name">بر اساس نام پکیج</string>
+    <string name="list_sort_by_install_time">بر اساس زمان نصب</string>
+    <string name="list_sort_by_update_time">بر اساس زمان به‌روزرسانی</string>
+    <string name="list_empty_no_apps">هیچ برنامه‌ای یافت نشد، شاید به این برنامه اجازهٔ بررسی همهٔ پکیج‌ها را نداده‌اید</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">فعال‌سازی PIB</string>
+    <string name="app_enable_intervention_desc">برای اجازه دادن به درخواست‌های Play Integrity حتی وقتی که رهگیری به‌صورت پیش‌فرض فعال است، این را غیرفعال کنید.</string>
+    <string name="app_rewrite_integrity_response">فعال‌سازی خطاهای مصنوعی</string>
+    <string name="app_rewrite_integrity_response_desc">وقتی فعال باشد، برنامه با Play Integrity ارتباط برقرار نمی‌کند و در عوض یک خطای تولیدشده دریافت می‌کند.</string>
+    <string name="app_deliver_synthetic_response">ارسال پاسخ مصنوعی</string>
+    <string name="app_deliver_synthetic_response_desc">وقتی غیرفعال باشد، برنامه هیچ پاسخی دریافت نخواهد کرد. فقط برای تست اینکه دقیقاً برنامه چه زمانی از Play Integrity درخواست می‌کند از آن استفاده کنید (زیرا احتمالاً برای مدت طولانی گیر خواهند کرد).</string>
+    <string name="app_delay_synthetic_response">تعویق ارسال پاسخ</string>
+    <string name="app_delay_synthetic_response_desc">قبل از ارسال کال‌بک‌های مصنوعی، تأخیری تصادفی بین ۳۰۰ تا ۲۰۰۰ میلی‌ثانیه اضافه می‌کند. ممکن است از تشخیص مبتنی بر زمان جلوگیری کند؟</string>
+    <string name="app_rewrite_integrity_error_code">کد خطایی برای وارد کردن</string>
+    <string name="app_rewrite_integrity_error_code_desc">این کد خطا به برنامه ارسال خواهد شد.</string>
+    <string name="app_rewrite_integrity_error_code_reference">مرجع کدهای خطا</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">یک جدول از مقادیر ممکن خطا را باز کنید.</string>
+    <string name="app_rewrite_integrity_error_remediable">نشانهٔ قابل رفع</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">به برنامه می‌گوید که باید درخواست را دوباره تلاش کند (مثلاً خطا گذرا است).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">مرجع کدهای خطای Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">کد خطا کپی شد: %1$s</string>
+    <string name="app_exclude_system_apps">شامل برنامه‌های سیستمی</string>
+    <string name="app_warning_risky_package_title">پکیج پرریسک</string>
+    <string name="app_warning_risky_package_desc">این پکیج به‌عنوان پرریسک علامت‌گذاری شده و ممکن است باعث ناپایداری شود. ادامه می‌دهید؟</string>
+    <string name="app_favorite_add">علامت‌گذاری به‌عنوان مورد علاقه</string>
+    <string name="app_favorite_remove">لغو علامت مورد علاقه</string>
+    <string name="app_force_stop_launch">راه‌اندازی مجدد و اجرا</string>
+    <string name="app_launch">اجرا</string>
+    <string name="app_launch_failed">اجرای برنامه موفق نبود، برای جزئیات بیشتر گزارش‌ها را بررسی کنید</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">پیش‌تنظیم روش ورودی</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">مقدار سفارشی</string>
+    <string name="settings_templates_random_ssaid">تولید تصادفی SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">ذخیره گزارش‌ها</string>
+    <string name="logs_clear">پاک کردن گزارش‌ها</string>
+    <string name="logs_upload_telemetry">ارسال آمار هم‌اکنون</string>
+    <string name="logs_show_telemetry_queue">نمایش وضعیت صف ارسال آمار</string>
+    <string name="logs_empty">گزارشی برای ذخیره وجود ندارد</string>
+    <string name="logs_saved">گزارش‌ها ذخیره شدند</string>
+    <string name="logs_telemetry_disabled">ارسال آمار غیرفعال است</string>
+    <string name="logs_telemetry_upload_enqueued">ارسال آمار در صف قرار گرفت: انتظار=%1$d تلاش=%2$d درحال‌ارسال=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">وضعیت صف: انتظار=%1$d تلاش=%2$d درحال‌ارسال=%3$d تأییدشده=%4$d ناموفق=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">بازهٔ زمانی</string>
+    <string name="statistics_window_all">از ابتدا</string>
+    <string name="statistics_window_24h">۲۴ ساعت گذشته</string>
+    <string name="statistics_window_7d">۷ روز گذشته</string>
+    <string name="statistics_updated_at">به‌روز شد: %1$s</string>
+    <string name="statistics_user_id">شناسهٔ کاربر: %1$s</string>
+    <string name="statistics_summary_title">خلاصهٔ ثبت</string>
+    <string name="statistics_summary_body">کل رویدادها: %1$d\nدرخواست‌ها: %2$d\nپاسخ‌ها: %3$d\nپاسخ‌های موفق: %4$d\nپاسخ‌های ناموفق: %5$d</string>
+    <string name="statistics_queue_title">صف ارسال آمار</string>
+    <string name="statistics_queue_body">انتظار: %1$d\nتلاش: %2$d\nدرحال‌ارسال: %3$d\nتأییدشده: %4$d\nناموفق: %5$d</string>
+    <string name="statistics_top_packages_title">فعالیت پکیج‌ها (همه)</string>
+    <string name="statistics_top_packages_empty">هیچ فعالیت پکیجی در این بازهٔ زمانی وجود ندارد.</string>
+    <string name="statistics_package_unknown_label">برنامه ناشناخته</string>
+    <string name="statistics_package_resolving_label">در حال تبدیل نام برنامه...</string>
+    <string name="statistics_recent_requests_title">۱۰ درخواست آخر</string>
+    <string name="statistics_recent_requests_empty">درخواستی در این بازهٔ زمانی وجود ندارد.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">ماژول</string>
+    <string name="settings_overwrite">بازنویسی</string>
+    <string name="settings_overwritten">بازنویسی‌شده</string>
+    <string name="settings_overwrite_summary">آیتم‌های این دسته در صورت فعال بودن سوئیچ‌ها، اجباری فعال می‌شوند</string>
+    <string name="settings_default_value">مقدار پیش‌فرض: %s</string>
+    <string name="settings_data_isolation">جداسازی داده‌ها</string>
+    <string name="settings_data_isolation_summary">دادهٔ برنامه: %1$s\nدادهٔ برنامه (vold): %2$s\nاجبار در مونت: %3$s</string>
+    <string name="settings_data_isolation_unsupported">این گزینه تنها در اندروید ۱۱ و بالاتر در دسترس است</string>
+    <string name="settings_app_data_isolation">جداسازی دادهٔ برنامه</string>
+    <string name="settings_vold_app_data_isolation">جداسازی دادهٔ برنامه (vold)</string>
+    <string name="settings_warning">هشدار</string>
+    <string name="settings_vold_warning">این ویژگی یک قابلیت جداسازی AOSP برای فضای خصوصی خارجی برنامه را فعال می‌کند. ممکن است سازگاری را بهبود دهد اما می‌تواند پایداری را کاهش دهد و ممکن است در نسخه‌های آینده اندروید کار نکند.</string>
+    <string name="settings_need_reboot">تغییر نیاز به راه‌اندازی مجدد دارد</string>
+    <string name="settings_force_mount_data">اجرای جداسازی داده برای همه برنامه‌ها</string>
+    <string name="settings_force_mount_data_summary">به‌طور پیش‌فرض جداسازی داده برای برنامه‌هایی که target API کمتر از ۳۰ دارند غیرفعال است</string>
+    <string name="settings_detail_log">گزارش جزئیات برای دیباگ</string>
+    <string name="settings_max_log_size">اندازه‌های بافر لاگر</string>
+    <string name="settings_hide_icon">مخفی کردن آیکون ماژول در لانچر</string>
+    <string name="settings_hide_icon_summary">هنوز می‌توانید برنامه را در Xposed manager باز کنید</string>
+    <string name="settings_bypass_risky_package_warning">رد هشدار پکیج پرریسک</string>
+    <string name="settings_bypass_risky_package_warning_summary">توجه داشته باشید که توسعه‌دهنده مسئول مشکلات مرتبط با پکیج پرریسک قبل یا بعد از فعال‌سازی این ویژگی نیست</string>
+    <string name="settings_disable_activity_launch_protection">غیرفعال کردن حفاظت راه‌اندازی Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">این سوئیچ همهٔ محافظت‌های startActivity را برداشته و اگر مطمئن نیستید آن را فعال نکنید.</string>
+    <string name="settings_system_wallpaper">استفاده از تصویر پس‌زمینهٔ سیستم</string>
+    <string name="settings_clear_uninstalled_app_configs">پاک کردن پیکربندی برنامه‌های حذف‌شده</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">این گزینه به شما اجازه می‌دهد پیکربندی بدون باقیمانده ایجاد کنید، اما وقتی برنامه‌ها را دوباره نصب می‌کنید باید دوباره پیکربندی کنید.</string>
+    <string name="settings_no_undone_warning">این عمل قابل بازگشت نیست.</string>
+    <string name="settings_package_query_workaround">پرس‌وجوی جایگزین پکیج</string>
+    <string name="settings_package_query_workaround_summary">اگر فهرست پکیج‌ها را در این برنامه به‌درستی می‌بینید، این گزینه را فعال نکنید.</string>
+    <string name="settings_intent_api_enabled">فعال‌سازی API اینتنت‌های خارجی</string>
+    <string name="settings_intent_api_enabled_summary">اجازه به سایر برنامه‌ها برای تغییر تنظیمات PIB.</string>
+    <string name="settings_intent_api_enable_title">فعال‌سازی API اینتنت‌های خارجی؟</string>
+    <string name="settings_intent_api_enable_message">وقتی فعال باشد، هر برنامهٔ موجود روی دستگاه می‌تواند اینتنت‌های API را برای تغییر تنظیمات PIB ارسال کند. فقط در صورتی این را فعال کنید که به برنامه‌هایی که نصب می‌کنید اعتماد دارید.</string>
+    <string name="settings_intent_api_enable_confirm">فعال کردن API</string>
+    <string name="settings_launcher_icon">آیکون لانچر</string>
+    <string name="settings_error_only_log">گزارش فقط خطا</string>
+
+    <string name="settings_telemetry">ارسال آمار</string>
+    <string name="settings_telemetry_enabled">فعال کردن ارسال آمار</string>
+    <string name="settings_telemetry_enabled_summary">رویدادهای درخواست و پاسخ Integrity برنامه‌ها را برای آمار و پژوهش به سرور توسعه‌دهنده ارسال می‌کند.</string>
+    <string name="telemetry_consent_title">به PIB خوش آمدید! می‌خواهید ارسال آمار را فعال کنید؟</string>
+    <string name="telemetry_consent_message">از نصب PIB سپاسگزاریم!\n\nارسال آمار به توسعه‌دهنده کمک می‌کند تا بررسی کند چگونه برنامه‌ها با Google Play Integrity تعامل دارند.\nحفظ حریم خصوصی: هیچ دادهٔ شناسایی‌شدنی ارسال نمی‌شود. از باتری استفاده نمی‌کند.\nمی‌توانید سیاست گسترده‌تر و کد منبع را در GitHub بخوانید.\nمی‌توانید هر زمان که خواستید در تنظیمات ارسال آمار را غیرفعال کنید.</string>
+    <string name="telemetry_consent_enable">حتماً!</string>
+    <string name="telemetry_consent_not_now">الان نه :(</string>
+
+    <string name="settings_language">زبان</string>
+
+    <string name="settings_theme">تم</string>
+    <string name="settings_system_theme_color">رنگ تم سیستم</string>
+    <string name="settings_theme_color">رنگ تم</string>
+    <string name="settings_pure_black_dark_theme">تم تاریک کاملاً سیاه</string>
+    <string name="settings_pure_black_dark_theme_summary">در صورت فعال بودن تم تاریک از تم کاملاً سیاه استفاده کنید</string>
+
+    <string name="settings_update">به‌روزرسانی</string>
+    <string name="settings_disable_update">غیرفعال کردن اعلان به‌روزرسانی</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">پیکربندی دسته‌ای لاگر</string>
+
+    <!-- About -->
+    <string name="about_description">PIB یک ماژول LSPosed است که بر مسدودسازی برنامه‌ها از استفاده از Google Play Integrity API تمرکز دارد.</string>
+    <string name="about_how_to_use_title">نحوهٔ استفاده از این ماژول</string>
+    <string name="about_how_to_use_description_1">ماژول را در Xposed manager فعال کنید و به آن دسترسی فروشگاه Google Play (com.android.vending) را بدهید.\nسپس فروشگاه Google Play را با بستن اجباری متوقف کنید.</string>
+    <string name="about_how_to_use_description_2">به‌صورت پیش‌فرض، تمام برنامه‌ها از دسترسی به Google Play Integrity مسدود شده‌اند. برنامه‌ای را انتخاب کنید که می‌خواهید به آن اجازه دسترسی بدهید، یا اگر می‌خواهید از یک کد خطای مشخص استفاده کنید.</string>
+    <string name="about_developer">توسعه‌دهنده</string>
+    <string name="about_support">پشتیبانی و بازخورد</string>
+    <string name="about_open_source">مجوزهای متن‌باز</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">ساکورا</string>
+    <string name="color_red">قرمز</string>
+    <string name="color_pink">صورتی</string>
+    <string name="color_purple">بنفش</string>
+    <string name="color_deep_purple">بنفش تیره</string>
+    <string name="color_indigo">نیلی</string>
+    <string name="color_blue">آبی</string>
+    <string name="color_light_blue">آبی روشن</string>
+    <string name="color_cyan">فیروزه‌ای</string>
+    <string name="color_teal">سبزآبی</string>
+    <string name="color_green">سبز</string>
+    <string name="color_light_green">سبز روشن</string>
+    <string name="color_lime">لیمویی</string>
+    <string name="color_yellow">زرد</string>
+    <string name="color_amber">کهربایی</string>
+    <string name="color_orange">نارنجی</string>
+    <string name="color_deep_orange">نارنجی تیره</string>
+    <string name="color_brown">قهوه‌ای</string>
+    <string name="color_blue_grey">آبی خاکستری</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">تم تیره</string>
+    <string name="dark_theme_off">همیشه خاموش</string>
+    <string name="dark_theme_on">همیشه روشن</string>
+</resources>

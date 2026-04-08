@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Дом</string>
+    <string name="title_logs">Журналы</string>
+    <string name="title_statistics">Статистика</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_template_manage">Управление профилями логирования</string>
+    <string name="title_app_manage">Параметры для приложений</string>
+    <string name="title_default_app">Настройки по умолчанию</string>
+    <string name="title_app_select">Выбрать приложения</string>
+    <string name="title_app_settings">Настройки приложения</string>
+    <string name="title_about">О приложении</string>
+
+    <string name="do_not_dual">Не устанавливать PIB второму пользователю</string>
+    <string name="show_crash_log">Показать лог падения</string>
+    <string name="config_damaged">Файл конфигурации повреждён. Пожалуйста, очистите данные приложения</string>
+    <string name="delete">Удалить</string>
+    <string name="enabled">Включено</string>
+    <string name="disabled">Отключено</string>
+    <string name="application">Приложение</string>
+    <string name="preferences">Параметры</string>
+    <string name="refresh">Обновить</string>
+    <string name="filter">Фильтр</string>
+    <string name="search">Поиск</string>
+    <string name="edit">Редактировать</string>
+    <string name="follow_system">Следовать системе</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Модуль активирован [%s]</string>
+    <string name="home_xposed_not_activated">Невозможно связаться с Google Play</string>
+    <string name="home_xposed_service_on">Системный сервис запущен [%d]</string>
+    <string name="home_xposed_service_off">Модуль отключён или Google Play не запущен. Попробуйте запустить его.</string>
+    <string name="home_xposed_service_old">Модуль обновлён, требуется перезагрузка</string>
+    <string name="home_xposed_service_health_stale">Сервис подключён, ожидается свежая проверка состояния</string>
+    <string name="home_xposed_filter_count">PIB зафиксировал всего %d событий</string>
+    <string name="home_backup_config">Резервная копия конфигурации</string>
+    <string name="home_restore_config">Восстановить конфиг</string>
+    <string name="home_import_successful">Импорт выполнен успешно</string>
+    <string name="home_import_failed">Импорт не выполнен</string>
+    <string name="home_import_file_damaged">Файл резервной копии повреждён</string>
+    <string name="home_export_failed">Экспорт не выполнен</string>
+    <string name="home_exported">Конфигурация сохранена</string>
+    <string name="home_new_update">Доступно новое обновление: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Показывать системные приложения</string>
+    <string name="list_sorting">Сортировка</string>
+    <string name="list_reverse_order">Обратный порядок</string>
+    <string name="list_sort_by_label">По названию приложения</string>
+    <string name="list_sort_by_package_name">По имени пакета</string>
+    <string name="list_sort_by_install_time">По времени установки</string>
+    <string name="list_sort_by_update_time">По времени обновления</string>
+    <string name="list_empty_no_apps">Приложений не найдено, возможно, вы не разрешили этому приложению просматривать все пакеты</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Включить PIB</string>
+    <string name="app_enable_intervention_desc">Отключите, чтобы разрешить запросы Play Integrity даже если перехват включён по умолчанию.</string>
+    <string name="app_rewrite_integrity_response">Включить синтетические ошибки</string>
+    <string name="app_rewrite_integrity_response_desc">Если включено, приложение не будет общаться с Play Integrity и вместо этого получит сгенерированную ошибку.</string>
+    <string name="app_deliver_synthetic_response">Доставлять синтетический ответ</string>
+    <string name="app_deliver_synthetic_response_desc">Если отключено, приложение вообще не получит ответа. Используйте только для тестирования того, где приложение запрашивает Play Integrity (оно может зависнуть надолго).</string>
+    <string name="app_delay_synthetic_response">Задерживать доставку ответа</string>
+    <string name="app_delay_synthetic_response_desc">Добавляет случайную задержку от 300 до 2000 мс перед отправкой синтетического обратного вызова. Может предотвратить обнаружение по таймингу?</string>
+    <string name="app_rewrite_integrity_error_code">Код ошибки для внедрения</string>
+    <string name="app_rewrite_integrity_error_code_desc">Приложение получит этот код ошибки.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Справочник кодов ошибок</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Открыть таблицу возможных значений ошибок.</string>
+    <string name="app_rewrite_integrity_error_remediable">Флаг возобновимости</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Указывает приложению, что запрос следует повторить (например, ошибка временная).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Справочник кодов ошибок Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Скопирован код ошибки: %1$s</string>
+    <string name="app_exclude_system_apps">Включать системные приложения</string>
+    <string name="app_warning_risky_package_title">Рискованный пакет</string>
+    <string name="app_warning_risky_package_desc">Этот пакет помечен как рискованный и может вызвать нестабильность. Продолжить?</string>
+    <string name="app_favorite_add">Добавить в избранное</string>
+    <string name="app_favorite_remove">Убрать из избранного</string>
+    <string name="app_force_stop_launch">Перезапустить и запустить</string>
+    <string name="app_launch">Запустить</string>
+    <string name="app_launch_failed">Запуск приложения не удался, проверьте логи для деталей</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Предустановка метода ввода</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Пользовательское значение</string>
+    <string name="settings_templates_random_ssaid">Рандомизировать SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Сохранить логи</string>
+    <string name="logs_clear">Очистить логи</string>
+    <string name="logs_upload_telemetry">Отправить телеметрию сейчас</string>
+    <string name="logs_show_telemetry_queue">Показать состояние очереди телеметрии</string>
+    <string name="logs_empty">Нет логов для сохранения</string>
+    <string name="logs_saved">Логи сохранены</string>
+    <string name="logs_telemetry_disabled">Отправка телеметрии отключена</string>
+    <string name="logs_telemetry_upload_enqueued">Отправка телеметрии в очереди: ожидание=%1$d повтор=%2$d в процессе=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Статус очереди: ожидание=%1$d повтор=%2$d в процессе=%3$d подтверждено=%4$d неудачно=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Интервал</string>
+    <string name="statistics_window_all">За всё время</string>
+    <string name="statistics_window_24h">За последние 24 часа</string>
+    <string name="statistics_window_7d">За последние 7 дней</string>
+    <string name="statistics_updated_at">Обновлено: %1$s</string>
+    <string name="statistics_user_id">Идентификатор пользователя: %1$s</string>
+    <string name="statistics_summary_title">Сводка захвата</string>
+    <string name="statistics_summary_body">Всего событий: %1$d\nЗапросов: %2$d\nОтветов: %3$d\nУспешных ответов: %4$d\nНеудачных ответов: %5$d</string>
+    <string name="statistics_queue_title">Очередь телеметрии</string>
+    <string name="statistics_queue_body">Ожидание: %1$d\nПовтор: %2$d\nВ процессе: %3$d\nПодтверждено: %4$d\nНеудачно: %5$d</string>
+    <string name="statistics_top_packages_title">Активность пакетов (все)</string>
+    <string name="statistics_top_packages_empty">Нет активности пакетов в этом интервале.</string>
+    <string name="statistics_package_unknown_label">Неизвестное приложение</string>
+    <string name="statistics_package_resolving_label">Получение названия приложения...</string>
+    <string name="statistics_recent_requests_title">Последние 10 запросов</string>
+    <string name="statistics_recent_requests_empty">Нет запросов в этом интервале.</string>
+    <string name="statistics_recent_requests_item_meta">№%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Модуль</string>
+    <string name="settings_overwrite">Перезаписать</string>
+    <string name="settings_overwritten">Перезаписано</string>
+    <string name="settings_overwrite_summary">Элементы этой категории будут принудительно включены, если переключатели отмечены</string>
+    <string name="settings_default_value">Значение по умолчанию: %s</string>
+    <string name="settings_data_isolation">Изоляция данных</string>
+    <string name="settings_data_isolation_summary">Данные приложения: %1$s\nДанные Vold: %2$s\nПринудительное монтирование: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Эта опция доступна только на Android 11 и выше</string>
+    <string name="settings_app_data_isolation">Изоляция данных приложения</string>
+    <string name="settings_vold_app_data_isolation">Изоляция данных Vold приложения</string>
+    <string name="settings_warning">Внимание</string>
+    <string name="settings_vold_warning">Это включает AOSP-функцию изоляции для внешнего приватного хранилища приложений. Это может повысить совместимость, но снизить стабильность и может перестать работать в будущих версиях Android.</string>
+    <string name="settings_need_reboot">Для изменения требуется перезагрузка</string>
+    <string name="settings_force_mount_data">Принудительная изоляция данных для всех приложений</string>
+    <string name="settings_force_mount_data_summary">По умолчанию изоляция данных отключена для приложений с target API ниже 30</string>
+    <string name="settings_detail_log">Детальный лог для отладки</string>
+    <string name="settings_max_log_size">Размеры буфера логгера</string>
+    <string name="settings_hide_icon">Скрыть иконку модуля в лаунчере</string>
+    <string name="settings_hide_icon_summary">Вы всё ещё можете открыть приложение в менеджере Xposed</string>
+    <string name="settings_bypass_risky_package_warning">Обойти предупреждение о рискованном пакете</string>
+    <string name="settings_bypass_risky_package_warning_summary">Обратите внимание, что разработчики не несут ответственности за проблемы, связанные с рискованными пакетами, до или после включения этой функции</string>
+    <string name="settings_disable_activity_launch_protection">Отключить защиту запуска Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Этот переключатель снимет все защиты startActivity. Если вы не уверены, не включайте его.</string>
+    <string name="settings_system_wallpaper">Использовать системные обои</string>
+    <string name="settings_clear_uninstalled_app_configs">Очистить конфиги удалённых приложений</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Эта опция позволяет создать конфигурацию без остатков, но вам придётся перенастроить приложения при их повторной установке.</string>
+    <string name="settings_no_undone_warning">Это действие нельзя отменить.</string>
+    <string name="settings_package_query_workaround">Альтернативный запрос пакетов</string>
+    <string name="settings_package_query_workaround_summary">Не включайте эту опцию, если вы видите список пакетов в этом приложении корректно.</string>
+    <string name="settings_intent_api_enabled">Включить внешний Intents API</string>
+    <string name="settings_intent_api_enabled_summary">Разрешить другим приложениям изменять настройки PIB.</string>
+    <string name="settings_intent_api_enable_title">Включить внешний Intents API?</string>
+    <string name="settings_intent_api_enable_message">Когда включено, любое приложение на устройстве может отправлять Intent\'ы API для изменения per-app настроек PIB. Включайте только если доверяете установленным приложениям.</string>
+    <string name="settings_intent_api_enable_confirm">Включить API</string>
+    <string name="settings_launcher_icon">Иконка ярлыка</string>
+    <string name="settings_error_only_log">Лог только для ошибок</string>
+
+    <string name="settings_telemetry">Телеметрия</string>
+    <string name="settings_telemetry_enabled">Включить отправку телеметрии</string>
+    <string name="settings_telemetry_enabled_summary">Отправляет события запросов и ответов интегритета приложений на сервер разработчика для статистики и исследований.</string>
+    <string name="telemetry_consent_title">Добро пожаловать в PIB! Хотите включить телеметрию?</string>
+    <string name="telemetry_consent_message">Спасибо за установку PIB!\n\nТелеметрия помогает разработчику изучать, как приложения взаимодействуют с Google Play Integrity.\nКонфиденциально: не загружается идентифицируемая информация. Не влияет на батарею.\nВы можете прочитать расширенную политику и исходный код на GitHub.\nВы можете отключить телеметрию в настройках в любой момент.</string>
+    <string name="telemetry_consent_enable">Конечно!</string>
+    <string name="telemetry_consent_not_now">Нет :(</string>
+
+    <string name="settings_language">Язык</string>
+
+    <string name="settings_theme">Тема</string>
+    <string name="settings_system_theme_color">Цвет темы системы</string>
+    <string name="settings_theme_color">Цвет темы</string>
+    <string name="settings_pure_black_dark_theme">Абсолютно чёрная тёмная тема</string>
+    <string name="settings_pure_black_dark_theme_summary">Используйте абсолютно чёрную тему, если тёмная тема включена</string>
+
+    <string name="settings_update">Обновление</string>
+    <string name="settings_disable_update">Отключить уведомления об обновлениях</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Мастер массовой настройки логгера</string>
+
+    <!-- About -->
+    <string name="about_description">PIB — модуль для LSPosed, предназначенный для блокировки приложений от использования API Google Play Integrity.</string>
+    <string name="about_how_to_use_title">Как использовать модуль</string>
+    <string name="about_how_to_use_description_1">Включите модуль в вашем Xposed-менеджере и предоставьте ему доступ к Google Play Store (com.android.vending).\nЗатем принудительно остановите Google Play Store.</string>
+    <string name="about_how_to_use_description_2">По умолчанию всем приложениям блокируется доступ к Google Play Integrity. Выберите, каким приложениям разрешить доступ, либо укажите конкретный код ошибки.</string>
+    <string name="about_developer">Разработчик</string>
+    <string name="about_support">Поддержка и отзывы</string>
+    <string name="about_open_source">Лицензии с открытым исходным кодом</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Сакура</string>
+    <string name="color_red">Красный</string>
+    <string name="color_pink">Розовый</string>
+    <string name="color_purple">Пурпурный</string>
+    <string name="color_deep_purple">Тёмно-пурпурный</string>
+    <string name="color_indigo">Индиго</string>
+    <string name="color_blue">Синий</string>
+    <string name="color_light_blue">Голубой</string>
+    <string name="color_cyan">Бирюзовый</string>
+    <string name="color_teal">Сине-зелёный</string>
+    <string name="color_green">Зелёный</string>
+    <string name="color_light_green">Светло-зелёный</string>
+    <string name="color_lime">Лайм</string>
+    <string name="color_yellow">Жёлтый</string>
+    <string name="color_amber">Янтарный</string>
+    <string name="color_orange">Оранжевый</string>
+    <string name="color_deep_orange">Тёмно-оранжевый</string>
+    <string name="color_brown">Коричневый</string>
+    <string name="color_blue_grey">Сине-серый</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Тёмная тема</string>
+    <string name="dark_theme_off">Всегда выключено</string>
+    <string name="dark_theme_on">Всегда включено</string>
+</resources>

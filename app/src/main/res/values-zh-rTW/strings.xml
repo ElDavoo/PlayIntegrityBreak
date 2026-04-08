@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">首頁</string>
+    <string name="title_logs">日誌</string>
+    <string name="title_statistics">統計</string>
+    <string name="title_settings">設定</string>
+    <string name="title_template_manage">管理日誌設定檔</string>
+    <string name="title_app_manage">應用選項</string>
+    <string name="title_default_app">預設選項</string>
+    <string name="title_app_select">選擇應用</string>
+    <string name="title_app_settings">應用設定</string>
+    <string name="title_about">關於</string>
+
+    <string name="do_not_dual">不要在次要使用者上安裝 PIB</string>
+    <string name="show_crash_log">顯示崩潰日誌</string>
+    <string name="config_damaged">設定檔已損壞。請清除應用資料</string>
+    <string name="delete">刪除</string>
+    <string name="enabled">已啟用</string>
+    <string name="disabled">已停用</string>
+    <string name="application">應用</string>
+    <string name="preferences">偏好設定</string>
+    <string name="refresh">重新整理</string>
+    <string name="filter">篩選</string>
+    <string name="search">搜尋</string>
+    <string name="edit">編輯</string>
+    <string name="follow_system">跟隨系統</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">模組已啟用 [%s]</string>
+    <string name="home_xposed_not_activated">無法與 Google Play 商店通訊</string>
+    <string name="home_xposed_service_on">系統服務執行中 [%d]</string>
+    <string name="home_xposed_service_off">模組已停用或 Play 商店未執行。請嘗試啟動它。</string>
+    <string name="home_xposed_service_old">模組已更新，需要重新啟動</string>
+    <string name="home_xposed_service_health_stale">服務已連線，等待新的健康檢查</string>
+    <string name="home_xposed_filter_count">PIB 已捕獲總計 %d 個事件</string>
+    <string name="home_backup_config">備份設定</string>
+    <string name="home_restore_config">還原設定</string>
+    <string name="home_import_successful">匯入成功</string>
+    <string name="home_import_failed">匯入失敗</string>
+    <string name="home_import_file_damaged">備份檔已損壞</string>
+    <string name="home_export_failed">匯出失敗</string>
+    <string name="home_exported">已備份設定</string>
+    <string name="home_new_update">有新更新可用：%s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">顯示系統應用</string>
+    <string name="list_sorting">排序</string>
+    <string name="list_reverse_order">反向排序</string>
+    <string name="list_sort_by_label">依應用名稱</string>
+    <string name="list_sort_by_package_name">依套件名稱</string>
+    <string name="list_sort_by_install_time">依安裝時間</string>
+    <string name="list_sort_by_update_time">依更新時間</string>
+    <string name="list_empty_no_apps">未找到應用，可能您未允許此應用查詢所有套件</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">啟用 PIB</string>
+    <string name="app_enable_intervention_desc">停用後，即使預設啟用攔截，也允許 Play Integrity 請求。</string>
+    <string name="app_rewrite_integrity_response">啟用合成錯誤</string>
+    <string name="app_rewrite_integrity_response_desc">啟用時，應用不會與 Play Integrity 通訊，而是收到產生的錯誤。</string>
+    <string name="app_deliver_synthetic_response">提供合成回應</string>
+    <string name="app_deliver_synthetic_response_desc">停用時，應用將完全收不到回應。僅在測試應用於何處請求 Play Integrity 時使用（應用可能長時間卡住）。</string>
+    <string name="app_delay_synthetic_response">延遲回應送出</string>
+    <string name="app_delay_synthetic_response_desc">在傳送合成 callback 前加入 300 到 2000 毫秒的隨機延遲。可能避免基於時序的偵測？</string>
+    <string name="app_rewrite_integrity_error_code">注入錯誤碼</string>
+    <string name="app_rewrite_integrity_error_code_desc">應用將收到此錯誤碼。</string>
+    <string name="app_rewrite_integrity_error_code_reference">錯誤碼參考</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">開啟可能錯誤值的表格。</string>
+    <string name="app_rewrite_integrity_error_remediable">可修復標記</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">告知應用此請求應重試（例如錯誤為暫時性）。</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integrity 錯誤碼參考</string>
+    <string name="app_rewrite_integrity_error_code_copied">已複製錯誤碼：%1$s</string>
+    <string name="app_exclude_system_apps">包含系統應用</string>
+    <string name="app_warning_risky_package_title">高風險套件</string>
+    <string name="app_warning_risky_package_desc">此套件被標記為高風險，可能導致不穩定。要繼續嗎？</string>
+    <string name="app_favorite_add">標記為最愛</string>
+    <string name="app_favorite_remove">取消最愛</string>
+    <string name="app_force_stop_launch">重新啟動並開啟</string>
+    <string name="app_launch">開啟</string>
+    <string name="app_launch_failed">啟動應用失敗，請查看日誌以取得更多資訊</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">輸入法預設</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">自訂值</string>
+    <string name="settings_templates_random_ssaid">隨機化 SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">儲存日誌</string>
+    <string name="logs_clear">清除日誌</string>
+    <string name="logs_upload_telemetry">立即上傳遙測</string>
+    <string name="logs_show_telemetry_queue">顯示遙測佇列狀態</string>
+    <string name="logs_empty">沒有可儲存的日誌</string>
+    <string name="logs_saved">日誌已儲存</string>
+    <string name="logs_telemetry_disabled">遙測上傳已停用</string>
+    <string name="logs_telemetry_upload_enqueued">遙測上傳已排入佇列：待處理=%1$d 重試=%2$d 進行中=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">佇列狀態：待處理=%1$d 重試=%2$d 進行中=%3$d 已確認=%4$d 失敗=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">時間範圍</string>
+    <string name="statistics_window_all">所有時間</string>
+    <string name="statistics_window_24h">最近 24 小時</string>
+    <string name="statistics_window_7d">最近 7 天</string>
+    <string name="statistics_updated_at">更新於：%1$s</string>
+    <string name="statistics_user_id">使用者 ID：%1$s</string>
+    <string name="statistics_summary_title">捕獲摘要</string>
+    <string name="statistics_summary_body">事件總數：%1$d\n請求：%2$d\n回應：%3$d\n成功回應：%4$d\n失敗回應：%5$d</string>
+    <string name="statistics_queue_title">遙測佇列</string>
+    <string name="statistics_queue_body">待處理：%1$d\n重試：%2$d\n進行中：%3$d\n已確認：%4$d\n失敗：%5$d</string>
+    <string name="statistics_top_packages_title">套件活動（全部）</string>
+    <string name="statistics_top_packages_empty">此時間範圍內沒有套件活動。</string>
+    <string name="statistics_package_unknown_label">未知應用</string>
+    <string name="statistics_package_resolving_label">正在解析應用名稱...</string>
+    <string name="statistics_recent_requests_title">最近 10 筆請求</string>
+    <string name="statistics_recent_requests_empty">此時間範圍內沒有請求。</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">模組</string>
+    <string name="settings_overwrite">覆寫</string>
+    <string name="settings_overwritten">已覆寫</string>
+    <string name="settings_overwrite_summary">若勾選開關，此分類的項目將被強制為啟用狀態</string>
+    <string name="settings_default_value">預設值：%s</string>
+    <string name="settings_data_isolation">資料隔離</string>
+    <string name="settings_data_isolation_summary">應用資料：%1$s\nVold 應用資料：%2$s\n強制掛載：%3$s</string>
+    <string name="settings_data_isolation_unsupported">此選項僅在 Android 11 以上可用</string>
+    <string name="settings_app_data_isolation">應用資料隔離</string>
+    <string name="settings_vold_app_data_isolation">Vold 應用資料隔離</string>
+    <string name="settings_warning">警告</string>
+    <string name="settings_vold_warning">此功能會為應用的外部私有儲存啟用 AOSP 隔離機制。它可能提升相容性，但也可能降低穩定性，並可能在未來 Android 版本中失效。</string>
+    <string name="settings_need_reboot">變更需要重新啟動</string>
+    <string name="settings_force_mount_data">對所有應用強制資料隔離</string>
+    <string name="settings_force_mount_data_summary">目標 API 小於 30 的應用預設停用資料隔離</string>
+    <string name="settings_detail_log">偵錯詳細日誌</string>
+    <string name="settings_max_log_size">日誌緩衝區大小</string>
+    <string name="settings_hide_icon">在啟動器中隱藏模組圖示</string>
+    <string name="settings_hide_icon_summary">您仍可在 Xposed 管理器中開啟此應用</string>
+    <string name="settings_bypass_risky_package_warning">略過高風險套件警告</string>
+    <string name="settings_bypass_risky_package_warning_summary">請注意，啟用此功能前後，開發者均不對高風險套件相關問題負責</string>
+    <string name="settings_disable_activity_launch_protection">停用 Activity 啟動保護</string>
+    <string name="settings_disable_activity_launch_protection_summary">此開關會移除所有 startActivity 保護。若不確定，請勿啟用。</string>
+    <string name="settings_system_wallpaper">使用系統桌布</string>
+    <string name="settings_clear_uninstalled_app_configs">清除已解除安裝應用的設定</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">此選項可建立無殘留設定，但當您重新安裝應用時需要重新設定它們。</string>
+    <string name="settings_no_undone_warning">此操作無法復原。</string>
+    <string name="settings_package_query_workaround">替代套件查詢</string>
+    <string name="settings_package_query_workaround_summary">如果此應用已能正確顯示套件清單，請勿啟用此選項。</string>
+    <string name="settings_intent_api_enabled">啟用外部 Intents API</string>
+    <string name="settings_intent_api_enabled_summary">允許其他應用修改 PIB 設定。</string>
+    <string name="settings_intent_api_enable_title">啟用外部 Intents API？</string>
+    <string name="settings_intent_api_enable_message">啟用後，裝置上的任何應用都可傳送 API Intents 來修改每個應用的 PIB 設定。僅在您信任已安裝的應用時啟用。</string>
+    <string name="settings_intent_api_enable_confirm">啟用 API</string>
+    <string name="settings_launcher_icon">啟動器圖示</string>
+    <string name="settings_error_only_log">僅記錄錯誤</string>
+
+    <string name="settings_telemetry">遙測</string>
+    <string name="settings_telemetry_enabled">啟用遙測上傳</string>
+    <string name="settings_telemetry_enabled_summary">將應用完整性請求與回應事件上傳到開發者伺服器，用於統計與研究。</string>
+    <string name="telemetry_consent_title">歡迎使用 PIB！要啟用遙測嗎？</string>
+    <string name="telemetry_consent_message">感謝安裝 PIB！\n\n遙測可協助開發者研究應用如何與 Google Play Integrity 互動。\n重視隱私：不會上傳可識別資料，也不會耗用額外電量。\n您可在 GitHub 閱讀擴充政策與原始碼。\n您可隨時在設定中停用遙測。</string>
+    <string name="telemetry_consent_enable">當然！</string>
+    <string name="telemetry_consent_not_now">暫時不要 :(</string>
+
+    <string name="settings_language">語言</string>
+
+    <string name="settings_theme">主題</string>
+    <string name="settings_system_theme_color">系統主題色</string>
+    <string name="settings_theme_color">主題色</string>
+    <string name="settings_pure_black_dark_theme">純黑暗色主題</string>
+    <string name="settings_pure_black_dark_theme_summary">啟用深色主題時使用純黑主題</string>
+
+    <string name="settings_update">更新</string>
+    <string name="settings_disable_update">停用更新通知</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">批次日誌器設定</string>
+
+    <!-- About -->
+    <string name="about_description">PIB 是一個 LSPosed 模組，專注於阻止應用使用 Google Play Integrity API。</string>
+    <string name="about_how_to_use_title">如何使用此模組</string>
+    <string name="about_how_to_use_description_1">在 Xposed 管理器中啟用此模組，並授予 Google Play 商店 scope（com.android.vending）。\n接著強制停止 Google Play 商店。</string>
+    <string name="about_how_to_use_description_2">預設情況下，所有應用都會被阻止存取 Google Play Integrity。請選擇要允許存取的應用，或選擇使用特定錯誤碼。</string>
+    <string name="about_developer">開發者</string>
+    <string name="about_support">支援與回饋</string>
+    <string name="about_open_source">開源授權</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">櫻花</string>
+    <string name="color_red">紅色</string>
+    <string name="color_pink">粉紅色</string>
+    <string name="color_purple">紫色</string>
+    <string name="color_deep_purple">深紫色</string>
+    <string name="color_indigo">靛藍色</string>
+    <string name="color_blue">藍色</string>
+    <string name="color_light_blue">淺藍色</string>
+    <string name="color_cyan">青色</string>
+    <string name="color_teal">藍綠色</string>
+    <string name="color_green">綠色</string>
+    <string name="color_light_green">淺綠色</string>
+    <string name="color_lime">萊姆色</string>
+    <string name="color_yellow">黃色</string>
+    <string name="color_amber">琥珀色</string>
+    <string name="color_orange">橙色</string>
+    <string name="color_deep_orange">深橙色</string>
+    <string name="color_brown">棕色</string>
+    <string name="color_blue_grey">藍灰色</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">深色主題</string>
+    <string name="dark_theme_off">永遠關閉</string>
+    <string name="dark_theme_on">永遠開啟</string>
+</resources>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Ana ekran</string>
+    <string name="title_logs">Kayıtlar</string>
+    <string name="title_statistics">İstatistikler</string>
+    <string name="title_settings">Ayarlar</string>
+    <string name="title_template_manage">Kayıt profillerini yönet</string>
+    <string name="title_app_manage">Uygulama başına seçenekler</string>
+    <string name="title_default_app">Varsayılan seçenekler</string>
+    <string name="title_app_select">Uygulamaları seç</string>
+    <string name="title_app_settings">Uygulama ayarları</string>
+    <string name="title_about">Hakkında</string>
+
+    <string name="do_not_dual">PIB\'i ikincil kullanıcıya yükleme</string>
+    <string name="show_crash_log">Çökme kaydını göster</string>
+    <string name="config_damaged">Yapılandırma dosyası bozulmuş. Lütfen uygulama verilerini temizleyin</string>
+    <string name="delete">Sil</string>
+    <string name="enabled">Etkin</string>
+    <string name="disabled">Devre dışı</string>
+    <string name="application">Uygulama</string>
+    <string name="preferences">Tercihler</string>
+    <string name="refresh">Yenile</string>
+    <string name="filter">Filtre</string>
+    <string name="search">Ara</string>
+    <string name="edit">Düzenle</string>
+    <string name="follow_system">Sistemi takip et</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Modül Etkin [%s]</string>
+    <string name="home_xposed_not_activated">Play Store ile iletişim kurulamadı</string>
+    <string name="home_xposed_service_on">Sistem servisi çalışıyor [%d]</string>
+    <string name="home_xposed_service_off">Modül devre dışı veya Play Store çalışmıyor. Başlatmayı deneyin.</string>
+    <string name="home_xposed_service_old">Modül güncellendi, yeniden başlatma gerekiyor</string>
+    <string name="home_xposed_service_health_stale">Servis bağlı, taze sağlık kontrolü bekleniyor</string>
+    <string name="home_xposed_filter_count">PIB toplam %d olay yakaladı</string>
+    <string name="home_backup_config">Yapılandırmayı yedekle</string>
+    <string name="home_restore_config">Yapılandırmayı geri yükle</string>
+    <string name="home_import_successful">İçe aktarma başarılı</string>
+    <string name="home_import_failed">İçe aktarma başarısız</string>
+    <string name="home_import_file_damaged">Yedek dosyası hasarlıydı</string>
+    <string name="home_export_failed">Dışa aktarma başarısız</string>
+    <string name="home_exported">Yapılandırma yedeklendi</string>
+    <string name="home_new_update">Yeni güncelleme mevcut: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Sistem uygulamalarını göster</string>
+    <string name="list_sorting">Sıralama</string>
+    <string name="list_reverse_order">Ters sırala</string>
+    <string name="list_sort_by_label">Uygulama adına göre</string>
+    <string name="list_sort_by_package_name">Paket adına göre</string>
+    <string name="list_sort_by_install_time">Yükleme zamanına göre</string>
+    <string name="list_sort_by_update_time">Güncelleme zamanına göre</string>
+    <string name="list_empty_no_apps">Uygulama bulunamadı; bu uygulamaya tüm paketleri sorgulama izni vermemiş olabilirsiniz</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">PIB\'i etkinleştir</string>
+    <string name="app_enable_intervention_desc">Devre dışı bırakıldığında, müdahale varsayılan olarak etkin olsa bile Play Integrity isteklerine izin verilir.</string>
+    <string name="app_rewrite_integrity_response">Sentetik hataları etkinleştir</string>
+    <string name="app_rewrite_integrity_response_desc">Etkinleştirildiğinde, uygulama Play Integrity ile iletişim kurmaz; yerine oluşturulmuş bir hata alır.</string>
+    <string name="app_deliver_synthetic_response">Sentetik yanıt gönder</string>
+    <string name="app_deliver_synthetic_response_desc">Devre dışı bırakıldığında, uygulama hiçbir yanıt almaz. Uygulamanın Play Integrity\'i tam olarak nerede çağırdığını test etmek için kullanın (muhtemelen uzun süre asılı kalır).</string>
+    <string name="app_delay_synthetic_response">Yanıt teslimini geciktir</string>
+    <string name="app_delay_synthetic_response_desc">Sentetik geri çağrıları teslim etmeden önce 300 ile 2000 ms arasında rastgele gecikme ekler. Zamanlama tabanlı tespiti engelleyebilir mi?</string>
+    <string name="app_rewrite_integrity_error_code">Enjekte edilecek hata kodu</string>
+    <string name="app_rewrite_integrity_error_code_desc">Uygulama bu hata kodunu alacaktır.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Hata kodu referansı</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Olası hata değerleri tablosunu açın.</string>
+    <string name="app_rewrite_integrity_error_remediable">Yeniden denenebilir bayrağı</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Uygulamaya isteğin yeniden denenmesi gerektiğini söyler (ör. hata geçici).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integrity hata kodu referansı</string>
+    <string name="app_rewrite_integrity_error_code_copied">Kopyalanan hata kodu: %1$s</string>
+    <string name="app_exclude_system_apps">Sistem uygulamalarını dahil et</string>
+    <string name="app_warning_risky_package_title">Riskli paket</string>
+    <string name="app_warning_risky_package_desc">Bu paket riskli olarak işaretlenmiştir ve kararsızlığa neden olabilir. Devam edilsin mi?</string>
+    <string name="app_favorite_add">Favori olarak işaretle</string>
+    <string name="app_favorite_remove">Favorilikten çıkar</string>
+    <string name="app_force_stop_launch">Yeniden başlat ve başlat</string>
+    <string name="app_launch">Başlat</string>
+    <string name="app_launch_failed">Uygulama başlatılamadı, daha fazla bilgi için kayıtlara bakın</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Girdi yöntemi ön ayarı</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Özel değer</string>
+    <string name="settings_templates_random_ssaid">SSAID\'i rastgeleleştir</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Kayıtları kaydet</string>
+    <string name="logs_clear">Kayıtları temizle</string>
+    <string name="logs_upload_telemetry">Telemetriyi şimdi yükle</string>
+    <string name="logs_show_telemetry_queue">Telemetri kuyruğu durumunu göster</string>
+    <string name="logs_empty">Kaydetmek için kayıt yok</string>
+    <string name="logs_saved">Kayıtlar kaydedildi</string>
+    <string name="logs_telemetry_disabled">Telemetri yüklemesi devre dışı</string>
+    <string name="logs_telemetry_upload_enqueued">Telemetri yüklemesi sıraya alındı: beklemede=%1$d tekrar=%2$d gönderimde=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Kuyruk durumu: beklemede=%1$d tekrar=%2$d gönderimde=%3$d onaylanan=%4$d başarısız=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Zaman aralığı</string>
+    <string name="statistics_window_all">Tüm zaman</string>
+    <string name="statistics_window_24h">Son 24 saat</string>
+    <string name="statistics_window_7d">Son 7 gün</string>
+    <string name="statistics_updated_at">Güncellendi: %1$s</string>
+    <string name="statistics_user_id">Kullanıcı ID: %1$s</string>
+    <string name="statistics_summary_title">Yakalama özeti</string>
+    <string name="statistics_summary_body">Toplam olay: %1$d\nİstekler: %2$d\nYanıtlar: %3$d\nBaşarılı yanıtlar: %4$d\nBaşarısız yanıtlar: %5$d</string>
+    <string name="statistics_queue_title">Telemetri kuyruğu</string>
+    <string name="statistics_queue_body">Beklemede: %1$d\nTekrar: %2$d\nGönderimde: %3$d\nOnaylanan: %4$d\nBaşarısız: %5$d</string>
+    <string name="statistics_top_packages_title">Paket etkinliği (tümü)</string>
+    <string name="statistics_top_packages_empty">Bu zaman aralığında paket etkinliği yok.</string>
+    <string name="statistics_package_unknown_label">Bilinmeyen uygulama</string>
+    <string name="statistics_package_resolving_label">Uygulama adı çözülüyor...</string>
+    <string name="statistics_recent_requests_title">Son 10 istek</string>
+    <string name="statistics_recent_requests_empty">Bu zaman aralığında istek yok.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Modül</string>
+    <string name="settings_overwrite">Üzerine yaz</string>
+    <string name="settings_overwritten">Üzerine yazıldı</string>
+    <string name="settings_overwrite_summary">Anahtarlar işaretliyse bu kategori öğeleri zorla etkinleştirilecektir</string>
+    <string name="settings_default_value">Varsayılan değer: %s</string>
+    <string name="settings_data_isolation">Veri izolasyonu</string>
+    <string name="settings_data_isolation_summary">Uygulama verisi: %1$s\nVold uygulama verisi: %2$s\nZorla bağlama: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Bu seçenek yalnızca Android 11 ve üstünde kullanılabilir</string>
+    <string name="settings_app_data_isolation">Uygulama veri izolasyonu</string>
+    <string name="settings_vold_app_data_isolation">Vold uygulama veri izolasyonu</string>
+    <string name="settings_warning">Uyarı</string>
+    <string name="settings_vold_warning">Bu, uygulamanın harici özel depolaması için bir AOSP izolasyon özelliğini etkinleştirir. Uyumluluğu artırabilir ancak kararlılığı azaltabilir ve gelecekteki Android sürümlerinde çalışmayı durdurabilir.</string>
+    <string name="settings_need_reboot">Değişiklikler yeniden başlatma gerektirir</string>
+    <string name="settings_force_mount_data">Tüm uygulamalar için veri izolasyonunu zorla</string>
+    <string name="settings_force_mount_data_summary">Varsayılan olarak API hedefi 30\'un altındaki uygulamalarda veri izolasyonu devre dışıdır</string>
+    <string name="settings_detail_log">Hata ayıklama için ayrıntılı kayıt</string>
+    <string name="settings_max_log_size">Kayıtçı bellek boyutları</string>
+    <string name="settings_hide_icon">Başlatıcıda modül simgesini gizle</string>
+    <string name="settings_hide_icon_summary">Yine de Xposed yöneticisinde uygulamayı açabilirsiniz</string>
+    <string name="settings_bypass_risky_package_warning">Riskli paket uyarısını atla</string>
+    <string name="settings_bypass_risky_package_warning_summary">Bu özelliği etkinleştirmeden önce geliştiricilerin riskli paketle ilgili sorunlardan sorumlu olmadığını unutmayın.</string>
+    <string name="settings_disable_activity_launch_protection">Activity başlatma korumasını devre dışı bırak</string>
+    <string name="settings_disable_activity_launch_protection_summary">Bu anahtar tüm startActivity korumalarını kaldırır. Emin değilseniz etkinleştirmeyin.</string>
+    <string name="settings_system_wallpaper">Sistem duvar kağıdını kullan</string>
+    <string name="settings_clear_uninstalled_app_configs">Kaldırılmış uygulama yapılandırmalarını temizle</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Bu seçenek artık kalıntı olmadan bir yapılandırma oluşturmanızı sağlar ancak uygulamaları yeniden yüklediğinizde tekrar yapılandırmanız gerekir.</string>
+    <string name="settings_no_undone_warning">Bu işlem geri alınamaz.</string>
+    <string name="settings_package_query_workaround">Alternatif paket sorgulama</string>
+    <string name="settings_package_query_workaround_summary">Bu uygulamada paket listesini düzgün görüyorsanız bu seçeneği etkinleştirmeyin.</string>
+    <string name="settings_intent_api_enabled">Harici Intents API\'yi etkinleştir</string>
+    <string name="settings_intent_api_enabled_summary">Diğer uygulamaların PIB ayarlarını değiştirmesine izin verin.</string>
+    <string name="settings_intent_api_enable_title">Harici Intents API etkinleştirilsin mi?</string>
+    <string name="settings_intent_api_enable_message">Etkinleştirildiğinde, cihazdaki herhangi bir uygulama per-app PIB ayarlarını değiştirmek için API Intent\'leri gönderebilir. Yüklediğiniz uygulamalara güveniyorsanız etkinleştirin.</string>
+    <string name="settings_intent_api_enable_confirm">API\'yi etkinleştir</string>
+    <string name="settings_launcher_icon">Başlatıcı simgesi</string>
+    <string name="settings_error_only_log">Sadece hata kaydı</string>
+
+    <string name="settings_telemetry">Telemetri</string>
+    <string name="settings_telemetry_enabled">Telemetri yüklemesini etkinleştir</string>
+    <string name="settings_telemetry_enabled_summary">Uygulamaların Integrity istek ve yanıt olaylarını geliştiricinin sunucusuna yükler, istatistik ve araştırma için.</string>
+    <string name="telemetry_consent_title">PIB\'e hoş geldiniz! Telemetriyi etkinleştirmek ister misiniz?</string>
+    <string name="telemetry_consent_message">PIB\'i yüklediğiniz için teşekkürler!\n\nTelemetri, geliştiricinin uygulamaların Google Play Integrity ile nasıl etkileşime girdiğini incelemesine yardımcı olur.\nGizlilik dostu: Tanımlayıcı hiçbir veri yüklenmez. Pil tüketmez.\nGenişletilmiş politikayı ve kaynak kodunu GitHub\'da okuyabilirsiniz.\nTelemetriyi istediğiniz zaman Ayarlar\'dan devre dışı bırakabilirsiniz.</string>
+    <string name="telemetry_consent_enable">Tabii ki!</string>
+    <string name="telemetry_consent_not_now">Şimdi değil :(</string>
+
+    <string name="settings_language">Dil</string>
+
+    <string name="settings_theme">Tema</string>
+    <string name="settings_system_theme_color">Sistem tema rengi</string>
+    <string name="settings_theme_color">Tema rengi</string>
+    <string name="settings_pure_black_dark_theme">Saf siyah koyu tema</string>
+    <string name="settings_pure_black_dark_theme_summary">Koyu tema etkinse saf siyah temayı kullan</string>
+
+    <string name="settings_update">Güncelle</string>
+    <string name="settings_disable_update">Güncelleme bildirimi devre dışı</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Toplu kayıt yapılandırması</string>
+
+    <!-- About -->
+    <string name="about_description">PIB, uygulamaların Google Play Integrity API\'sini kullanmasını engellemeye odaklanmış bir LSPosed modülüdür.</string>
+    <string name="about_how_to_use_title">Bu modül nasıl kullanılır</string>
+    <string name="about_how_to_use_description_1">Modülü Xposed yöneticinizde etkinleştirin ve Google Play Store kapsamını (com.android.vending) verin.\nArdından, Google Play Store\'u zorla durdurun.</string>
+    <string name="about_how_to_use_description_2">Varsayılan olarak tüm uygulamalar Google Play Integrity\'e erişimi engellenir. Hangi uygulamaya erişime izin vermek istediğinizi seçin veya belirli bir hata kodu kullanmak isteyip istemediğinizi belirleyin.</string>
+    <string name="about_developer">Geliştirici</string>
+    <string name="about_support">Destek ve geri bildirim</string>
+    <string name="about_open_source">Açık kaynak lisansları</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Kırmızı</string>
+    <string name="color_pink">Pembe</string>
+    <string name="color_purple">Mor</string>
+    <string name="color_deep_purple">Koyu mor</string>
+    <string name="color_indigo">İndigo</string>
+    <string name="color_blue">Mavi</string>
+    <string name="color_light_blue">Açık mavi</string>
+    <string name="color_cyan">Camgöbeği</string>
+    <string name="color_teal">Deniz yeşili</string>
+    <string name="color_green">Yeşil</string>
+    <string name="color_light_green">Açık yeşil</string>
+    <string name="color_lime">Limon</string>
+    <string name="color_yellow">Sarı</string>
+    <string name="color_amber">Kehribar</string>
+    <string name="color_orange">Turuncu</string>
+    <string name="color_deep_orange">Koyu turuncu</string>
+    <string name="color_brown">Kahverengi</string>
+    <string name="color_blue_grey">Mavi gri</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Koyu tema</string>
+    <string name="dark_theme_off">Her zaman kapalı</string>
+    <string name="dark_theme_on">Her zaman açık</string>
+</resources>

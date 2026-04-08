@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Acasă</string>
+    <string name="title_logs">Jurnale</string>
+    <string name="title_statistics">Statistici</string>
+    <string name="title_settings">Setări</string>
+    <string name="title_template_manage">Gestionați profilele de logare</string>
+    <string name="title_app_manage">Opțiuni per-aplicație</string>
+    <string name="title_default_app">Opțiuni implicite</string>
+    <string name="title_app_select">Selectați aplicațiile</string>
+    <string name="title_app_settings">Setări aplicație</string>
+    <string name="title_about">Despre</string>
+
+    <string name="do_not_dual">Nu instala PIB pentru utilizatorul secundar</string>
+    <string name="show_crash_log">Afișează jurnalul de blocări</string>
+    <string name="config_damaged">Fișierul de configurare este corupt. Vă rugăm să curățați datele aplicației</string>
+    <string name="delete">Șterge</string>
+    <string name="enabled">Activat</string>
+    <string name="disabled">Dezactivat</string>
+    <string name="application">Aplicație</string>
+    <string name="preferences">Preferințe</string>
+    <string name="refresh">Actualizează</string>
+    <string name="filter">Filtru</string>
+    <string name="search">Căutare</string>
+    <string name="edit">Editează</string>
+    <string name="follow_system">Urmărește sistemul</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Modul activat [%s]</string>
+    <string name="home_xposed_not_activated">Nu se poate comunica cu Play Store</string>
+    <string name="home_xposed_service_on">Serviciu de sistem în funcțiune [%d]</string>
+    <string name="home_xposed_service_off">Modulul este dezactivat sau Play Store nu rulează. Încercați să îl porniți.</string>
+    <string name="home_xposed_service_old">Modul actualizat, reporniți dispozitivul</string>
+    <string name="home_xposed_service_health_stale">Serviciu conectat, se așteaptă un nou control de stare</string>
+    <string name="home_xposed_filter_count">PIB a capturat în total %d evenimente</string>
+    <string name="home_backup_config">Salvează configurația</string>
+    <string name="home_restore_config">Restaurare configurație</string>
+    <string name="home_import_successful">Import reușit</string>
+    <string name="home_import_failed">Import eșuat</string>
+    <string name="home_import_file_damaged">Fișierul de backup este corupt</string>
+    <string name="home_export_failed">Export eșuat</string>
+    <string name="home_exported">Config salvat</string>
+    <string name="home_new_update">Actualizare disponibilă: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Afișează aplicațiile de sistem</string>
+    <string name="list_sorting">Sortare</string>
+    <string name="list_reverse_order">Ordine inversă</string>
+    <string name="list_sort_by_label">După numele aplicației</string>
+    <string name="list_sort_by_package_name">După numele pachetului</string>
+    <string name="list_sort_by_install_time">După data instalării</string>
+    <string name="list_sort_by_update_time">După data actualizării</string>
+    <string name="list_empty_no_apps">Nu au fost găsite aplicații; poate nu ați permis acestei aplicații să interogheze toate pachetele</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Activează PIB</string>
+    <string name="app_enable_intervention_desc">Dezactivați pentru a permite cererile Play Integrity chiar dacă interceptarea este activată implicit.</string>
+    <string name="app_rewrite_integrity_response">Activează erori sintetice</string>
+    <string name="app_rewrite_integrity_response_desc">Când este activat, aplicația nu va comunica cu Play Integrity și va primi în schimb o eroare generată.</string>
+    <string name="app_deliver_synthetic_response">Trimite răspuns sintetic</string>
+    <string name="app_deliver_synthetic_response_desc">Când este dezactivat, aplicația nu va primi niciun răspuns. Folosiți-l doar pentru a testa unde anume aplicația solicită Play Integrity (deoarece se poate bloca mult timp).</string>
+    <string name="app_delay_synthetic_response">Întârzie livrarea răspunsului</string>
+    <string name="app_delay_synthetic_response_desc">Adaugă o întârziere aleatorie între 300 și 2000 ms înainte de a livra callback-urile sintetice. Ar putea preveni detectarea bazată pe timp?</string>
+    <string name="app_rewrite_integrity_error_code">Codul de eroare de injectat</string>
+    <string name="app_rewrite_integrity_error_code_desc">Aplicația va primi acest cod de eroare.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Referință cod de eroare</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Deschide un tabel cu valorile posibile ale erorilor.</string>
+    <string name="app_rewrite_integrity_error_remediable">Indicator remediabil</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Indică aplicației că cererea trebuie reîncercată (de ex. eroare tranzitorie).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Referință coduri de eroare Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Cod de eroare copiat: %1$s</string>
+    <string name="app_exclude_system_apps">Include aplicațiile de sistem</string>
+    <string name="app_warning_risky_package_title">Pachet riscant</string>
+    <string name="app_warning_risky_package_desc">Acest pachet este marcat ca riscant și poate provoca instabilitate. Continuați?</string>
+    <string name="app_favorite_add">Marchează ca favorit</string>
+    <string name="app_favorite_remove">Elimină din favorite</string>
+    <string name="app_force_stop_launch">Repornire și lansare</string>
+    <string name="app_launch">Lansează</string>
+    <string name="app_launch_failed">Lansarea aplicației a eșuat, verificați jurnalele pentru detalii</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Preset metodă de introducere</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Valoare personalizată</string>
+    <string name="settings_templates_random_ssaid">Randomizează SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Salvează jurnalele</string>
+    <string name="logs_clear">Șterge jurnalele</string>
+    <string name="logs_upload_telemetry">Încarcă telemetria acum</string>
+    <string name="logs_show_telemetry_queue">Afișează starea cozii de telemetrie</string>
+    <string name="logs_empty">Nu există jurnale de salvat</string>
+    <string name="logs_saved">Jurnale salvate</string>
+    <string name="logs_telemetry_disabled">Încărcarea telemetriei este dezactivată</string>
+    <string name="logs_telemetry_upload_enqueued">Încărcare telemetrie în coadă: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Stare coadă: pending=%1$d retry=%2$d in-flight=%3$d acked=%4$d failed=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Interval de timp</string>
+    <string name="statistics_window_all">Tot timpul</string>
+    <string name="statistics_window_24h">Ultimele 24 de ore</string>
+    <string name="statistics_window_7d">Ultimele 7 zile</string>
+    <string name="statistics_updated_at">Actualizat: %1$s</string>
+    <string name="statistics_user_id">ID utilizator: %1$s</string>
+    <string name="statistics_summary_title">Rezumat capturi</string>
+    <string name="statistics_summary_body">Evenimente totale: %1$d\nCereri: %2$d\nRăspunsuri: %3$d\nRăspunsuri reușite: %4$d\nRăspunsuri eșuate: %5$d</string>
+    <string name="statistics_queue_title">Coada telemetriei</string>
+    <string name="statistics_queue_body">În așteptare: %1$d\nReîncercări: %2$d\nÎn curs: %3$d\nConfirmate: %4$d\nEșuate: %5$d</string>
+    <string name="statistics_top_packages_title">Activitate pachete (toate)</string>
+    <string name="statistics_top_packages_empty">Nicio activitate a pachetelor în acest interval.</string>
+    <string name="statistics_package_unknown_label">Aplicație necunoscută</string>
+    <string name="statistics_package_resolving_label">Se rezolvă numele aplicației...</string>
+    <string name="statistics_recent_requests_title">Ultimele 10 cereri</string>
+    <string name="statistics_recent_requests_empty">Nicio cerere în acest interval.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Modul</string>
+    <string name="settings_overwrite">Suprascrie</string>
+    <string name="settings_overwritten">Suprascris</string>
+    <string name="settings_overwrite_summary">Articolele din această categorie vor fi forțate ca active dacă comutatoarele sunt bifate</string>
+    <string name="settings_default_value">Valoare implicită: %s</string>
+    <string name="settings_data_isolation">Izolarea datelor</string>
+    <string name="settings_data_isolation_summary">Date aplicație: %1$s\nDate Vold aplicație: %2$s\nForțare montare: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Această opțiune este disponibilă doar pe Android 11 și versiuni superioare</string>
+    <string name="settings_app_data_isolation">Izolarea datelor aplicației</string>
+    <string name="settings_vold_app_data_isolation">Izolarea datelor Vold</string>
+    <string name="settings_warning">Avertisment</string>
+    <string name="settings_vold_warning">Activează o funcție AOSP de izolare pentru stocarea externă privată a aplicațiilor. Poate îmbunătăți compatibilitatea, dar poate reduce stabilitatea și s-ar putea să nu funcționeze în versiunile viitoare de Android.</string>
+    <string name="settings_need_reboot">Schimbarea necesită repornire</string>
+    <string name="settings_force_mount_data">Aplică izolarea datelor pentru toate aplicațiile</string>
+    <string name="settings_force_mount_data_summary">Izolarea datelor este dezactivată pentru aplicațiile cu target API mai mic de 30 în mod implicit</string>
+    <string name="settings_detail_log">Jurnal detaliat pentru depanare</string>
+    <string name="settings_max_log_size">Dimensiuni buffer jurnal</string>
+    <string name="settings_hide_icon">Ascunde pictograma modulului în launcher</string>
+    <string name="settings_hide_icon_summary">Poți încă deschide aplicația în managerul Xposed</string>
+    <string name="settings_bypass_risky_package_warning">Ocolește avertizarea pentru pachete riscante</string>
+    <string name="settings_bypass_risky_package_warning_summary">Rețineți că dezvoltatorii nu sunt responsabili pentru probleme legate de pachete riscante înainte sau după ce activați această funcție</string>
+    <string name="settings_disable_activity_launch_protection">Dezactivează protecția lansării Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Acest comutator va ridica toate protecțiile startActivity. Dacă nu sunteți sigur, nu îl activați.</string>
+    <string name="settings_system_wallpaper">Folosește tapetul sistemului</string>
+    <string name="settings_clear_uninstalled_app_configs">Curăță configurațiile aplicațiilor dezinstalate</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Această opțiune vă permite să creați o configurație fără resturi, dar va trebui să reconfigurați aplicațiile când le reinstalați.</string>
+    <string name="settings_no_undone_warning">Această acțiune nu poate fi anulată.</string>
+    <string name="settings_package_query_workaround">Interogare alternativă a pachetelor</string>
+    <string name="settings_package_query_workaround_summary">Nu activați această opțiune dacă vedeți corect lista de pachete în această aplicație.</string>
+    <string name="settings_intent_api_enabled">Activează API-ul Intents extern</string>
+    <string name="settings_intent_api_enabled_summary">Permite altor aplicații să modifice setările PIB.</string>
+    <string name="settings_intent_api_enable_title">Activează API-ul Intents extern?</string>
+    <string name="settings_intent_api_enable_message">Când este activat, orice aplicație de pe dispozitiv poate trimite Intents API pentru a modifica setările per-aplicație PIB. Activați-l doar dacă aveți încredere în aplicațiile pe care le instalați.</string>
+    <string name="settings_intent_api_enable_confirm">Activează API</string>
+    <string name="settings_launcher_icon">Pictogramă launcher</string>
+    <string name="settings_error_only_log">Jurnal doar erori</string>
+
+    <string name="settings_telemetry">Telemetrie</string>
+    <string name="settings_telemetry_enabled">Activează încărcarea telemetriei</string>
+    <string name="settings_telemetry_enabled_summary">Încarcă evenimentele cererilor și răspunsurilor Play Integrity către serverul dezvoltatorului, pentru statistică și cercetare.</string>
+    <string name="telemetry_consent_title">Bine ați venit la PIB! Doriți să activați telemetria?</string>
+    <string name="telemetry_consent_message">Mulțumim pentru instalarea PIB!\n\nTelemetria îl ajută pe dezvoltator să studieze cum interacționează aplicațiile cu Google Play Integrity.\nPrietenos cu confidențialitatea: Nu sunt încărcate date identificabile. Nu consumă baterie.\nPuteți citi politica extinsă și codul sursă pe GitHub.\nPuteți dezactiva telemetria oricând din Setări.</string>
+    <string name="telemetry_consent_enable">Sigur!</string>
+    <string name="telemetry_consent_not_now">Nu acum :(</string>
+
+    <string name="settings_language">Limbă</string>
+
+    <string name="settings_theme">Temă</string>
+    <string name="settings_system_theme_color">Culoare temă sistem</string>
+    <string name="settings_theme_color">Culoare temă</string>
+    <string name="settings_pure_black_dark_theme">Temă întunecată negru pur</string>
+    <string name="settings_pure_black_dark_theme_summary">Folosește tema negru pur dacă tema întunecată este activată</string>
+
+    <string name="settings_update">Actualizare</string>
+    <string name="settings_disable_update">Dezactivează notificarea de actualizare</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Configurare în masă a jurnalizatorului</string>
+
+    <!-- About -->
+    <string name="about_description">PIB este un modul LSPosed axat pe blocarea aplicațiilor de la utilizarea API-ului Google Play Integrity.</string>
+    <string name="about_how_to_use_title">Cum să folosiți acest modul</string>
+    <string name="about_how_to_use_description_1">Activați modulul în managerul Xposed și acordați-i scope-ul Google Play Store (com.android.vending).\nApoi, forțați oprirea Google Play Store.</string>
+    <string name="about_how_to_use_description_2">Implicit, toate aplicațiile sunt blocate de la accesarea Google Play Integrity. Selectați pentru ce aplicație doriți să permiteți accesul sau dacă doriți să folosiți un cod de eroare specific.</string>
+    <string name="about_developer">Dezvoltator</string>
+    <string name="about_support">Suport și feedback</string>
+    <string name="about_open_source">Licențe open-source</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Roșu</string>
+    <string name="color_pink">Roz</string>
+    <string name="color_purple">Mov</string>
+    <string name="color_deep_purple">Mov închis</string>
+    <string name="color_indigo">Indigo</string>
+    <string name="color_blue">Albastru</string>
+    <string name="color_light_blue">Albastru deschis</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_teal">Turcoaz</string>
+    <string name="color_green">Verde</string>
+    <string name="color_light_green">Verde deschis</string>
+    <string name="color_lime">Lime</string>
+    <string name="color_yellow">Galben</string>
+    <string name="color_amber">Chihlimbar</string>
+    <string name="color_orange">Portocaliu</string>
+    <string name="color_deep_orange">Portocaliu închis</string>
+    <string name="color_brown">Maro</string>
+    <string name="color_blue_grey">Albastru-gri</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Temă întunecată</string>
+    <string name="dark_theme_off">Dezactivată mereu</string>
+    <string name="dark_theme_on">Activată mereu</string>
+</resources>

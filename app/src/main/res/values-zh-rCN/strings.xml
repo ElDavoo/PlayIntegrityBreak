@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">首页</string>
+    <string name="title_logs">日志</string>
+    <string name="title_statistics">统计</string>
+    <string name="title_settings">设置</string>
+    <string name="title_template_manage">管理日志配置</string>
+    <string name="title_app_manage">应用选项</string>
+    <string name="title_default_app">默认选项</string>
+    <string name="title_app_select">选择应用</string>
+    <string name="title_app_settings">应用设置</string>
+    <string name="title_about">关于</string>
+
+    <string name="do_not_dual">不要在副用户上安装 PIB</string>
+    <string name="show_crash_log">显示崩溃日志</string>
+    <string name="config_damaged">配置文件损坏。请清除应用数据</string>
+    <string name="delete">删除</string>
+    <string name="enabled">已启用</string>
+    <string name="disabled">已禁用</string>
+    <string name="application">应用</string>
+    <string name="preferences">首选项</string>
+    <string name="refresh">刷新</string>
+    <string name="filter">过滤</string>
+    <string name="search">搜索</string>
+    <string name="edit">编辑</string>
+    <string name="follow_system">跟随系统</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">模块已激活 [%s]</string>
+    <string name="home_xposed_not_activated">无法与 Google Play 商店通信</string>
+    <string name="home_xposed_service_on">系统服务正在运行 [%d]</string>
+    <string name="home_xposed_service_off">模块已禁用或 Play 商店未运行。请尝试启动它。</string>
+    <string name="home_xposed_service_old">模块已更新，需要重启</string>
+    <string name="home_xposed_service_health_stale">服务已连接，等待新的健康检查</string>
+    <string name="home_xposed_filter_count">PIB 已捕获总计 %d 条事件</string>
+    <string name="home_backup_config">备份配置</string>
+    <string name="home_restore_config">恢复配置</string>
+    <string name="home_import_successful">导入成功</string>
+    <string name="home_import_failed">导入失败</string>
+    <string name="home_import_file_damaged">备份文件已损坏</string>
+    <string name="home_export_failed">导出失败</string>
+    <string name="home_exported">已备份配置</string>
+    <string name="home_new_update">有可用新版本：%s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">显示系统应用</string>
+    <string name="list_sorting">排序</string>
+    <string name="list_reverse_order">倒序</string>
+    <string name="list_sort_by_label">按应用名称</string>
+    <string name="list_sort_by_package_name">按包名</string>
+    <string name="list_sort_by_install_time">按安装时间</string>
+    <string name="list_sort_by_update_time">按更新时间</string>
+    <string name="list_empty_no_apps">未找到应用，可能您未允许此应用查询所有包</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">启用 PIB</string>
+    <string name="app_enable_intervention_desc">禁用后即使默认情况下启用了拦截，仍允许 Play Integrity 请求。</string>
+    <string name="app_rewrite_integrity_response">启用合成错误</string>
+    <string name="app_rewrite_integrity_response_desc">启用时，应用不会与 Play Integrity 通信，而是收到生成的错误。</string>
+    <string name="app_deliver_synthetic_response">发送合成响应</string>
+    <string name="app_deliver_synthetic_response_desc">禁用时，应用将完全无法收到响应。仅在测试应用何时请求 Play Integrity（应用可能会长时间挂起）时使用。</string>
+    <string name="app_delay_synthetic_response">延迟响应发送</string>
+    <string name="app_delay_synthetic_response_desc">在发送合成回调前增加 300 到 2000 毫秒的随机延迟。可能防止基于时序的检测？</string>
+    <string name="app_rewrite_integrity_error_code">注入的错误代码</string>
+    <string name="app_rewrite_integrity_error_code_desc">应用将接收此错误代码。</string>
+    <string name="app_rewrite_integrity_error_code_reference">错误代码参考</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">打开可能的错误值表。</string>
+    <string name="app_rewrite_integrity_error_remediable">可恢复标志</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">告诉应用该请求应重试（例如错误是临时性的）。</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integrity 错误代码参考</string>
+    <string name="app_rewrite_integrity_error_code_copied">已复制错误代码：%1$s</string>
+    <string name="app_exclude_system_apps">包括系统应用</string>
+    <string name="app_warning_risky_package_title">风险包</string>
+    <string name="app_warning_risky_package_desc">该包被标记为有风险，可能导致不稳定。继续？</string>
+    <string name="app_favorite_add">标记为收藏</string>
+    <string name="app_favorite_remove">取消收藏</string>
+    <string name="app_force_stop_launch">重启并启动</string>
+    <string name="app_launch">启动</string>
+    <string name="app_launch_failed">应用启动失败，请查看日志以获取更多信息</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">输入法预设</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">自定义值</string>
+    <string name="settings_templates_random_ssaid">随机化 SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">保存日志</string>
+    <string name="logs_clear">清除日志</string>
+    <string name="logs_upload_telemetry">立即上传遥测</string>
+    <string name="logs_show_telemetry_queue">显示遥测队列状态</string>
+    <string name="logs_empty">没有要保存的日志</string>
+    <string name="logs_saved">日志已保存</string>
+    <string name="logs_telemetry_disabled">遥测上传已被禁用</string>
+    <string name="logs_telemetry_upload_enqueued">遥测上传已入队：等待=%1$d 重试=%2$d 进行中=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">队列状态：等待=%1$d 重试=%2$d 进行中=%3$d 已确认=%4$d 失败=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">时间范围</string>
+    <string name="statistics_window_all">所有时间</string>
+    <string name="statistics_window_24h">最近 24 小时</string>
+    <string name="statistics_window_7d">最近 7 天</string>
+    <string name="statistics_updated_at">更新：%1$s</string>
+    <string name="statistics_user_id">用户 ID：%1$s</string>
+    <string name="statistics_summary_title">捕获摘要</string>
+    <string name="statistics_summary_body">事件总数：%1$d\n请求：%2$d\n响应：%3$d\n成功响应：%4$d\n失败响应：%5$d</string>
+    <string name="statistics_queue_title">遥测队列</string>
+    <string name="statistics_queue_body">等待：%1$d\n重试：%2$d\n进行中：%3$d\n已确认：%4$d\n失败：%5$d</string>
+    <string name="statistics_top_packages_title">包活动（全部）</string>
+    <string name="statistics_top_packages_empty">在此时间范围内没有包活动。</string>
+    <string name="statistics_package_unknown_label">未知应用</string>
+    <string name="statistics_package_resolving_label">正在解析应用名称...</string>
+    <string name="statistics_recent_requests_title">最近 10 条请求</string>
+    <string name="statistics_recent_requests_empty">在此时间范围内没有请求。</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">模块</string>
+    <string name="settings_overwrite">覆盖</string>
+    <string name="settings_overwritten">已覆盖</string>
+    <string name="settings_overwrite_summary">该类别的项目将在切换开关被选中时被强制启用</string>
+    <string name="settings_default_value">默认值：%s</string>
+    <string name="settings_data_isolation">数据隔离</string>
+    <string name="settings_data_isolation_summary">应用数据：%1$s\nVold 应用数据：%2$s\n强制挂载：%3$s</string>
+    <string name="settings_data_isolation_unsupported">此选项仅在 Android 11 及更高版本可用</string>
+    <string name="settings_app_data_isolation">应用数据隔离</string>
+    <string name="settings_vold_app_data_isolation">Vold 应用数据隔离</string>
+    <string name="settings_warning">警告</string>
+    <string name="settings_vold_warning">这将为应用的外部私有存储启用 AOSP 隔离功能。它可能提高兼容性，但可能降低稳定性，并可能在未来的 Android 版本中停止工作。</string>
+    <string name="settings_need_reboot">更改后需要重启</string>
+    <string name="settings_force_mount_data">对所有应用强制数据隔离</string>
+    <string name="settings_force_mount_data_summary">默认情况下，目标 API 小于 30 的应用禁用数据隔离</string>
+    <string name="settings_detail_log">调试详细日志</string>
+    <string name="settings_max_log_size">日志缓冲区大小</string>
+    <string name="settings_hide_icon">在启动器中隐藏模块图标</string>
+    <string name="settings_hide_icon_summary">您仍然可以在 Xposed 管理器中打开该应用</string>
+    <string name="settings_bypass_risky_package_warning">绕过风险包警告</string>
+    <string name="settings_bypass_risky_package_warning_summary">请注意，在您启用此功能之前或之后，开发者不对与风险包相关的问题负责。</string>
+    <string name="settings_disable_activity_launch_protection">禁用 Activity 启动保护</string>
+    <string name="settings_disable_activity_launch_protection_summary">此开关将解除所有 startActivity 保护。如果不确定，请不要启用。</string>
+    <string name="settings_system_wallpaper">使用系统壁纸</string>
+    <string name="settings_clear_uninstalled_app_configs">清除已卸载应用的配置</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">此选项允许您创建无残留的配置，但在重新安装应用时需要重新配置它们。</string>
+    <string name="settings_no_undone_warning">该操作无法撤销。</string>
+    <string name="settings_package_query_workaround">替代的包查询</string>
+    <string name="settings_package_query_workaround_summary">如果您在此应用中可以正确看到包列表，请不要启用此选项。</string>
+    <string name="settings_intent_api_enabled">启用外部 Intents API</string>
+    <string name="settings_intent_api_enabled_summary">允许其他应用更改 PIB 设置。</string>
+    <string name="settings_intent_api_enable_title">启用外部 Intents API？</string>
+    <string name="settings_intent_api_enable_message">启用后，设备上的任何应用都可以发送 API Intents 来修改每个应用的 PIB 设置。仅在您信任所安装的应用时启用。</string>
+    <string name="settings_intent_api_enable_confirm">启用 API</string>
+    <string name="settings_launcher_icon">启动器图标</string>
+    <string name="settings_error_only_log">仅记录错误</string>
+
+    <string name="settings_telemetry">遥测</string>
+    <string name="settings_telemetry_enabled">启用遥测上传</string>
+    <string name="settings_telemetry_enabled_summary">将应用的完整性请求和响应事件上传到开发者的服务器，用于统计和研究。</string>
+    <string name="telemetry_consent_title">欢迎使用 PIB！要启用遥测吗？</string>
+    <string name="telemetry_consent_message">感谢安装 PIB！\n\n遥测帮助开发者研究应用如何与 Google Play Integrity 交互。\n尊重隐私：不上传可识别数据。不会消耗额外电量。\n您可以在 GitHub 上阅读扩展政策和源代码。\n您可以随时在设置中禁用遥测。</string>
+    <string name="telemetry_consent_enable">当然！</string>
+    <string name="telemetry_consent_not_now">暂不启用</string>
+
+    <string name="settings_language">语言</string>
+
+    <string name="settings_theme">主题</string>
+    <string name="settings_system_theme_color">系统主题颜色</string>
+    <string name="settings_theme_color">主题颜色</string>
+    <string name="settings_pure_black_dark_theme">纯黑暗色主题</string>
+    <string name="settings_pure_black_dark_theme_summary">如果启用了暗黑主题，则使用纯黑主题</string>
+
+    <string name="settings_update">更新</string>
+    <string name="settings_disable_update">禁用更新通知</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">批量记录器配置</string>
+
+    <!-- About -->
+    <string name="about_description">
+        PIB 是一个 LSPosed 模块，专注于阻止应用使用 Google Play Integrity API。
+    </string>
+    <string name="about_how_to_use_title">如何使用此模块</string>
+    <string name="about_how_to_use_description_1">在 Xposed 管理器中启用该模块，并授予其 Google Play 商店（com.android.vending）权限范围。\n然后，强制停止 Google Play 商店。</string>
+    <string name="about_how_to_use_description_2">默认情况下，所有应用都被阻止访问 Google Play Integrity。选择希望允许访问的应用，或选择要使用的特定错误代码。</string>
+    <string name="about_developer">开发者</string>
+    <string name="about_support">支持与反馈</string>
+    <string name="about_open_source">开源许可证</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">樱花</string>
+    <string name="color_red">红色</string>
+    <string name="color_pink">粉色</string>
+    <string name="color_purple">紫色</string>
+    <string name="color_deep_purple">深紫色</string>
+    <string name="color_indigo">靛蓝</string>
+    <string name="color_blue">蓝色</string>
+    <string name="color_light_blue">浅蓝色</string>
+    <string name="color_cyan">青色</string>
+    <string name="color_teal">青绿色</string>
+    <string name="color_green">绿色</string>
+    <string name="color_light_green">浅绿色</string>
+    <string name="color_lime">酸橙色</string>
+    <string name="color_yellow">黄色</string>
+    <string name="color_amber">琥珀色</string>
+    <string name="color_orange">橙色</string>
+    <string name="color_deep_orange">深橙色</string>
+    <string name="color_brown">棕色</string>
+    <string name="color_blue_grey">蓝灰色</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">深色主题</string>
+    <string name="dark_theme_off">始终关闭</string>
+    <string name="dark_theme_on">始终开启</string>
+</resources>

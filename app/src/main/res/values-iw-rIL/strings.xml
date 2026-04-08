@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">בית</string>
+    <string name="title_logs">יומנים</string>
+    <string name="title_statistics">סטטיסטיקות</string>
+    <string name="title_settings">הגדרות</string>
+    <string name="title_template_manage">ניהול פרופילי רישום</string>
+    <string name="title_app_manage">אפשרויות לכל אפליקציה</string>
+    <string name="title_default_app">אפשרויות ברירת מחדל</string>
+    <string name="title_app_select">בחירת אפליקציות</string>
+    <string name="title_app_settings">הגדרות אפליקציה</string>
+    <string name="title_about">אודות</string>
+
+    <string name="do_not_dual">אל תתקין את PIB על משתמש משני</string>
+    <string name="show_crash_log">הצג יומן קריסות</string>
+    <string name="config_damaged">קובץ התצורה פגום. נקה את נתוני האפליקציה</string>
+    <string name="delete">מחק</string>
+    <string name="enabled">מופעל</string>
+    <string name="disabled">כבוי</string>
+    <string name="application">אפליקציה</string>
+    <string name="preferences">העדפות</string>
+    <string name="refresh">רענן</string>
+    <string name="filter">סינון</string>
+    <string name="search">חיפוש</string>
+    <string name="edit">עריכה</string>
+    <string name="follow_system">בהתאם למערכת</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">המודול הופעל [%s]</string>
+    <string name="home_xposed_not_activated">לא ניתן לתקשר עם חנות Play</string>
+    <string name="home_xposed_service_on">שירות המערכת פעיל [%d]</string>
+    <string name="home_xposed_service_off">המודול כבוי או שחנות Play אינה פעילה. נסה להפעיל אותה.</string>
+    <string name="home_xposed_service_old">המודול עודכן, נדרש אתחול</string>
+    <string name="home_xposed_service_health_stale">השירות מחובר, ממתין לבדיקת תקינות חדשה</string>
+    <string name="home_xposed_filter_count">PIB לכד בסך הכול %d אירועים</string>
+    <string name="home_backup_config">גיבוי תצורה</string>
+    <string name="home_restore_config">שחזור תצורה</string>
+    <string name="home_import_successful">הייבוא הצליח</string>
+    <string name="home_import_failed">הייבוא נכשל</string>
+    <string name="home_import_file_damaged">קובץ הגיבוי פגום</string>
+    <string name="home_export_failed">הייצוא נכשל</string>
+    <string name="home_exported">התצורה גובתה</string>
+    <string name="home_new_update">עדכון חדש זמין: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">הצג אפליקציות מערכת</string>
+    <string name="list_sorting">מיון</string>
+    <string name="list_reverse_order">סדר הפוך</string>
+    <string name="list_sort_by_label">לפי שם אפליקציה</string>
+    <string name="list_sort_by_package_name">לפי שם חבילה</string>
+    <string name="list_sort_by_install_time">לפי זמן התקנה</string>
+    <string name="list_sort_by_update_time">לפי זמן עדכון</string>
+    <string name="list_empty_no_apps">לא נמצאו אפליקציות, ייתכן שלא אפשרת לאפליקציה זו לגשת לכל החבילות</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">הפעל PIB</string>
+    <string name="app_enable_intervention_desc">כבה כדי לאפשר בקשות Play Integrity גם כאשר היירוט מופעל כברירת מחדל.</string>
+    <string name="app_rewrite_integrity_response">הפעל שגיאות סינתטיות</string>
+    <string name="app_rewrite_integrity_response_desc">כאשר מופעל, האפליקציה לא תתקשר עם Play Integrity ותקבל במקום זאת שגיאה שנוצרה.</string>
+    <string name="app_deliver_synthetic_response">ספק תגובה סינתטית</string>
+    <string name="app_deliver_synthetic_response_desc">כאשר כבוי, האפליקציה לא תקבל תגובה כלל. השתמש בזה רק כדי לבדוק היכן בדיוק האפליקציה מבקשת Play Integrity (סביר שתיתקע לזמן רב).</string>
+    <string name="app_delay_synthetic_response">השהיית מסירת תגובה</string>
+    <string name="app_delay_synthetic_response_desc">מוסיף השהיה אקראית בין 300 ל-2000 מילישניות לפני מסירת callbacks סינתטיים. עשוי למנוע זיהוי מבוסס תזמון?</string>
+    <string name="app_rewrite_integrity_error_code">קוד שגיאה להזרקה</string>
+    <string name="app_rewrite_integrity_error_code_desc">האפליקציה תקבל את קוד השגיאה הזה.</string>
+    <string name="app_rewrite_integrity_error_code_reference">הפניה לקודי שגיאה</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">פתיחת טבלה של ערכי שגיאה אפשריים.</string>
+    <string name="app_rewrite_integrity_error_remediable">דגל בר-תיקון</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">מודיע לאפליקציה שיש לנסות שוב את הבקשה (למשל כשהשגיאה זמנית).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">הפניה לקודי שגיאה של Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">קוד השגיאה הועתק: %1$s</string>
+    <string name="app_exclude_system_apps">כלול אפליקציות מערכת</string>
+    <string name="app_warning_risky_package_title">חבילה מסוכנת</string>
+    <string name="app_warning_risky_package_desc">חבילה זו מסומנת כמסוכנת ועלולה לגרום לחוסר יציבות. להמשיך?</string>
+    <string name="app_favorite_add">סמן כמועדף</string>
+    <string name="app_favorite_remove">הסר ממועדפים</string>
+    <string name="app_force_stop_launch">הפעל מחדש ופתח</string>
+    <string name="app_launch">פתח</string>
+    <string name="app_launch_failed">הפעלת האפליקציה נכשלה, בדוק את היומנים לפרטים נוספים</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">תצורה מוכנה לשיטת קלט</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">ערך מותאם אישית</string>
+    <string name="settings_templates_random_ssaid">אקראיות ל-SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">שמור יומנים</string>
+    <string name="logs_clear">נקה יומנים</string>
+    <string name="logs_upload_telemetry">העלה טלמטריה עכשיו</string>
+    <string name="logs_show_telemetry_queue">הצג מצב תור טלמטריה</string>
+    <string name="logs_empty">אין יומנים לשמירה</string>
+    <string name="logs_saved">היומנים נשמרו</string>
+    <string name="logs_telemetry_disabled">העלאת טלמטריה כבויה</string>
+    <string name="logs_telemetry_upload_enqueued">העלאת טלמטריה נוספה לתור: ממתין=%1$d ניסיון חוזר=%2$d בתהליך=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">מצב תור: ממתין=%1$d ניסיון חוזר=%2$d בתהליך=%3$d אושרו=%4$d נכשלו=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">טווח זמן</string>
+    <string name="statistics_window_all">כל הזמן</string>
+    <string name="statistics_window_24h">24 השעות האחרונות</string>
+    <string name="statistics_window_7d">7 הימים האחרונים</string>
+    <string name="statistics_updated_at">עודכן: %1$s</string>
+    <string name="statistics_user_id">מזהה משתמש: %1$s</string>
+    <string name="statistics_summary_title">סיכום לכידות</string>
+    <string name="statistics_summary_body">סך אירועים: %1$d\nבקשות: %2$d\nתגובות: %3$d\nתגובות מוצלחות: %4$d\nתגובות שנכשלו: %5$d</string>
+    <string name="statistics_queue_title">תור טלמטריה</string>
+    <string name="statistics_queue_body">ממתין: %1$d\nניסיון חוזר: %2$d\nבתהליך: %3$d\nאושרו: %4$d\nנכשלו: %5$d</string>
+    <string name="statistics_top_packages_title">פעילות חבילות (הכול)</string>
+    <string name="statistics_top_packages_empty">אין פעילות חבילות בטווח הזמן הזה.</string>
+    <string name="statistics_package_unknown_label">אפליקציה לא ידועה</string>
+    <string name="statistics_package_resolving_label">מאתר את שם האפליקציה...</string>
+    <string name="statistics_recent_requests_title">10 הבקשות האחרונות</string>
+    <string name="statistics_recent_requests_empty">אין בקשות בטווח הזמן הזה.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">מודול</string>
+    <string name="settings_overwrite">דרוס</string>
+    <string name="settings_overwritten">נדרס</string>
+    <string name="settings_overwrite_summary">פריטי קטגוריה זו יכפו כמופעלים אם המתגים מסומנים</string>
+    <string name="settings_default_value">ערך ברירת מחדל: %s</string>
+    <string name="settings_data_isolation">בידוד נתונים</string>
+    <string name="settings_data_isolation_summary">נתוני אפליקציה: %1$s\nנתוני Vold של אפליקציה: %2$s\nכפיית עיגון: %3$s</string>
+    <string name="settings_data_isolation_unsupported">אפשרות זו זמינה רק ב-Android 11 ומעלה</string>
+    <string name="settings_app_data_isolation">בידוד נתוני אפליקציה</string>
+    <string name="settings_vold_app_data_isolation">בידוד נתוני אפליקציה של Vold</string>
+    <string name="settings_warning">אזהרה</string>
+    <string name="settings_vold_warning">אפשרות זו מפעילה יכולת בידוד של AOSP לאחסון חיצוני פרטי של אפליקציה. היא עשויה לשפר תאימות אך להפחית יציבות ועלולה להפסיק לעבוד בגרסאות Android עתידיות.</string>
+    <string name="settings_need_reboot">השינוי דורש אתחול</string>
+    <string name="settings_force_mount_data">אכוף בידוד נתונים לכל האפליקציות</string>
+    <string name="settings_force_mount_data_summary">בידוד נתונים כבוי כברירת מחדל עבור אפליקציות עם target API נמוך מ-30</string>
+    <string name="settings_detail_log">יומן מפורט לדיבוג</string>
+    <string name="settings_max_log_size">גדלי מאגר היומן</string>
+    <string name="settings_hide_icon">הסתר סמל מודול במפעיל</string>
+    <string name="settings_hide_icon_summary">עדיין אפשר לפתוח את האפליקציה במנהל Xposed</string>
+    <string name="settings_bypass_risky_package_warning">עקוף אזהרת חבילה מסוכנת</string>
+    <string name="settings_bypass_risky_package_warning_summary">שים לב שהמפתחים אינם אחראים לבעיות הקשורות לחבילות מסוכנות לפני או אחרי הפעלת תכונה זו</string>
+    <string name="settings_disable_activity_launch_protection">כבה הגנת הפעלת Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">מתג זה יסיר את כל ההגנות של startActivity. אם אינך בטוח, אל תפעיל אותו.</string>
+    <string name="settings_system_wallpaper">השתמש ברקע מערכת</string>
+    <string name="settings_clear_uninstalled_app_configs">נקה תצורות של אפליקציות שהוסרו</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">אפשרות זו מאפשרת ליצור תצורה ללא שאריות, אך תצטרך להגדיר מחדש אפליקציות לאחר התקנה חוזרת.</string>
+    <string name="settings_no_undone_warning">לא ניתן לבטל פעולה זו.</string>
+    <string name="settings_package_query_workaround">שאילתת חבילות חלופית</string>
+    <string name="settings_package_query_workaround_summary">אל תפעיל אפשרות זו אם רשימת החבילות מוצגת כראוי באפליקציה.</string>
+    <string name="settings_intent_api_enabled">הפעל Intents API חיצוני</string>
+    <string name="settings_intent_api_enabled_summary">אפשר לאפליקציות אחרות לשנות את הגדרות PIB.</string>
+    <string name="settings_intent_api_enable_title">להפעיל Intents API חיצוני?</string>
+    <string name="settings_intent_api_enable_message">כאשר האפשרות מופעלת, כל אפליקציה במכשיר יכולה לשלוח Intents API כדי לשנות הגדרות PIB לפי אפליקציה. הפעל זאת רק אם אתה סומך על האפליקציות שאתה מתקין.</string>
+    <string name="settings_intent_api_enable_confirm">הפעל API</string>
+    <string name="settings_launcher_icon">סמל מפעיל</string>
+    <string name="settings_error_only_log">יומן שגיאות בלבד</string>
+
+    <string name="settings_telemetry">טלמטריה</string>
+    <string name="settings_telemetry_enabled">הפעל העלאת טלמטריה</string>
+    <string name="settings_telemetry_enabled_summary">מעלה לשרת המפתח אירועי בקשות ותגובות Integrity של אפליקציות לצורך סטטיסטיקה ומחקר.</string>
+    <string name="telemetry_consent_title">ברוך הבא ל-PIB! להפעיל טלמטריה?</string>
+    <string name="telemetry_consent_message">תודה שהתקנת PIB!\n\nטלמטריה מסייעת למפתח ללמוד איך אפליקציות מתקשרות עם Google Play Integrity.\nידידותי לפרטיות: לא מועלים נתונים מזהים. לא צורך סוללה.\nאפשר לקרוא את המדיניות המורחבת ואת קוד המקור ב-GitHub.\nאפשר לכבות טלמטריה בכל עת בהגדרות.</string>
+    <string name="telemetry_consent_enable">בהחלט!</string>
+    <string name="telemetry_consent_not_now">לא עכשיו :(</string>
+
+    <string name="settings_language">שפה</string>
+
+    <string name="settings_theme">ערכת נושא</string>
+    <string name="settings_system_theme_color">צבע ערכת הנושא של המערכת</string>
+    <string name="settings_theme_color">צבע ערכת נושא</string>
+    <string name="settings_pure_black_dark_theme">ערכת נושא כהה שחור מלא</string>
+    <string name="settings_pure_black_dark_theme_summary">השתמש בערכת שחור מלא כאשר ערכת נושא כהה מופעלת</string>
+
+    <string name="settings_update">עדכון</string>
+    <string name="settings_disable_update">כבה התראת עדכון</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">אשף תצורת לוגרים מרובה</string>
+
+    <!-- About -->
+    <string name="about_description">PIB הוא מודול LSPosed המתמקד בחסימת שימוש באפליקציות ב-API של Google Play Integrity.</string>
+    <string name="about_how_to_use_title">איך להשתמש במודול הזה</string>
+    <string name="about_how_to_use_description_1">הפעל את המודול במנהל Xposed שלך והענק לו את ה-scope של Google Play Store (com.android.vending).\nלאחר מכן עצור בכפייה את Google Play Store.</string>
+    <string name="about_how_to_use_description_2">כברירת מחדל, כל האפליקציות חסומות מגישה ל-Google Play Integrity. בחר עבור איזו אפליקציה לאפשר גישה, או אם ברצונך להשתמש בקוד שגיאה מסוים.</string>
+    <string name="about_developer">מפתח</string>
+    <string name="about_support">תמיכה ומשוב</string>
+    <string name="about_open_source">רישיונות קוד פתוח</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">סאקורה</string>
+    <string name="color_red">אדום</string>
+    <string name="color_pink">ורוד</string>
+    <string name="color_purple">סגול</string>
+    <string name="color_deep_purple">סגול כהה</string>
+    <string name="color_indigo">אינדיגו</string>
+    <string name="color_blue">כחול</string>
+    <string name="color_light_blue">כחול בהיר</string>
+    <string name="color_cyan">ציאן</string>
+    <string name="color_teal">טורקיז</string>
+    <string name="color_green">ירוק</string>
+    <string name="color_light_green">ירוק בהיר</string>
+    <string name="color_lime">ליים</string>
+    <string name="color_yellow">צהוב</string>
+    <string name="color_amber">ענבר</string>
+    <string name="color_orange">כתום</string>
+    <string name="color_deep_orange">כתום כהה</string>
+    <string name="color_brown">חום</string>
+    <string name="color_blue_grey">כחול אפור</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">ערכת נושא כהה</string>
+    <string name="dark_theme_off">תמיד כבוי</string>
+    <string name="dark_theme_on">תמיד מופעל</string>
+</resources>

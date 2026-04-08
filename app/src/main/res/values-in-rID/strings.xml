@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Beranda</string>
+    <string name="title_logs">Log</string>
+    <string name="title_statistics">Statistik</string>
+    <string name="title_settings">Pengaturan</string>
+    <string name="title_template_manage">Kelola profil pencatatan</string>
+    <string name="title_app_manage">Opsi per aplikasi</string>
+    <string name="title_default_app">Opsi bawaan</string>
+    <string name="title_app_select">Pilih aplikasi</string>
+    <string name="title_app_settings">Pengaturan aplikasi</string>
+    <string name="title_about">Tentang</string>
+
+    <string name="do_not_dual">Jangan pasang PIB ke pengguna sekunder</string>
+    <string name="show_crash_log">Tampilkan log crash</string>
+    <string name="config_damaged">File konfigurasi rusak. Silakan bersihkan data aplikasi</string>
+    <string name="delete">Hapus</string>
+    <string name="enabled">Aktif</string>
+    <string name="disabled">Nonaktif</string>
+    <string name="application">Aplikasi</string>
+    <string name="preferences">Preferensi</string>
+    <string name="refresh">Segarkan</string>
+    <string name="filter">Filter</string>
+    <string name="search">Cari</string>
+    <string name="edit">Ubah</string>
+    <string name="follow_system">Ikuti sistem</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Modul Diaktifkan [%s]</string>
+    <string name="home_xposed_not_activated">Tidak dapat berkomunikasi dengan Play Store</string>
+    <string name="home_xposed_service_on">Layanan sistem berjalan [%d]</string>
+    <string name="home_xposed_service_off">Modul dinonaktifkan atau Play Store tidak berjalan. Coba jalankan Play Store.</string>
+    <string name="home_xposed_service_old">Modul diperbarui, perlu reboot</string>
+    <string name="home_xposed_service_health_stale">Layanan terhubung, menunggu pemeriksaan kesehatan baru</string>
+    <string name="home_xposed_filter_count">PIB telah merekam total %d kejadian</string>
+    <string name="home_backup_config">Cadangkan konfigurasi</string>
+    <string name="home_restore_config">Pulihkan konfigurasi</string>
+    <string name="home_import_successful">Impor berhasil</string>
+    <string name="home_import_failed">Impor gagal</string>
+    <string name="home_import_file_damaged">File cadangan rusak</string>
+    <string name="home_export_failed">Ekspor gagal</string>
+    <string name="home_exported">Konfigurasi dicadangkan</string>
+    <string name="home_new_update">Pembaruan baru tersedia: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Tampilkan aplikasi sistem</string>
+    <string name="list_sorting">Pengurutan</string>
+    <string name="list_reverse_order">Urutan terbalik</string>
+    <string name="list_sort_by_label">Berdasarkan nama aplikasi</string>
+    <string name="list_sort_by_package_name">Berdasarkan nama paket</string>
+    <string name="list_sort_by_install_time">Berdasarkan waktu pemasangan</string>
+    <string name="list_sort_by_update_time">Berdasarkan waktu pembaruan</string>
+    <string name="list_empty_no_apps">Tidak ada aplikasi ditemukan, mungkin Anda tidak mengizinkan aplikasi ini untuk memeriksa semua paket</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Aktifkan PIB</string>
+    <string name="app_enable_intervention_desc">Nonaktifkan untuk mengizinkan permintaan Play Integrity meskipun penyadapan diaktifkan secara default.</string>
+    <string name="app_rewrite_integrity_response">Aktifkan kesalahan sintetis</string>
+    <string name="app_rewrite_integrity_response_desc">Saat diaktifkan, aplikasi tidak akan berkomunikasi dengan Play Integrity dan akan menerima kesalahan yang dihasilkan.</string>
+    <string name="app_deliver_synthetic_response">Kirim respons sintetis</string>
+    <string name="app_deliver_synthetic_response_desc">Saat dinonaktifkan, aplikasi tidak akan menerima respons sama sekali. Gunakan hanya untuk menguji di mana aplikasi meminta Play Integrity (karena kemungkinan akan menggantung cukup lama).</string>
+    <string name="app_delay_synthetic_response">Tunda pengiriman respons</string>
+    <string name="app_delay_synthetic_response_desc">Menambahkan jeda acak antara 300 dan 2000 ms sebelum mengirim callback sintetis. Mungkin mencegah deteksi berbasis waktu?</string>
+    <string name="app_rewrite_integrity_error_code">Kode error yang disisipkan</string>
+    <string name="app_rewrite_integrity_error_code_desc">Aplikasi akan menerima kode error ini.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Referensi kode error</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Buka tabel nilai error yang mungkin.</string>
+    <string name="app_rewrite_integrity_error_remediable">Tanda dapat dipulihkan</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Memberitahu aplikasi bahwa permintaan harus dicoba ulang (mis. error bersifat sementara).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Referensi kode error integritas</string>
+    <string name="app_rewrite_integrity_error_code_copied">Kode error disalin: %1$s</string>
+    <string name="app_exclude_system_apps">Termasuk aplikasi sistem</string>
+    <string name="app_warning_risky_package_title">Paket berisiko</string>
+    <string name="app_warning_risky_package_desc">Paket ini ditandai berisiko dan dapat menyebabkan ketidakstabilan. Lanjutkan?</string>
+    <string name="app_favorite_add">Tandai sebagai favorit</string>
+    <string name="app_favorite_remove">Hapus favorit</string>
+    <string name="app_force_stop_launch">Mulai ulang dan jalankan</string>
+    <string name="app_launch">Jalankan</string>
+    <string name="app_launch_failed">Gagal menjalankan aplikasi, periksa log untuk detail lebih lanjut</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Preset metode input</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Nilai khusus</string>
+    <string name="settings_templates_random_ssaid">Acak SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Simpan log</string>
+    <string name="logs_clear">Hapus log</string>
+    <string name="logs_upload_telemetry">Unggah telemetri sekarang</string>
+    <string name="logs_show_telemetry_queue">Tampilkan status antrean telemetri</string>
+    <string name="logs_empty">Tidak ada log untuk disimpan</string>
+    <string name="logs_saved">Log disimpan</string>
+    <string name="logs_telemetry_disabled">Unggahan telemetri dinonaktifkan</string>
+    <string name="logs_telemetry_upload_enqueued">Unggahan telemetri dalam antrean: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Status antrean: pending=%1$d retry=%2$d in-flight=%3$d diakui=%4$d gagal=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Jangka waktu</string>
+    <string name="statistics_window_all">Sepanjang waktu</string>
+    <string name="statistics_window_24h">24 jam terakhir</string>
+    <string name="statistics_window_7d">7 hari terakhir</string>
+    <string name="statistics_updated_at">Diperbarui: %1$s</string>
+    <string name="statistics_user_id">ID Pengguna: %1$s</string>
+    <string name="statistics_summary_title">Ringkasan tangkapan</string>
+    <string name="statistics_summary_body">Total kejadian: %1$d\nPermintaan: %2$d\nRespons: %3$d\nRespons berhasil: %4$d\nRespons gagal: %5$d</string>
+    <string name="statistics_queue_title">Antrean telemetri</string>
+    <string name="statistics_queue_body">Pending: %1$d\nRetry: %2$d\nIn-flight: %3$d\nDiakui: %4$d\nGagal: %5$d</string>
+    <string name="statistics_top_packages_title">Aktivitas paket (semua)</string>
+    <string name="statistics_top_packages_empty">Tidak ada aktivitas paket dalam jangka waktu ini.</string>
+    <string name="statistics_package_unknown_label">Aplikasi tidak dikenal</string>
+    <string name="statistics_package_resolving_label">Mencari nama aplikasi...</string>
+    <string name="statistics_recent_requests_title">10 permintaan terakhir</string>
+    <string name="statistics_recent_requests_empty">Tidak ada permintaan dalam jangka waktu ini.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Modul</string>
+    <string name="settings_overwrite">Timpa</string>
+    <string name="settings_overwritten">Ditimpa</string>
+    <string name="settings_overwrite_summary">Item di kategori ini akan dipaksa aktif jika sakelar dicentang</string>
+    <string name="settings_default_value">Nilai default: %s</string>
+    <string name="settings_data_isolation">Isolasi data</string>
+    <string name="settings_data_isolation_summary">Data aplikasi: %1$s\nData aplikasi Vold: %2$s\nPaksa mount: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Opsi ini hanya tersedia di Android 11 ke atas</string>
+    <string name="settings_app_data_isolation">Isolasi data aplikasi</string>
+    <string name="settings_vold_app_data_isolation">Isolasi data aplikasi Vold</string>
+    <string name="settings_warning">Peringatan</string>
+    <string name="settings_vold_warning">Ini mengaktifkan fitur isolasi AOSP untuk penyimpanan privat eksternal aplikasi. Mungkin meningkatkan kompatibilitas tetapi dapat mengurangi stabilitas dan dapat berhenti bekerja di versi Android mendatang.</string>
+    <string name="settings_need_reboot">Perubahan membutuhkan reboot</string>
+    <string name="settings_force_mount_data">Terapkan isolasi data untuk semua aplikasi</string>
+    <string name="settings_force_mount_data_summary">Isolasi data dinonaktifkan untuk aplikasi yang target API-nya di bawah 30 secara default</string>
+    <string name="settings_detail_log">Log detail untuk debugging</string>
+    <string name="settings_max_log_size">Ukuran buffer logger</string>
+    <string name="settings_hide_icon">Sembunyikan ikon modul di launcher</string>
+    <string name="settings_hide_icon_summary">Anda masih dapat membuka aplikasi di Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">Lewati peringatan paket berisiko</string>
+    <string name="settings_bypass_risky_package_warning_summary">Catatan: pengembang tidak bertanggung jawab atas masalah terkait paket berisiko sebelum atau setelah Anda mengaktifkan fitur ini</string>
+    <string name="settings_disable_activity_launch_protection">Nonaktifkan proteksi peluncuran Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Toggle ini akan mengangkat semua proteksi startActivity. Jika Anda tidak yakin, jangan aktifkan.</string>
+    <string name="settings_system_wallpaper">Gunakan wallpaper sistem</string>
+    <string name="settings_clear_uninstalled_app_configs">Hapus konfigurasi aplikasi yang dicopot</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Opsi ini memungkinkan Anda membuat konfigurasi tanpa sisa, tetapi Anda harus mengonfigurasi ulang aplikasi saat Anda memasangnya kembali.</string>
+    <string name="settings_no_undone_warning">Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="settings_package_query_workaround">Kueri paket alternatif</string>
+    <string name="settings_package_query_workaround_summary">Jangan aktifkan opsi ini jika Anda dapat melihat daftar paket di aplikasi ini dengan benar.</string>
+    <string name="settings_intent_api_enabled">Aktifkan Intents API eksternal</string>
+    <string name="settings_intent_api_enabled_summary">Izinkan aplikasi lain mengubah pengaturan PIB.</string>
+    <string name="settings_intent_api_enable_title">Aktifkan Intents API eksternal?</string>
+    <string name="settings_intent_api_enable_message">Saat diaktifkan, aplikasi apa pun di perangkat dapat mengirim Intent API untuk mengubah pengaturan PIB per-aplikasi. Aktifkan hanya jika Anda mempercayai aplikasi yang Anda pasang.</string>
+    <string name="settings_intent_api_enable_confirm">Aktifkan API</string>
+    <string name="settings_launcher_icon">Ikon launcher</string>
+    <string name="settings_error_only_log">Log hanya error</string>
+
+    <string name="settings_telemetry">Telemetri</string>
+    <string name="settings_telemetry_enabled">Aktifkan unggahan telemetri</string>
+    <string name="settings_telemetry_enabled_summary">Mengunggah peristiwa permintaan dan respons integritas aplikasi ke server pengembang, untuk statistik dan penelitian.</string>
+    <string name="telemetry_consent_title">Selamat datang di PIB! Apakah Anda ingin mengaktifkan telemetri?</string>
+    <string name="telemetry_consent_message">Terima kasih telah memasang PIB!\n\nTelemetri membantu pengembang mempelajari bagaimana aplikasi berinteraksi dengan Google Play Integrity.\nRamah privasi: Tidak ada data yang dapat diidentifikasi yang diunggah. Tidak menggunakan baterai.\nAnda dapat membaca kebijakan lengkap dan kode sumber di GitHub.\nAnda dapat menonaktifkan telemetri kapan saja di Pengaturan.</string>
+    <string name="telemetry_consent_enable">Tentu!</string>
+    <string name="telemetry_consent_not_now">Tidak :(</string>
+
+    <string name="settings_language">Bahasa</string>
+
+    <string name="settings_theme">Tema</string>
+    <string name="settings_system_theme_color">Warna tema sistem</string>
+    <string name="settings_theme_color">Warna tema</string>
+    <string name="settings_pure_black_dark_theme">Tema gelap hitam pekat</string>
+    <string name="settings_pure_black_dark_theme_summary">Gunakan tema hitam pekat jika tema gelap diaktifkan</string>
+
+    <string name="settings_update">Perbarui</string>
+    <string name="settings_disable_update">Nonaktifkan notifikasi pembaruan</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Konfigurasi logger massal</string>
+
+    <!-- About -->
+    <string name="about_description">PIB adalah modul LSPosed yang berfokus pada memblokir aplikasi dari menggunakan Google Play Integrity API.</string>
+    <string name="about_how_to_use_title">Cara menggunakan modul ini</string>
+    <string name="about_how_to_use_description_1">Aktifkan modul di Xposed manager Anda, dan beri scope Google Play Store (com.android.vending).\nKemudian, hentikan paksa Google Play Store.</string>
+    <string name="about_how_to_use_description_2">Secara default, semua aplikasi diblokir mengakses Google Play Integrity. Pilih aplikasi mana yang ingin Anda izinkan aksesnya, atau jika Anda ingin menggunakan kode error tertentu.</string>
+    <string name="about_developer">Pengembang</string>
+    <string name="about_support">Dukungan dan umpan balik</string>
+    <string name="about_open_source">Lisensi sumber terbuka</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Merah</string>
+    <string name="color_pink">Merah muda</string>
+    <string name="color_purple">Ungu</string>
+    <string name="color_deep_purple">Ungu tua</string>
+    <string name="color_indigo">Indigo</string>
+    <string name="color_blue">Biru</string>
+    <string name="color_light_blue">Biru muda</string>
+    <string name="color_cyan">Sian</string>
+    <string name="color_teal">Toska</string>
+    <string name="color_green">Hijau</string>
+    <string name="color_light_green">Hijau muda</string>
+    <string name="color_lime">Lime</string>
+    <string name="color_yellow">Kuning</string>
+    <string name="color_amber">Amber</string>
+    <string name="color_orange">Oranye</string>
+    <string name="color_deep_orange">Oranye tua</string>
+    <string name="color_brown">Cokelat</string>
+    <string name="color_blue_grey">Biru abu-abu</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Tema gelap</string>
+    <string name="dark_theme_off">Selalu mati</string>
+    <string name="dark_theme_on">Selalu aktif</string>
+</resources>

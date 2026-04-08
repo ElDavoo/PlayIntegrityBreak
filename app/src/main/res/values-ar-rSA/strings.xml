@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">الرئيسية</string>
+    <string name="title_logs">السجلات</string>
+    <string name="title_statistics">الإحصائيات</string>
+    <string name="title_settings">الإعدادات</string>
+    <string name="title_template_manage">إدارة ملفات التسجيل</string>
+    <string name="title_app_manage">خيارات التطبيق</string>
+    <string name="title_default_app">الإعدادات الافتراضية</string>
+    <string name="title_app_select">اختيار التطبيقات</string>
+    <string name="title_app_settings">إعدادات التطبيق</string>
+    <string name="title_about">حول</string>
+
+    <string name="do_not_dual">لا تثبت PIB للمستخدم الثانوي</string>
+    <string name="show_crash_log">عرض سجل التعطل</string>
+    <string name="config_damaged">ملف التكوين تالف. يرجى مسح بيانات التطبيق</string>
+    <string name="delete">حذف</string>
+    <string name="enabled">مفعل</string>
+    <string name="disabled">معطل</string>
+    <string name="application">التطبيق</string>
+    <string name="preferences">التفضيلات</string>
+    <string name="refresh">تحديث</string>
+    <string name="filter">تصفية</string>
+    <string name="search">بحث</string>
+    <string name="edit">تحرير</string>
+    <string name="follow_system">اتباع النظام</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">الموديول مفعل [%s]</string>
+    <string name="home_xposed_not_activated">لا يمكن الاتصال بمتجر Play</string>
+    <string name="home_xposed_service_on">خدمة النظام تعمل [%d]</string>
+    <string name="home_xposed_service_off">الوحدة معطلة أو متجر Play غير قيد التشغيل. حاول تشغيله.</string>
+    <string name="home_xposed_service_old">تم تحديث الوحدة، يلزم إعادة التشغيل</string>
+    <string name="home_xposed_service_health_stale">الخدمة متصلة، في انتظار فحص صحة جديد</string>
+    <string name="home_xposed_filter_count">سجّل PIB إجمالي %d حدثًا</string>
+    <string name="home_backup_config">نسخ احتياطي للتكوين</string>
+    <string name="home_restore_config">استعادة التكوين</string>
+    <string name="home_import_successful">تم الاستيراد بنجاح</string>
+    <string name="home_import_failed">فشل الاستيراد</string>
+    <string name="home_import_file_damaged">ملف النسخ الاحتياطي تالف</string>
+    <string name="home_export_failed">فشل التصدير</string>
+    <string name="home_exported">تم نسخ التكوين احتياطيًا</string>
+    <string name="home_new_update">يوجد تحديث جديد: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">عرض تطبيقات النظام</string>
+    <string name="list_sorting">الفرز</string>
+    <string name="list_reverse_order">عكس الترتيب</string>
+    <string name="list_sort_by_label">حسب اسم التطبيق</string>
+    <string name="list_sort_by_package_name">حسب اسم الحزمة</string>
+    <string name="list_sort_by_install_time">حسب وقت التثبيت</string>
+    <string name="list_sort_by_update_time">حسب وقت التحديث</string>
+    <string name="list_empty_no_apps">لم يتم العثور على تطبيقات؛ ربما لم تسمح لهذا التطبيق بالاستعلام عن جميع الحزم</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">تمكين PIB</string>
+    <string name="app_enable_intervention_desc">عطِّل للسماح بطلبات Play Integrity حتى عندما يكون الاعتراض مفعّلًا افتراضيًا.</string>
+    <string name="app_rewrite_integrity_response">تمكين أخطاء مصطنعة</string>
+    <string name="app_rewrite_integrity_response_desc">عند التمكين، لن يتواصل التطبيق مع Play Integrity وسيتلقى بدلًا من ذلك خطأً مصطنعًا.</string>
+    <string name="app_deliver_synthetic_response">تسليم استجابة مصطنعة</string>
+    <string name="app_deliver_synthetic_response_desc">عند التعطيل، لن يتلقى التطبيق أي استجابة على الإطلاق. استخدم هذا فقط لاختبار المكان الذي يطلب فيه التطبيق Play Integrity (حيث قد يتجمد التطبيق لفترة طويلة).</string>
+    <string name="app_delay_synthetic_response">تأخير تسليم الاستجابة</string>
+    <string name="app_delay_synthetic_response_desc">يضيف تأخيرًا عشوائيًا بين 300 و2000 مللي ثانية قبل تسليم الردود المصطنعة. قد يمنع ذلك الكشف القائم على التوقيت؟</string>
+    <string name="app_rewrite_integrity_error_code">رمز الخطأ المراد حقنه</string>
+    <string name="app_rewrite_integrity_error_code_desc">سيتلقى التطبيق رمز الخطأ هذا.</string>
+    <string name="app_rewrite_integrity_error_code_reference">مرجع رموز الخطأ</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">افتح جدول قيم الأخطاء المحتملة.</string>
+    <string name="app_rewrite_integrity_error_remediable">علم قابلية الإصلاح</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">يخبر التطبيق بأنه ينبغي إعادة محاولة الطلب (مثلاً، الخطأ مؤقت).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">مرجع رموز أخطاء Play Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">تم نسخ رمز الخطأ: %1$s</string>
+    <string name="app_exclude_system_apps">تضمين تطبيقات النظام</string>
+    <string name="app_warning_risky_package_title">حزمة خطرة</string>
+    <string name="app_warning_risky_package_desc">تم وسم هذه الحزمة كمخاطرة وقد تتسبب في عدم استقرار. المتابعة؟</string>
+    <string name="app_favorite_add">أضف إلى المفضلة</string>
+    <string name="app_favorite_remove">إزالة من المفضلة</string>
+    <string name="app_force_stop_launch">إعادة التشغيل ثم تشغيل التطبيق</string>
+    <string name="app_launch">تشغيل</string>
+    <string name="app_launch_failed">فشل تشغيل التطبيق، تحقق من السجلات لمزيد من التفاصيل</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">إعداد مسبق لطريقة الإدخال</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">قيمة مخصصة</string>
+    <string name="settings_templates_random_ssaid">توليد SSAID عشوائي</string>
+
+    <!-- Logs -->
+    <string name="logs_save">حفظ السجلات</string>
+    <string name="logs_clear">مسح السجلات</string>
+    <string name="logs_upload_telemetry">إرسال التحليلات الآن</string>
+    <string name="logs_show_telemetry_queue">عرض حالة قائمة انتظار التحليلات</string>
+    <string name="logs_empty">لا توجد سجلات للحفظ</string>
+    <string name="logs_saved">تم حفظ السجلات</string>
+    <string name="logs_telemetry_disabled">إرسال التحليلات معطل</string>
+    <string name="logs_telemetry_upload_enqueued">تم جدولة إرسال التحليلات: قيد الانتظار=%1$d إعادة المحاولة=%2$d قيد الإرسال=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">حالة الطابور: قيد الانتظار=%1$d إعادة المحاولة=%2$d قيد الإرسال=%3$d مؤكد=%4$d فشل=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">الفترة الزمنية</string>
+    <string name="statistics_window_all">كل الوقت</string>
+    <string name="statistics_window_24h">آخر 24 ساعة</string>
+    <string name="statistics_window_7d">آخر 7 أيام</string>
+    <string name="statistics_updated_at">تم التحديث: %1$s</string>
+    <string name="statistics_user_id">معرّف المستخدم: %1$s</string>
+    <string name="statistics_summary_title">ملخص الالتقاط</string>
+    <string name="statistics_summary_body">إجمالي الأحداث: %1$d\nالطلبات: %2$d\nالاستجابات: %3$d\nالاستجابات الناجحة: %4$d\nالاستجابات الفاشلة: %5$d</string>
+    <string name="statistics_queue_title">قائمة انتظار التحليلات</string>
+    <string name="statistics_queue_body">قيد الانتظار: %1$d\nإعادة المحاولة: %2$d\nقيد الإرسال: %3$d\nتم التأكيد: %4$d\nفشل: %5$d</string>
+    <string name="statistics_top_packages_title">نشاط الحزم (الكل)</string>
+    <string name="statistics_top_packages_empty">لا يوجد نشاط للحزم في هذه الفترة الزمنية.</string>
+    <string name="statistics_package_unknown_label">تطبيق غير معروف</string>
+    <string name="statistics_package_resolving_label">جارٍ حل اسم التطبيق...</string>
+    <string name="statistics_recent_requests_title">آخر 10 طلبات</string>
+    <string name="statistics_recent_requests_empty">لا توجد طلبات في هذه الفترة الزمنية.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">الوحدة</string>
+    <string name="settings_overwrite">استبدال</string>
+    <string name="settings_overwritten">تم الاستبدال</string>
+    <string name="settings_overwrite_summary">عناصر هذه الفئة سيتم فرض تمكينها إذا كانت المفاتيح مُفعّلة</string>
+    <string name="settings_default_value">القيمة الافتراضية: %s</string>
+    <string name="settings_data_isolation">عزل البيانات</string>
+    <string name="settings_data_isolation_summary">بيانات التطبيق: %1$s\nبيانات تطبيق Vold: %2$s\nفرض التركيب: %3$s</string>
+    <string name="settings_data_isolation_unsupported">هذا الخيار متاح فقط على أندرويد 11 وما بعده</string>
+    <string name="settings_app_data_isolation">عزل بيانات التطبيق</string>
+    <string name="settings_vold_app_data_isolation">عزل بيانات تطبيق Vold</string>
+    <string name="settings_warning">تحذير</string>
+    <string name="settings_vold_warning">هذا يُمكّن ميزة عزلة في AOSP لتخزين التطبيق الخارجي الخاص. قد تحسن التوافق لكنها قد تقلل الاستقرار وقد تتوقف عن العمل في إصدارات أندرويد المستقبلية.</string>
+    <string name="settings_need_reboot">يتطلب التغيير إعادة تشغيل</string>
+    <string name="settings_force_mount_data">فرض عزل البيانات لكل التطبيقات</string>
+    <string name="settings_force_mount_data_summary">عزل البيانات معطل للتطبيقات التي تستهدف API أقل من 30 بشكل افتراضي</string>
+    <string name="settings_detail_log">سجل تفصيلي لأغراض التصحيح</string>
+    <string name="settings_max_log_size">أحجام مخزن السجل</string>
+    <string name="settings_hide_icon">إخفاء أيقونة الوحدة في المشغل</string>
+    <string name="settings_hide_icon_summary">لا يزال بإمكانك فتح التطبيق في مدير Xposed</string>
+    <string name="settings_bypass_risky_package_warning">تجاوز تحذير الحزمة الخطرة</string>
+    <string name="settings_bypass_risky_package_warning_summary">لاحظ أن المطورين غير مسؤولين عن المشاكل المرتبطة بالحزم الخطرة قبل أو بعد تمكينك لهذه الميزة</string>
+    <string name="settings_disable_activity_launch_protection">تعطيل حماية إطلاق النشاط</string>
+    <string name="settings_disable_activity_launch_protection_summary">سيُرفع هذا التبديل كل حماية startActivity. إذا كنت غير متأكد، فلا تقم بتمكينه.</string>
+    <string name="settings_system_wallpaper">استخدم خلفية النظام</string>
+    <string name="settings_clear_uninstalled_app_configs">مسح إعدادات التطبيقات المحذوفة</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">يتيح لك هذا الخيار إنشاء تهيئة بدون مخلفات، لكن سيتعين عليك إعادة تهيئة التطبيقات عند إعادة تثبيتها.</string>
+    <string name="settings_no_undone_warning">لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="settings_package_query_workaround">استعلام بديل عن الحزم</string>
+    <string name="settings_package_query_workaround_summary">لا تقم بتمكين هذا الخيار إذا كنت ترى قائمة الحزم في هذا التطبيق بشكل صحيح.</string>
+    <string name="settings_intent_api_enabled">تمكين واجهة Intents الخارجية</string>
+    <string name="settings_intent_api_enabled_summary">السماح للتطبيقات الأخرى بتغيير إعدادات PIB.</string>
+    <string name="settings_intent_api_enable_title">تمكين واجهة Intents الخارجية؟</string>
+    <string name="settings_intent_api_enable_message">عند التمكين، يمكن لأي تطبيق على الجهاز إرسال نوايا API لتعديل إعدادات PIB لكل تطبيق. فعّل هذا فقط إذا وثقت بالتطبيقات التي تثبتها.</string>
+    <string name="settings_intent_api_enable_confirm">تمكين الواجهة</string>
+    <string name="settings_launcher_icon">أيقونة المشغل</string>
+    <string name="settings_error_only_log">سجل الأخطاء فقط</string>
+
+    <string name="settings_telemetry">التحليلات</string>
+    <string name="settings_telemetry_enabled">تمكين إرسال التحليلات</string>
+    <string name="settings_telemetry_enabled_summary">يرفع أحداث طلب واستجابة تكامل التطبيقات إلى خادم المطور، للإحصاءات والبحث.</string>
+    <string name="telemetry_consent_title">مرحبًا بك في PIB! هل تود تمكين التحليلات؟</string>
+    <string name="telemetry_consent_message">شكرًا لتثبيت PIB!\n\nتساعد التحليلات المطور على دراسة كيفية تفاعل التطبيقات مع Google Play Integrity.\nودودة للخصوصية: لا يتم رفع بيانات تعريفية. لا تستهلك بطارية إضافية.\nيمكنك قراءة السياسة الموسعة وشيفرة المصدر على GitHub.\nيمكنك تعطيل التحليلات في أي وقت من الإعدادات.</string>
+    <string name="telemetry_consent_enable">بالطبع!</string>
+    <string name="telemetry_consent_not_now">ليس الآن :(</string>
+
+    <string name="settings_language">اللغة</string>
+
+    <string name="settings_theme">السمة</string>
+    <string name="settings_system_theme_color">لون سمة النظام</string>
+    <string name="settings_theme_color">لون السمة</string>
+    <string name="settings_pure_black_dark_theme">سمة داكنة سوداء صافية</string>
+    <string name="settings_pure_black_dark_theme_summary">استخدم السمة السوداء الصافية إذا كانت السمة الداكنة مفعلة</string>
+
+    <string name="settings_update">تحديث</string>
+    <string name="settings_disable_update">تعطيل إشعار التحديث</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">تكوين السجل الجماعي</string>
+
+    <!-- About -->
+    <string name="about_description">PIB هو موديول LSPosed يركز على منع التطبيقات من استخدام واجهة برمجة تطبيقات Google Play Integrity.</string>
+    <string name="about_how_to_use_title">كيفية استخدام هذا الموديول</string>
+    <string name="about_how_to_use_description_1">فَعّل الموديول في مدير Xposed الخاص بك، ومنحه صلاحية نطاق متجر Google Play (com.android.vending).\nثم أوقف متجر Google Play قسريًا.</string>
+    <string name="about_how_to_use_description_2">افتراضيًا، تُمنع جميع التطبيقات من الوصول إلى Google Play Integrity. اختر التطبيق الذي تريد السماح له بالوصول، أو إذا أردت استخدام رمز خطأ محدد.</string>
+    <string name="about_developer">المطور</string>
+    <string name="about_support">الدعم والتغذية الراجعة</string>
+    <string name="about_open_source">تراخيص المصدر المفتوح</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">ساكورا</string>
+    <string name="color_red">أحمر</string>
+    <string name="color_pink">وردي</string>
+    <string name="color_purple">بنفسجي</string>
+    <string name="color_deep_purple">بنفسجي غامق</string>
+    <string name="color_indigo">نيلي</string>
+    <string name="color_blue">أزرق</string>
+    <string name="color_light_blue">أزرق فاتح</string>
+    <string name="color_cyan">سماوي</string>
+    <string name="color_teal">أخضر مائل للأزرق</string>
+    <string name="color_green">أخضر</string>
+    <string name="color_light_green">أخضر فاتح</string>
+    <string name="color_lime">ليموني</string>
+    <string name="color_yellow">أصفر</string>
+    <string name="color_amber">عنبر</string>
+    <string name="color_orange">برتقالي</string>
+    <string name="color_deep_orange">برتقالي غامق</string>
+    <string name="color_brown">بني</string>
+    <string name="color_blue_grey">رمادي مزرق</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">السمة الداكنة</string>
+    <string name="dark_theme_off">دائمًا معطل</string>
+    <string name="dark_theme_on">دائمًا مفعّل</string>
+</resources>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Αρχική</string>
+    <string name="title_logs">Καταγραφές</string>
+    <string name="title_statistics">Στατιστικά</string>
+    <string name="title_settings">Ρυθμίσεις</string>
+    <string name="title_template_manage">Διαχείριση προφίλ καταγραφής</string>
+    <string name="title_app_manage">Επιλογές ανά εφαρμογή</string>
+    <string name="title_default_app">Προεπιλεγμένες επιλογές</string>
+    <string name="title_app_select">Επιλογή εφαρμογών</string>
+    <string name="title_app_settings">Ρυθμίσεις εφαρμογής</string>
+    <string name="title_about">Σχετικά</string>
+
+    <string name="do_not_dual">Μην εγκαταστήσετε το PIB σε δευτερεύον χρήστη</string>
+    <string name="show_crash_log">Εμφάνιση αρχείου καταγραφής συντριβής</string>
+    <string name="config_damaged">Αρχείο ρυθμίσεων κατεστραμμένο. Καθαρίστε τα δεδομένα της εφαρμογής</string>
+    <string name="delete">Διαγραφή</string>
+    <string name="enabled">Ενεργό</string>
+    <string name="disabled">Απενεργοποιημένο</string>
+    <string name="application">Εφαρμογή</string>
+    <string name="preferences">Προτιμήσεις</string>
+    <string name="refresh">Ανανέωση</string>
+    <string name="filter">Φίλτρο</string>
+    <string name="search">Αναζήτηση</string>
+    <string name="edit">Επεξεργασία</string>
+    <string name="follow_system">Ακολουθεί το σύστημα</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Το module ενεργοποιήθηκε [%s]</string>
+    <string name="home_xposed_not_activated">Αδυναμία επικοινωνίας με το Play Store</string>
+    <string name="home_xposed_service_on">Υπηρεσία συστήματος σε λειτουργία [%d]</string>
+    <string name="home_xposed_service_off">Το module είναι απενεργοποιημένο ή το Play Store δεν τρέχει. Δοκιμάστε να το ξεκινήσετε.</string>
+    <string name="home_xposed_service_old">Το module ενημερώθηκε, απαιτείται επανεκκίνηση</string>
+    <string name="home_xposed_service_health_stale">Η υπηρεσία συνδέθηκε, περιμένει νέο έλεγχο υγείας</string>
+    <string name="home_xposed_filter_count">Το PIB έχει καταγράψει συνολικά %d συμβάντα</string>
+    <string name="home_backup_config">Δημιουργία αντιγράφου ρυθμίσεων</string>
+    <string name="home_restore_config">Επαναφορά ρυθμίσεων</string>
+    <string name="home_import_successful">Εισαγωγή επιτυχής</string>
+    <string name="home_import_failed">Σφάλμα εισαγωγής</string>
+    <string name="home_import_file_damaged">Το αρχείο αντιγράφου ήταν κατεστραμμένο</string>
+    <string name="home_export_failed">Σφάλμα εξαγωγής</string>
+    <string name="home_exported">Οι ρυθμίσεις αντιγράφτηκαν</string>
+    <string name="home_new_update">Διαθέσιμη νέα ενημέρωση: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Εμφάνιση συστημικών εφαρμογών</string>
+    <string name="list_sorting">Ταξινόμηση</string>
+    <string name="list_reverse_order">Αντίστροφη σειρά</string>
+    <string name="list_sort_by_label">Κατά όνομα εφαρμογής</string>
+    <string name="list_sort_by_package_name">Κατά όνομα πακέτου</string>
+    <string name="list_sort_by_install_time">Κατά χρόνο εγκατάστασης</string>
+    <string name="list_sort_by_update_time">Κατά χρόνο ενημέρωσης</string>
+    <string name="list_empty_no_apps">Δεν βρέθηκαν εφαρμογές, μπορεί να μην επιτρέψατε σε αυτή την εφαρμογή να ελέγξει όλα τα πακέτα</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Ενεργοποίηση PIB</string>
+    <string name="app_enable_intervention_desc">Απενεργοποιήστε για να επιτρέψετε αιτήματα Play Integrity ακόμα και όταν η υποκλοπή είναι ενεργοποιημένη από προεπιλογή.</string>
+    <string name="app_rewrite_integrity_response">Ενεργοποίηση συνθετικών σφαλμάτων</string>
+    <string name="app_rewrite_integrity_response_desc">Όταν είναι ενεργό, η εφαρμογή δεν θα επικοινωνεί με το Play Integrity και θα λαμβάνει δημιουργημένο σφάλμα.</string>
+    <string name="app_deliver_synthetic_response">Παράδοση συνθετικής απάντησης</string>
+    <string name="app_deliver_synthetic_response_desc">Όταν είναι απενεργοποιημένο, η εφαρμογή δεν θα λάβει καθόλου απάντηση. Χρησιμοποιήστε το μόνο για δοκιμές όπου η εφαρμογή πιθανώς θα κολλήσει.</string>
+    <string name="app_delay_synthetic_response">Καθυστέρηση παράδοσης απάντησης</string>
+    <string name="app_delay_synthetic_response_desc">Προσθέτει τυχαία καθυστέρηση μεταξύ 300 και 2000 ms πριν την παράδοση των συνθετικών κλήσεων. Μπορεί να αποτρέψει ανίχνευση βάσει χρόνου;</string>
+    <string name="app_rewrite_integrity_error_code">Κωδικός σφάλματος για εισαγωγή</string>
+    <string name="app_rewrite_integrity_error_code_desc">Η εφαρμογή θα λάβει αυτόν τον κωδικό σφάλματος.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Αναφορά κωδικών σφάλματος</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Άνοιγμα πίνακα με πιθανούς κωδικούς σφάλματος.</string>
+    <string name="app_rewrite_integrity_error_remediable">Σημαία επιδιόρθωσης</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Ενημερώνει την εφαρμογή ότι το αίτημα πρέπει να επαναληφθεί (π.χ. το σφάλμα είναι προσωρινό).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Αναφορά κωδικών σφαλμάτων Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Αντιγράφηκε κωδικός σφάλματος: %1$s</string>
+    <string name="app_exclude_system_apps">Συμπερίληψη συστημικών εφαρμογών</string>
+    <string name="app_warning_risky_package_title">Επικίνδυνο πακέτο</string>
+    <string name="app_warning_risky_package_desc">Αυτό το πακέτο χαρακτηρίζεται επικίνδυνο και μπορεί να προκαλέσει αστάθεια. Συνεχίσετε;</string>
+    <string name="app_favorite_add">Σήμανση ως αγαπημένο</string>
+    <string name="app_favorite_remove">Αφαίρεση αγαπημένου</string>
+    <string name="app_force_stop_launch">Επανεκκίνηση και εκκίνηση</string>
+    <string name="app_launch">Εκκίνηση</string>
+    <string name="app_launch_failed">Η εκκίνηση της εφαρμογής απέτυχε, ελέγξτε τα καταγραφικά για λεπτομέρειες</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Προεπιλογή μεθόδου εισαγωγής</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Προσαρμοσμένη τιμή</string>
+    <string name="settings_templates_random_ssaid">Τυχαίο SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Αποθήκευση καταγραφών</string>
+    <string name="logs_clear">Εκκαθάριση καταγραφών</string>
+    <string name="logs_upload_telemetry">Αποστολή τηλεμετρίας τώρα</string>
+    <string name="logs_show_telemetry_queue">Εμφάνιση κατάστασης ουράς τηλεμετρίας</string>
+    <string name="logs_empty">Δεν υπάρχουν καταγραφές για αποθήκευση</string>
+    <string name="logs_saved">Καταγραφές αποθηκεύτηκαν</string>
+    <string name="logs_telemetry_disabled">Η αποστολή τηλεμετρίας είναι απενεργοποιημένη</string>
+    <string name="logs_telemetry_upload_enqueued">Αποστολή τηλεμετρίας σε ουρά: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Κατάσταση ουράς: pending=%1$d retry=%2$d in-flight=%3$d acked=%4$d failed=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Χρονικό παράθυρο</string>
+    <string name="statistics_window_all">Όλες οι περιόδοι</string>
+    <string name="statistics_window_24h">Τελευταίες 24 ώρες</string>
+    <string name="statistics_window_7d">Τελευταίες 7 ημέρες</string>
+    <string name="statistics_updated_at">Ενημερώθηκε: %1$s</string>
+    <string name="statistics_user_id">Αναγνωριστικό χρήστη: %1$s</string>
+    <string name="statistics_summary_title">Περίληψη καταγραφής</string>
+    <string name="statistics_summary_body">Συνολικά συμβάντα: %1$d\nΑιτήματα: %2$d\nΑπαντήσεις: %3$d\nΕπιτυχείς απαντήσεις: %4$d\nΑποτυχημένες απαντήσεις: %5$d</string>
+    <string name="statistics_queue_title">Ουρά τηλεμετρίας</string>
+    <string name="statistics_queue_body">Εκκρεμούν: %1$d\nΕπαναπροσπάθεια: %2$d\nΣε εξέλιξη: %3$d\nΕπιβεβαιωμένα: %4$d\nΑποτυχίες: %5$d</string>
+    <string name="statistics_top_packages_title">Δραστηριότητα πακέτων (όλα)</string>
+    <string name="statistics_top_packages_empty">Καμία δραστηριότητα πακέτων σε αυτό το χρονικό παράθυρο.</string>
+    <string name="statistics_package_unknown_label">Άγνωστη εφαρμογή</string>
+    <string name="statistics_package_resolving_label">Επίλυση ονόματος εφαρμογής...</string>
+    <string name="statistics_recent_requests_title">Τελευταία 10 αιτήματα</string>
+    <string name="statistics_recent_requests_empty">Κανένα αίτημα σε αυτό το χρονικό παράθυρο.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Μονάδα</string>
+    <string name="settings_overwrite">Επανεγγραφή</string>
+    <string name="settings_overwritten">Επανεγράφη</string>
+    <string name="settings_overwrite_summary">Αυτά τα στοιχεία θα επιβληθούν ως ενεργοποιημένα αν οι διακόπτες είναι τσεκαρισμένοι</string>
+    <string name="settings_default_value">Προεπιλεγμένη τιμή: %s</string>
+    <string name="settings_data_isolation">Απομόνωση δεδομένων</string>
+    <string name="settings_data_isolation_summary">App data: %1$s\nVold app data: %2$s\nForce mount: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Αυτή η επιλογή είναι διαθέσιμη μόνο σε Android 11 και νεότερα</string>
+    <string name="settings_app_data_isolation">Απομόνωση δεδομένων εφαρμογής</string>
+    <string name="settings_vold_app_data_isolation">Απομόνωση δεδομένων Vold εφαρμογής</string>
+    <string name="settings_warning">Προειδοποίηση</string>
+    <string name="settings_vold_warning">Αυτό ενεργοποιεί μια λειτουργία απομόνωσης AOSP για το εξωτερικό ιδιωτικό αποθηκευτικό χώρου εφαρμογής. Μπορεί να βελτιώσει τη συμβατότητα αλλά να μειώσει τη σταθερότητα και να σταματήσει να λειτουργεί σε μελλοντικές εκδόσεις Android.</string>
+    <string name="settings_need_reboot">Απαιτείται επανεκκίνηση</string>
+    <string name="settings_force_mount_data">Εναγκαστική απομόνωση δεδομένων για όλες τις εφαρμογές</string>
+    <string name="settings_force_mount_data_summary">Η απομόνωση δεδομένων είναι απενεργοποιημένη για εφαρμογές με target API κάτω από 30 από προεπιλογή</string>
+    <string name="settings_detail_log">Λεπτομερές αρχείο καταγραφής για αποσφαλμάτωση</string>
+    <string name="settings_max_log_size">Μέγεθος buffer καταγραφής</string>
+    <string name="settings_hide_icon">Απόκρυψη εικονιδίου εφαρμογής στο launcher</string>
+    <string name="settings_hide_icon_summary">Μπορείτε ακόμα να ανοίξετε την εφαρμογή στο Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">Παράκαμψη προειδοποίησης επικίνδυνου πακέτου</string>
+    <string name="settings_bypass_risky_package_warning_summary">Σημειώστε ότι οι προγραμματιστές δεν ευθύνονται για ζητήματα που προκαλούνται από επικίνδυνα πακέτα πριν ή μετά την ενεργοποίηση αυτής της λειτουργίας</string>
+    <string name="settings_disable_activity_launch_protection">Απενεργοποίηση προστασίας εκκίνησης Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Αυτό το toggle θα άρει όλες τις προστασίες startActivity. Αν δεν είστε σίγουροι, μην το ενεργοποιήσετε.</string>
+    <string name="settings_system_wallpaper">Χρήση συστημικού φόντου</string>
+    <string name="settings_clear_uninstalled_app_configs">Εκκαθάριση ρυθμίσεων απεγκατεστημένων εφαρμογών</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Αυτή η επιλογή σας επιτρέπει να δημιουργήσετε ρυθμίσεις χωρίς υπολείμματα αλλά θα πρέπει να επαναδιαμορφώσετε τις εφαρμογές όταν τις εγκαταστήσετε ξανά.</string>
+    <string name="settings_no_undone_warning">Αυτή η ενέργεια δεν μπορεί να ανακληθεί.</string>
+    <string name="settings_package_query_workaround">Εναλλακτική ερώτηση πακέτων</string>
+    <string name="settings_package_query_workaround_summary">Μην ενεργοποιήσετε αυτή την επιλογή αν βλέπετε τη λίστα πακέτων σωστά.</string>
+    <string name="settings_intent_api_enabled">Ενεργοποίηση εξωτερικού Intents API</string>
+    <string name="settings_intent_api_enabled_summary">Επιτρέψτε σε άλλες εφαρμογές να αλλάζουν ρυθμίσεις PIB.</string>
+    <string name="settings_intent_api_enable_title">Ενεργοποιήσετε το εξωτερικό Intents API;</string>
+    <string name="settings_intent_api_enable_message">Όταν ενεργοποιηθεί, οποιαδήποτε εφαρμογή στη συσκευή μπορεί να στείλει API Intents για να τροποποιήσει ρυθμίσεις PIB. Ενεργοποιήστε μόνο αν εμπιστεύεστε τις εφαρμογές που εγκαθιστάτε.</string>
+    <string name="settings_intent_api_enable_confirm">Ενεργοποίηση API</string>
+    <string name="settings_launcher_icon">Εικονίδιο launcher</string>
+    <string name="settings_error_only_log">Καταγραφή μόνο σφαλμάτων</string>
+
+    <string name="settings_telemetry">Τηλεμετρία</string>
+    <string name="settings_telemetry_enabled">Ενεργοποίηση αποστολής τηλεμετρίας</string>
+    <string name="settings_telemetry_enabled_summary">Αποστέλλει συμβάντα αιτημάτων και απαντήσεων Integrity στον server του προγραμματιστή, για στατιστικά και έρευνα.</string>
+    <string name="telemetry_consent_title">Καλώς ορίσατε στο PIB! Θα θέλατε να ενεργοποιήσετε την τηλεμετρία;</string>
+    <string name="telemetry_consent_message">Ευχαριστούμε που εγκαταστήσατε το PIB!\n\nΗ τηλεμετρία βοηθά τον προγραμματιστή να μελετήσει πώς οι εφαρμογές αλληλεπιδρούν με το Google Play Integrity.\nΦιλικό προς την ιδιωτικότητα: Δεν αποστέλλονται αναγνωρίσιμα δεδομένα. Δεν καταναλώνει μπαταρία.\nΜπορείτε να διαβάσετε την εκτενή πολιτική και τον πηγαίο κώδικα στο GitHub.\nΜπορείτε να απενεργοποιήσετε την τηλεμετρία οποιαδήποτε στιγμή από τις Ρυθμίσεις.</string>
+    <string name="telemetry_consent_enable">Σίγουρα!</string>
+    <string name="telemetry_consent_not_now">Όχι :(</string>
+
+    <string name="settings_language">Γλώσσα</string>
+
+    <string name="settings_theme">Θέμα</string>
+    <string name="settings_system_theme_color">Χρώμα θέματος συστήματος</string>
+    <string name="settings_theme_color">Χρώμα θέματος</string>
+    <string name="settings_pure_black_dark_theme">Καθαρό μαύρο σκοτεινό θέμα</string>
+    <string name="settings_pure_black_dark_theme_summary">Χρησιμοποιήστε το καθαρό μαύρο όταν είναι ενεργοποιημένο το σκοτεινό θέμα</string>
+
+    <string name="settings_update">Ενημέρωση</string>
+    <string name="settings_disable_update">Απενεργοποίηση ειδοποίησης ενημέρωσης</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Μαζική ρύθμιση καταγραφής</string>
+
+    <!-- About -->
+    <string name="about_description">Το PIB είναι ένα module LSPosed που στοχεύει στο μπλοκάρισμα εφαρμογών από τη χρήση του Google Play Integrity API.</string>
+    <string name="about_how_to_use_title">Πώς να χρησιμοποιήσετε αυτό το module</string>
+    <string name="about_how_to_use_description_1">Ενεργοποιήστε το module στον Xposed manager και δώστε του το scope του Google Play Store (com.android.vending).\nΣτη συνέχεια τερματίστε βιαίως το Google Play Store.</string>
+    <string name="about_how_to_use_description_2">Από προεπιλογή, όλες οι εφαρμογές μπλοκάρονται από την πρόσβαση στο Google Play Integrity. Επιλέξτε για ποια εφαρμογή θέλετε να επιτρέψετε πρόσβαση, ή αν θέλετε να χρησιμοποιήσετε συγκεκριμένο κωδικό σφάλματος.</string>
+    <string name="about_developer">Προγραμματιστής</string>
+    <string name="about_support">Υποστήριξη και ανατροφοδότηση</string>
+    <string name="about_open_source">Άδειες ανοικτού κώδικα</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Κόκκινο</string>
+    <string name="color_pink">Ροζ</string>
+    <string name="color_purple">Μωβ</string>
+    <string name="color_deep_purple">Σκούρο μωβ</string>
+    <string name="color_indigo">Ίντιγκο</string>
+    <string name="color_blue">Μπλε</string>
+    <string name="color_light_blue">Ανοιχτό μπλε</string>
+    <string name="color_cyan">Κυανό</string>
+    <string name="color_teal">Τιρκουάζ</string>
+    <string name="color_green">Πράσινο</string>
+    <string name="color_light_green">Ανοιχτό πράσινο</string>
+    <string name="color_lime">Λάιμ</string>
+    <string name="color_yellow">Κίτρινο</string>
+    <string name="color_amber">Κεχριμπαρί</string>
+    <string name="color_orange">Πορτοκαλί</string>
+    <string name="color_deep_orange">Σκούρο πορτοκαλί</string>
+    <string name="color_brown">Καφέ</string>
+    <string name="color_blue_grey">Μπλε-γκρι</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Σκοτεινό θέμα</string>
+    <string name="dark_theme_off">Πάντα απενεργοποιημένο</string>
+    <string name="dark_theme_on">Πάντα ενεργοποιημένο</string>
+</resources>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Головна</string>
+    <string name="title_logs">Журнали</string>
+    <string name="title_statistics">Статистика</string>
+    <string name="title_settings">Налаштування</string>
+    <string name="title_template_manage">Керування профілями журналювання</string>
+    <string name="title_app_manage">Параметри для додатків</string>
+    <string name="title_default_app">Параметри за замовчуванням</string>
+    <string name="title_app_select">Вибір додатків</string>
+    <string name="title_app_settings">Налаштування додатка</string>
+    <string name="title_about">Про програму</string>
+
+    <string name="do_not_dual">Не встановлювати PIB для вторинного користувача</string>
+    <string name="show_crash_log">Показати журнал збоїв</string>
+    <string name="config_damaged">Файл конфігурації пошкоджено. Очистіть дані додатка</string>
+    <string name="delete">Видалити</string>
+    <string name="enabled">Увімкнено</string>
+    <string name="disabled">Вимкнено</string>
+    <string name="application">Додаток</string>
+    <string name="preferences">Параметри</string>
+    <string name="refresh">Оновити</string>
+    <string name="filter">Фільтр</string>
+    <string name="search">Пошук</string>
+    <string name="edit">Редагувати</string>
+    <string name="follow_system">За системою</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Модуль активовано [%s]</string>
+    <string name="home_xposed_not_activated">Не вдається зв\'язатися з Google Play</string>
+    <string name="home_xposed_service_on">Системна служба запущена [%d]</string>
+    <string name="home_xposed_service_off">Модуль вимкнутий або Play Store не запущено. Спробуйте запустити його.</string>
+    <string name="home_xposed_service_old">Модуль оновлено, потрібно перезавантаження</string>
+    <string name="home_xposed_service_health_stale">Служба підключена, очікується оновлена перевірка стану</string>
+    <string name="home_xposed_filter_count">PIB зафіксував всього %d подій</string>
+    <string name="home_backup_config">Резервне копіювання конфігурації</string>
+    <string name="home_restore_config">Відновити конфігурацію</string>
+    <string name="home_import_successful">Імпорт успішний</string>
+    <string name="home_import_failed">Не вдалося імпортувати</string>
+    <string name="home_import_file_damaged">Файл резервної копії пошкоджено</string>
+    <string name="home_export_failed">Не вдалося експортувати</string>
+    <string name="home_exported">Конфігурація збережена</string>
+    <string name="home_new_update">Доступне нове оновлення: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Показати системні додатки</string>
+    <string name="list_sorting">Сортування</string>
+    <string name="list_reverse_order">Зворотний порядок</string>
+    <string name="list_sort_by_label">За назвою додатку</string>
+    <string name="list_sort_by_package_name">За іменем пакета</string>
+    <string name="list_sort_by_install_time">За часом встановлення</string>
+    <string name="list_sort_by_update_time">За часом оновлення</string>
+    <string name="list_empty_no_apps">Додатків не знайдено, можливо ви не дозволили цьому додатку переглядати всі пакети</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Увімкнути PIB</string>
+    <string name="app_enable_intervention_desc">Вимкніть, щоб дозволити запити Play Integrity навіть коли перехоплення ввімкнено за замовчуванням.</string>
+    <string name="app_rewrite_integrity_response">Увімкнути синтетичні помилки</string>
+    <string name="app_rewrite_integrity_response_desc">Якщо увімкнено, додаток не зв\'язуватиметься з Play Integrity і отримає згенеровану помилку.</string>
+    <string name="app_deliver_synthetic_response">Надіслати синтетичну відповідь</string>
+    <string name="app_deliver_synthetic_response_desc">Якщо вимкнено, додаток зовсім не отримає відповідь. Використовуйте лише для тестування, де саме додаток запитує Play Integrity (воно може зависати тривалий час).</string>
+    <string name="app_delay_synthetic_response">Затримка доставки відповіді</string>
+    <string name="app_delay_synthetic_response_desc">Додає випадкову затримку між 300 і 2000 мс перед відправленням синтетичних колбеків. Може запобігти виявленню за часом?</string>
+    <string name="app_rewrite_integrity_error_code">Код помилки для ін\'єкції</string>
+    <string name="app_rewrite_integrity_error_code_desc">Додаток отримає цей код помилки.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Довідник кодів помилок</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Відкрити таблицю можливих значень помилок.</string>
+    <string name="app_rewrite_integrity_error_remediable">Прапорець \'Відновлювано\'</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Повідомляє додатку, що запит слід повторити (наприклад, помилка тимчасова).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Довідник кодів помилок Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Скопійовано код помилки: %1$s</string>
+    <string name="app_exclude_system_apps">Включати системні додатки</string>
+    <string name="app_warning_risky_package_title">Ризикований пакет</string>
+    <string name="app_warning_risky_package_desc">Цей пакет позначено як ризиковий і може спричинити нестабільність. Продовжити?</string>
+    <string name="app_favorite_add">Позначити як улюблений</string>
+    <string name="app_favorite_remove">Зняти з улюблених</string>
+    <string name="app_force_stop_launch">Перезапустити і запустити</string>
+    <string name="app_launch">Запустити</string>
+    <string name="app_launch_failed">Не вдалося запустити додаток, перевірте журнали для деталей</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Профіль способу введення</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Власне значення</string>
+    <string name="settings_templates_random_ssaid">Рандомізувати SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Зберегти журнали</string>
+    <string name="logs_clear">Очистити журнали</string>
+    <string name="logs_upload_telemetry">Надіслати телеметрію зараз</string>
+    <string name="logs_show_telemetry_queue">Показати стан черги телеметрії</string>
+    <string name="logs_empty">Немає журналів для збереження</string>
+    <string name="logs_saved">Журнали збережено</string>
+    <string name="logs_telemetry_disabled">Відправка телеметрії вимкнена</string>
+    <string name="logs_telemetry_upload_enqueued">Черга відправки телеметрії: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Стан черги: pending=%1$d retry=%2$d в обробці=%3$d підтверджено=%4$d не вдалося=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Інтервал часу</string>
+    <string name="statistics_window_all">Увесь час</string>
+    <string name="statistics_window_24h">Останні 24 години</string>
+    <string name="statistics_window_7d">Останні 7 днів</string>
+    <string name="statistics_updated_at">Оновлено: %1$s</string>
+    <string name="statistics_user_id">ID користувача: %1$s</string>
+    <string name="statistics_summary_title">Підсумок захоплення</string>
+    <string name="statistics_summary_body">Всього подій: %1$d\nЗапити: %2$d\nВідповіді: %3$d\nУспішні відповіді: %4$d\nНеуспішні відповіді: %5$d</string>
+    <string name="statistics_queue_title">Черга телеметрії</string>
+    <string name="statistics_queue_body">В очікуванні: %1$d\nПовтори: %2$d\nВ обробці: %3$d\nПідтверджено: %4$d\nНе вдалося: %5$d</string>
+    <string name="statistics_top_packages_title">Активність пакетів (усі)</string>
+    <string name="statistics_top_packages_empty">Немає активності пакетів у цьому інтервалі.</string>
+    <string name="statistics_package_unknown_label">Невідомий додаток</string>
+    <string name="statistics_package_resolving_label">Отримання назви додатка...</string>
+    <string name="statistics_recent_requests_title">Останні 10 запитів</string>
+    <string name="statistics_recent_requests_empty">Немає запитів у цьому інтервалі.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Модуль</string>
+    <string name="settings_overwrite">Перезаписати</string>
+    <string name="settings_overwritten">Перезаписано</string>
+    <string name="settings_overwrite_summary">Елементи цієї категорії будуть примусово ввімкнені, якщо ці перемикачі встановлені</string>
+    <string name="settings_default_value">Значення за замовчуванням: %s</string>
+    <string name="settings_data_isolation">Ізоляція даних</string>
+    <string name="settings_data_isolation_summary">Дані додатку: %1$s\nVold дані додатку: %2$s\nПримусовий монтування: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Ця опція доступна лише на Android 11 і новіше</string>
+    <string name="settings_app_data_isolation">Ізоляція даних додатка</string>
+    <string name="settings_vold_app_data_isolation">Ізоляція Vold для даних додатка</string>
+    <string name="settings_warning">Увага</string>
+    <string name="settings_vold_warning">Це вмикає AOSP-функцію ізоляції для зовнішнього приватного сховища додатка. Це може покращити сумісність, але зменшити стабільність і може перестати працювати у майбутніх версіях Android.</string>
+    <string name="settings_need_reboot">Для застосування потрібне перезавантаження</string>
+    <string name="settings_force_mount_data">Примусово застосувати ізоляцію даних для всіх додатків</string>
+    <string name="settings_force_mount_data_summary">Ізоляція даних вимкнена для додатків з target API нижче 30 за замовчуванням</string>
+    <string name="settings_detail_log">Детальний журнал для відлагодження</string>
+    <string name="settings_max_log_size">Розмір буфера логера</string>
+    <string name="settings_hide_icon">Приховати іконку модуля в лаунчері</string>
+    <string name="settings_hide_icon_summary">Ви все ще можете відкрити додаток в Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">Обійти попередження про ризиковий пакет</string>
+    <string name="settings_bypass_risky_package_warning_summary">Розробники не несуть відповідальності за проблеми, пов\'язані з ризиковими пакетами до або після увімкнення цієї функції</string>
+    <string name="settings_disable_activity_launch_protection">Вимкнути захист запуску Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Цей перемикач зніме всі захисти startActivity. Якщо ви не впевнені, не вмикайте.</string>
+    <string name="settings_system_wallpaper">Використовувати системні шпалери</string>
+    <string name="settings_clear_uninstalled_app_configs">Очистити конфігурації видалених додатків</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Ця опція дозволяє створити конфіг без залишків, але вам доведеться налаштувати додатки заново після повторної установки.</string>
+    <string name="settings_no_undone_warning">Цю дію не можна скасувати.</string>
+    <string name="settings_package_query_workaround">Альтернативний запит пакетів</string>
+    <string name="settings_package_query_workaround_summary">Не вмикайте цю опцію, якщо список пакетів у цьому додатку відображається правильно.</string>
+    <string name="settings_intent_api_enabled">Увімкнути зовнішній Intents API</string>
+    <string name="settings_intent_api_enabled_summary">Дозволяє іншим додаткам змінювати налаштування PIB.</string>
+    <string name="settings_intent_api_enable_title">Увімкнути зовнішній Intents API?</string>
+    <string name="settings_intent_api_enable_message">Коли увімкнено, будь-який додаток на пристрої може надсилати API Intents для зміни налаштувань PIB для конкретних додатків. Увімкніть тільки якщо ви довіряєте встановленим додаткам.</string>
+    <string name="settings_intent_api_enable_confirm">Увімкнути API</string>
+    <string name="settings_launcher_icon">Іконка лаунчера</string>
+    <string name="settings_error_only_log">Лог лише помилок</string>
+
+    <string name="settings_telemetry">Телеметрія</string>
+    <string name="settings_telemetry_enabled">Увімкнути надсилання телеметрії</string>
+    <string name="settings_telemetry_enabled_summary">Надсилає події запитів і відповідей Integrity додатків на сервер розробника для статистики і досліджень.</string>
+    <string name="telemetry_consent_title">Ласкаво просимо до PIB! Хочете увімкнути телеметрію?</string>
+    <string name="telemetry_consent_message">Дякуємо за встановлення PIB!\n\nТелеметрія допомагає розробнику досліджувати, як додатки взаємодіють з Google Play Integrity.\nДоброзичливо до приватності: не надсилаються ідентифікуючі дані. Не впливає на витрату батареї.\nВи можете прочитати розширену політику та вихідний код на GitHub.\nВи можете вимкнути телеметрію в будь-який час у Налаштуваннях.</string>
+    <string name="telemetry_consent_enable">Звісно!</string>
+    <string name="telemetry_consent_not_now">Не зараз :(</string>
+
+    <string name="settings_language">Мова</string>
+
+    <string name="settings_theme">Тема</string>
+    <string name="settings_system_theme_color">Колір системної теми</string>
+    <string name="settings_theme_color">Колір теми</string>
+    <string name="settings_pure_black_dark_theme">Чисто чорна темна тема</string>
+    <string name="settings_pure_black_dark_theme_summary">Використовувати чисто чорну тему, якщо увімкнена темна тема</string>
+
+    <string name="settings_update">Оновлення</string>
+    <string name="settings_disable_update">Вимкнути повідомлення про оновлення</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Масове налаштування журналів</string>
+
+    <!-- About -->
+    <string name="about_description">PIB — модуль LSPosed, спрямований на блокування додатків від використання Google Play Integrity API.</string>
+    <string name="about_how_to_use_title">Як використовувати цей модуль</string>
+    <string name="about_how_to_use_description_1">Увімкніть модуль у вашому Xposed manager та надайте йому доступ до Google Play Store (com.android.vending).\nПотім примусово зупиніть Google Play Store.</string>
+    <string name="about_how_to_use_description_2">За замовчуванням усі додатки блокуються від доступу до Google Play Integrity. Виберіть додатки, яким хочете дозволити доступ, або вкажіть конкретний код помилки.</string>
+    <string name="about_developer">Розробник</string>
+    <string name="about_support">Підтримка та зворотній зв\'язок</string>
+    <string name="about_open_source">Ліцензії з відкритим кодом</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Сакура</string>
+    <string name="color_red">Червоний</string>
+    <string name="color_pink">Рожевий</string>
+    <string name="color_purple">Фіолетовий</string>
+    <string name="color_deep_purple">Темно-фіолетовий</string>
+    <string name="color_indigo">Індиго</string>
+    <string name="color_blue">Синій</string>
+    <string name="color_light_blue">Світло-синій</string>
+    <string name="color_cyan">Блакитний</string>
+    <string name="color_teal">Бірюзовий</string>
+    <string name="color_green">Зелений</string>
+    <string name="color_light_green">Світло-зелений</string>
+    <string name="color_lime">Лаймовий</string>
+    <string name="color_yellow">Жовтий</string>
+    <string name="color_amber">Янтарний</string>
+    <string name="color_orange">Помаранчевий</string>
+    <string name="color_deep_orange">Темно-помаранчевий</string>
+    <string name="color_brown">Коричневий</string>
+    <string name="color_blue_grey">Синьо-сірий</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Темна тема</string>
+    <string name="dark_theme_off">Завжди вимкнено</string>
+    <string name="dark_theme_on">Завжди ввімкнено</string>
+</resources>

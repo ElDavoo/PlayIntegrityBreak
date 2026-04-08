@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Hem</string>
+    <string name="title_logs">Loggar</string>
+    <string name="title_statistics">Statistik</string>
+    <string name="title_settings">Inställningar</string>
+    <string name="title_template_manage">Hantera loggprofiler</string>
+    <string name="title_app_manage">App-specifika inställningar</string>
+    <string name="title_default_app">Standardinställningar</string>
+    <string name="title_app_select">Välj appar</string>
+    <string name="title_app_settings">Appinställningar</string>
+    <string name="title_about">Om</string>
+
+    <string name="do_not_dual">Installera inte PIB för sekundär användare</string>
+    <string name="show_crash_log">Visa kraschlogg</string>
+    <string name="config_damaged">Konfigfil skadad. Rensa appdata.</string>
+    <string name="delete">Ta bort</string>
+    <string name="enabled">Aktiverad</string>
+    <string name="disabled">Inaktiverad</string>
+    <string name="application">Applikation</string>
+    <string name="preferences">Inställningar</string>
+    <string name="refresh">Uppdatera</string>
+    <string name="filter">Filter</string>
+    <string name="search">Sök</string>
+    <string name="edit">Redigera</string>
+    <string name="follow_system">Följ systemet</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Modul aktiverad [%s]</string>
+    <string name="home_xposed_not_activated">Kan inte kommunicera med Play Butik</string>
+    <string name="home_xposed_service_on">Systemtjänst körs [%d]</string>
+    <string name="home_xposed_service_off">Modulen är inaktiverad eller Play Butik körs inte. Försök starta den.</string>
+    <string name="home_xposed_service_old">Modulen uppdaterad, kräver omstart</string>
+    <string name="home_xposed_service_health_stale">Tjänsten ansluten, väntar på ny hälsokontroll</string>
+    <string name="home_xposed_filter_count">PIB har fångat totalt %d händelser</string>
+    <string name="home_backup_config">Säkerhetskopiera konfig</string>
+    <string name="home_restore_config">Återställ konfig</string>
+    <string name="home_import_successful">Import lyckades</string>
+    <string name="home_import_failed">Import misslyckades</string>
+    <string name="home_import_file_damaged">Säkerhetskopieringsfilen var skadad</string>
+    <string name="home_export_failed">Export misslyckades</string>
+    <string name="home_exported">Konfig sparad</string>
+    <string name="home_new_update">Ny uppdatering tillgänglig: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Visa systemappar</string>
+    <string name="list_sorting">Sortering</string>
+    <string name="list_reverse_order">Omvänd ordning</string>
+    <string name="list_sort_by_label">Efter appnamn</string>
+    <string name="list_sort_by_package_name">Efter paketnamn</string>
+    <string name="list_sort_by_install_time">Efter installationstid</string>
+    <string name="list_sort_by_update_time">Efter uppdateringstid</string>
+    <string name="list_empty_no_apps">Inga applikationer hittades. Du kanske inte gav appen behörighet att fråga alla paket.</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Aktivera PIB</string>
+    <string name="app_enable_intervention_desc">Inaktivera för att tillåta Play Integrity-förfrågningar även när avlyssning är aktiverad som standard.</string>
+    <string name="app_rewrite_integrity_response">Aktivera syntetiska fel</string>
+    <string name="app_rewrite_integrity_response_desc">När aktiverat kommer appen inte kommunicera med Play Integrity utan får ett genererat fel.</string>
+    <string name="app_deliver_synthetic_response">Leverera syntetiskt svar</string>
+    <string name="app_deliver_synthetic_response_desc">När inaktiverat får appen inget svar alls. Använd endast för att testa var appen begär Play Integrity (de kan hänga länge).</string>
+    <string name="app_delay_synthetic_response">Fördröj leverans av svar</string>
+    <string name="app_delay_synthetic_response_desc">Lägger till en slumpmässig fördröjning mellan 300 och 2000 ms innan syntetiska callbacks levereras. Kan förhindra tidsbaserad detektion?</string>
+    <string name="app_rewrite_integrity_error_code">Felkod att injicera</string>
+    <string name="app_rewrite_integrity_error_code_desc">Appen kommer att få denna felkod.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Felkodreferens</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Öppna en tabell över möjliga felvärden.</string>
+    <string name="app_rewrite_integrity_error_remediable">Remedierbar flagga</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Anger att appen bör försöka igen (t.ex. felet är tillfälligt).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integritetsfelkodsförteckning</string>
+    <string name="app_rewrite_integrity_error_code_copied">Kopierad felkod: %1$s</string>
+    <string name="app_exclude_system_apps">Inkludera systemappar</string>
+    <string name="app_warning_risky_package_title">Riskfyllt paket</string>
+    <string name="app_warning_risky_package_desc">Detta paket är markerat som riskfyllt och kan orsaka instabilitet. Fortsätt?</string>
+    <string name="app_favorite_add">Markera som favorit</string>
+    <string name="app_favorite_remove">Avmarkera favorit</string>
+    <string name="app_force_stop_launch">Starta om och öppna</string>
+    <string name="app_launch">Öppna</string>
+    <string name="app_launch_failed">Appens uppstart misslyckades, kontrollera loggar för mer information</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Förinställning för inmatningsmetod</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Eget värde</string>
+    <string name="settings_templates_random_ssaid">Slumpa SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Spara loggar</string>
+    <string name="logs_clear">Rensa loggar</string>
+    <string name="logs_upload_telemetry">Ladda upp telemetri nu</string>
+    <string name="logs_show_telemetry_queue">Visa telemetriköstatus</string>
+    <string name="logs_empty">Inga loggar att spara</string>
+    <string name="logs_saved">Loggar sparade</string>
+    <string name="logs_telemetry_disabled">Telemetriuppladdning är inaktiverad</string>
+    <string name="logs_telemetry_upload_enqueued">Telemetriuppladdning köad: väntande=%1$d omförsök=%2$d pågående=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Köstatus: väntande=%1$d omförsök=%2$d pågående=%3$d kvitterade=%4$d misslyckade=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Tidsintervall</string>
+    <string name="statistics_window_all">Hela tiden</string>
+    <string name="statistics_window_24h">Senaste 24 timmarna</string>
+    <string name="statistics_window_7d">Sista 7 dagarna</string>
+    <string name="statistics_updated_at">Uppdaterad: %1$s</string>
+    <string name="statistics_user_id">Användar-ID: %1$s</string>
+    <string name="statistics_summary_title">Sammanfattning</string>
+    <string name="statistics_summary_body">Totalt antal händelser: %1$d\nFörfrågningar: %2$d\nSvar: %3$d\nLyckade svar: %4$d\nMisslyckade svar: %5$d</string>
+    <string name="statistics_queue_title">Telemetrikö</string>
+    <string name="statistics_queue_body">Väntande: %1$d\nOmförsök: %2$d\nPågående: %3$d\nKvitterade: %4$d\nMisslyckade: %5$d</string>
+    <string name="statistics_top_packages_title">Paketaktivitet (alla)</string>
+    <string name="statistics_top_packages_empty">Ingen paketaktivitet i detta tidsintervall.</string>
+    <string name="statistics_package_unknown_label">Okänd app</string>
+    <string name="statistics_package_resolving_label">Löser appnamn...</string>
+    <string name="statistics_recent_requests_title">Senaste 10 förfrågningar</string>
+    <string name="statistics_recent_requests_empty">Inga förfrågningar i detta tidsintervall.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Modul</string>
+    <string name="settings_overwrite">Skriv över</string>
+    <string name="settings_overwritten">Överskrivet</string>
+    <string name="settings_overwrite_summary">Objekt i denna kategori kommer tvingas vara aktiverade om kryssrutorna är markerade</string>
+    <string name="settings_default_value">Standardvärde: %s</string>
+    <string name="settings_data_isolation">Dataisolering</string>
+    <string name="settings_data_isolation_summary">Appdata: %1$s\nVold appdata: %2$s\nTvinga montering: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Detta alternativ är endast tillgängligt på Android 11 och senare</string>
+    <string name="settings_app_data_isolation">Appdataisolering</string>
+    <string name="settings_vold_app_data_isolation">Vold appdataisolering</string>
+    <string name="settings_warning">Varning</string>
+    <string name="settings_vold_warning">Detta aktiverar en AOSP-isoleringsfunktion för appens externa privata lagring. Det kan förbättra kompatibilitet men minska stabiliteten och kan sluta fungera i framtida Android-versioner.</string>
+    <string name="settings_need_reboot">Ändringen kräver omstart</string>
+    <string name="settings_force_mount_data">Tvinga isolering för alla appar</string>
+    <string name="settings_force_mount_data_summary">Dataisolering är som standard inaktiverad för appar med mål-API under 30</string>
+    <string name="settings_detail_log">Detaljlogg för felsökning</string>
+    <string name="settings_max_log_size">Logger bufferstorlekar</string>
+    <string name="settings_hide_icon">Dölj modulikonen i startprogrammet</string>
+    <string name="settings_hide_icon_summary">Du kan fortfarande öppna appen i Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">Hoppa över varning för riskfyllt paket</string>
+    <string name="settings_bypass_risky_package_warning_summary">Observera att utvecklaren inte ansvarar för problem relaterade till riskfyllda paket före eller efter att du aktiverade denna funktion</string>
+    <string name="settings_disable_activity_launch_protection">Inaktivera skydd för Activity-start</string>
+    <string name="settings_disable_activity_launch_protection_summary">Denna växel tar bort alla startActivity-skydd. Om du är osäker, aktivera inte den.</string>
+    <string name="settings_system_wallpaper">Använd systemets bakgrundsbild</string>
+    <string name="settings_clear_uninstalled_app_configs">Rensa konfigurationer för avinstallerade appar</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Detta alternativ låter dig skapa en konfig utan kvarlämningar men du måste konfigurera om appar när du installerar dem igen.</string>
+    <string name="settings_no_undone_warning">Denna åtgärd kan inte ångras.</string>
+    <string name="settings_package_query_workaround">Alternativ paketfråga</string>
+    <string name="settings_package_query_workaround_summary">Aktivera inte detta om du ser paketlistan i appen korrekt.</string>
+    <string name="settings_intent_api_enabled">Aktivera extern Intents API</string>
+    <string name="settings_intent_api_enabled_summary">Tillåt andra appar att ändra PIB-inställningar.</string>
+    <string name="settings_intent_api_enable_title">Aktivera extern Intents API?</string>
+    <string name="settings_intent_api_enable_message">När aktiverat kan vilken app som helst skicka API-intents för att ändra per-app PIB-inställningar. Aktivera endast om du litar på apparna du installerar.</string>
+    <string name="settings_intent_api_enable_confirm">Aktivera API</string>
+    <string name="settings_launcher_icon">Startprogramsikon</string>
+    <string name="settings_error_only_log">Endast fel i logg</string>
+
+    <string name="settings_telemetry">Telemetri</string>
+    <string name="settings_telemetry_enabled">Aktivera telemetriuppladdning</string>
+    <string name="settings_telemetry_enabled_summary">Laddar upp apparnas integritetsförfrågningar och -svar till utvecklarens server, för statistik och forskning.</string>
+    <string name="telemetry_consent_title">Välkommen till PIB! Vill du aktivera telemetri?</string>
+    <string name="telemetry_consent_message">Tack för att du installerade PIB!\n\nTelemetri hjälper utvecklaren att studera hur appar interagerar med Google Play Integrity.\nIntegritetsvänligt: Inga identifierbara data laddas upp. Använder inget batteri.\nDu kan läsa den utökade policyn och källkoden på GitHub.\nDu kan inaktivera telemetri när som helst i Inställningar.</string>
+    <string name="telemetry_consent_enable">Självklart!</string>
+    <string name="telemetry_consent_not_now">Inte nu :(</string>
+
+    <string name="settings_language">Språk</string>
+
+    <string name="settings_theme">Tema</string>
+    <string name="settings_system_theme_color">Systemtema-färg</string>
+    <string name="settings_theme_color">Temafärg</string>
+    <string name="settings_pure_black_dark_theme">Rent svart mörkt tema</string>
+    <string name="settings_pure_black_dark_theme_summary">Använd det rent svarta temat om mörkt tema är aktiverat</string>
+
+    <string name="settings_update">Uppdatera</string>
+    <string name="settings_disable_update">Inaktivera uppdateringsavisering</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Masskonfiguration av loggning</string>
+
+    <!-- About -->
+    <string name="about_description">PIB är en LSPosed-modul som fokuserar på att blockera appar från att använda Google Play Integrity API.</string>
+    <string name="about_how_to_use_title">Hur man använder denna modul</string>
+    <string name="about_how_to_use_description_1">Aktivera modulen i din Xposed manager och ge den Play Butiks-behörighet (com.android.vending).\nStoppa sedan Google Play Butik.</string>
+    <string name="about_how_to_use_description_2">Som standard blockeras alla appar från att få åtkomst till Google Play Integrity. Välj för vilka appar du vill tillåta åtkomst, eller om du vill använda en specifik felkod.</string>
+    <string name="about_developer">Utvecklare</string>
+    <string name="about_support">Support och feedback</string>
+    <string name="about_open_source">Öppna källkodslicenser</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Röd</string>
+    <string name="color_pink">Rosa</string>
+    <string name="color_purple">Lila</string>
+    <string name="color_deep_purple">Mörklila</string>
+    <string name="color_indigo">Indigo</string>
+    <string name="color_blue">Blå</string>
+    <string name="color_light_blue">Ljusblå</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_teal">Teal</string>
+    <string name="color_green">Grön</string>
+    <string name="color_light_green">Ljusgrön</string>
+    <string name="color_lime">Lime</string>
+    <string name="color_yellow">Gul</string>
+    <string name="color_amber">Bärnsten</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_deep_orange">Mörkorange</string>
+    <string name="color_brown">Brun</string>
+    <string name="color_blue_grey">Blågrå</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Mörkt tema</string>
+    <string name="dark_theme_off">Alltid av</string>
+    <string name="dark_theme_on">Alltid på</string>
+</resources>

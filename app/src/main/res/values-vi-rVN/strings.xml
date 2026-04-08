@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Trang chủ</string>
+    <string name="title_logs">Nhật ký</string>
+    <string name="title_statistics">Thống kê</string>
+    <string name="title_settings">Cài đặt</string>
+    <string name="title_template_manage">Quản lý cấu hình ghi</string>
+    <string name="title_app_manage">Tùy chọn theo ứng dụng</string>
+    <string name="title_default_app">Tùy chọn mặc định</string>
+    <string name="title_app_select">Chọn ứng dụng</string>
+    <string name="title_app_settings">Cài đặt ứng dụng</string>
+    <string name="title_about">Giới thiệu</string>
+
+    <string name="do_not_dual">Không cài PIB cho người dùng phụ</string>
+    <string name="show_crash_log">Hiển thị nhật ký lỗi</string>
+    <string name="config_damaged">Tệp cấu hình bị hỏng. Vui lòng xóa dữ liệu ứng dụng</string>
+    <string name="delete">Xóa</string>
+    <string name="enabled">Đã bật</string>
+    <string name="disabled">Đã tắt</string>
+    <string name="application">Ứng dụng</string>
+    <string name="preferences">Tùy chọn</string>
+    <string name="refresh">Làm mới</string>
+    <string name="filter">Bộ lọc</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="edit">Chỉnh sửa</string>
+    <string name="follow_system">Theo hệ thống</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Mô-đun đã kích hoạt [%s]</string>
+    <string name="home_xposed_not_activated">Không thể giao tiếp với Play Store</string>
+    <string name="home_xposed_service_on">Dịch vụ hệ thống đang chạy [%d]</string>
+    <string name="home_xposed_service_off">Mô-đun bị tắt hoặc Play Store không chạy. Thử khởi động nó.</string>
+    <string name="home_xposed_service_old">Mô-đun đã cập nhật, cần khởi động lại</string>
+    <string name="home_xposed_service_health_stale">Dịch vụ đã kết nối, chờ kiểm tra sức khỏe mới</string>
+    <string name="home_xposed_filter_count">PIB đã ghi lại tổng cộng %d sự kiện</string>
+    <string name="home_backup_config">Sao lưu cấu hình</string>
+    <string name="home_restore_config">Khôi phục cấu hình</string>
+    <string name="home_import_successful">Nhập thành công</string>
+    <string name="home_import_failed">Nhập thất bại</string>
+    <string name="home_import_file_damaged">Tệp sao lưu bị hỏng</string>
+    <string name="home_export_failed">Xuất thất bại</string>
+    <string name="home_exported">Đã sao lưu cấu hình</string>
+    <string name="home_new_update">Bản cập nhật mới có sẵn: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Hiển thị ứng dụng hệ thống</string>
+    <string name="list_sorting">Sắp xếp</string>
+    <string name="list_reverse_order">Đảo thứ tự</string>
+    <string name="list_sort_by_label">Theo tên ứng dụng</string>
+    <string name="list_sort_by_package_name">Theo tên gói</string>
+    <string name="list_sort_by_install_time">Theo thời gian cài đặt</string>
+    <string name="list_sort_by_update_time">Theo thời gian cập nhật</string>
+    <string name="list_empty_no_apps">Không tìm thấy ứng dụng nào, có thể bạn chưa cho phép ứng dụng này truy vấn tất cả gói</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Bật PIB</string>
+    <string name="app_enable_intervention_desc">Tắt để cho phép các yêu cầu Play Integrity ngay cả khi tính năng chặn được bật mặc định.</string>
+    <string name="app_rewrite_integrity_response">Bật lỗi tổng hợp</string>
+    <string name="app_rewrite_integrity_response_desc">Khi bật, ứng dụng sẽ không liên lạc với Play Integrity và sẽ nhận một lỗi được tạo.</string>
+    <string name="app_deliver_synthetic_response">Gửi phản hồi tổng hợp</string>
+    <string name="app_deliver_synthetic_response_desc">Khi tắt, ứng dụng sẽ không nhận bất kỳ phản hồi nào. Chỉ dùng để kiểm tra nơi ứng dụng yêu cầu Play Integrity (vì ứng dụng có thể bị treo lâu).</string>
+    <string name="app_delay_synthetic_response">Hoãn gửi phản hồi</string>
+    <string name="app_delay_synthetic_response_desc">Thêm độ trễ ngẫu nhiên từ 300 đến 2000 ms trước khi gửi callback tổng hợp. Có thể ngăn phát hiện dựa trên thời gian?</string>
+    <string name="app_rewrite_integrity_error_code">Mã lỗi để chèn</string>
+    <string name="app_rewrite_integrity_error_code_desc">Ứng dụng sẽ nhận mã lỗi này.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Tham chiếu mã lỗi</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Mở bảng các giá trị lỗi có thể.</string>
+    <string name="app_rewrite_integrity_error_remediable">Cờ có thể khắc phục</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Cho biết ứng dụng nên thử lại yêu cầu (ví dụ: lỗi tạm thời).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Tham chiếu mã lỗi Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Đã sao chép mã lỗi: %1$s</string>
+    <string name="app_exclude_system_apps">Bao gồm ứng dụng hệ thống</string>
+    <string name="app_warning_risky_package_title">Gói rủi ro</string>
+    <string name="app_warning_risky_package_desc">Gói này được đánh dấu rủi ro và có thể gây mất ổn định. Tiếp tục?</string>
+    <string name="app_favorite_add">Đánh dấu yêu thích</string>
+    <string name="app_favorite_remove">Bỏ đánh dấu yêu thích</string>
+    <string name="app_force_stop_launch">Khởi động lại và mở</string>
+    <string name="app_launch">Mở</string>
+    <string name="app_launch_failed">Mở ứng dụng thất bại, kiểm tra nhật ký để biết chi tiết</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Mẫu phương thức nhập</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Giá trị tùy chỉnh</string>
+    <string name="settings_templates_random_ssaid">Ngẫu nhiên hoá SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Lưu nhật ký</string>
+    <string name="logs_clear">Xóa nhật ký</string>
+    <string name="logs_upload_telemetry">Tải lên telemetry ngay</string>
+    <string name="logs_show_telemetry_queue">Hiển thị trạng thái hàng đợi telemetry</string>
+    <string name="logs_empty">Không có nhật ký để lưu</string>
+    <string name="logs_saved">Đã lưu nhật ký</string>
+    <string name="logs_telemetry_disabled">Tải telemetry bị vô hiệu hóa</string>
+    <string name="logs_telemetry_upload_enqueued">Tải telemetry vào hàng đợi: đang chờ=%1$d thử lại=%2$d đang gửi=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Trạng thái hàng đợi: đang chờ=%1$d thử lại=%2$d đang gửi=%3$d đã xác nhận=%4$d thất bại=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Khoảng thời gian</string>
+    <string name="statistics_window_all">Toàn bộ thời gian</string>
+    <string name="statistics_window_24h">24 giờ qua</string>
+    <string name="statistics_window_7d">7 ngày qua</string>
+    <string name="statistics_updated_at">Cập nhật: %1$s</string>
+    <string name="statistics_user_id">ID người dùng: %1$s</string>
+    <string name="statistics_summary_title">Tóm tắt ghi</string>
+    <string name="statistics_summary_body">Tổng số sự kiện: %1$d\nYêu cầu: %2$d\nPhản hồi: %3$d\nPhản hồi thành công: %4$d\nPhản hồi thất bại: %5$d</string>
+    <string name="statistics_queue_title">Hàng đợi telemetry</string>
+    <string name="statistics_queue_body">Đang chờ: %1$d\nThử lại: %2$d\nĐang gửi: %3$d\nĐã xác nhận: %4$d\nThất bại: %5$d</string>
+    <string name="statistics_top_packages_title">Hoạt động gói (tất cả)</string>
+    <string name="statistics_top_packages_empty">Không có hoạt động gói trong khoảng thời gian này.</string>
+    <string name="statistics_package_unknown_label">Ứng dụng không xác định</string>
+    <string name="statistics_package_resolving_label">Đang xác định tên ứng dụng...</string>
+    <string name="statistics_recent_requests_title">10 yêu cầu gần nhất</string>
+    <string name="statistics_recent_requests_empty">Không có yêu cầu trong khoảng thời gian này.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Mô-đun</string>
+    <string name="settings_overwrite">Ghi đè</string>
+    <string name="settings_overwritten">Đã bị ghi đè</string>
+    <string name="settings_overwrite_summary">Các mục trong danh mục này sẽ được ép bật nếu các công tắc được chọn</string>
+    <string name="settings_default_value">Giá trị mặc định: %s</string>
+    <string name="settings_data_isolation">Cô lập dữ liệu</string>
+    <string name="settings_data_isolation_summary">Dữ liệu ứng dụng: %1$s\nDữ liệu Vold app: %2$s\nÉp gắn: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Tùy chọn này chỉ có sẵn trên Android 11 trở lên</string>
+    <string name="settings_app_data_isolation">Cô lập dữ liệu ứng dụng</string>
+    <string name="settings_vold_app_data_isolation">Cô lập dữ liệu Vold app</string>
+    <string name="settings_warning">Cảnh báo</string>
+    <string name="settings_vold_warning">Tùy chọn này kích hoạt một tính năng cô lập của AOSP cho bộ nhớ riêng bên ngoài của ứng dụng. Nó có thể cải thiện tương thích nhưng làm giảm độ ổn định và có thể ngừng hoạt động trong các phiên bản Android tương lai.</string>
+    <string name="settings_need_reboot">Thay đổi yêu cầu khởi động lại</string>
+    <string name="settings_force_mount_data">Áp đặt cô lập dữ liệu cho tất cả ứng dụng</string>
+    <string name="settings_force_mount_data_summary">Theo mặc định, cô lập dữ liệu bị tắt cho ứng dụng có target API thấp hơn 30</string>
+    <string name="settings_detail_log">Nhật ký chi tiết để gỡ lỗi</string>
+    <string name="settings_max_log_size">Kích thước bộ nhớ đệm trình ghi</string>
+    <string name="settings_hide_icon">Ẩn biểu tượng mô-đun trong launcher</string>
+    <string name="settings_hide_icon_summary">Bạn vẫn có thể mở ứng dụng trong Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">Bỏ qua cảnh báo gói rủi ro</string>
+    <string name="settings_bypass_risky_package_warning_summary">Lưu ý rằng nhà phát triển không chịu trách nhiệm cho các vấn đề liên quan đến gói rủi ro trước hoặc sau khi bạn bật tính năng này</string>
+    <string name="settings_disable_activity_launch_protection">Vô hiệu hóa bảo vệ khởi chạy Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Công tắc này sẽ bỏ tất cả các biện pháp bảo vệ startActivity. Nếu bạn không chắc, đừng bật nó.</string>
+    <string name="settings_system_wallpaper">Sử dụng hình nền hệ thống</string>
+    <string name="settings_clear_uninstalled_app_configs">Xóa cấu hình ứng dụng đã gỡ cài đặt</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Tùy chọn này cho phép bạn tạo cấu hình không còn dư lượng nhưng bạn sẽ phải cấu hình lại ứng dụng khi cài lại.</string>
+    <string name="settings_no_undone_warning">Hành động này không thể hoàn tác.</string>
+    <string name="settings_package_query_workaround">Cách truy vấn gói thay thế</string>
+    <string name="settings_package_query_workaround_summary">Đừng bật tùy chọn này nếu bạn đã thấy danh sách gói trong ứng dụng này đúng.</string>
+    <string name="settings_intent_api_enabled">Bật API Intents bên ngoài</string>
+    <string name="settings_intent_api_enabled_summary">Cho phép ứng dụng khác thay đổi cài đặt PIB.</string>
+    <string name="settings_intent_api_enable_title">Bật API Intents bên ngoài?</string>
+    <string name="settings_intent_api_enable_message">Khi bật, bất kỳ ứng dụng nào trên thiết bị đều có thể gửi API Intents để thay đổi cài đặt per-app của PIB. Chỉ bật nếu bạn tin tưởng các ứng dụng bạn cài đặt.</string>
+    <string name="settings_intent_api_enable_confirm">Bật API</string>
+    <string name="settings_launcher_icon">Biểu tượng launcher</string>
+    <string name="settings_error_only_log">Nhật ký chỉ lỗi</string>
+
+    <string name="settings_telemetry">Telemetry</string>
+    <string name="settings_telemetry_enabled">Bật tải telemetry</string>
+    <string name="settings_telemetry_enabled_summary">Tải lên các sự kiện yêu cầu và phản hồi integrity của ứng dụng lên máy chủ của nhà phát triển, để thống kê và nghiên cứu.</string>
+    <string name="telemetry_consent_title">Chào mừng đến với PIB! Bạn có muốn bật telemetry không?</string>
+    <string name="telemetry_consent_message">Cảm ơn bạn đã cài đặt PIB!\n\nTelemetry giúp nhà phát triển nghiên cứu cách các ứng dụng tương tác với Google Play Integrity.\nBảo mật: Không có dữ liệu định danh nào được tải lên. Không tiêu tốn pin.\nBạn có thể đọc chính sách mở rộng và mã nguồn trên GitHub.\nBạn có thể tắt telemetry bất kỳ lúc nào trong Cài đặt.</string>
+    <string name="telemetry_consent_enable">Đồng ý!</string>
+    <string name="telemetry_consent_not_now">Không, cảm ơn :(</string>
+
+    <string name="settings_language">Ngôn ngữ</string>
+
+    <string name="settings_theme">Giao diện</string>
+    <string name="settings_system_theme_color">Màu chủ đề hệ thống</string>
+    <string name="settings_theme_color">Màu chủ đề</string>
+    <string name="settings_pure_black_dark_theme">Chủ đề tối hoàn toàn đen</string>
+    <string name="settings_pure_black_dark_theme_summary">Sử dụng chủ đề đen thuần khi chế độ tối được bật</string>
+
+    <string name="settings_update">Cập nhật</string>
+    <string name="settings_disable_update">Tắt thông báo cập nhật</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Cấu hình ghi hàng loạt</string>
+
+    <!-- About -->
+    <string name="about_description">PIB là một module LSPosed tập trung vào việc chặn ứng dụng sử dụng Google Play Integrity API.</string>
+    <string name="about_how_to_use_title">Cách sử dụng module này</string>
+    <string name="about_how_to_use_description_1">Bật module trong Xposed manager của bạn, và cấp phạm vi Google Play Store (com.android.vending).\nSau đó, bắt buộc dừng Google Play Store.</string>
+    <string name="about_how_to_use_description_2">Mặc định, tất cả ứng dụng bị chặn truy cập Google Play Integrity. Chọn ứng dụng mà bạn muốn cho phép truy cập, hoặc nếu bạn muốn sử dụng một mã lỗi cụ thể.</string>
+    <string name="about_developer">Nhà phát triển</string>
+    <string name="about_support">Hỗ trợ và phản hồi</string>
+    <string name="about_open_source">Giấy phép nguồn mở</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Đỏ</string>
+    <string name="color_pink">Hồng</string>
+    <string name="color_purple">Tím</string>
+    <string name="color_deep_purple">Tím đậm</string>
+    <string name="color_indigo">Chàm</string>
+    <string name="color_blue">Xanh dương</string>
+    <string name="color_light_blue">Xanh dương nhạt</string>
+    <string name="color_cyan">Xanh lơ</string>
+    <string name="color_teal">Xanh ngọc</string>
+    <string name="color_green">Xanh lá</string>
+    <string name="color_light_green">Xanh lá nhạt</string>
+    <string name="color_lime">Xanh chanh</string>
+    <string name="color_yellow">Vàng</string>
+    <string name="color_amber">Hổ phách</string>
+    <string name="color_orange">Cam</string>
+    <string name="color_deep_orange">Cam đậm</string>
+    <string name="color_brown">Nâu</string>
+    <string name="color_blue_grey">Xanh xám</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Chế độ tối</string>
+    <string name="dark_theme_off">Luôn tắt</string>
+    <string name="dark_theme_on">Luôn bật</string>
+</resources>

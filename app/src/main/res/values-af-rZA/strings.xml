@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Tuis</string>
+    <string name="title_logs">Logboeke</string>
+    <string name="title_statistics">Statistieke</string>
+    <string name="title_settings">Instellings</string>
+    <string name="title_template_manage">Bestuur aantekenprofiele</string>
+    <string name="title_app_manage">Per-app opsies</string>
+    <string name="title_default_app">Standaard opsies</string>
+    <string name="title_app_select">Kies toepassings</string>
+    <string name="title_app_settings">Toepassinginstellings</string>
+    <string name="title_about">Oor</string>
+
+    <string name="do_not_dual">Installeer PIB nie op sekondêre gebruiker nie</string>
+    <string name="show_crash_log">Wys foutlog</string>
+    <string name="config_damaged">Konfigurasielêer beskadig. Maak asseblief die app-data skoon</string>
+    <string name="delete">Vee uit</string>
+    <string name="enabled">Aangeskakel</string>
+    <string name="disabled"> Ongeskakel</string>
+    <string name="application">Toepassing</string>
+    <string name="preferences">Voorkeure</string>
+    <string name="refresh">Vernu</string>
+    <string name="filter">Filtreer</string>
+    <string name="search">Soek</string>
+    <string name="edit">Wysig</string>
+    <string name="follow_system">Volg stelsel</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Module geaktiveer [%s]</string>
+    <string name="home_xposed_not_activated">Kan nie met Play Store kommunikeer nie</string>
+    <string name="home_xposed_service_on">Stelsediens aan die gang [%d]</string>
+    <string name="home_xposed_service_off">Die module is gedeaktiveer of Play Store loop nie. Probeer om dit te begin.</string>
+    <string name="home_xposed_service_old">Module bygewerk, herbegin vereis</string>
+    <string name="home_xposed_service_health_stale">Diens verbonden, wag vir vars gesondheidskontrole</string>
+    <string name="home_xposed_filter_count">PIB het totaal %d gebeure vasgelê</string>
+    <string name="home_backup_config">Rugsteun konfig</string>
+    <string name="home_restore_config">Herstel konfig</string>
+    <string name="home_import_successful">Invoer suksesvol</string>
+    <string name="home_import_failed">Invoer het misluk</string>
+    <string name="home_import_file_damaged">Rugsteunlêer was beskadig</string>
+    <string name="home_export_failed">Uitvoer het misluk</string>
+    <string name="home_exported">Konfig gerugsteun</string>
+    <string name="home_new_update">Nuwe opdatering beskikbaar: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Wys stelseltoepassings</string>
+    <string name="list_sorting">Sorteer</string>
+    <string name="list_reverse_order">Omgekeerde volgorde</string>
+    <string name="list_sort_by_label">Volgens appnaam</string>
+    <string name="list_sort_by_package_name">Volgens pakketnaam</string>
+    <string name="list_sort_by_install_time">Volgens installasietyd</string>
+    <string name="list_sort_by_update_time">Volgens opdateringstyd</string>
+    <string name="list_empty_no_apps">Geen toepassings gevind nie, miskien het jy nie hierdie app toestemming gegee om alle pakkette te navraag nie</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Skakel PIB in</string>
+    <string name="app_enable_intervention_desc">Deaktiveer om Play Integrity-versoeke toe te laat selfs wanneer onderskepping standaard geaktiveer is.</string>
+    <string name="app_rewrite_integrity_response">Skakel sintetiese foute in</string>
+    <string name="app_rewrite_integrity_response_desc">Wanneer geaktiveer, sal die app nie met Play Integrity kommunikeer nie en kry in plaas daarvan \'n gegenereerde fout.</string>
+    <string name="app_deliver_synthetic_response">Lewer sintetiese reaksie</string>
+    <string name="app_deliver_synthetic_response_desc">Wanneer gedeaktiveer, sal die app glad nie \'n reaksie ontvang nie. Gebruik dit net om te toets waar die app presies Play Integrity vra (hulle kan lank vasloop).</string>
+    <string name="app_delay_synthetic_response">Verskuiwing van reaksie aflewering</string>
+    <string name="app_delay_synthetic_response_desc">Voeg \'n ewekansige vertraging tussen 300 en 2000 ms by voordat sintetiese callbacks gelewer word. Kan tyding-gebaseerde opsporing voorkom?</string>
+    <string name="app_rewrite_integrity_error_code">Foutkode om in te spuit</string>
+    <string name="app_rewrite_integrity_error_code_desc">Die app sal hierdie foutkode ontvang.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Foutkode verwysing</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Maak \'n tabel van moontlike foutwaardes oop.</string>
+    <string name="app_rewrite_integrity_error_remediable">Herstelbare vlag</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Sê vir die app dat die versoek herhaal moet word (bv. die fout is tydelik).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integriteitsfoutkode verwysing</string>
+    <string name="app_rewrite_integrity_error_code_copied">Gekopieer foutkode: %1$s</string>
+    <string name="app_exclude_system_apps">Sluit stelselapps in</string>
+    <string name="app_warning_risky_package_title">Riskante pakket</string>
+    <string name="app_warning_risky_package_desc">Hierdie pakket is gemerk as riskant en kan onstabiliteit veroorsaak. Voortgaan?</string>
+    <string name="app_favorite_add">Merk as gunsteling</string>
+    <string name="app_favorite_remove">Verwyder gunstelingmerk</string>
+    <string name="app_force_stop_launch">Herbegin en begin</string>
+    <string name="app_launch">Begin</string>
+    <string name="app_launch_failed">App-opstart het misluk, kyk logboeke vir meer besonderhede</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Insetmetode voorset</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Pasgemaakte waarde</string>
+    <string name="settings_templates_random_ssaid">Willekeurig SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Stoor logboeke</string>
+    <string name="logs_clear">Maak logboeke skoon</string>
+    <string name="logs_upload_telemetry">Laai telemetrie nou op</string>
+    <string name="logs_show_telemetry_queue">Wys telemetrie-waglys status</string>
+    <string name="logs_empty">Geen logboeke om te stoor nie</string>
+    <string name="logs_saved">Logboeke gestoor</string>
+    <string name="logs_telemetry_disabled">Telemetrie-oplaai is gedeaktiveer</string>
+    <string name="logs_telemetry_upload_enqueued">Telemetrie-oplaai in ry geplaas: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Ry status: pending=%1$d retry=%2$d in-flight=%3$d acked=%4$d failed=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Tydvenster</string>
+    <string name="statistics_window_all">Altyd</string>
+    <string name="statistics_window_24h">Laaste 24 uur</string>
+    <string name="statistics_window_7d">Laaste 7 dae</string>
+    <string name="statistics_updated_at">Bygewerk: %1$s</string>
+    <string name="statistics_user_id">Gebruiker ID: %1$s</string>
+    <string name="statistics_summary_title">Vasleggingsopsomming</string>
+    <string name="statistics_summary_body">Totale gebeure: %1$d
+Versoeke: %2$d
+Reaksies: %3$d
+Suksesvolle reaksies: %4$d
+Mislukte reaksies: %5$d</string>
+    <string name="statistics_queue_title">Telemetrie-ry</string>
+    <string name="statistics_queue_body">Pending: %1$d
+Herhaal: %2$d
+In-vlug: %3$d
+Bevestig: %4$d
+Misluk: %5$d</string>
+    <string name="statistics_top_packages_title">Pakketaktiwiteit (almal)</string>
+    <string name="statistics_top_packages_empty">Geen pakketaktiwiteit in hierdie tydvenster nie.</string>
+    <string name="statistics_package_unknown_label">Onbekende app</string>
+    <string name="statistics_package_resolving_label">Besig om app-naam op te los...</string>
+    <string name="statistics_recent_requests_title">Laaste 10 versoeke</string>
+    <string name="statistics_recent_requests_empty">Geen versoeke in hierdie tydvenster nie.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Module</string>
+    <string name="settings_overwrite">Oorskryf</string>
+    <string name="settings_overwritten">Oorskryf</string>
+    <string name="settings_overwrite_summary">Items in hierdie kategorie sal gedwing word as aangeskakel indien die skakelaars gekies is</string>
+    <string name="settings_default_value">Standaard waarde: %s</string>
+    <string name="settings_data_isolation">Data isolasie</string>
+    <string name="settings_data_isolation_summary">App-data: %1$s
+Vold app-data: %2$s
+Force mount: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Hierdie opsie is net beskikbaar op Android 11 en hoër</string>
+    <string name="settings_app_data_isolation">App data isolasie</string>
+    <string name="settings_vold_app_data_isolation">Vold app data isolasie</string>
+    <string name="settings_warning">Waarskuwing</string>
+    <string name="settings_vold_warning">Dit skakel \'n AOSP isolasie-funksie vir app eksterne privaat stoorruimte in. Dit kan versoenbaarheid verbeter maar kan stabiliteit verminder en in toekomstige Android-weergawes ophou werk.</string>
+    <string name="settings_need_reboot">Verandering vereis herbegin</string>
+    <string name="settings_force_mount_data">Forceer data isolasie vir alle apps</string>
+    <string name="settings_force_mount_data_summary">Data isolasie is standaard gedeaktiveer vir apps met teiken API laer as 30</string>
+    <string name="settings_detail_log">Detail log vir ontfouting</string>
+    <string name="settings_max_log_size">Logger buffer groottes</string>
+    <string name="settings_hide_icon">Verberg module-ikoon in lanceerder</string>
+    <string name="settings_hide_icon_summary">Jy kan steeds die app in Xposed bestuurder oopmaak</string>
+    <string name="settings_bypass_risky_package_warning">Omseil riskante pakket waarskuwing</string>
+    <string name="settings_bypass_risky_package_warning_summary">Let daarop dat die ontwikkelaars nie verantwoordelik is vir riskante pakket probleme voor of na jy hierdie funksie geaktiveer het nie</string>
+    <string name="settings_disable_activity_launch_protection">Deaktiveer Activity launch beskerming</string>
+    <string name="settings_disable_activity_launch_protection_summary">Hierdie skakel sal alle startActivity beskermings verwyder. As jy onseker is, skakel dit nie aan nie.</string>
+    <string name="settings_system_wallpaper">Gebruik stelsel agtergrond</string>
+    <string name="settings_clear_uninstalled_app_configs">Maak verwyderde app-konfigs skoon</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Hierdie opsie laat jou toe om \'n konfig te skep sonder oorblyfsels maar jy sal die apps weer moet herkonfigureer wanneer jy dit weer installeer.</string>
+    <string name="settings_no_undone_warning">Hierdie aksie kan nie ongedaan gemaak word nie.</string>
+    <string name="settings_package_query_workaround">Alternatiewe pakket navraag</string>
+    <string name="settings_package_query_workaround_summary">Moet hierdie opsie nie aanskakel as jy die pakketlys korrek in hierdie app sien nie.</string>
+    <string name="settings_intent_api_enabled">Skakel eksterne Intents API in</string>
+    <string name="settings_intent_api_enabled_summary">Laat ander apps toe om PIB instellings te verander.</string>
+    <string name="settings_intent_api_enable_title">Skakel eksterne Intents API aan?</string>
+    <string name="settings_intent_api_enable_message">Wanneer aangeskakel, kan enige app op die toestel API Intents stuur om per-app PIB instellings te verander. Skakel dit net aan as jy die apps wat jy installeer vertrou.</string>
+    <string name="settings_intent_api_enable_confirm">Skakel API aan</string>
+    <string name="settings_launcher_icon">Lanceerder-ikoon</string>
+    <string name="settings_error_only_log">Net fout-log</string>
+
+    <string name="settings_telemetry">Telemetrie</string>
+    <string name="settings_telemetry_enabled">Skakel telemetrie-oplaai in</string>
+    <string name="settings_telemetry_enabled_summary">Laai app se integriteitsversoek en reaksie gebeure na die ontwikkelaar se bediener vir statistieke en navorsing op.</string>
+    <string name="telemetry_consent_title">Welkom by PIB! Wil jy telemetrie aanskakel?</string>
+    <string name="telemetry_consent_message">Dankie dat jy PIB geïnstalleer het!
+
+Telemetrie help die ontwikkelaar om te bestudeer hoe apps met Google Play Integrity interageer.
+Privaatheidsvriendelik: Geen identifiserende data word opgelaai nie. Gebruik geen ekstra battery.
+Jy kan die uitgebreide beleid en die bronkode op GitHub lees.
+Jy kan telemetrie enige tyd in Instellings deaktiveer.</string>
+    <string name="telemetry_consent_enable">Vir seker!</string>
+    <string name="telemetry_consent_not_now">Nie nou nie :(</string>
+
+    <string name="settings_language">Taal</string>
+
+    <string name="settings_theme">Tema</string>
+    <string name="settings_system_theme_color">Stelsel tema kleur</string>
+    <string name="settings_theme_color">Tema kleur</string>
+    <string name="settings_pure_black_dark_theme">Persoonlik swart donker tema</string>
+    <string name="settings_pure_black_dark_theme_summary">Gebruik die suiwer swart tema as donker tema aangeskakel is</string>
+
+    <string name="settings_update">Opdatering</string>
+    <string name="settings_disable_update">Deaktiveer opdateringswaarskuwing</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Gekombineerde logger konfigurering</string>
+
+    <!-- About -->
+    <string name="about_description">PIB is \'n LSPosed module gefokus op die blokkeer van apps se gebruik van Google Play Integrity API.</string>
+    <string name="about_how_to_use_title">Hoe om hierdie module te gebruik</string>
+    <string name="about_how_to_use_description_1">Skakel die module in jou Xposed bestuurder aan, en gee dit die Google Play Store bereik (com.android.vending).
+Dan, force-stop Google Play Store.</string>
+    <string name="about_how_to_use_description_2">Standaard word alle apps geblokkeer van toegang tot Google Play Integrity. Kies vir watter app jy toegang wil toelaat, of as jy \'n spesifieke foutkode wil gebruik.</string>
+    <string name="about_developer">Ontwikkelaar</string>
+    <string name="about_support">Ondersteuning en terugvoer</string>
+    <string name="about_open_source">Oopbron lisensies</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Rooi</string>
+    <string name="color_pink">Pienk</string>
+    <string name="color_purple">Pers</string>
+    <string name="color_deep_purple">Diep pers</string>
+    <string name="color_indigo">Indigo</string>
+    <string name="color_blue">Blou</string>
+    <string name="color_light_blue">Ligblou</string>
+    <string name="color_cyan">Sian</string>
+    <string name="color_teal">Teal</string>
+    <string name="color_green">Groen</string>
+    <string name="color_light_green">Liggroen</string>
+    <string name="color_lime">Limoen</string>
+    <string name="color_yellow">Geel</string>
+    <string name="color_amber">Amber</string>
+    <string name="color_orange">Oranje</string>
+    <string name="color_deep_orange">Diep oranje</string>
+    <string name="color_brown">Bruin</string>
+    <string name="color_blue_grey">Blou-grys</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Donker tema</string>
+    <string name="dark_theme_off">Altyd af</string>
+    <string name="dark_theme_on">Altyd aan</string>
+</resources>

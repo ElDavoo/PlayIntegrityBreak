@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">หน้าแรก</string>
+    <string name="title_logs">บันทึก</string>
+    <string name="title_statistics">สถิติ</string>
+    <string name="title_settings">การตั้งค่า</string>
+    <string name="title_template_manage">จัดการโปรไฟล์การบันทึก</string>
+    <string name="title_app_manage">ตัวเลือกต่อแอป</string>
+    <string name="title_default_app">ตัวเลือกเริ่มต้น</string>
+    <string name="title_app_select">เลือกแอป</string>
+    <string name="title_app_settings">การตั้งค่าแอป</string>
+    <string name="title_about">เกี่ยวกับ</string>
+
+    <string name="do_not_dual">อย่าติดตั้ง PIB สำหรับผู้ใช้รอง</string>
+    <string name="show_crash_log">แสดงบันทึกการขัดข้อง</string>
+    <string name="config_damaged">ไฟล์การตั้งค่าเสียหาย กรุณาล้างข้อมูลแอป</string>
+    <string name="delete">ลบ</string>
+    <string name="enabled">เปิดใช้งาน</string>
+    <string name="disabled">ปิดใช้งาน</string>
+    <string name="application">แอปพลิเคชัน</string>
+    <string name="preferences">การตั้งค่า</string>
+    <string name="refresh">รีเฟรช</string>
+    <string name="filter">ตัวกรอง</string>
+    <string name="search">ค้นหา</string>
+    <string name="edit">แก้ไข</string>
+    <string name="follow_system">ตามระบบ</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">โมดูลเปิดใช้งาน [%s]</string>
+    <string name="home_xposed_not_activated">ไม่สามารถสื่อสารกับ Play Store</string>
+    <string name="home_xposed_service_on">บริการระบบกำลังทำงาน [%d]</string>
+    <string name="home_xposed_service_off">โมดูลถูกปิดหรือ Play Store ไม่ทำงาน ลองเริ่มแอป</string>
+    <string name="home_xposed_service_old">โมดูลอัปเดต ต้องรีบูตเครื่อง</string>
+    <string name="home_xposed_service_health_stale">บริการเชื่อมต่อ รอการตรวจสุขภาพล่าสุด</string>
+    <string name="home_xposed_filter_count">PIB เก็บเหตุการณ์ทั้งหมด %d รายการ</string>
+    <string name="home_backup_config">สำรองการตั้งค่า</string>
+    <string name="home_restore_config">กู้คืนการตั้งค่า</string>
+    <string name="home_import_successful">นำเข้าเรียบร้อย</string>
+    <string name="home_import_failed">นำเข้าไม่สำเร็จ</string>
+    <string name="home_import_file_damaged">ไฟล์สำรองถูกทำลาย</string>
+    <string name="home_export_failed">สำรองข้อมูลล้มเหลว</string>
+    <string name="home_exported">สำรองการตั้งค่าเรียบร้อย</string>
+    <string name="home_new_update">มีอัปเดตใหม่: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">แสดงแอประบบ</string>
+    <string name="list_sorting">การจัดเรียง</string>
+    <string name="list_reverse_order">สลับลำดับ</string>
+    <string name="list_sort_by_label">ตามชื่อแอป</string>
+    <string name="list_sort_by_package_name">ตามชื่อแพ็กเกจ</string>
+    <string name="list_sort_by_install_time">ตามเวลาติดตั้ง</string>
+    <string name="list_sort_by_update_time">ตามเวลาอัปเดต</string>
+    <string name="list_empty_no_apps">ไม่พบแอป อาจเป็นเพราะคุณไม่ได้อนุญาตให้แอปนี้ค้นหาแพ็กเกจทั้งหมด</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">เปิดใช้งาน PIB</string>
+    <string name="app_enable_intervention_desc">ปิดเพื่ออนุญาตคำขอ Play Integrity แม้จะเปิดการดักจับโดยค่าเริ่มต้น</string>
+    <string name="app_rewrite_integrity_response">เปิดใช้งานข้อผิดพลาดจำลอง</string>
+    <string name="app_rewrite_integrity_response_desc">เมื่อเปิดใช้งาน แอปจะไม่ได้สื่อสารกับ Play Integrity และจะได้รับข้อผิดพลาดที่สร้างขึ้นแทน</string>
+    <string name="app_deliver_synthetic_response">ส่งคำตอบจำลอง</string>
+    <string name="app_deliver_synthetic_response_desc">เมื่อปิดใช้งาน แอปจะไม่ได้รับคำตอบเลย ใช้เท่านั้นเพื่อทดสอบจุดที่แอปร้องขอ Play Integrity (อาจทำให้แอปค้างนาน)</string>
+    <string name="app_delay_synthetic_response">หน่วงการส่งคำตอบ</string>
+    <string name="app_delay_synthetic_response_desc">เพิ่มการหน่วงแบบสุ่มระหว่าง 300 ถึง 2000 มิลลิวินาที ก่อนส่ง callback จำลอง อาจช่วยป้องกันการตรวจจับตามเวลา</string>
+    <string name="app_rewrite_integrity_error_code">รหัสข้อผิดพลาดที่จะแทรก</string>
+    <string name="app_rewrite_integrity_error_code_desc">แอปจะได้รับรหัสข้อผิดพลาดนี้</string>
+    <string name="app_rewrite_integrity_error_code_reference">อ้างอิงรหัสข้อผิดพลาด</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">เปิดตารางค่าข้อผิดพลาดที่เป็นไปได้</string>
+    <string name="app_rewrite_integrity_error_remediable">ธงแก้ไขได้ (Remediable)</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">บอกแอปให้ลองใหม่ (เช่น ข้อผิดพลาดเป็นแบบชั่วคราว)</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">อ้างอิงรหัสข้อผิดพลาด Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">คัดลอกรหัสข้อผิดพลาด: %1$s</string>
+    <string name="app_exclude_system_apps">รวมแอประบบ</string>
+    <string name="app_warning_risky_package_title">แพ็กเกจที่เสี่ยง</string>
+    <string name="app_warning_risky_package_desc">แพ็กเกจนี้ถูกมาร์กเป็นเสี่ยงและอาจทำให้ไม่เสถียร ต้องการดำเนินการต่อหรือไม่?</string>
+    <string name="app_favorite_add">มาร์กเป็นรายการโปรด</string>
+    <string name="app_favorite_remove">ยกเลิกเครื่องหมายรายการโปรด</string>
+    <string name="app_force_stop_launch">รีสตาร์ทและเปิดใช้งาน</string>
+    <string name="app_launch">เปิดแอป</string>
+    <string name="app_launch_failed">การเปิดแอปล้มเหลว ตรวจสอบบันทึกสำหรับรายละเอียดเพิ่มเติม</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">พรเซ็ตวิธีป้อนข้อมูล</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">ค่าสั่งทำเอง</string>
+    <string name="settings_templates_random_ssaid">สุ่ม SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">บันทึกไฟล์</string>
+    <string name="logs_clear">ล้างบันทึก</string>
+    <string name="logs_upload_telemetry">อัปโหลดเทเลเมทรีตอนนี้</string>
+    <string name="logs_show_telemetry_queue">แสดงสถานะคิวเทเลเมทรี</string>
+    <string name="logs_empty">ไม่มีบันทึกให้บันทึก</string>
+    <string name="logs_saved">บันทึกเรียบร้อย</string>
+    <string name="logs_telemetry_disabled">การอัปโหลดเทเลเมทรีถูกปิดใช้งาน</string>
+    <string name="logs_telemetry_upload_enqueued">การอัปโหลดเทเลเมทรีคิว: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">สถานะคิว: pending=%1$d retry=%2$d in-flight=%3$d acked=%4$d failed=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">ช่วงเวลา</string>
+    <string name="statistics_window_all">ทั้งหมด</string>
+    <string name="statistics_window_24h">24 ชั่วโมงล่าสุด</string>
+    <string name="statistics_window_7d">7 วันล่าสุด</string>
+    <string name="statistics_updated_at">อัปเดต: %1$s</string>
+    <string name="statistics_user_id">รหัสผู้ใช้: %1$s</string>
+    <string name="statistics_summary_title">สรุปการจับข้อมูล</string>
+    <string name="statistics_summary_body">เหตุการณ์ทั้งหมด: %1$d\nคำขอ: %2$d\nการตอบกลับ: %3$d\nการตอบกลับสำเร็จ: %4$d\nการตอบกลับล้มเหลว: %5$d</string>
+    <string name="statistics_queue_title">คิวเทเลเมทรี</string>
+    <string name="statistics_queue_body">คงค้าง: %1$d\nลองใหม่: %2$d\nระหว่างดำเนินการ: %3$d\nยืนยันแล้ว: %4$d\nล้มเหลว: %5$d</string>
+    <string name="statistics_top_packages_title">กิจกรรมแพ็กเกจ (ทั้งหมด)</string>
+    <string name="statistics_top_packages_empty">ไม่มีกิจกรรมของแพ็กเกจในช่วงเวลานี้</string>
+    <string name="statistics_package_unknown_label">แอปไม่ทราบ</string>
+    <string name="statistics_package_resolving_label">กำลังค้นหาชื่อแอป...</string>
+    <string name="statistics_recent_requests_title">10 คำขอล่าสุด</string>
+    <string name="statistics_recent_requests_empty">ไม่มีคำขอในช่วงเวลานี้</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">โมดูล</string>
+    <string name="settings_overwrite">บังคับเขียนทับ</string>
+    <string name="settings_overwritten">ถูกเขียนทับแล้ว</string>
+    <string name="settings_overwrite_summary">รายการในหมวดนี้จะถูกบังคับให้เปิดหากสวิตช์ถูกเลือก</string>
+    <string name="settings_default_value">ค่าตั้งต้น: %s</string>
+    <string name="settings_data_isolation">แยกข้อมูล</string>
+    <string name="settings_data_isolation_summary">ข้อมูลแอป: %1$s\nVold ข้อมูลแอป: %2$s\nบังคับเมานท์: %3$s</string>
+    <string name="settings_data_isolation_unsupported">ตัวเลือกนี้ใช้ได้เฉพาะบน Android 11 ขึ้นไป</string>
+    <string name="settings_app_data_isolation">การแยกข้อมูลแอป</string>
+    <string name="settings_vold_app_data_isolation">การแยกข้อมูลแอป Vold</string>
+    <string name="settings_warning">คำเตือน</string>
+    <string name="settings_vold_warning">นี่เปิดใช้งานฟีเจอร์แยกข้อมูล AOSP สำหรับพื้นที่เก็บข้อมูลส่วนตัวภายนอกของแอป อาจปรับปรุงความเข้ากันได้แต่ลดความเสถียรและอาจหยุดทำงานใน Android เวอร์ชันอนาคต</string>
+    <string name="settings_need_reboot">การเปลี่ยนแปลงต้องรีบูต</string>
+    <string name="settings_force_mount_data">บังคับการแยกข้อมูลสำหรับทุกแอป</string>
+    <string name="settings_force_mount_data_summary">การแยกข้อมูลถูกปิดสำหรับแอปที่ target API ต่ำกว่า 30 โดยค่าเริ่มต้น</string>
+    <string name="settings_detail_log">บันทึกรายละเอียดสำหรับดีบัก</string>
+    <string name="settings_max_log_size">ขนาดบัฟเฟอร์ล็อก</string>
+    <string name="settings_hide_icon">ซ่อนไอคอนโมดูลในตัวเรียกใช้งาน</string>
+    <string name="settings_hide_icon_summary">คุณยังสามารถเปิดแอปได้ใน Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">ข้ามคำเตือนแพ็กเกจเสี่ยง</string>
+    <string name="settings_bypass_risky_package_warning_summary">โปรดทราบว่า devs จะไม่รับผิดชอบต่อปัญหาเกี่ยวกับแพ็กเกจเสี่ยงก่อนหรือหลังที่คุณเปิดคุณสมบัตินี้</string>
+    <string name="settings_disable_activity_launch_protection">ปิดการป้องกันการเปิด Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">สวิตช์นี้จะยกเลิกการป้องกัน startActivity ทั้งหมด หากไม่แน่ใจ อย่าเปิดใช้งาน</string>
+    <string name="settings_system_wallpaper">ใช้ภาพพื้นหลังระบบ</string>
+    <string name="settings_clear_uninstalled_app_configs">ล้างการตั้งค่าสำหรับแอปที่ถอนการติดตั้ง</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">ตัวเลือกนี้ช่วยให้คุณสร้างการตั้งค่าใหม่โดยไม่มีข้อมูลเหลือ แต่คุณจะต้องตั้งค่าแอปใหม่เมื่อติดตั้งอีกครั้ง</string>
+    <string name="settings_no_undone_warning">การดำเนินการนี้ไม่สามารถย้อนกลับได้</string>
+    <string name="settings_package_query_workaround">วิธีแก้ปัญหาการค้นหาแพ็กเกจทางเลือก</string>
+    <string name="settings_package_query_workaround_summary">อย่าเปิดตัวเลือกนี้หากคุณเห็นรายการแพ็กเกจในแอปนี้อย่างถูกต้อง</string>
+    <string name="settings_intent_api_enabled">เปิดใช้งาน Intents API ภายนอก</string>
+    <string name="settings_intent_api_enabled_summary">อนุญาตให้แอปอื่นเปลี่ยนการตั้งค่า PIB</string>
+    <string name="settings_intent_api_enable_title">เปิดใช้งาน Intents API ภายนอก?</string>
+    <string name="settings_intent_api_enable_message">เมื่อเปิดใช้งาน แอปใดๆ บนอุปกรณ์สามารถส่ง Intent API เพื่อแก้ไขการตั้งค่า PIB ต่อแอป โปรดเปิดเฉพาะถ้าคุณเชื่อถือแอปที่ติดตั้ง</string>
+    <string name="settings_intent_api_enable_confirm">เปิดใช้งาน API</string>
+    <string name="settings_launcher_icon">ไอคอนตัวเรียกใช้งาน</string>
+    <string name="settings_error_only_log">ล็อกเฉพาะข้อผิดพลาด</string>
+
+    <string name="settings_telemetry">เทเลเมทรี</string>
+    <string name="settings_telemetry_enabled">เปิดการอัปโหลดเทเลเมทรี</string>
+    <string name="settings_telemetry_enabled_summary">อัปโหลดเหตุการณ์คำขอและการตอบกลับ Integrity ของแอปไปยังเซิร์ฟเวอร์ของนักพัฒนา เพื่อสถิติและการวิจัย</string>
+    <string name="telemetry_consent_title">ยินดีต้อนรับสู่ PIB! ต้องการเปิดเทเลเมทรีหรือไม่?</string>
+    <string name="telemetry_consent_message">ขอบคุณที่ติดตั้ง PIB!\n\nเทเลเมทรีช่วยนักพัฒนาศึกษาแนวทางที่แอปโต้ตอบกับ Google Play Integrity.\nเป็นมิตรกับความเป็นส่วนตัว: ไม่มีข้อมูลที่ระบุตัวตนถูกอัปโหลด ไม่ส่งผลต่อแบตเตอรี่.\nคุณสามารถอ่านนโยบายเพิ่มเติมและซอร์สโค้ดบน GitHub.\nคุณสามารถปิดเทเลเมทรีได้ตลอดเวลาในการตั้งค่า.</string>
+    <string name="telemetry_consent_enable">เอาสิ!</string>
+    <string name="telemetry_consent_not_now">ยังไม่</string>
+
+    <string name="settings_language">ภาษา</string>
+
+    <string name="settings_theme">ธีม</string>
+    <string name="settings_system_theme_color">สีธีมตามระบบ</string>
+    <string name="settings_theme_color">สีธีม</string>
+    <string name="settings_pure_black_dark_theme">ธีมมืดดำสนิท</string>
+    <string name="settings_pure_black_dark_theme_summary">ใช้ธีมดำสนิทเมื่อเปิดธีมมืด</string>
+
+    <string name="settings_update">อัปเดต</string>
+    <string name="settings_disable_update">ปิดแจ้งเตือนอัปเดต</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">การตั้งค่าบันทึกแบบกลุ่ม</string>
+
+    <!-- About -->
+    <string name="about_description">PIB เป็นโมดูล LSPosed ที่มุ่งเน้นการบล็อกแอปจากการใช้ Google Play Integrity API</string>
+    <string name="about_how_to_use_title">วิธีใช้โมดูลนี้</string>
+    <string name="about_how_to_use_description_1">เปิดโมดูลใน Xposed manager และให้สิทธิ์สโคป Google Play Store (com.android.vending)\nจากนั้น บังคับหยุด Google Play Store</string>
+    <string name="about_how_to_use_description_2">โดยค่าเริ่มต้น แอปทั้งหมดจะถูกบล็อกไม่ให้เข้าถึง Google Play Integrity เลือกแอปที่ต้องการอนุญาตหรือเลือกใช้รหัสข้อผิดพลาดเฉพาะ</string>
+    <string name="about_developer">นักพัฒนา</string>
+    <string name="about_support">การสนับสนุนและข้อเสนอแนะ</string>
+    <string name="about_open_source">ไลเซนส์โอเพนซอร์ส</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">ซากุระ</string>
+    <string name="color_red">แดง</string>
+    <string name="color_pink">ชมพู</string>
+    <string name="color_purple">ม่วง</string>
+    <string name="color_deep_purple">ม่วงเข้ม</string>
+    <string name="color_indigo">คราม</string>
+    <string name="color_blue">น้ำเงิน</string>
+    <string name="color_light_blue">ฟ้าอ่อน</string>
+    <string name="color_cyan">ซีอัน</string>
+    <string name="color_teal">เทอล์ค</string>
+    <string name="color_green">เขียว</string>
+    <string name="color_light_green">เขียวอ่อน</string>
+    <string name="color_lime">มะนาว</string>
+    <string name="color_yellow">เหลือง</string>
+    <string name="color_amber">แอมเบอร์</string>
+    <string name="color_orange">ส้ม</string>
+    <string name="color_deep_orange">ส้มเข้ม</string>
+    <string name="color_brown">น้ำตาล</string>
+    <string name="color_blue_grey">น้ำเงินเทา</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">ธีมมืด</string>
+    <string name="dark_theme_off">ปิดตลอด</string>
+    <string name="dark_theme_on">เปิดตลอด</string>
+</resources>

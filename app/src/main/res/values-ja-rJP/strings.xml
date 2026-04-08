@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">ホーム</string>
+    <string name="title_logs">ログ</string>
+    <string name="title_statistics">統計</string>
+    <string name="title_settings">設定</string>
+    <string name="title_template_manage">ログプロファイルの管理</string>
+    <string name="title_app_manage">アプリごとのオプション</string>
+    <string name="title_default_app">デフォルトのオプション</string>
+    <string name="title_app_select">アプリを選択</string>
+    <string name="title_app_settings">アプリ設定</string>
+    <string name="title_about">このアプリについて</string>
+
+    <string name="do_not_dual">PIBを副ユーザーにインストールしない</string>
+    <string name="show_crash_log">クラッシュログを表示</string>
+    <string name="config_damaged">設定ファイルが壊れています。アプリデータをクリアしてください</string>
+    <string name="delete">削除</string>
+    <string name="enabled">有効</string>
+    <string name="disabled">無効</string>
+    <string name="application">アプリケーション</string>
+    <string name="preferences">設定</string>
+    <string name="refresh">更新</string>
+    <string name="filter">フィルター</string>
+    <string name="search">検索</string>
+    <string name="edit">編集</string>
+    <string name="follow_system">システムに従う</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">モジュールが有効化されました [%s]</string>
+    <string name="home_xposed_not_activated">Playストアと通信できません</string>
+    <string name="home_xposed_service_on">システムサービスが動作中 [%d]</string>
+    <string name="home_xposed_service_off">モジュールが無効化されているか、Playストアが実行されていません。起動を試してください。</string>
+    <string name="home_xposed_service_old">モジュールが更新されました。再起動が必要です</string>
+    <string name="home_xposed_service_health_stale">サービス接続済み、最新のヘルスチェックを待機中</string>
+    <string name="home_xposed_filter_count">PIBは合計 %d 件のイベントを記録しました</string>
+    <string name="home_backup_config">設定をバックアップ</string>
+    <string name="home_restore_config">設定を復元</string>
+    <string name="home_import_successful">インポート成功</string>
+    <string name="home_import_failed">インポート失敗</string>
+    <string name="home_import_file_damaged">バックアップファイルが破損しています</string>
+    <string name="home_export_failed">エクスポートに失敗しました</string>
+    <string name="home_exported">設定をバックアップしました</string>
+    <string name="home_new_update">新しい更新があります: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">システムアプリを表示</string>
+    <string name="list_sorting">ソート</string>
+    <string name="list_reverse_order">逆順</string>
+    <string name="list_sort_by_label">アプリ名順</string>
+    <string name="list_sort_by_package_name">パッケージ名順</string>
+    <string name="list_sort_by_install_time">インストール時間順</string>
+    <string name="list_sort_by_update_time">更新時間順</string>
+    <string name="list_empty_no_apps">アプリが見つかりません。全パッケージの照会を許可していない可能性があります</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">PIBを有効にする</string>
+    <string name="app_enable_intervention_desc">無効にすると、介入がデフォルトで有効な場合でもPlay Integrityリクエストが許可されます。</string>
+    <string name="app_rewrite_integrity_response">合成エラーを有効にする</string>
+    <string name="app_rewrite_integrity_response_desc">有効にすると、アプリはPlay Integrityと通信せず、代わりに生成されたエラーを受け取ります。</string>
+    <string name="app_deliver_synthetic_response">合成レスポンスを配信する</string>
+    <string name="app_deliver_synthetic_response_desc">無効にすると、アプリはまったくレスポンスを受け取りません。アプリがPlay Integrityを要求する正確な箇所をテストする場合にのみ使用してください（長時間ハングする可能性があります）。</string>
+    <string name="app_delay_synthetic_response">レスポンス配信を遅延</string>
+    <string name="app_delay_synthetic_response_desc">合成コールバックの配信前に300〜2000msのランダムな遅延を追加します。タイミング検出を防げる可能性があります。</string>
+    <string name="app_rewrite_integrity_error_code">注入するエラーコード</string>
+    <string name="app_rewrite_integrity_error_code_desc">アプリはこのエラーコードを受け取ります。</string>
+    <string name="app_rewrite_integrity_error_code_reference">エラーコード参照</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">可能なエラー値の表を開きます。</string>
+    <string name="app_rewrite_integrity_error_remediable">再試行可能フラグ</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">リクエストは再試行されるべきであるとアプリに伝えます（例えばエラーが一時的である場合）。</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integrityエラーコード参照</string>
+    <string name="app_rewrite_integrity_error_code_copied">コピーしたエラーコード: %1$s</string>
+    <string name="app_exclude_system_apps">システムアプリを含める</string>
+    <string name="app_warning_risky_package_title">危険なパッケージ</string>
+    <string name="app_warning_risky_package_desc">このパッケージは危険とマークされており、安定性に影響を与える可能性があります。続行しますか？</string>
+    <string name="app_favorite_add">お気に入りに追加</string>
+    <string name="app_favorite_remove">お気に入りから削除</string>
+    <string name="app_force_stop_launch">再起動して起動</string>
+    <string name="app_launch">起動</string>
+    <string name="app_launch_failed">アプリの起動に失敗しました。詳細はログを確認してください</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">入力方法プリセット</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">カスタム値</string>
+    <string name="settings_templates_random_ssaid">SSaidをランダム化</string>
+
+    <!-- Logs -->
+    <string name="logs_save">ログを保存</string>
+    <string name="logs_clear">ログをクリア</string>
+    <string name="logs_upload_telemetry">今すぐテレメトリをアップロード</string>
+    <string name="logs_show_telemetry_queue">テレメトリキューの状態を表示</string>
+    <string name="logs_empty">保存するログがありません</string>
+    <string name="logs_saved">ログを保存しました</string>
+    <string name="logs_telemetry_disabled">テレメトリのアップロードは無効です</string>
+    <string name="logs_telemetry_upload_enqueued">テレメトリアップロードがキューに入りました: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">キュー状態: pending=%1$d retry=%2$d in-flight=%3$d acked=%4$d failed=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">時間範囲</string>
+    <string name="statistics_window_all">全期間</string>
+    <string name="statistics_window_24h">過去24時間</string>
+    <string name="statistics_window_7d">過去7日間</string>
+    <string name="statistics_updated_at">更新: %1$s</string>
+    <string name="statistics_user_id">ユーザーID: %1$s</string>
+    <string name="statistics_summary_title">キャプチャ要約</string>
+    <string name="statistics_summary_body">合計イベント: %1$d\nリクエスト: %2$d\nレスポンス: %3$d\n成功レスポンス: %4$d\n失敗レスポンス: %5$d</string>
+    <string name="statistics_queue_title">テレメトリキュー</string>
+    <string name="statistics_queue_body">保留: %1$d\n再試行: %2$d\n送信中: %3$d\n承認済み: %4$d\n失敗: %5$d</string>
+    <string name="statistics_top_packages_title">パッケージアクティビティ（全体）</string>
+    <string name="statistics_top_packages_empty">この時間範囲にパッケージのアクティビティはありません。</string>
+    <string name="statistics_package_unknown_label">不明なアプリ</string>
+    <string name="statistics_package_resolving_label">アプリ名を解決中...</string>
+    <string name="statistics_recent_requests_title">直近10件のリクエスト</string>
+    <string name="statistics_recent_requests_empty">この時間範囲にリクエストはありません。</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">モジュール</string>
+    <string name="settings_overwrite">上書き</string>
+    <string name="settings_overwritten">上書きされました</string>
+    <string name="settings_overwrite_summary">チェックされたスイッチのカテゴリ項目は強制的に有効になります</string>
+    <string name="settings_default_value">デフォルト値: %s</string>
+    <string name="settings_data_isolation">データ分離</string>
+    <string name="settings_data_isolation_summary">アプリデータ: %1$s\nVoldのアプリデータ: %2$s\n強制マウント: %3$s</string>
+    <string name="settings_data_isolation_unsupported">このオプションはAndroid 11以上でのみ利用可能です</string>
+    <string name="settings_app_data_isolation">アプリデータ分離</string>
+    <string name="settings_vold_app_data_isolation">Voldのアプリデータ分離</string>
+    <string name="settings_warning">警告</string>
+    <string name="settings_vold_warning">これはアプリの外部プライベートストレージに対するAOSPの分離機能を有効にします。互換性は向上する可能性がありますが、安定性が低下したり将来のAndroidで動作しなくなる可能性があります。</string>
+    <string name="settings_need_reboot">変更には再起動が必要です</string>
+    <string name="settings_force_mount_data">すべてのアプリに対してデータ分離を強制する</string>
+    <string name="settings_force_mount_data_summary">デフォルトではAPIターゲットが30未満のアプリではデータ分離は無効です</string>
+    <string name="settings_detail_log">デバッグ用の詳細ログ</string>
+    <string name="settings_max_log_size">ロガーバッファサイズ</string>
+    <string name="settings_hide_icon">ランチャーのモジュールアイコンを非表示にする</string>
+    <string name="settings_hide_icon_summary">Xposedマネージャーからアプリを開くことはできます</string>
+    <string name="settings_bypass_risky_package_warning">危険なパッケージ警告を無視する</string>
+    <string name="settings_bypass_risky_package_warning_summary">この機能を有効にする前後の危険なパッケージ関連の問題について開発者は責任を負いません</string>
+    <string name="settings_disable_activity_launch_protection">Activity起動保護を無効にする</string>
+    <string name="settings_disable_activity_launch_protection_summary">このトグルはすべてのstartActivity保護を解除します。よくわからない場合は有効にしないでください。</string>
+    <string name="settings_system_wallpaper">システムの壁紙を使う</string>
+    <string name="settings_clear_uninstalled_app_configs">アンインストールされたアプリの設定をクリア</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">このオプションを使うと残骸なしで設定を作成できますが、再インストール時にアプリを再設定する必要があります。</string>
+    <string name="settings_no_undone_warning">この操作は元に戻せません。</string>
+    <string name="settings_package_query_workaround">代替のパッケージ照会</string>
+    <string name="settings_package_query_workaround_summary">アプリ内でパッケージリストが正しく表示されている場合、このオプションを有効にしないでください。</string>
+    <string name="settings_intent_api_enabled">外部Intents APIを有効にする</string>
+    <string name="settings_intent_api_enabled_summary">他のアプリがPIB設定を変更できるようにします。</string>
+    <string name="settings_intent_api_enable_title">外部Intents APIを有効にしますか?</string>
+    <string name="settings_intent_api_enable_message">有効にすると、デバイス上の任意のアプリがAPI Intentsを送信してアプリごとのPIB設定を変更できます。インストールするアプリを信頼している場合にのみ有効にしてください。</string>
+    <string name="settings_intent_api_enable_confirm">APIを有効にする</string>
+    <string name="settings_launcher_icon">ランチャーアイコン</string>
+    <string name="settings_error_only_log">エラーのみログ</string>
+
+    <string name="settings_telemetry">テレメトリ</string>
+    <string name="settings_telemetry_enabled">テレメトリのアップロードを有効にする</string>
+    <string name="settings_telemetry_enabled_summary">アプリのIntegrityリクエストとレスポンスイベントを開発者のサーバーにアップロードします（統計と研究用）。</string>
+    <string name="telemetry_consent_title">PIBへようこそ！テレメトリを有効にしますか？</string>
+    <string name="telemetry_consent_message">PIBをインストールしていただきありがとうございます！\n\nテレメトリは開発者がアプリのGoogle Play Integrityとのやり取りを研究するのに役立ちます。\nプライバシー配慮: 識別可能なデータはアップロードされません。バッテリーも使用しません。\n拡張ポリシーやソースコードはGitHubで確認できます。\n設定でいつでもテレメトリを無効にできます。</string>
+    <string name="telemetry_consent_enable">もちろん！</string>
+    <string name="telemetry_consent_not_now">今はいいや :(</string>
+
+    <string name="settings_language">言語</string>
+
+    <string name="settings_theme">テーマ</string>
+    <string name="settings_system_theme_color">システムのテーマ色</string>
+    <string name="settings_theme_color">テーマ色</string>
+    <string name="settings_pure_black_dark_theme">純黒ダークテーマ</string>
+    <string name="settings_pure_black_dark_theme_summary">ダークテーマが有効な場合、純黒テーマを使用します</string>
+
+    <string name="settings_update">更新</string>
+    <string name="settings_disable_update">更新通知を無効にする</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">一括ログ設定ウィザード</string>
+
+    <!-- About -->
+    <string name="about_description">PIBはGoogle Play Integrity APIへのアクセスをブロックすることに焦点を当てたLSPosedモジュールです。</string>
+    <string name="about_how_to_use_title">このモジュールの使い方</string>
+    <string name="about_how_to_use_description_1">Xposedマネージャーでモジュールを有効にし、Google Playストアのスコープ（com.android.vending）を付与してください。\nその後、Google Playストアを強制停止します。</string>
+    <string name="about_how_to_use_description_2">デフォルトでは、全てのアプリはGoogle Play Integrityへのアクセスがブロックされます。アクセスを許可したいアプリ、または特定のエラーコードを使用したいアプリを選択してください。</string>
+    <string name="about_developer">開発者</string>
+    <string name="about_support">サポートとフィードバック</string>
+    <string name="about_open_source">オープンソースライセンス</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">桜</string>
+    <string name="color_red">赤</string>
+    <string name="color_pink">ピンク</string>
+    <string name="color_purple">紫</string>
+    <string name="color_deep_purple">ディープパープル</string>
+    <string name="color_indigo">インディゴ</string>
+    <string name="color_blue">青</string>
+    <string name="color_light_blue">ライトブルー</string>
+    <string name="color_cyan">シアン</string>
+    <string name="color_teal">ティール</string>
+    <string name="color_green">緑</string>
+    <string name="color_light_green">ライトグリーン</string>
+    <string name="color_lime">ライム</string>
+    <string name="color_yellow">黄</string>
+    <string name="color_amber">アンバー</string>
+    <string name="color_orange">オレンジ</string>
+    <string name="color_deep_orange">ディープオレンジ</string>
+    <string name="color_brown">茶</string>
+    <string name="color_blue_grey">ブルーグレー</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">ダークテーマ</string>
+    <string name="dark_theme_off">常にオフ</string>
+    <string name="dark_theme_on">常にオン</string>
+</resources>

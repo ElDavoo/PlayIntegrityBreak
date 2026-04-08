@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Strona główna</string>
+    <string name="title_logs">Dzienniki</string>
+    <string name="title_statistics">Statystyki</string>
+    <string name="title_settings">Ustawienia</string>
+    <string name="title_template_manage">Zarządzaj profilami logowania</string>
+    <string name="title_app_manage">Opcje aplikacji</string>
+    <string name="title_default_app">Domyślne opcje</string>
+    <string name="title_app_select">Wybierz aplikacje</string>
+    <string name="title_app_settings">Ustawienia aplikacji</string>
+    <string name="title_about">O aplikacji</string>
+
+    <string name="do_not_dual">Nie instaluj PIB dla drugiego użytkownika</string>
+    <string name="show_crash_log">Pokaż log awarii</string>
+    <string name="config_damaged">Plik konfiguracji uszkodzony. Wyczyść dane aplikacji</string>
+    <string name="delete">Usuń</string>
+    <string name="enabled">Włączone</string>
+    <string name="disabled">Wyłączone</string>
+    <string name="application">Aplikacja</string>
+    <string name="preferences">Preferencje</string>
+    <string name="refresh">Odśwież</string>
+    <string name="filter">Filtr</string>
+    <string name="search">Szukaj</string>
+    <string name="edit">Edytuj</string>
+    <string name="follow_system">Dopasuj do systemu</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Moduł aktywowany [%s]</string>
+    <string name="home_xposed_not_activated">Nie można komunikować się ze Sklepem Play</string>
+    <string name="home_xposed_service_on">Usługa systemowa działa [%d]</string>
+    <string name="home_xposed_service_off">Moduł jest wyłączony lub Sklep Play nie działa. Spróbuj go uruchomić.</string>
+    <string name="home_xposed_service_old">Moduł zaktualizowany, wymagany restart</string>
+    <string name="home_xposed_service_health_stale">Usługa połączona, oczekiwanie na aktualny test stanu</string>
+    <string name="home_xposed_filter_count">PIB przechwycił w sumie %d zdarzeń</string>
+    <string name="home_backup_config">Kopia zapasowa konfiguracji</string>
+    <string name="home_restore_config">Przywróć konfigurację</string>
+    <string name="home_import_successful">Import udany</string>
+    <string name="home_import_failed">Import nieudany</string>
+    <string name="home_import_file_damaged">Plik kopii zapasowej uszkodzony</string>
+    <string name="home_export_failed">Eksport nieudany</string>
+    <string name="home_exported">Kopia zapasowa konfiguracji utworzona</string>
+    <string name="home_new_update">Dostępna nowa aktualizacja: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Pokaż aplikacje systemowe</string>
+    <string name="list_sorting">Sortowanie</string>
+    <string name="list_reverse_order">Odwróć kolejność</string>
+    <string name="list_sort_by_label">Według nazwy aplikacji</string>
+    <string name="list_sort_by_package_name">Według nazwy pakietu</string>
+    <string name="list_sort_by_install_time">Według czasu instalacji</string>
+    <string name="list_sort_by_update_time">Według czasu aktualizacji</string>
+    <string name="list_empty_no_apps">Nie znaleziono aplikacji — możliwe, że nie pozwoliłeś tej aplikacji na przeszukiwanie wszystkich pakietów</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Włącz PIB</string>
+    <string name="app_enable_intervention_desc">Wyłącz, aby zezwolić na żądania Play Integrity nawet gdy przechwytywanie jest domyślnie włączone.</string>
+    <string name="app_rewrite_integrity_response">Włącz sztuczne błędy</string>
+    <string name="app_rewrite_integrity_response_desc">Po włączeniu aplikacja nie będzie komunikować się z Play Integrity i otrzyma wygenerowany błąd.</string>
+    <string name="app_deliver_synthetic_response">Dostarcz syntetyczną odpowiedź</string>
+    <string name="app_deliver_synthetic_response_desc">Gdy wyłączone, aplikacja nie otrzyma żadnej odpowiedzi. Używaj tylko do testów, gdzie dokładnie aplikacja żąda Play Integrity (może wtedy długo się zawieszać).</string>
+    <string name="app_delay_synthetic_response">Opóźnij dostarczenie odpowiedzi</string>
+    <string name="app_delay_synthetic_response_desc">Dodaje losowe opóźnienie między 300 a 2000 ms przed dostarczeniem syntetycznych wywołań zwrotnych. Może zapobiec wykrywaniu opartemu na czasie?</string>
+    <string name="app_rewrite_integrity_error_code">Kod błędu do wstrzyknięcia</string>
+    <string name="app_rewrite_integrity_error_code_desc">Aplikacja otrzyma ten kod błędu.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Odniesienie kodów błędów</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Otwórz tabelę możliwych wartości błędów.</string>
+    <string name="app_rewrite_integrity_error_remediable">Flaga możliwego naprawienia</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Informuje aplikację, że żądanie powinno zostać ponowione (np. błąd jest tymczasowy).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Odniesienie kodów błędów Integrity</string>
+    <string name="app_rewrite_integrity_error_code_copied">Skopiowano kod błędu: %1$s</string>
+    <string name="app_exclude_system_apps">Uwzględnij aplikacje systemowe</string>
+    <string name="app_warning_risky_package_title">Ryzykowny pakiet</string>
+    <string name="app_warning_risky_package_desc">Ten pakiet oznaczono jako ryzykowny i może powodować niestabilność. Kontynuować?</string>
+    <string name="app_favorite_add">Dodaj do ulubionych</string>
+    <string name="app_favorite_remove">Usuń z ulubionych</string>
+    <string name="app_force_stop_launch">Uruchom ponownie i otwórz</string>
+    <string name="app_launch">Uruchom</string>
+    <string name="app_launch_failed">Uruchomienie aplikacji nie powiodło się, sprawdź logi po więcej informacji</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Preset metody wprowadzania</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Wartość niestandardowa</string>
+    <string name="settings_templates_random_ssaid">Losuj SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Zapisz logi</string>
+    <string name="logs_clear">Wyczyść logi</string>
+    <string name="logs_upload_telemetry">Prześlij telemetrykę teraz</string>
+    <string name="logs_show_telemetry_queue">Pokaż status kolejki telemetrycznej</string>
+    <string name="logs_empty">Brak logów do zapisania</string>
+    <string name="logs_saved">Logi zapisane</string>
+    <string name="logs_telemetry_disabled">Przesyłanie telemetryczne jest wyłączone</string>
+    <string name="logs_telemetry_upload_enqueued">Kolejka wysyłki telemetryki: oczekujące=%1$d próby=%2$d w toku=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Status kolejki: oczekujące=%1$d próby=%2$d w toku=%3$d potwierdzone=%4$d nieudane=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Okno czasowe</string>
+    <string name="statistics_window_all">Cały czas</string>
+    <string name="statistics_window_24h">Ostatnie 24 godziny</string>
+    <string name="statistics_window_7d">Ostatnie 7 dni</string>
+    <string name="statistics_updated_at">Zaktualizowano: %1$s</string>
+    <string name="statistics_user_id">ID użytkownika: %1$s</string>
+    <string name="statistics_summary_title">Podsumowanie przechwytywania</string>
+    <string name="statistics_summary_body">Łączne zdarzenia: %1$d\nŻądania: %2$d\nOdpowiedzi: %3$d\nPomyślne odpowiedzi: %4$d\nNieudane odpowiedzi: %5$d</string>
+    <string name="statistics_queue_title">Kolejka telemetryczna</string>
+    <string name="statistics_queue_body">Oczekujące: %1$d\nPonowienia: %2$d\nW toku: %3$d\nPotwierdzone: %4$d\nNieudane: %5$d</string>
+    <string name="statistics_top_packages_title">Aktywność pakietów (wszystkie)</string>
+    <string name="statistics_top_packages_empty">Brak aktywności pakietów w tym przedziale czasowym.</string>
+    <string name="statistics_package_unknown_label">Nieznana aplikacja</string>
+    <string name="statistics_package_resolving_label">Rozwiązywanie nazwy aplikacji...</string>
+    <string name="statistics_recent_requests_title">Ostatnie 10 żądań</string>
+    <string name="statistics_recent_requests_empty">Brak żądań w tym przedziale czasowym.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Moduł</string>
+    <string name="settings_overwrite">Nadpisz</string>
+    <string name="settings_overwritten">Nadpisano</string>
+    <string name="settings_overwrite_summary">Elementy z tej kategorii będą wymuszone jako włączone, jeśli przełączniki są zaznaczone</string>
+    <string name="settings_default_value">Wartość domyślna: %s</string>
+    <string name="settings_data_isolation">Izolacja danych</string>
+    <string name="settings_data_isolation_summary">Dane aplikacji: %1$s\nDane Vold: %2$s\nWymuś montowanie: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Ta opcja dostępna tylko na Androidzie 11 i wyżej</string>
+    <string name="settings_app_data_isolation">Izolacja danych aplikacji</string>
+    <string name="settings_vold_app_data_isolation">Izolacja danych aplikacji Vold</string>
+    <string name="settings_warning">Ostrzeżenie</string>
+    <string name="settings_vold_warning">To włącza funkcję izolacji AOSP dla zewnętrznej prywatnej pamięci aplikacji. Może poprawić kompatybilność, ale zmniejszyć stabilność i przestać działać w przyszłych wersjach Androida.</string>
+    <string name="settings_need_reboot">Zmiana wymaga restartu</string>
+    <string name="settings_force_mount_data">Wymuś izolację danych dla wszystkich aplikacji</string>
+    <string name="settings_force_mount_data_summary">Izolacja danych jest domyślnie wyłączona dla aplikacji z target API niższym niż 30</string>
+    <string name="settings_detail_log">Szczegółowy log do debugowania</string>
+    <string name="settings_max_log_size">Rozmiary bufora loggera</string>
+    <string name="settings_hide_icon">Ukryj ikonę modułu w launcherze</string>
+    <string name="settings_hide_icon_summary">Nadal możesz otworzyć aplikację w menedżerze Xposed</string>
+    <string name="settings_bypass_risky_package_warning">Pomiń ostrzeżenie o ryzykownych pakietach</string>
+    <string name="settings_bypass_risky_package_warning_summary">Zwróć uwagę, że deweloperzy nie ponoszą odpowiedzialności za problemy związane z ryzykownymi pakietami przed ani po włączeniu tej funkcji</string>
+    <string name="settings_disable_activity_launch_protection">Wyłącz ochronę uruchamiania Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Ten przełącznik zdjemie wszystkie zabezpieczenia startActivity. Jeśli nie jesteś pewien, nie włączaj.</string>
+    <string name="settings_system_wallpaper">Użyj tapety systemowej</string>
+    <string name="settings_clear_uninstalled_app_configs">Usuń konfiguracje odinstalowanych aplikacji</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Ta opcja pozwala utworzyć konfigurację bez pozostałości, ale będziesz musiał ponownie skonfigurować aplikacje po ich ponownej instalacji.</string>
+    <string name="settings_no_undone_warning">Ta akcja nie może zostać cofnięta.</string>
+    <string name="settings_package_query_workaround">Alternatywne zapytanie pakietów</string>
+    <string name="settings_package_query_workaround_summary">Nie włączaj tej opcji, jeśli prawidłowo widzisz listę pakietów w tej aplikacji.</string>
+    <string name="settings_intent_api_enabled">Włącz zewnętrzne API Intents</string>
+    <string name="settings_intent_api_enabled_summary">Pozwól innym aplikacjom zmieniać ustawienia PIB.</string>
+    <string name="settings_intent_api_enable_title">Włączyć zewnętrzne API Intents?</string>
+    <string name="settings_intent_api_enable_message">Po włączeniu każda aplikacja na urządzeniu może wysyłać Intents API aby modyfikować ustawienia PIB dla poszczególnych aplikacji. Włącz tylko jeśli ufasz zainstalowanym aplikacjom.</string>
+    <string name="settings_intent_api_enable_confirm">Włącz API</string>
+    <string name="settings_launcher_icon">Ikona launcher</string>
+    <string name="settings_error_only_log">Tylko log błędów</string>
+
+    <string name="settings_telemetry">Telemetria</string>
+    <string name="settings_telemetry_enabled">Włącz przesyłanie telemetryki</string>
+    <string name="settings_telemetry_enabled_summary">Wysyła zdarzenia żądań i odpowiedzi integryty aplikacji na serwer dewelopera, do celów statystycznych i badawczych.</string>
+    <string name="telemetry_consent_title">Witamy w PIB! Czy chcesz włączyć telemetrię?</string>
+    <string name="telemetry_consent_message">Dziękujemy za zainstalowanie PIB!\n\nTelemetria pomaga deweloperowi badać, jak aplikacje korzystają z Google Play Integrity.\nPrywatność: Nie przesyłamy danych identyfikujących. Nie zużywa baterii.\nMożesz przeczytać rozszerzoną politykę i kod źródłowy na GitHub.\nTelemetrię możesz wyłączyć w Ustawieniach w dowolnym momencie.</string>
+    <string name="telemetry_consent_enable">Pewnie!</string>
+    <string name="telemetry_consent_not_now">Nie teraz :(</string>
+
+    <string name="settings_language">Język</string>
+
+    <string name="settings_theme">Motyw</string>
+    <string name="settings_system_theme_color">Kolor motywu systemowego</string>
+    <string name="settings_theme_color">Kolor motywu</string>
+    <string name="settings_pure_black_dark_theme">Czysta czerń w trybie ciemnym</string>
+    <string name="settings_pure_black_dark_theme_summary">Użyj czystej czerni, gdy włączony jest tryb ciemny</string>
+
+    <string name="settings_update">Aktualizuj</string>
+    <string name="settings_disable_update">Wyłącz powiadomienia o aktualizacjach</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Kreator zbiorowej konfiguracji logera</string>
+
+    <!-- About -->
+    <string name="about_description">PIB to moduł LSPosed skoncentrowany na blokowaniu aplikacji przed używaniem API Google Play Integrity.</string>
+    <string name="about_how_to_use_title">Jak używać tego modułu</string>
+    <string name="about_how_to_use_description_1">Włącz moduł w menedżerze Xposed i przydziel mu zakres Sklepu Play (com.android.vending).\nNastępnie wymuś zatrzymanie Sklepu Play.</string>
+    <string name="about_how_to_use_description_2">Domyślnie wszystkie aplikacje są blokowane przed dostępem do Play Integrity. Wybierz aplikacje, którym chcesz zezwolić, lub ustaw konkretny kod błędu.</string>
+    <string name="about_developer">Deweloper</string>
+    <string name="about_support">Wsparcie i opinie</string>
+    <string name="about_open_source">Licencje open source</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Czerwony</string>
+    <string name="color_pink">Różowy</string>
+    <string name="color_purple">Fioletowy</string>
+    <string name="color_deep_purple">Głęboki fiolet</string>
+    <string name="color_indigo">Indygo</string>
+    <string name="color_blue">Niebieski</string>
+    <string name="color_light_blue">Jasnoniebieski</string>
+    <string name="color_cyan">Cyjan</string>
+    <string name="color_teal">Turkusowy</string>
+    <string name="color_green">Zielony</string>
+    <string name="color_light_green">Jasnozielony</string>
+    <string name="color_lime">Limonkowy</string>
+    <string name="color_yellow">Żółty</string>
+    <string name="color_amber">Bursztynowy</string>
+    <string name="color_orange">Pomarańczowy</string>
+    <string name="color_deep_orange">Głęboka pomarańcza</string>
+    <string name="color_brown">Brązowy</string>
+    <string name="color_blue_grey">Niebieskoszary</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Tryb ciemny</string>
+    <string name="dark_theme_off">Zawsze wyłączony</string>
+    <string name="dark_theme_on">Zawsze włączony</string>
+</resources>

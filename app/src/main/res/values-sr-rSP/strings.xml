@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Почетна</string>
+    <string name="title_logs">Логови</string>
+    <string name="title_statistics">Статистика</string>
+    <string name="title_settings">Подешавања</string>
+    <string name="title_template_manage">Управљање профилима снимања</string>
+    <string name="title_app_manage">Опције по апликацији</string>
+    <string name="title_default_app">Подразумеване опције</string>
+    <string name="title_app_select">Изабери апликације</string>
+    <string name="title_app_settings">Подешавања апликације</string>
+    <string name="title_about">О апликацији</string>
+
+    <string name="do_not_dual">Не инсталирај PIB за секундарног корисника</string>
+    <string name="show_crash_log">Прикажи извештај о паду</string>
+    <string name="config_damaged">Конфигурациони фајл је оштећен. Очистите податке апликације</string>
+    <string name="delete">Избриши</string>
+    <string name="enabled">Укључено</string>
+    <string name="disabled">Искључено</string>
+    <string name="application">Апликација</string>
+    <string name="preferences">Поставке</string>
+    <string name="refresh">Освежи</string>
+    <string name="filter">Филтер</string>
+    <string name="search">Претрага</string>
+    <string name="edit">Уреди</string>
+    <string name="follow_system">Прати систем</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Модул активиран [%s]</string>
+    <string name="home_xposed_not_activated">Не може да комуницира са Play продавницом</string>
+    <string name="home_xposed_service_on">Системска услуга активна [%d]</string>
+    <string name="home_xposed_service_off">Модул је онемогућен или Play продавница не ради. Покушајте да је покренете.</string>
+    <string name="home_xposed_service_old">Модул је ажуриран, потребан је поновни покретање</string>
+    <string name="home_xposed_service_health_stale">Услуга повезана, чека се свежа провера здравља</string>
+    <string name="home_xposed_filter_count">PIB је снимио укупно %d догађаја</string>
+    <string name="home_backup_config">Направи резервну копију конфигурације</string>
+    <string name="home_restore_config">Врати конфигурацију</string>
+    <string name="home_import_successful">Увођење успешно</string>
+    <string name="home_import_failed">Увођење није успело</string>
+    <string name="home_import_file_damaged">Резервна датотека је оштећена</string>
+    <string name="home_export_failed">Извоз није успео</string>
+    <string name="home_exported">Резервна копија конфигурације сачувана</string>
+    <string name="home_new_update">Доступно ново ажурирање: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Прикажи системске апликације</string>
+    <string name="list_sorting">Сортирање</string>
+    <string name="list_reverse_order">Обрнути редослед</string>
+    <string name="list_sort_by_label">По имену апликације</string>
+    <string name="list_sort_by_package_name">По имену пакета</string>
+    <string name="list_sort_by_install_time">По времену инсталације</string>
+    <string name="list_sort_by_update_time">По времену ажурирања</string>
+    <string name="list_empty_no_apps">Нема пронађених апликација, можда нисте дозволили овој апликацији да тражи све пакете</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">Омогући PIB</string>
+    <string name="app_enable_intervention_desc">Искључите да омогућите Play Integrity захтеве чак и када је пресретање подразумевано омогућено.</string>
+    <string name="app_rewrite_integrity_response">Омогући синтетичке грешке</string>
+    <string name="app_rewrite_integrity_response_desc">Када је омогућено, апликација неће комуницирати са Play Integrity, већ ће добити генерисану грешку.</string>
+    <string name="app_deliver_synthetic_response">Испоручи синтетички одговор</string>
+    <string name="app_deliver_synthetic_response_desc">Када је онемогућено, апликација уопште неће добити одговор. Користите само за тестирање где апликација тачно тражи Play Integrity (вероватно ће дуго чекати).</string>
+    <string name="app_delay_synthetic_response">Одужи испоруку одговора</string>
+    <string name="app_delay_synthetic_response_desc">Додаје случајно кашњење између 300 и 2000 ms пре испоруке синтетичких повратних позива. Може спречити детекцију засновану на тајмингу?</string>
+    <string name="app_rewrite_integrity_error_code">Код грешке за убризгавање</string>
+    <string name="app_rewrite_integrity_error_code_desc">Апликација ће добити овај код грешке.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Референца кодова грешке</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Отворите табелу могућих вредности грешака.</string>
+    <string name="app_rewrite_integrity_error_remediable">Флаг који се може поправити</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Кажe апликацији да захтев треба бити поновљен (на пример, грешка је привремена).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Референца кодова Integrity грешака</string>
+    <string name="app_rewrite_integrity_error_code_copied">Копиран код грешке: %1$s</string>
+    <string name="app_exclude_system_apps">Укључи системске апликације</string>
+    <string name="app_warning_risky_package_title">Ризичан пакет</string>
+    <string name="app_warning_risky_package_desc">Овај пакет је означен као ризичан и може изазвати нестабилност. Наставити?</string>
+    <string name="app_favorite_add">Означи као омиљено</string>
+    <string name="app_favorite_remove">Уклони ознаку омиљеног</string>
+    <string name="app_force_stop_launch">Поново покрени и покрени</string>
+    <string name="app_launch">Покрени</string>
+    <string name="app_launch_failed">Покретање апликације није успело, проверите логове за више детаља</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Пресет начина уноса</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Прилагођена вредност</string>
+    <string name="settings_templates_random_ssaid">Случајно SSAID</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Сачувај логове</string>
+    <string name="logs_clear">Очисти логове</string>
+    <string name="logs_upload_telemetry">Пошаљи телеметрију сада</string>
+    <string name="logs_show_telemetry_queue">Прикажи статус реда телеметрије</string>
+    <string name="logs_empty">Нема логова за чување</string>
+    <string name="logs_saved">Логови сачувани</string>
+    <string name="logs_telemetry_disabled">Слање телеметрије је онемогућено</string>
+    <string name="logs_telemetry_upload_enqueued">Слање телеметрије у реду: pending=%1$d retry=%2$d in-flight=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Статус реда: pending=%1$d retry=%2$d in-flight=%3$d acked=%4$d failed=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Временски период</string>
+    <string name="statistics_window_all">Цео период</string>
+    <string name="statistics_window_24h">Последња 24 сата</string>
+    <string name="statistics_window_7d">Последњих 7 дана</string>
+    <string name="statistics_updated_at">Ажурирано: %1$s</string>
+    <string name="statistics_user_id">ИД корисника: %1$s</string>
+    <string name="statistics_summary_title">Резиме снимања</string>
+    <string name="statistics_summary_body">Укупно догађаја: %1$d\nЗахтева: %2$d\nОдговора: %3$d\nУспешних одговора: %4$d\nНеуспелих одговора: %5$d</string>
+    <string name="statistics_queue_title">Ред телеметрије</string>
+    <string name="statistics_queue_body">Очекујуће: %1$d\nПокушаји: %2$d\nУ току: %3$d\nПотврђено: %4$d\nНеуспело: %5$d</string>
+    <string name="statistics_top_packages_title">Активност пакета (сви)</string>
+    <string name="statistics_top_packages_empty">Нема активности пакета у овом временском периоду.</string>
+    <string name="statistics_package_unknown_label">Непозната апликација</string>
+    <string name="statistics_package_resolving_label">Решавање имена апликације...</string>
+    <string name="statistics_recent_requests_title">Последњих 10 захтева</string>
+    <string name="statistics_recent_requests_empty">Нема захтева у овом временском периоду.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Модул</string>
+    <string name="settings_overwrite">Присили</string>
+    <string name="settings_overwritten">Присилено</string>
+    <string name="settings_overwrite_summary">Ови ставке категорије ће бити присилно омогућене ако су прекидачи укључени</string>
+    <string name="settings_default_value">Подразумевана вредност: %s</string>
+    <string name="settings_data_isolation">Изолација података</string>
+    <string name="settings_data_isolation_summary">Подаци апликације: %1$s\nVold подаци апликације: %2$s\nПрисили монтирање: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Ова опција је доступна само на Android 11 и новијим верзијама</string>
+    <string name="settings_app_data_isolation">Изолација података апликације</string>
+    <string name="settings_vold_app_data_isolation">Vold изолација података апликације</string>
+    <string name="settings_warning">Упозорење</string>
+    <string name="settings_vold_warning">Ово омогућава AOSP функцију изолације за спољну приватну меморију апликације. Може побољшати компатибилност али смањити стабилност и можда престати да ради у будућим верзијама Android-а.</string>
+    <string name="settings_need_reboot">Промене захтевају поновно покретање</string>
+    <string name="settings_force_mount_data">Присили изолацију података за све апликације</string>
+    <string name="settings_force_mount_data_summary">Изолација података је по подразумеваној вредности онемогућена за апликације са target API &lt; 30</string>
+    <string name="settings_detail_log">Детаљан лог за дебаговање</string>
+    <string name="settings_max_log_size">Величине бафера логера</string>
+    <string name="settings_hide_icon">Сакриј икону модула у ланчера</string>
+    <string name="settings_hide_icon_summary">Још увек можете отворити апликацију у Xposed manager-у</string>
+    <string name="settings_bypass_risky_package_warning">Прескочи упозорење о ризичном пакету</string>
+    <string name="settings_bypass_risky_package_warning_summary">Имајте у виду да одржаваоци не сносе одговорност за проблеме везане за ризичне пакете пре или после омогућавања ове функције</string>
+    <string name="settings_disable_activity_launch_protection">Онемогући заштиту покретања Activity-а</string>
+    <string name="settings_disable_activity_launch_protection_summary">Ова опција ће уклонити сва заштитна мере за startActivity. Ако нисте сигурни, не омогућавајте је.</string>
+    <string name="settings_system_wallpaper">Користи системски тапет</string>
+    <string name="settings_clear_uninstalled_app_configs">Обриши конфигурације деинсталираних апликаacija</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Ова опција вам омогућава да креирате конфигурацију без остатака али ћете морати поново да конфигуришете апликације када их поново инсталирате.</string>
+    <string name="settings_no_undone_warning">Ова радња се не може поништити.</string>
+    <string name="settings_package_query_workaround">Алтернативно тражење пакета</string>
+    <string name="settings_package_query_workaround_summary">Не омогућавајте ову опцију ако правилно видите листу пакета у овој апликацији.</string>
+    <string name="settings_intent_api_enabled">Омогући спољни Intents API</string>
+    <string name="settings_intent_api_enabled_summary">Дозволи другим апликацијама да мењају PIB подешавања.</string>
+    <string name="settings_intent_api_enable_title">Омогућити спољни Intents API?</string>
+    <string name="settings_intent_api_enable_message">Када је омогућено, било која апликација на уређају може послати API Intente да промени per-app PIB подешавања. Омогућите само ако верујете апликацијама које инсталирате.</string>
+    <string name="settings_intent_api_enable_confirm">Омогући API</string>
+    <string name="settings_launcher_icon">Икона ланчера</string>
+    <string name="settings_error_only_log">Само грешке у логовима</string>
+
+    <string name="settings_telemetry">Телеметрија</string>
+    <string name="settings_telemetry_enabled">Омогући слање телеметрије</string>
+    <string name="settings_telemetry_enabled_summary">Слаже информације о Integrity захтевима и одговорима апликација на сервер развоја, за статистику и истраживања.</string>
+    <string name="telemetry_consent_title">Добродошли у PIB! Желите ли да омогућите телеметрију?</string>
+    <string name="telemetry_consent_message">Хвала што сте инсталирали PIB!\n\nТелеметрија помаже програмеру да испита како апликације комуницирају са Google Play Integrity.\nПриватно: Нема слања идентификационих података. Не користи батерију.\nМожете прочитати проширену политику и изворни код на GitHub-у.\nТелеметрију можете искључити у било ком тренутку у Подешавањима.</string>
+    <string name="telemetry_consent_enable">Заиста!</string>
+    <string name="telemetry_consent_not_now">Не сада :(</string>
+
+    <string name="settings_language">Језик</string>
+
+    <string name="settings_theme">Тема</string>
+    <string name="settings_system_theme_color">Боја системске теме</string>
+    <string name="settings_theme_color">Боја теме</string>
+    <string name="settings_pure_black_dark_theme">Потпуно црна тамна тема</string>
+    <string name="settings_pure_black_dark_theme_summary">Користите потпуно црну тему ако је тамна тема укључена</string>
+
+    <string name="settings_update">Ажурирање</string>
+    <string name="settings_disable_update">Онемогући обавештења о ажурирању</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Чаробњак за масовну конфигурацију логера</string>
+
+    <!-- About -->
+    <string name="about_description">PIB је LSPosed модул фокусиран на блокирање апликација у коришћењу Google Play Integrity API.</string>
+    <string name="about_how_to_use_title">Како користити овај модул</string>
+    <string name="about_how_to_use_description_1">Омогућите модул у свом Xposed менаџеру и дајте му опсег Google Play продавнице (com.android.vending).\nЗатим, принудно зауставите Google Play продавницу.</string>
+    <string name="about_how_to_use_description_2">Подразумевано, све апликације су блокиране од приступа Google Play Integrity. Изаберите за коју апликацију желите да дозволите приступ, или да користите одређени код грешке.</string>
+    <string name="about_developer">Програмер</string>
+    <string name="about_support">Подршка и повратне информације</string>
+    <string name="about_open_source">Лиценце отвореног кода</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Сакура</string>
+    <string name="color_red">Црвена</string>
+    <string name="color_pink">Розе</string>
+    <string name="color_purple">Лила</string>
+    <string name="color_deep_purple">Тамно љубичаста</string>
+    <string name="color_indigo">Индиго</string>
+    <string name="color_blue">Плава</string>
+    <string name="color_light_blue">Светло плава</string>
+    <string name="color_cyan">Цијан</string>
+    <string name="color_teal">Тијар</string>
+    <string name="color_green">Зелена</string>
+    <string name="color_light_green">Светло зелена</string>
+    <string name="color_lime">Лимета</string>
+    <string name="color_yellow">Жута</string>
+    <string name="color_amber">Џинџер</string>
+    <string name="color_orange">Наранџаста</string>
+    <string name="color_deep_orange">Тамно наранџаста</string>
+    <string name="color_brown">Браон</string>
+    <string name="color_blue_grey">Плаво сива</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Тамна тема</string>
+    <string name="dark_theme_off">Увек искључено</string>
+    <string name="dark_theme_on">Увек укључено</string>
+</resources>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Play Integrity Break</string>
+    <string name="app_name_launcher" translatable="false">PIB</string>
+
+    <string name="title_home">Kezdőlap</string>
+    <string name="title_logs">Naplók</string>
+    <string name="title_statistics">Statisztikák</string>
+    <string name="title_settings">Beállítások</string>
+    <string name="title_template_manage">Naplózási profilok kezelése</string>
+    <string name="title_app_manage">Alkalmazásonkénti beállítások</string>
+    <string name="title_default_app">Alapértelmezett beállítások</string>
+    <string name="title_app_select">Alkalmazások kiválasztása</string>
+    <string name="title_app_settings">Alkalmazás beállításai</string>
+    <string name="title_about">Névjegy</string>
+
+    <string name="do_not_dual">Ne telepítsd a PIB-et másodlagos felhasználóra</string>
+    <string name="show_crash_log">Leállási napló megjelenítése</string>
+    <string name="config_damaged">A konfigurációs fájl sérült. Kérlek töröld az alkalmazás adatait</string>
+    <string name="delete">Törlés</string>
+    <string name="enabled">Engedélyezve</string>
+    <string name="disabled">Letiltva</string>
+    <string name="application">Alkalmazás</string>
+    <string name="preferences">Preferenciák</string>
+    <string name="refresh">Frissítés</string>
+    <string name="filter">Szűrő</string>
+    <string name="search">Keresés</string>
+    <string name="edit">Szerkesztés</string>
+    <string name="follow_system">Kövesse a rendszer beállításait</string>
+
+    <!-- Home -->
+    <string name="home_xposed_activated">Modul aktiválva [%s]</string>
+    <string name="home_xposed_not_activated">Nem lehet kommunikálni a Play Áruházzal</string>
+    <string name="home_xposed_service_on">Rendszerszolgáltatás fut [%d]</string>
+    <string name="home_xposed_service_off">A modul le van tiltva, vagy a Play Áruház nem fut. Próbáld meg elindítani.</string>
+    <string name="home_xposed_service_old">A modul frissült, szükséges újraindítás</string>
+    <string name="home_xposed_service_health_stale">A szolgáltatás csatlakozott, vár a friss állapotellenőrzésre</string>
+    <string name="home_xposed_filter_count">A PIB összesen %d eseményt rögzített</string>
+    <string name="home_backup_config">Konfiguráció mentése</string>
+    <string name="home_restore_config">Konfiguráció visszaállítása</string>
+    <string name="home_import_successful">Importálás sikeres</string>
+    <string name="home_import_failed">Importálás sikertelen</string>
+    <string name="home_import_file_damaged">A biztonsági mentés fájl sérült</string>
+    <string name="home_export_failed">Exportálás sikertelen</string>
+    <string name="home_exported">Konfiguráció mentve</string>
+    <string name="home_new_update">Új frissítés érhető el: %s</string>
+
+    <!-- App select -->
+    <string name="list_show_system">Rendszeralkalmazások megjelenítése</string>
+    <string name="list_sorting">Rendezés</string>
+    <string name="list_reverse_order">Fordított sorrend</string>
+    <string name="list_sort_by_label">Alkalmazás neve szerint</string>
+    <string name="list_sort_by_package_name">Csomagnév szerint</string>
+    <string name="list_sort_by_install_time">Telepítés időpontja szerint</string>
+    <string name="list_sort_by_update_time">Frissítés időpontja szerint</string>
+    <string name="list_empty_no_apps">Nem található alkalmazás; lehet, hogy nem engedélyezted az alkalmazásnak az összes csomag lekérdezését</string>
+
+    <!-- App settings -->
+    <string name="app_enable_intervention">PIB engedélyezése</string>
+    <string name="app_enable_intervention_desc">Kapcsolja ki, hogy engedélyezze a Play Integrity kéréseket akkor is, ha az elfogás alapértelmezés szerint engedélyezett.</string>
+    <string name="app_rewrite_integrity_response">Szintetikus hibák engedélyezése</string>
+    <string name="app_rewrite_integrity_response_desc">Ha engedélyezve van, az alkalmazás nem kommunikál a Play Integrity szolgáltatással, helyette egy generált hibát kap.</string>
+    <string name="app_deliver_synthetic_response">Szintetikus válasz kézbesítése</string>
+    <string name="app_deliver_synthetic_response_desc">Ha letiltva, az alkalmazás egyáltalán nem kap választ. Csak teszteléshez használd (hogy lásd, hol kéri pontosan a Play Integrity-t), mert az alkalmazás valószínűleg hosszasan várakozni fog.</string>
+    <string name="app_delay_synthetic_response">Válasz kézbesítés késleltetése</string>
+    <string name="app_delay_synthetic_response_desc">Véletlenszerű késleltetést ad 300 és 2000 ms között, mielőtt a szintetikus visszahívásokat kézbesíti. Megelőzheti az időzítés alapú észlelést?</string>
+    <string name="app_rewrite_integrity_error_code">Befecskendezendő hibakód</string>
+    <string name="app_rewrite_integrity_error_code_desc">Az alkalmazás ezt a hibakódot fogja megkapni.</string>
+    <string name="app_rewrite_integrity_error_code_reference">Hibakód hivatkozás</string>
+    <string name="app_rewrite_integrity_error_code_reference_desc">Nyisd meg a lehetséges hibaváltozatok táblázatát.</string>
+    <string name="app_rewrite_integrity_error_remediable">Újrapróbálható jelző</string>
+    <string name="app_rewrite_integrity_error_remediable_desc">Megmondja az alkalmazásnak, hogy a kérés újrapróbálható (pl. a hiba átmeneti).</string>
+    <string name="app_rewrite_integrity_error_code_reference_title">Integritási hibakódok</string>
+    <string name="app_rewrite_integrity_error_code_copied">Másolt hibakód: %1$s</string>
+    <string name="app_exclude_system_apps">Rendszeralkalmazások bevonása</string>
+    <string name="app_warning_risky_package_title">Kockázatos csomag</string>
+    <string name="app_warning_risky_package_desc">Ez a csomag kockázatosként van megjelölve és instabilitást okozhat. Folytatod?</string>
+    <string name="app_favorite_add">Hozzáadás a kedvencekhez</string>
+    <string name="app_favorite_remove">Eltávolítás a kedvencek közül</string>
+    <string name="app_force_stop_launch">Újraindítás és indítás</string>
+    <string name="app_launch">Indítás</string>
+    <string name="app_launch_failed">Az alkalmazás indítása sikertelen, nézd meg a naplókat további részletekért</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_input_method">Beviteli mód előre beállítás</string>
+
+    <!-- Settings templates - basic configuration types -->
+    <string name="settings_templates_custom">Egyéni érték</string>
+    <string name="settings_templates_random_ssaid">SSAIN véletlenszerűsítése</string>
+
+    <!-- Logs -->
+    <string name="logs_save">Naplók mentése</string>
+    <string name="logs_clear">Naplók törlése</string>
+    <string name="logs_upload_telemetry">Telemetria feltöltése most</string>
+    <string name="logs_show_telemetry_queue">Telemetria sor állapotának megjelenítése</string>
+    <string name="logs_empty">Nincsenek mentésre váró naplók</string>
+    <string name="logs_saved">Naplók mentve</string>
+    <string name="logs_telemetry_disabled">A telemetria feltöltés le van tiltva</string>
+    <string name="logs_telemetry_upload_enqueued">Telemetria feltöltés sorba állítva: várakozó=%1$d újrapróbálás=%2$d folyamatban=%3$d</string>
+    <string name="logs_telemetry_queue_snapshot">Sor állapota: várakozó=%1$d újrapróbálás=%2$d folyamatban=%3$d visszaigazolt=%4$d sikertelen=%5$d</string>
+
+    <!-- Filter logs -->
+    <string name="statistics_time_window">Időablak</string>
+    <string name="statistics_window_all">Összes idő</string>
+    <string name="statistics_window_24h">Az elmúlt 24 óra</string>
+    <string name="statistics_window_7d">Az elmúlt 7 nap</string>
+    <string name="statistics_updated_at">Frissítve: %1$s</string>
+    <string name="statistics_user_id">Felhasználói azonosító: %1$s</string>
+    <string name="statistics_summary_title">Összegzés</string>
+    <string name="statistics_summary_body">Összes esemény: %1$d\nKérések: %2$d\nVálaszok: %3$d\nSikeres válaszok: %4$d\nSikertelen válaszok: %5$d</string>
+    <string name="statistics_queue_title">Telemetria sor</string>
+    <string name="statistics_queue_body">Várakozó: %1$d\nÚjrapróbálás: %2$d\nFolyamatban: %3$d\nVisszaigazolt: %4$d\nSikertelen: %5$d</string>
+    <string name="statistics_top_packages_title">Csomag aktivitás (összes)</string>
+    <string name="statistics_top_packages_empty">Ebben az időablakban nincs csomag aktivitás.</string>
+    <string name="statistics_package_unknown_label">Ismeretlen alkalmazás</string>
+    <string name="statistics_package_resolving_label">Alkalmazásnév feloldása...</string>
+    <string name="statistics_recent_requests_title">Utolsó 10 kérelem</string>
+    <string name="statistics_recent_requests_empty">Ebben az időablakban nincs kérés.</string>
+    <string name="statistics_recent_requests_item_meta">#%1$d - %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_module">Modul</string>
+    <string name="settings_overwrite">Felülír</string>
+    <string name="settings_overwritten">Felülírva</string>
+    <string name="settings_overwrite_summary">Ha a kapcsolók be vannak kapcsolva, ezen kategória elemei kötelezően engedélyezettek lesznek.</string>
+    <string name="settings_default_value">Alapértelmezett érték: %s</string>
+    <string name="settings_data_isolation">Adatszigetelés</string>
+    <string name="settings_data_isolation_summary">Alkalmazás adatai: %1$s\nVold alkalmazás adatai: %2$s\nErőltetett csatolás: %3$s</string>
+    <string name="settings_data_isolation_unsupported">Ez az opció csak Android 11-en és újabb verziókon érhető el</string>
+    <string name="settings_app_data_isolation">Alkalmazás adatai elkülönítése</string>
+    <string name="settings_vold_app_data_isolation">Vold alkalmazásadatok elkülönítése</string>
+    <string name="settings_warning">Figyelmeztetés</string>
+    <string name="settings_vold_warning">Ez egy AOSP elkülönítési funkciót engedélyez az alkalmazás külső privát tárhelyéhez. Javíthatja a kompatibilitást, de csökkentheti a stabilitást és előfordulhat, hogy a jövőbeli Android verziókban nem fog működni.</string>
+    <string name="settings_need_reboot">A módosításhoz újraindítás szükséges</string>
+    <string name="settings_force_mount_data">Adatelkülönítést kényszerít minden alkalmazásnál</string>
+    <string name="settings_force_mount_data_summary">Az adatelkülönítés alapértelmezés szerint ki van kapcsolva azoknál az alkalmazásoknál, amelyek célzott API-szintje 30 alatti.</string>
+    <string name="settings_detail_log">Részletes napló a hibakereséshez</string>
+    <string name="settings_max_log_size">Naplózó pufferméretek</string>
+    <string name="settings_hide_icon">Modul ikonának elrejtése a launcherben</string>
+    <string name="settings_hide_icon_summary">Az alkalmazást továbbra is megnyithatod az Xposed kezelőben</string>
+    <string name="settings_bypass_risky_package_warning">Kockázatos csomag figyelmeztetés kikapcsolása</string>
+    <string name="settings_bypass_risky_package_warning_summary">Figyelem: a fejlesztők nem vállalnak felelősséget kockázatos csomagok okozta problémákért, sem az engedélyezés előtt, sem utána.</string>
+    <string name="settings_disable_activity_launch_protection">Activity indítási védelem tiltása</string>
+    <string name="settings_disable_activity_launch_protection_summary">Ez a kapcsoló eltávolít minden startActivity védelmet. Ha bizonytalan vagy, ne engedélyezd.</string>
+    <string name="settings_system_wallpaper">Rendszer háttérkép használata</string>
+    <string name="settings_clear_uninstalled_app_configs">Eltávolított alkalmazások konfigurációinak törlése</string>
+    <string name="settings_clear_uninstalled_app_configs_summary">Ez az opció lehetővé teszi konfiguráció létrehozását maradékok nélkül, de újratelepítéskor újra be kell állítanod az alkalmazásokat.</string>
+    <string name="settings_no_undone_warning">Ez a művelet nem visszavonható.</string>
+    <string name="settings_package_query_workaround">Alternatív csomag lekérdezés</string>
+    <string name="settings_package_query_workaround_summary">Ne engedélyezd ezt az opciót, ha a csomaglista ebben az alkalmazásban helyesen jelenik meg.</string>
+    <string name="settings_intent_api_enabled">Külső Intents API engedélyezése</string>
+    <string name="settings_intent_api_enabled_summary">Engedélyezi más alkalmazások számára a PIB beállításainak megváltoztatását.</string>
+    <string name="settings_intent_api_enable_title">Külső Intents API engedélyezése?</string>
+    <string name="settings_intent_api_enable_message">Ha engedélyezed, bármely eszközön lévő alkalmazás küldhet API Intenteket a per-alkalmazás PIB beállításainak módosítására. Csak akkor engedélyezd, ha megbízol az általad telepített alkalmazásokban.</string>
+    <string name="settings_intent_api_enable_confirm">API engedélyezése</string>
+    <string name="settings_launcher_icon">Indító ikon</string>
+    <string name="settings_error_only_log">Csak hibák naplózása</string>
+
+    <string name="settings_telemetry">Telemetria</string>
+    <string name="settings_telemetry_enabled">Telemetria feltöltés engedélyezése</string>
+    <string name="settings_telemetry_enabled_summary">Feltölti az alkalmazások integritás-kéréseinek és válaszainak eseményeit a fejlesztő szerverére, statisztikához és kutatáshoz.</string>
+    <string name="telemetry_consent_title">Üdv a PIB-ben! Szeretnéd engedélyezni a telemetriát?</string>
+    <string name="telemetry_consent_message">Köszönjük, hogy telepítetted a PIB-et!\n\nA telemetria segíti a fejlesztőt annak tanulmányozásában, hogyan kommunikálnak az alkalmazások a Google Play Integrity szolgáltatással.\nAdatbarát: nincs feltöltve azonosítható adat. Nem használ extra akkumulátort.\nElolvashatod a részletes irányelvet és a forráskódot a GitHubon.\nA telemetriát bármikor kikapcsolhatod a Beállításokban.</string>
+    <string name="telemetry_consent_enable">Persze!</string>
+    <string name="telemetry_consent_not_now">Nem most :(</string>
+
+    <string name="settings_language">Nyelv</string>
+
+    <string name="settings_theme">Téma</string>
+    <string name="settings_system_theme_color">Rendszer téma színe</string>
+    <string name="settings_theme_color">Téma színe</string>
+    <string name="settings_pure_black_dark_theme">Tiszta fekete sötét téma</string>
+    <string name="settings_pure_black_dark_theme_summary">Használd a tiszta fekete témát, ha a sötét téma engedélyezve van</string>
+
+    <string name="settings_update">Frissítés</string>
+    <string name="settings_disable_update">Frissítés értesítés letiltása</string>
+
+    <!-- Bulk config wizard -->
+    <string name="title_bulk_config_wizard">Tömeges naplózó beállítások</string>
+
+    <!-- About -->
+    <string name="about_description">A PIB egy LSPosed modul, amely megakadályozza az alkalmazásokat abban, hogy a Google Play Integrity API-t használják.</string>
+    <string name="about_how_to_use_title">Hogyan használd ezt a modult</string>
+    <string name="about_how_to_use_description_1">Engedélyezd a modult az Xposed kezelőben, és add meg számára a Google Play Áruház engedélyt (com.android.vending).\nEzután kényszerített leállítással állítsd le a Google Play Áruházat.</string>
+    <string name="about_how_to_use_description_2">Alapértelmezés szerint minden alkalmazás blokkolva van a Google Play Integrity elérésétől. Válaszd ki, melyik alkalmazásnak szeretnél hozzáférést engedélyezni, vagy ha egy konkrét hibakódot szeretnél használni.</string>
+    <string name="about_developer">Fejlesztő</string>
+    <string name="about_support">Támogatás és visszajelzés</string>
+    <string name="about_open_source">Nyílt forráskódú licenszek</string>
+
+    <!-- Colors -->
+    <string name="color_sakura">Sakura</string>
+    <string name="color_red">Piros</string>
+    <string name="color_pink">Rózsaszín</string>
+    <string name="color_purple">Lila</string>
+    <string name="color_deep_purple">Mélylila</string>
+    <string name="color_indigo">Indigó</string>
+    <string name="color_blue">Kék</string>
+    <string name="color_light_blue">Világoskék</string>
+    <string name="color_cyan">Cián</string>
+    <string name="color_teal">Türkiz</string>
+    <string name="color_green">Zöld</string>
+    <string name="color_light_green">Világoszöld</string>
+    <string name="color_lime">Lime</string>
+    <string name="color_yellow">Sárga</string>
+    <string name="color_amber">Ámbar</string>
+    <string name="color_orange">Narancs</string>
+    <string name="color_deep_orange">Mélynarancs</string>
+    <string name="color_brown">Barna</string>
+    <string name="color_blue_grey">Kékesszürke</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Sötét téma</string>
+    <string name="dark_theme_off">Mindig kikapcsolva</string>
+    <string name="dark_theme_on">Mindig bekapcsolva</string>
+</resources>
