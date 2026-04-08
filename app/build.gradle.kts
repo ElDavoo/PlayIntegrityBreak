@@ -15,6 +15,10 @@ val officialBuild: Boolean by rootProject.extra
 extensions.configure<ApplicationExtension>("android") {
     namespace = appPackageName
 
+    defaultConfig {
+        resourceConfigurations += listOf("en")
+    }
+
     buildFeatures {
         buildConfig = true
         viewBinding = true
