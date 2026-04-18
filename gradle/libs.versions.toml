@@ -34,6 +34,6 @@ com-github-topjohnwu-libsu-core = { module = "com.github.topjohnwu.libsu:core", 
 de-robv-android-xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
 dev-rikka-hidden-compat = { module = "dev.rikka.hidden:compat", version.ref = "hidden-api" }
 dev-rikka-hidden-stub = { module = "dev.rikka.hidden:stub", version.ref = "hidden-api" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.10.0" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.11.0" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 me-zhanghai-android-appiconloader = { module = "me.zhanghai.android.appiconloader:appiconloader", version = "1.5.0" }
