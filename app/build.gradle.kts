@@ -1,4 +1,6 @@
 import com.android.build.api.dsl.ApplicationExtension
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 plugins {
     alias(libs.plugins.agp.app)
@@ -96,8 +98,17 @@ fun registerApkRenameTask(buildType: String) {
             }
 
             val sourceFile = sourceFiles.single()
-            if (!sourceFile.renameTo(targetFile)) {
-                throw GradleException("Failed to rename ${sourceFile.name} to ${targetFile.name}")
+            try {
+                Files.move(
+                    sourceFile.toPath(),
+                    targetFile.toPath(),
+                    StandardCopyOption.REPLACE_EXISTING,
+                )
+            } catch (exception: Exception) {
+                throw GradleException(
+                    "Failed to rename ${sourceFile.absolutePath} to ${targetFile.absolutePath}",
+                    exception,
+                )
             }
         }
     }
