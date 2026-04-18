@@ -30,7 +30,11 @@ fun getUncommittedSuffix(): String {
 
     if (ciBuild) {
         val headRefVal = providers.environmentVariable("GITHUB_HEAD_REF").orElse("HEAD").get()
-        return "-$headRefVal"
+        val sanitizedHeadRef = headRefVal
+            .replace(Regex("[^A-Za-z0-9._-]"), "-")
+            .trim('-')
+            .ifEmpty { "HEAD" }
+        return "-$sanitizedHeadRef"
     }
 
     var returnedVal = ""
