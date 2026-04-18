@@ -97,7 +97,7 @@ jobs:
           path: "app/build/outputs/mapping/release"
 
       - name: Upload to GitHub release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: PIB-${{ steps.buildAll.outputs.versionNum }}
