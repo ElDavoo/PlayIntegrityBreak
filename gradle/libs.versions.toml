@@ -2,7 +2,7 @@
 #noinspection AndroidGradlePluginVersion
 agp = "9.1.1"
 kotlin = "2.3.20"
-material = "1.13.0"
+material = "1.14.0"
 hidden-api = "4.4.0"
 androidx-navigation = "2.9.7"
 androidx-work = "2.11.2"
