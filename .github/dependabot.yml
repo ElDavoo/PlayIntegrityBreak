@@ -1,5 +1,19 @@
 version: 2
 updates:
+  - package-ecosystem: nix
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: UTC
+    labels:
+      - dependencies
+      - nix
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 10
+
   - package-ecosystem: gradle
     directory: /
     schedule:
