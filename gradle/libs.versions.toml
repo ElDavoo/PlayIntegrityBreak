@@ -1,6 +1,6 @@
 [versions]
 #noinspection AndroidGradlePluginVersion
-agp = "9.2.0"
+agp = "9.3.0"
 kotlin = "2.4.10"
 material = "1.14.0"
 hidden-api = "4.4.0"
