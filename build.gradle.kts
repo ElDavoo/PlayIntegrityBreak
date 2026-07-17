@@ -61,7 +61,8 @@ val gitCommitCount = "git rev-list HEAD --count".execute().toInt()
 val gitCommitCountAfterReset = gitCommitCount - 627
 
 val minSdkVer by extra(29)
-val targetSdkVer by extra(36)
+val targetSdkVer by extra(37)
+val buildToolsVer by extra("37.0.0")
 
 val appVerCode by extra(gitCommitCount + 0x6f7373) // commit count + 0xOSS
 val appVerName by extra("${gitCommitCountAfterReset}${gitHasUncommittedSuffix}")
@@ -97,6 +98,7 @@ tasks.register("clean", Delete::class) {
 fun Project.configureApplicationExtension() {
     extensions.findByType(ApplicationExtension::class.java)?.run {
         compileSdk = targetSdkVer
+        buildToolsVersion = buildToolsVer
 
         defaultConfig {
             minSdk = minSdkVer
@@ -142,6 +144,7 @@ fun Project.configureApplicationExtension() {
 fun Project.configureLibraryExtension() {
     extensions.findByType(LibraryExtension::class.java)?.run {
         compileSdk = targetSdkVer
+        buildToolsVersion = buildToolsVer
 
         defaultConfig {
             minSdk = minSdkVer
