@@ -21,8 +21,8 @@
           };
 
           androidComposition = pkgs.androidenv.composeAndroidPackages {
-            platformVersions = [ "36" ];
-            buildToolsVersions = [ "35.0.0" "36.0.0" "36.1.0" ];
+            platformVersions = [ "37" ];
+            buildToolsVersions = [ "37.0.0" ];
             includeEmulator = false;
             includeNDK = false;
           };
@@ -46,8 +46,8 @@
 
               # Prefer host SDK only when it already has the exact components this build expects.
               if [ -n "$host_sdk" ] \
-                && [ -d "$host_sdk/platforms/android-36" ] \
-                && [ -d "$host_sdk/build-tools/35.0.0" ]; then
+                && [ -d "$host_sdk/platforms/android-37" ] \
+                && [ -d "$host_sdk/build-tools/37.0.0" ]; then
                 sdk_root="$host_sdk"
                 echo "Using host Android SDK: $sdk_root"
               else
