@@ -4,7 +4,7 @@ agp = "9.2.0"
 kotlin = "2.4.10"
 material = "1.14.0"
 hidden-api = "4.4.0"
-androidx-navigation = "2.9.8"
+androidx-navigation = "2.10.0"
 androidx-work = "2.11.2"
 vbpd = "2.0.4"
 
@@ -18,7 +18,7 @@ autoresconfig = { id = "dev.rikka.tools.autoresconfig", version = "1.2.2" }
 refine = { id = "dev.rikka.tools.refine", version = "4.4.0" }
 
 [libraries]
-androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.1" }
+androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.8.0" }
 androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version = "1.10.0" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
