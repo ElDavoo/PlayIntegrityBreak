@@ -91,6 +91,13 @@ object ConfigManager {
             saveConfig()
         }
 
+    var integrityRequestToast: Boolean
+        get() = config.integrityRequestToast
+        set(value) {
+            config.integrityRequestToast = value
+            saveConfig()
+        }
+
     var defaultInterventionEnabled: Boolean
         get() = config.defaultInterventionEnabled
         set(value) {

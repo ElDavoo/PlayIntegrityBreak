@@ -155,6 +155,8 @@
     <string name="settings_intent_api_enable_confirm">Enable API</string>
     <string name="settings_launcher_icon">Launcher icon</string>
     <string name="settings_error_only_log">Error-only log</string>
+    <string name="settings_integrity_request_toast">Toast on Integrity requests</string>
+    <string name="settings_integrity_request_toast_summary">Show a toast every time an app\'s Play Integrity request is logged</string>
 
     <string name="settings_telemetry">Telemetry</string>
     <string name="settings_telemetry_enabled">Enable telemetry upload</string>
