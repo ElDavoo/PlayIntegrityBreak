@@ -1,7 +1,6 @@
-package icu.nullptr.playintegritybreak.xposed
+package icu.nullptr.playintegritybreak.core
 
 import android.util.Log
-import de.robv.android.xposed.XposedBridge
 import it.eldavo.pib.common.BuildConfig
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -35,11 +34,11 @@ fun logWithLevel(level: Int, tag: String, msg: String, cause: Throwable? = null)
 
     if (PIBLoggerService.isActive()) {
         PIBLoggerService.appendParsedLog(parsedLog)
-        XposedBridge.log("[PIB] $parsedLog")
+        Backend.log("[PIB] $parsedLog")
         return
     }
 
-    XposedBridge.log("[PIB] $parsedLog")
+    Backend.log("[PIB] $parsedLog")
 }
 
 fun logV(tag: String, msg: String, cause: Throwable? = null) = logWithLevel(Log.VERBOSE, tag, msg, cause)

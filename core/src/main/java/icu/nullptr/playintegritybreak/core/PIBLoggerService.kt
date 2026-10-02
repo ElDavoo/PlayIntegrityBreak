@@ -1,4 +1,4 @@
-package icu.nullptr.playintegritybreak.xposed
+package icu.nullptr.playintegritybreak.core
 
 import android.app.Application
 import android.content.pm.PackageInfo
@@ -469,6 +469,8 @@ object PIBLoggerService : IPIBService.Stub() {
     override fun getLogFileLocation(): String = synchronized(logLock) {
         ensureLogFile()?.absolutePath ?: "unavailable"
     }
+
+    override fun getBackendName(): String = Backend.name
 
     private fun Bundle.getIntOrNull(key: String): Int? {
         if (!containsKey(key)) return null
