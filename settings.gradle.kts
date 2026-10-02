@@ -27,5 +27,7 @@ rootProject.name = "PIB"
 include(
     ":app",
     ":common",
-    ":xposed"
+    ":core",
+    ":xposed",
+    ":zygisk",
 )
