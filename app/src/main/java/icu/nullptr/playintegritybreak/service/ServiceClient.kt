@@ -113,6 +113,10 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
         return if (isStatusCacheFresh()) lastKnownHealthcheckTimestamp else 0L
     }
 
+    // Services older than SERVICE_VERSION 103 only ever ran under Xposed.
+    override fun getBackendName(): String =
+        service?.let { runCatching { it.backendName }.getOrNull() } ?: "Xposed"
+
     override fun getFilterCount() = service?.filterCount ?: 0
 
     override fun getLogs() = service?.logs

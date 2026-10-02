@@ -1,10 +1,8 @@
-package icu.nullptr.playintegritybreak.xposed
+package icu.nullptr.playintegritybreak.core
 
 import android.os.Bundle
 import android.os.IBinder
 import android.os.IInterface
-import de.robv.android.xposed.XC_MethodHook
-import de.robv.android.xposed.XposedBridge
 import java.lang.reflect.Member
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
@@ -76,9 +74,9 @@ object IntegrityServiceHook {
     }
 
     private fun hookMethod(method: Method) {
-        XposedBridge.hookMethod(method, object : XC_MethodHook() {
-            override fun beforeHookedMethod(param: MethodHookParam) {
-                val args = param.args ?: emptyArray()
+        Backend.current.hook(method, object : MethodHook() {
+            override fun before(param: HookParam) {
+                val args = param.args
 
                 logBinderPayload("before", param.method, args)
 
@@ -168,7 +166,7 @@ object IntegrityServiceHook {
                 }
             }
 
-            override fun afterHookedMethod(param: MethodHookParam) {
+            override fun after(param: HookParam) {
                 if (isSyntheticDeliveryInProgress()) {
                     return
                 }
@@ -179,7 +177,7 @@ object IntegrityServiceHook {
                     is IInterface -> hookBundleMethodsIfAny(result.javaClass, "iinterface-return")
                 }
 
-                val args = param.args ?: emptyArray()
+                val args = param.args
                 logBinderPayload("after", param.method, args)
                 val callerPkg = extractCallerPackage(args)
                 val playIntegrityVersion = extractPlayIntegrityVersion(args)
@@ -273,7 +271,7 @@ object IntegrityServiceHook {
 
         if (bundleArgs.isEmpty()) return
 
-        XposedBridge.log(
+        Backend.log(
             "[PIB] $TAG binder payload dump [$stage] ${member.declaringClass.name}#${member.name} bundleArgs=${bundleArgs.size}"
         )
 
@@ -286,9 +284,9 @@ object IntegrityServiceHook {
         val indent = "  ".repeat(depth)
         val keys = runCatching { bundle.keySet().toList().sorted() }.getOrDefault(emptyList())
 
-        XposedBridge.log("[PIB] $TAG ${indent}$label keyCount=${keys.size}")
+        Backend.log("[PIB] $TAG ${indent}$label keyCount=${keys.size}")
         if (keys.isEmpty()) {
-            XposedBridge.log("[PIB] $TAG ${indent}$label <empty>")
+            Backend.log("[PIB] $TAG ${indent}$label <empty>")
             return
         }
 
@@ -296,49 +294,49 @@ object IntegrityServiceHook {
             val value = runCatching { bundleGetAnyCompat(bundle, key) }.getOrNull()
             when (value) {
                 is Bundle -> {
-                    XposedBridge.log(
+                    Backend.log(
                         "[PIB] $TAG ${indent}  $key = Bundle(size=${runCatching { value.keySet().size }.getOrDefault(0)})"
                     )
                     dumpBundle(value, key, depth + 2)
                 }
 
-                is Array<*> -> XposedBridge.log(
+                is Array<*> -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentDeepToString()} (${value.javaClass.name})"
                 )
 
-                is IntArray -> XposedBridge.log(
+                is IntArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                is LongArray -> XposedBridge.log(
+                is LongArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                is DoubleArray -> XposedBridge.log(
+                is DoubleArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                is FloatArray -> XposedBridge.log(
+                is FloatArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                is BooleanArray -> XposedBridge.log(
+                is BooleanArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                is ShortArray -> XposedBridge.log(
+                is ShortArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                is ByteArray -> XposedBridge.log(
+                is ByteArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                is CharArray -> XposedBridge.log(
+                is CharArray -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${value.contentToString()} (${value.javaClass.name})"
                 )
 
-                else -> XposedBridge.log(
+                else -> Backend.log(
                     "[PIB] $TAG ${indent}  $key = ${describeBundleValue(value)}"
                 )
             }

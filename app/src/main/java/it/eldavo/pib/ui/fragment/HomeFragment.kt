@@ -118,6 +118,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     Triple(version, healthy, filterCount)
                 }.getOrDefault(Triple(0, false, 0))
             }
+            val backendName = if (serviceVersion > 0) {
+                withContext(Dispatchers.IO) { ServiceClient.backendName }
+            } else {
+                null
+            }
 
             if (!isAdded) return@launch
 
@@ -137,7 +142,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     moduleStatusIcon.setImageResource(R.drawable.sentiment_calm_24px)
                     val versionNameSimple = BuildConfig.VERSION_NAME.substringBefore(".r")
                     moduleStatus.text =
-                        getString(R.string.home_xposed_activated, versionNameSimple)
+                        getString(R.string.home_xposed_activated, versionNameSimple) + " ($backendName)"
                     root.setOnLongClickListener {
                         ConfigManager.saveConfig()
                         showToast(android.R.string.ok)
