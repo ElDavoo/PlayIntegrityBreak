@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
@@ -224,6 +225,7 @@ object PIBLoggerService : IPIBService.Stub() {
         playIntegrityVersionPatch: Int?,
     ) {
         touchHealthcheck()
+        showRequestToast(callerPkg)
         enqueuePendingEvent(
             PendingIntegrityEvent(
                 timestampMs = System.currentTimeMillis(),
@@ -297,6 +299,23 @@ object PIBLoggerService : IPIBService.Stub() {
                 logW(TAG, "Failed to publish logger binder", it)
             }
         }.getOrDefault(false)
+    }
+
+    // Runs in the Play Store process, which has no access to PIB's resources, so the text is not localized.
+    private fun showRequestToast(callerPkg: String) {
+        if (!synchronized(configLock) { config.integrityRequestToast }) return
+        val app = getCurrentApplication() ?: return
+        heartbeatHandler.post {
+            runCatching {
+                val pm = app.packageManager
+                val label = runCatching {
+                    pm.getApplicationInfo(callerPkg, 0).loadLabel(pm)
+                }.getOrDefault(callerPkg)
+                Toast.makeText(app, "PIB: Play Integrity request from $label", Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                logW(TAG, "Failed to show integrity request toast", it)
+            }
+        }
     }
 
     private fun enqueuePendingEvent(event: PendingIntegrityEvent) {
