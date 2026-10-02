@@ -1,0 +1,89 @@
+name: Dependabot auto-merge
+
+# Approves and merges a Dependabot pull request once its "Pull Request" build is green.
+#
+# Why workflow_run instead of GitHub's native auto-merge: this repo's branch rulesets require
+# no status check and no approving review, so `gh pr merge --auto` would have nothing to wait
+# for and would merge a PR the moment it opened, before CI ran. Keying off the build's
+# completion makes the build the real gate -- this job only acts once the "Pull Request"
+# workflow has concluded success for a Dependabot PR.
+#
+# The job never checks out or runs the PR's code; it only talks to the API using the head
+# branch name, so the write token is never exposed to unreviewed code. The trigger is marked
+# safe for that reason.
+on:  # zizmor: ignore[dangerous-triggers]
+  workflow_run:
+    workflows: ["Pull Request"]
+    types: [completed]
+
+permissions: {}
+
+# Two Dependabot builds can finish at the same moment; serialise per branch.
+concurrency:
+  group: dependabot-auto-merge-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: false
+
+jobs:
+  auto-merge:
+    # Only a Dependabot pull_request build that actually passed.
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Approve and merge if the build is green
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -euo pipefail
+
+          # The branch, not github.event.workflow_run.pull_requests: that array is empty in
+          # several documented cases, and a Dependabot branch always lives in this repository.
+          pr=$(gh pr list --head "$BRANCH" --state open --json number,author \
+                 --jq '.[] | select(.author.login == "app/dependabot") | .number')
+          if [ -z "$pr" ]; then
+            echo "::notice::No open Dependabot PR for $BRANCH; nothing to do."
+            exit 0
+          fi
+
+          # Re-read the whole rollup rather than trusting only the run that woke us, so a second
+          # red check on the PR still blocks the merge. A finished check reports conclusion; a
+          # commit status reports state; SKIPPED/NEUTRAL count as non-blocking. Computed inside
+          # gh's own jq so the step needs no system jq on the runner.
+          verdict=$(gh pr view "$pr" --json statusCheckRollup --jq '
+            [ .statusCheckRollup[] | (.conclusion // .state // .status // "PENDING") | ascii_upcase ]
+            | map(select(. != "SKIPPED" and . != "NEUTRAL"))
+            | if length == 0 then "EMPTY"
+              elif all(. == "SUCCESS") then "SUCCESS"
+              else "BLOCKED" end')
+          if [ "$verdict" != "SUCCESS" ]; then
+            echo "::notice::PR #$pr is not fully green ($verdict); leaving it."
+            exit 0
+          fi
+
+          # A conflicting PR (base moved under it) can't be merged; Dependabot will rebase it
+          # and the new build re-triggers this workflow.
+          mergeable=$(gh pr view "$pr" --json mergeable --jq '.mergeable')
+          if [ "$mergeable" != "MERGEABLE" ]; then
+            echo "::notice::PR #$pr is $mergeable; waiting for a rebase."
+            exit 0
+          fi
+
+          # Approve once. Dependabot can't approve its own PR; github-actions supplies the
+          # review the user asked auto-merge to leave. Idempotent so a re-run never stacks
+          # reviews (a push dismisses the old one, which reads as not-APPROVED here).
+          approved=$(gh pr view "$pr" --json reviews \
+                       --jq '[.reviews[] | select(.author.login == "github-actions" and .state == "APPROVED")] | length')
+          if [ "$approved" -eq 0 ]; then
+            gh pr review "$pr" --approve \
+              --body 'Build is green. Approved automatically: for a dependency bump, CI is the review.'
+          fi
+
+          gh pr merge "$pr" --squash
+          echo "::notice::Merged Dependabot PR #$pr."
