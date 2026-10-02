@@ -5,9 +5,8 @@ import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 import icu.nullptr.playintegritybreak.common.Constants
+import icu.nullptr.playintegritybreak.core.Bootstrap
 import java.util.concurrent.atomic.AtomicBoolean
-
-private const val TAG = "PIB-XposedEntry"
 
 @Suppress("unused")
 class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
@@ -25,14 +24,6 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
         EzXposed.initHandleLoadPackage(lpparam)
         if (!integrityHooksInstalled.compareAndSet(false, true)) return
 
-        runCatching {
-            PIBLoggerService.initialize()
-            PIBLoggerService.tryPublishBinderToClientApp()
-            IntegrityServiceHook.install(lpparam.classLoader)
-            logI(TAG, "Integrity hooks installed in ${lpparam.packageName}")
-        }.onFailure {
-            logE(TAG, "Failed to install Integrity hooks", it)
-            integrityHooksInstalled.set(false)
-        }
+        Bootstrap.start(XposedHookBackend, lpparam.classLoader)
     }
 }

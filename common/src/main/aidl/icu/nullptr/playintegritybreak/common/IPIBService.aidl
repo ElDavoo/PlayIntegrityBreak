@@ -24,4 +24,6 @@ interface IPIBService {
 
     String getLogFileLocation() = 9;
 
+    String getBackendName() = 11;
+
 }
