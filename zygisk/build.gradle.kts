@@ -117,7 +117,7 @@ for (variant in listOf("debug", "release")) {
         }
         includeEmptyDirs = false
 
-        val requiredEntries = listOf("module.prop", "customize.sh", "classes.dex", "pib.apk") +
+        val requiredEntries = listOf("module.prop", "customize.sh", "action.sh", "classes.dex", "pib.apk") +
             moduleAbis.flatMap { listOf("zygisk/$it.so", "lsplant/$it.so") }
         doLast {
             val zip = archiveFile.get().asFile

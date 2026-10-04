@@ -21,6 +21,7 @@
 #include <dobby.h>
 #include <lsplant.hpp>
 
+#include "elf_util.h"
 #include "zygisk.hpp"
 
 #define LOG_TAG "PIB-Zygisk"
@@ -40,6 +41,9 @@ constexpr const char *kEntryClass = "icu.nullptr.playintegritybreak.zygisk.Zygis
 using InitFn = bool (*)(JNIEnv *, const lsplant::InitInfo &);
 using HookFn = jobject (*)(JNIEnv *, jobject, jobject, jobject);
 using DeoptimizeFn = bool (*)(JNIEnv *, jobject);
+
+// Kept for the whole process lifetime, since LSPlant may resolve symbols after Init.
+ElfImg *libart = nullptr;
 
 HookFn lsplant_hook = nullptr;
 DeoptimizeFn lsplant_deoptimize = nullptr;
@@ -99,6 +103,12 @@ bool init_lsplant(JNIEnv *env, const std::vector<uint8_t> &lib) {
         return false;
     }
 
+    libart = new ElfImg("libart.so");
+    if (!libart->valid()) {
+        LOGE("Cannot read libart.so symbols");
+        return false;
+    }
+
     lsplant::InitInfo info{
             .inline_hooker = [](void *target, void *hooker) -> void * {
                 void *backup = nullptr;
@@ -108,10 +118,11 @@ bool init_lsplant(JNIEnv *env, const std::vector<uint8_t> &lib) {
                 return DobbyDestroy(func) == 0;
             },
             .art_symbol_resolver = [](std::string_view symbol) -> void * {
-                return DobbySymbolResolver("libart.so", std::string(symbol).c_str());
+                return libart->symbol(symbol);
             },
-            // Dobby can't look up by prefix; LSPlant treats this resolver as optional.
-            .art_symbol_prefix_resolver = {},
+            .art_symbol_prefix_resolver = [](std::string_view prefix) -> void * {
+                return libart->symbol_prefix(prefix);
+            },
             .generated_class_name = "PIBHooker_",
             .generated_source_name = "PIB",
     };
