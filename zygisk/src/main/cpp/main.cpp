@@ -1,16 +1,12 @@
 // PIB Zygisk module.
 //
 // Only runs in the Play Store main process. In preAppSpecialize (still with zygote privileges)
-// it reads the module payload (classes.dex + LSPlant) and initialises LSPlant; in
+// it reads classes.dex from the module directory and initialises LSPlant; in
 // postAppSpecialize it loads the dex and hands control to ZygiskEntry.main().
 
-#include <android/dlext.h>
 #include <android/log.h>
-#include <dlfcn.h>
 #include <fcntl.h>
 #include <jni.h>
-#include <linux/memfd.h>
-#include <sys/syscall.h>
 #include <unistd.h>
 
 #include <cstring>
@@ -32,21 +28,12 @@ namespace {
 
 constexpr const char *kTargetProcess = "com.android.vending";
 constexpr const char *kDexFile = "classes.dex";
-constexpr const char *kLSPlantFile = "lsplant/" PIB_ABI ".so";
 constexpr const char *kBridgeClass = "icu.nullptr.playintegritybreak.zygisk.LSPlantBridge";
 constexpr const char *kEntryClass = "icu.nullptr.playintegritybreak.zygisk.ZygiskEntry";
-
-// liblsplant.so is loaded at runtime from the module directory, so its entry points are
-// resolved with dlsym instead of being linked.
-using InitFn = bool (*)(JNIEnv *, const lsplant::InitInfo &);
-using HookFn = jobject (*)(JNIEnv *, jobject, jobject, jobject);
-using DeoptimizeFn = bool (*)(JNIEnv *, jobject);
 
 // Kept for the whole process lifetime, since LSPlant may resolve symbols after Init.
 ElfImg *libart = nullptr;
 
-HookFn lsplant_hook = nullptr;
-DeoptimizeFn lsplant_deoptimize = nullptr;
 
 // The dex is mapped by a direct ByteBuffer, so it must outlive the class loader (forever).
 std::vector<uint8_t> *dex_bytes = nullptr;
@@ -68,41 +55,7 @@ bool read_file(int dir_fd, const char *path, std::vector<uint8_t> &out) {
     return !out.empty();
 }
 
-void *dlopen_from_memory(const std::vector<uint8_t> &bytes, const char *name) {
-    int fd = static_cast<int>(syscall(__NR_memfd_create, name, MFD_CLOEXEC));
-    if (fd < 0) {
-        LOGE("memfd_create failed: %s", strerror(errno));
-        return nullptr;
-    }
-    if (write(fd, bytes.data(), bytes.size()) != static_cast<ssize_t>(bytes.size())) {
-        LOGE("Cannot write %s to memfd: %s", name, strerror(errno));
-        close(fd);
-        return nullptr;
-    }
-    android_dlextinfo info{};
-    info.flags = ANDROID_DLEXT_USE_LIBRARY_FD;
-    info.library_fd = fd;
-    void *handle = android_dlopen_ext(name, RTLD_NOW, &info);
-    close(fd);
-    if (!handle) LOGE("dlopen %s failed: %s", name, dlerror());
-    return handle;
-}
-
-bool init_lsplant(JNIEnv *env, const std::vector<uint8_t> &lib) {
-    void *handle = dlopen_from_memory(lib, "liblsplant.so");
-    if (!handle) return false;
-
-    auto init = reinterpret_cast<InitFn>(
-            dlsym(handle, "_ZN7lsplant2v24InitEP7_JNIEnvRKNS0_8InitInfoE"));
-    lsplant_hook = reinterpret_cast<HookFn>(
-            dlsym(handle, "_ZN7lsplant2v24HookEP7_JNIEnvP8_jobjectS4_S4_"));
-    lsplant_deoptimize = reinterpret_cast<DeoptimizeFn>(
-            dlsym(handle, "_ZN7lsplant2v210DeoptimizeEP7_JNIEnvP8_jobject"));
-    if (!init || !lsplant_hook || !lsplant_deoptimize) {
-        LOGE("LSPlant symbols not found");
-        return false;
-    }
-
+bool init_lsplant(JNIEnv *env) {
     libart = new ElfImg("libart.so");
     if (!libart->valid()) {
         LOGE("Cannot read libart.so symbols");
@@ -126,7 +79,7 @@ bool init_lsplant(JNIEnv *env, const std::vector<uint8_t> &lib) {
             .generated_class_name = "PIBHooker_",
             .generated_source_name = "PIB",
     };
-    if (!init(env, info)) {
+    if (!lsplant::Init(env, info)) {
         LOGE("LSPlant init failed");
         return false;
     }
@@ -134,11 +87,11 @@ bool init_lsplant(JNIEnv *env, const std::vector<uint8_t> &lib) {
 }
 
 jobject JNICALL bridge_hook(JNIEnv *env, jclass, jobject target, jobject hooker, jobject callback) {
-    return lsplant_hook(env, target, hooker, callback);
+    return lsplant::Hook(env, target, hooker, callback);
 }
 
 jboolean JNICALL bridge_deoptimize(JNIEnv *env, jclass, jobject method) {
-    return lsplant_deoptimize(env, method) ? JNI_TRUE : JNI_FALSE;
+    return lsplant::Deoptimize(env, method) ? JNI_TRUE : JNI_FALSE;
 }
 
 bool clear_exception(JNIEnv *env, const char *what) {
@@ -233,12 +186,11 @@ public:
             return;
         }
         auto dex = new std::vector<uint8_t>();
-        std::vector<uint8_t> lsplant_lib;
-        bool ok = read_file(dir_fd, kDexFile, *dex) && read_file(dir_fd, kLSPlantFile, lsplant_lib);
+        bool ok = read_file(dir_fd, kDexFile, *dex);
         close(dir_fd);
 
         // LSPlant must be initialised before the hidden API policy of the app is applied.
-        if (!ok || !init_lsplant(env_, lsplant_lib)) {
+        if (!ok || !init_lsplant(env_)) {
             delete dex;
             // Natives are not registered yet, so unloading is still safe.
             api_->setOption(zygisk::Option::DLCLOSE_MODULE_LIBRARY);

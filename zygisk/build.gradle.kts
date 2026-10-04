@@ -24,6 +24,11 @@ extensions.configure<ApplicationExtension>("android") {
         externalNativeBuild {
             cmake {
                 arguments += "-DANDROID_STL=c++_static"
+                // DexBuilder (inside LSPlant) pulls parallel_hashmap into two C++ modules; with SSE2
+                // its intrinsics get defined twice on x86 and clang 21 rejects that (same as Vector).
+                val phmapFlags = listOf("-DPHMAP_HAVE_SSE2=0", "-DPHMAP_HAVE_SSSE3=0")
+                cFlags += phmapFlags
+                cppFlags += phmapFlags
             }
         }
     }
@@ -63,21 +68,13 @@ kotlin {
     jvmToolchain(21)
 }
 
-val lsplantAar: Configuration by configurations.creating {
-    isTransitive = false
-}
-
 dependencies {
     implementation(projects.core)
 
     implementation(libs.io.github.vvb2060.ndk.dobby)
-    implementation(libs.org.lsposed.lsplant.standalone)
-    lsplantAar(libs.org.lsposed.lsplant.standalone) {
-        artifact { type = "aar" }
-    }
 }
 
-// Builds the flashable Magisk/KernelSU module: zygisk/<abi>.so + classes.dex + liblsplant + PIB app.
+// Builds the flashable Magisk/KernelSU module: zygisk/<abi>.so + classes.dex + PIB app.
 for (variant in listOf("debug", "release")) {
     val variantCapped = variant.replaceFirstChar { it.titlecase(Locale.ROOT) }
     val payloadApk = layout.buildDirectory.file("outputs/apk/$variant/zygisk-$variant.apk")
@@ -104,13 +101,6 @@ for (variant in listOf("debug", "release")) {
             include("lib/*/libpib_zygisk.so")
             eachFile { if (path.startsWith("lib/")) path = "zygisk/${relativePath.segments[1]}.so" }
         }
-        from(lsplantAar.elements.map { files -> files.map { zipTree(it) } }) {
-            include("prefab/modules/lsplant/libs/*/liblsplant.so")
-            eachFile {
-                val abi = relativePath.segments[4].removePrefix("android.")
-                if (abi in moduleAbis) path = "lsplant/$abi.so" else exclude()
-            }
-        }
         from(appApkDir) {
             include("*.apk")
             rename { "pib.apk" }
@@ -118,7 +108,7 @@ for (variant in listOf("debug", "release")) {
         includeEmptyDirs = false
 
         val requiredEntries = listOf("module.prop", "customize.sh", "action.sh", "classes.dex", "pib.apk") +
-            moduleAbis.flatMap { listOf("zygisk/$it.so", "lsplant/$it.so") }
+            moduleAbis.map { "zygisk/$it.so" }
         doLast {
             val zip = archiveFile.get().asFile
             val entries = ZipFile(zip).use { z -> z.entries().asSequence().map { it.name }.toSet() }

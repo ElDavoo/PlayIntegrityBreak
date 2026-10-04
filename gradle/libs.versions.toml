@@ -7,7 +7,6 @@ hidden-api = "4.4.0"
 androidx-navigation = "2.10.2"
 androidx-work = "2.12.0"
 vbpd = "2.0.4"
-lsplant = "6.4"
 
 [plugins]
 agp-app = { id = "com.android.application", version.ref = "agp" }
@@ -38,5 +37,4 @@ dev-rikka-hidden-stub = { module = "dev.rikka.hidden:stub", version.ref = "hidde
 io-github-vvb2060-ndk-dobby = { module = "io.github.vvb2060.ndk:dobby", version = "1.2" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.11.0" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
-org-lsposed-lsplant-standalone = { module = "org.lsposed.lsplant:lsplant-standalone", version.ref = "lsplant" }
 me-zhanghai-android-appiconloader = { module = "me.zhanghai.android.appiconloader:appiconloader", version = "1.5.0" }

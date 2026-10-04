@@ -1,0 +1,3 @@
+[submodule "zygisk/src/main/cpp/external/lsplant"]
+	path = zygisk/src/main/cpp/external/lsplant
+	url = https://github.com/JingMatrix/LSPlant.git
