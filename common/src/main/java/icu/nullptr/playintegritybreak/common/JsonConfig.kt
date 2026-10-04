@@ -11,6 +11,7 @@ data class JsonConfig(
     var integrityModeMigrated: Boolean = false,
     var detailLog: Boolean = false,
     var errorOnlyLog: Boolean = false,
+    var integrityRequestToast: Boolean = true,
     var defaultInterventionEnabled: Boolean = true,
     var defaultHookRewriteEnabled: Boolean = true,
     var defaultHookRewriteErrorCode: Int = -8,
@@ -47,6 +48,7 @@ data class JsonConfig(
         var rewriteIntegrityErrorRemediable: Boolean = true,
         var deliverSyntheticResponse: Boolean = true,
         var delaySyntheticResponseDelivery: Boolean = false,
+        var integrityRequestToast: Boolean = true,
     ) {
         override fun toString() = encoder.encodeToString(this)
 

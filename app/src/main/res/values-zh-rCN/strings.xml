@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">禁用后即使默认情况下启用了拦截，仍允许 Play Integrity 请求。</string>
     <string name="app_rewrite_integrity_response">启用合成错误</string>
     <string name="app_rewrite_integrity_response_desc">启用时，应用不会与 Play Integrity 通信，而是收到生成的错误。</string>
+    <string name="app_integrity_request_toast">Integrity 请求时显示提示</string>
+    <string name="app_integrity_request_toast_desc">当此应用请求 Play Integrity 时显示提示。还需要在默认选项中启用。</string>
+    <string name="app_integrity_request_toast_default_desc">当应用请求 Play Integrity 时显示提示。可按应用单独关闭。</string>
+    <string name="integrity_request_toast">%1$s 请求了 Play Integrity</string>
     <string name="app_deliver_synthetic_response">发送合成响应</string>
     <string name="app_deliver_synthetic_response_desc">禁用时，应用将完全无法收到响应。仅在测试应用何时请求 Play Integrity（应用可能会长时间挂起）时使用。</string>
     <string name="app_delay_synthetic_response">延迟响应发送</string>

@@ -17,6 +17,14 @@
             app:singleLineTitle="false"
             android:title="@string/app_rewrite_integrity_response"
             android:summary="@string/app_rewrite_integrity_response_desc" />
+        <SwitchPreferenceCompat
+            android:icon="@drawable/outline_info_24"
+            android:key="integrityRequestToast"
+            android:defaultValue="true"
+            android:dependency="enableIntervention"
+            app:singleLineTitle="false"
+            android:title="@string/app_integrity_request_toast"
+            android:summary="@string/app_integrity_request_toast_desc" />
     </PreferenceCategory>
 
     <PreferenceCategory

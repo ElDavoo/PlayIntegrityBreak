@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">Deaktiver for at tillade Play Integrity-forespørgsler, selv når opsnapning er aktiveret som standard.</string>
     <string name="app_rewrite_integrity_response">Aktivér syntetiske fejl</string>
     <string name="app_rewrite_integrity_response_desc">Når aktiveret, vil appen ikke kommunikere med Play Integrity og vil i stedet modtage en genereret fejl.</string>
+    <string name="app_integrity_request_toast">Besked ved Integrity-anmodninger</string>
+    <string name="app_integrity_request_toast_desc">Vis en besked, når denne app beder om Play Integrity. Skal også være slået til under Standardindstillinger.</string>
+    <string name="app_integrity_request_toast_default_desc">Vis en besked, når en app beder om Play Integrity. Kan slås fra for hver app.</string>
+    <string name="integrity_request_toast">%1$s bad om Play Integrity</string>
     <string name="app_deliver_synthetic_response">Lever syntetisk svar</string>
     <string name="app_deliver_synthetic_response_desc">Når deaktiveret, modtager appen slet ikke noget svar. Brug kun for at teste, hvor appen præcist anmoder om Play Integrity (da den sandsynligvis vil hænge i lang tid).</string>
     <string name="app_delay_synthetic_response">Forsink svarlevering</string>

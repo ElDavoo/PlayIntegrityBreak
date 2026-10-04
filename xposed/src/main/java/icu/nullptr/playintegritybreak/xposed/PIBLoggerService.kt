@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
@@ -224,6 +225,7 @@ object PIBLoggerService : IPIBService.Stub() {
         playIntegrityVersionPatch: Int?,
     ) {
         touchHealthcheck()
+        showRequestToast(callerPkg)
         enqueuePendingEvent(
             PendingIntegrityEvent(
                 timestampMs = System.currentTimeMillis(),
@@ -297,6 +299,34 @@ object PIBLoggerService : IPIBService.Stub() {
                 logW(TAG, "Failed to publish logger binder", it)
             }
         }.getOrDefault(false)
+    }
+
+    private fun showRequestToast(callerPkg: String) {
+        val enabled = synchronized(configLock) {
+            config.integrityRequestToast && config.scope[callerPkg]?.integrityRequestToast != false
+        }
+        if (!enabled) return
+        val app = getCurrentApplication() ?: return
+        heartbeatHandler.post {
+            runCatching {
+                val pm = app.packageManager
+                val label = runCatching {
+                    pm.getApplicationInfo(callerPkg, 0).loadLabel(pm)
+                }.getOrDefault(callerPkg)
+                Toast.makeText(app, requestToastText(app, label), Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                logW(TAG, "Failed to show integrity request toast", it)
+            }
+        }
+    }
+
+    // The hook runs in the Play Store process, so the localized text is read from PIB's own package.
+    private fun requestToastText(app: Application, label: CharSequence): String {
+        return runCatching {
+            val res = app.createPackageContext(BuildConfig.APP_PACKAGE_NAME, 0).resources
+            val id = res.getIdentifier("integrity_request_toast", "string", BuildConfig.APP_PACKAGE_NAME)
+            res.getString(id, label)
+        }.getOrElse { "$label asked for Play Integrity" }
     }
 
     private fun enqueuePendingEvent(event: PendingIntegrityEvent) {

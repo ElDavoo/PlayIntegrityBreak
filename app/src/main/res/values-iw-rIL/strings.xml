@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">כבה כדי לאפשר בקשות Play Integrity גם כאשר היירוט מופעל כברירת מחדל.</string>
     <string name="app_rewrite_integrity_response">הפעל שגיאות סינתטיות</string>
     <string name="app_rewrite_integrity_response_desc">כאשר מופעל, האפליקציה לא תתקשר עם Play Integrity ותקבל במקום זאת שגיאה שנוצרה.</string>
+    <string name="app_integrity_request_toast">התראה על בקשות Integrity</string>
+    <string name="app_integrity_request_toast_desc">הצגת התראה כאשר האפליקציה הזו מבקשת Play Integrity. יש להפעיל זאת גם באפשרויות ברירת מחדל.</string>
+    <string name="app_integrity_request_toast_default_desc">הצגת התראה כאשר אפליקציה מבקשת Play Integrity. ניתן לכבות לכל אפליקציה בנפרד.</string>
+    <string name="integrity_request_toast">%1$s ביקשה Play Integrity</string>
     <string name="app_deliver_synthetic_response">ספק תגובה סינתטית</string>
     <string name="app_deliver_synthetic_response_desc">כאשר כבוי, האפליקציה לא תקבל תגובה כלל. השתמש בזה רק כדי לבדוק היכן בדיוק האפליקציה מבקשת Play Integrity (סביר שתיתקע לזמן רב).</string>
     <string name="app_delay_synthetic_response">השהיית מסירת תגובה</string>

@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">Отключите, чтобы разрешить запросы Play Integrity даже если перехват включён по умолчанию.</string>
     <string name="app_rewrite_integrity_response">Включить синтетические ошибки</string>
     <string name="app_rewrite_integrity_response_desc">Если включено, приложение не будет общаться с Play Integrity и вместо этого получит сгенерированную ошибку.</string>
+    <string name="app_integrity_request_toast">Уведомление о запросах Integrity</string>
+    <string name="app_integrity_request_toast_desc">Показывать всплывающее уведомление, когда это приложение запрашивает Play Integrity. Также должно быть включено в Настройках по умолчанию.</string>
+    <string name="app_integrity_request_toast_default_desc">Показывать всплывающее уведомление, когда приложение запрашивает Play Integrity. Можно отключить для отдельных приложений.</string>
+    <string name="integrity_request_toast">%1$s запросило Play Integrity</string>
     <string name="app_deliver_synthetic_response">Доставлять синтетический ответ</string>
     <string name="app_deliver_synthetic_response_desc">Если отключено, приложение вообще не получит ответа. Используйте только для тестирования того, где приложение запрашивает Play Integrity (оно может зависнуть надолго).</string>
     <string name="app_delay_synthetic_response">Задерживать доставку ответа</string>

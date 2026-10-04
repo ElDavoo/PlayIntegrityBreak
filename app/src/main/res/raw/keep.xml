@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Read by the hook through getIdentifier, so the shrinker can't see the reference. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@string/integrity_request_toast" />

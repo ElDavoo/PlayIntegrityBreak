@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">無効にすると、介入がデフォルトで有効な場合でもPlay Integrityリクエストが許可されます。</string>
     <string name="app_rewrite_integrity_response">合成エラーを有効にする</string>
     <string name="app_rewrite_integrity_response_desc">有効にすると、アプリはPlay Integrityと通信せず、代わりに生成されたエラーを受け取ります。</string>
+    <string name="app_integrity_request_toast">Integrity リクエスト時にトースト表示</string>
+    <string name="app_integrity_request_toast_desc">このアプリが Play Integrity を要求したときにトーストを表示します。デフォルトのオプションでも有効にする必要があります。</string>
+    <string name="app_integrity_request_toast_default_desc">アプリが Play Integrity を要求したときにトーストを表示します。アプリごとに無効にできます。</string>
+    <string name="integrity_request_toast">%1$s が Play Integrity を要求しました</string>
     <string name="app_deliver_synthetic_response">合成レスポンスを配信する</string>
     <string name="app_deliver_synthetic_response_desc">無効にすると、アプリはまったくレスポンスを受け取りません。アプリがPlay Integrityを要求する正確な箇所をテストする場合にのみ使用してください（長時間ハングする可能性があります）。</string>
     <string name="app_delay_synthetic_response">レスポンス配信を遅延</string>
