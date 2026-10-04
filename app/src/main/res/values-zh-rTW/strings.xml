@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">停用後，即使預設啟用攔截，也允許 Play Integrity 請求。</string>
     <string name="app_rewrite_integrity_response">啟用合成錯誤</string>
     <string name="app_rewrite_integrity_response_desc">啟用時，應用不會與 Play Integrity 通訊，而是收到產生的錯誤。</string>
+    <string name="app_integrity_request_toast">Integrity 請求時顯示提示</string>
+    <string name="app_integrity_request_toast_desc">當此應用程式請求 Play Integrity 時顯示提示。也需要在預設選項中啟用。</string>
+    <string name="app_integrity_request_toast_default_desc">當應用程式請求 Play Integrity 時顯示提示。可針對個別應用程式關閉。</string>
+    <string name="integrity_request_toast">%1$s 請求了 Play Integrity</string>
     <string name="app_deliver_synthetic_response">提供合成回應</string>
     <string name="app_deliver_synthetic_response_desc">停用時，應用將完全收不到回應。僅在測試應用於何處請求 Play Integrity 時使用（應用可能長時間卡住）。</string>
     <string name="app_delay_synthetic_response">延遲回應送出</string>

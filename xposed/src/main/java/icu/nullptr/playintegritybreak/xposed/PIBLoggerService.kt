@@ -301,7 +301,6 @@ object PIBLoggerService : IPIBService.Stub() {
         }.getOrDefault(false)
     }
 
-    // Runs in the Play Store process, which has no access to PIB's resources, so the text is not localized.
     private fun showRequestToast(callerPkg: String) {
         val enabled = synchronized(configLock) {
             config.integrityRequestToast && config.scope[callerPkg]?.integrityRequestToast != false
@@ -314,11 +313,20 @@ object PIBLoggerService : IPIBService.Stub() {
                 val label = runCatching {
                     pm.getApplicationInfo(callerPkg, 0).loadLabel(pm)
                 }.getOrDefault(callerPkg)
-                Toast.makeText(app, "$label asked for Play Integrity", Toast.LENGTH_SHORT).show()
+                Toast.makeText(app, requestToastText(app, label), Toast.LENGTH_SHORT).show()
             }.onFailure {
                 logW(TAG, "Failed to show integrity request toast", it)
             }
         }
+    }
+
+    // The hook runs in the Play Store process, so the localized text is read from PIB's own package.
+    private fun requestToastText(app: Application, label: CharSequence): String {
+        return runCatching {
+            val res = app.createPackageContext(BuildConfig.APP_PACKAGE_NAME, 0).resources
+            val id = res.getIdentifier("integrity_request_toast", "string", BuildConfig.APP_PACKAGE_NAME)
+            res.getString(id, label)
+        }.getOrElse { "$label asked for Play Integrity" }
     }
 
     private fun enqueuePendingEvent(event: PendingIntegrityEvent) {

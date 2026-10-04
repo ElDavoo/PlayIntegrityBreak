@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">عطِّل للسماح بطلبات Play Integrity حتى عندما يكون الاعتراض مفعّلًا افتراضيًا.</string>
     <string name="app_rewrite_integrity_response">تمكين أخطاء مصطنعة</string>
     <string name="app_rewrite_integrity_response_desc">عند التمكين، لن يتواصل التطبيق مع Play Integrity وسيتلقى بدلًا من ذلك خطأً مصطنعًا.</string>
+    <string name="app_integrity_request_toast">إشعار عند طلبات Integrity</string>
+    <string name="app_integrity_request_toast_desc">عرض إشعار عندما يطلب هذا التطبيق Play Integrity. يجب تفعيله أيضًا في الإعدادات الافتراضية.</string>
+    <string name="app_integrity_request_toast_default_desc">عرض إشعار عندما يطلب أي تطبيق Play Integrity. يمكن إيقافه لكل تطبيق على حدة.</string>
+    <string name="integrity_request_toast">طلب %1$s ‏Play Integrity</string>
     <string name="app_deliver_synthetic_response">تسليم استجابة مصطنعة</string>
     <string name="app_deliver_synthetic_response_desc">عند التعطيل، لن يتلقى التطبيق أي استجابة على الإطلاق. استخدم هذا فقط لاختبار المكان الذي يطلب فيه التطبيق Play Integrity (حيث قد يتجمد التطبيق لفترة طويلة).</string>
     <string name="app_delay_synthetic_response">تأخير تسليم الاستجابة</string>

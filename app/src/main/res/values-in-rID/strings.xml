@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">Nonaktifkan untuk mengizinkan permintaan Play Integrity meskipun penyadapan diaktifkan secara default.</string>
     <string name="app_rewrite_integrity_response">Aktifkan kesalahan sintetis</string>
     <string name="app_rewrite_integrity_response_desc">Saat diaktifkan, aplikasi tidak akan berkomunikasi dengan Play Integrity dan akan menerima kesalahan yang dihasilkan.</string>
+    <string name="app_integrity_request_toast">Toast saat permintaan Integrity</string>
+    <string name="app_integrity_request_toast_desc">Tampilkan toast saat aplikasi ini meminta Play Integrity. Juga harus diaktifkan di Opsi bawaan.</string>
+    <string name="app_integrity_request_toast_default_desc">Tampilkan toast saat aplikasi meminta Play Integrity. Dapat dinonaktifkan per aplikasi.</string>
+    <string name="integrity_request_toast">%1$s meminta Play Integrity</string>
     <string name="app_deliver_synthetic_response">Kirim respons sintetis</string>
     <string name="app_deliver_synthetic_response_desc">Saat dinonaktifkan, aplikasi tidak akan menerima respons sama sekali. Gunakan hanya untuk menguji di mana aplikasi meminta Play Integrity (karena kemungkinan akan menggantung cukup lama).</string>
     <string name="app_delay_synthetic_response">Tunda pengiriman respons</string>

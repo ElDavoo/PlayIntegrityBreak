@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">Desactiva per permetre les sol·licituds de Play Integrity encara que la intercepció estigui habilitada per defecte.</string>
     <string name="app_rewrite_integrity_response">Activa errors sintètics</string>
     <string name="app_rewrite_integrity_response_desc">Quan està activat, l\'aplicació no es comunicarà amb Play Integrity i rebrà un error generat.</string>
+    <string name="app_integrity_request_toast">Avís en les sol·licituds d\'Integrity</string>
+    <string name="app_integrity_request_toast_desc">Mostra un avís quan aquesta aplicació sol·liciti Play Integrity. També cal activar-ho a Opcions per defecte.</string>
+    <string name="app_integrity_request_toast_default_desc">Mostra un avís quan una aplicació sol·liciti Play Integrity. Es pot desactivar per a cada aplicació.</string>
+    <string name="integrity_request_toast">%1$s ha sol·licitat Play Integrity</string>
     <string name="app_deliver_synthetic_response">Enviar resposta sintètica</string>
     <string name="app_deliver_synthetic_response_desc">Quan està desactivat, l\'aplicació no rebrà cap resposta. Utilitza-ho només per provar on exactament l\'aplicació sol·licita Play Integrity (pot quedar-se penjada durant molt de temps).</string>
     <string name="app_delay_synthetic_response">Retardar l\'enviament de la resposta</string>

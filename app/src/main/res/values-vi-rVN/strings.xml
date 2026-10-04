@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">Tắt để cho phép các yêu cầu Play Integrity ngay cả khi tính năng chặn được bật mặc định.</string>
     <string name="app_rewrite_integrity_response">Bật lỗi tổng hợp</string>
     <string name="app_rewrite_integrity_response_desc">Khi bật, ứng dụng sẽ không liên lạc với Play Integrity và sẽ nhận một lỗi được tạo.</string>
+    <string name="app_integrity_request_toast">Thông báo khi có yêu cầu Integrity</string>
+    <string name="app_integrity_request_toast_desc">Hiển thị thông báo khi ứng dụng này yêu cầu Play Integrity. Cũng cần được bật trong Tùy chọn mặc định.</string>
+    <string name="app_integrity_request_toast_default_desc">Hiển thị thông báo khi một ứng dụng yêu cầu Play Integrity. Có thể tắt cho từng ứng dụng.</string>
+    <string name="integrity_request_toast">%1$s đã yêu cầu Play Integrity</string>
     <string name="app_deliver_synthetic_response">Gửi phản hồi tổng hợp</string>
     <string name="app_deliver_synthetic_response_desc">Khi tắt, ứng dụng sẽ không nhận bất kỳ phản hồi nào. Chỉ dùng để kiểm tra nơi ứng dụng yêu cầu Play Integrity (vì ứng dụng có thể bị treo lâu).</string>
     <string name="app_delay_synthetic_response">Hoãn gửi phản hồi</string>

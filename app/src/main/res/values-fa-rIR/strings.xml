@@ -60,6 +60,10 @@
     <string name="app_enable_intervention_desc">برای اجازه دادن به درخواست‌های Play Integrity حتی وقتی که رهگیری به‌صورت پیش‌فرض فعال است، این را غیرفعال کنید.</string>
     <string name="app_rewrite_integrity_response">فعال‌سازی خطاهای مصنوعی</string>
     <string name="app_rewrite_integrity_response_desc">وقتی فعال باشد، برنامه با Play Integrity ارتباط برقرار نمی‌کند و در عوض یک خطای تولیدشده دریافت می‌کند.</string>
+    <string name="app_integrity_request_toast">اعلان هنگام درخواست‌های Integrity</string>
+    <string name="app_integrity_request_toast_desc">هنگامی که این برنامه Play Integrity را درخواست می‌کند، اعلانی نمایش داده شود. باید در تنظیمات پیش‌فرض نیز فعال باشد.</string>
+    <string name="app_integrity_request_toast_default_desc">هنگامی که برنامه‌ای Play Integrity را درخواست می‌کند، اعلانی نمایش داده شود. برای هر برنامه قابل غیرفعال‌سازی است.</string>
+    <string name="integrity_request_toast">%1$s ‏Play Integrity را درخواست کرد</string>
     <string name="app_deliver_synthetic_response">ارسال پاسخ مصنوعی</string>
     <string name="app_deliver_synthetic_response_desc">وقتی غیرفعال باشد، برنامه هیچ پاسخی دریافت نخواهد کرد. فقط برای تست اینکه دقیقاً برنامه چه زمانی از Play Integrity درخواست می‌کند از آن استفاده کنید (زیرا احتمالاً برای مدت طولانی گیر خواهند کرد).</string>
     <string name="app_delay_synthetic_response">تعویق ارسال پاسخ</string>
