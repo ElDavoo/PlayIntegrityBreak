@@ -1,6 +1,7 @@
 package icu.nullptr.playintegritybreak.zygisk
 
 import android.app.Application
+import android.app.Instrumentation
 import android.util.Log
 import com.v7878.unsafe.Reflection
 import com.v7878.zygisk.ZygoteLoader
@@ -31,28 +32,45 @@ object ZygiskEntry {
         // The payload is injected in every Play Store process, the Integrity service runs in the main one.
         if (ZygoteLoader.getProcessName() != Constants.VENDING_PACKAGE_NAME) return
 
+        // Several bootstrap points, the first one that fires wins:
+        // - Vector deoptimizes LoadedApk.makeApplication(Inner) and Instrumentation.newApplication
+        //   right after we hook them, resetting their entry points and dropping our hooks;
+        // - without Vector, boot image code may call Application.attach without going through
+        //   its entry point.
         runCatching {
-            // makeApplication(Inner) is too large to be inlined into handleBindApplication, and,
-            // unlike handleBindApplication, Xposed frameworks don't hook it.
-            val makeApplication = Reflection.getHiddenExecutables(Class.forName("android.app.LoadedApk"))
-                .filterIsInstance<Method>()
-                .filter {
-                    (it.name == "makeApplication" || it.name == "makeApplicationInner") &&
-                        it.returnType == Application::class.java
-                }
-            check(makeApplication.isNotEmpty()) { "LoadedApk.makeApplication not found" }
-
-            val hook = object : MethodHook() {
-                override fun after(param: HookParam) {
-                    val app = param.result as? Application ?: return
-                    if (app.packageName != Constants.VENDING_PACKAGE_NAME) return
-                    if (!started.compareAndSet(false, true)) return
-                    Bootstrap.start(VMToolsHookBackend, app.classLoader)
-                }
-            }
-            makeApplication.forEach { VMToolsHookBackend.hook(it, hook) }
+            hookAll(declaredMethods(Application::class.java, "attach"), object : MethodHook() {
+                override fun after(param: HookParam) = start(param.thisObject as Application)
+            })
+            hookAll(declaredMethods(Instrumentation::class.java, "callApplicationOnCreate"), object : MethodHook() {
+                override fun before(param: HookParam) = start(param.args[0] as Application)
+            })
+            hookAll(
+                declaredMethods(Class.forName("android.app.LoadedApk"), "makeApplication", "makeApplicationInner"),
+                object : MethodHook() {
+                    override fun after(param: HookParam) {
+                        (param.result as? Application)?.let(::start)
+                    }
+                },
+            )
         }.onFailure {
             Log.e(TAG, "Failed to set up Zygisk entry", it)
         }
+    }
+
+    private fun declaredMethods(clazz: Class<*>, vararg names: String): List<Method> =
+        Reflection.getHiddenExecutables(clazz).filterIsInstance<Method>().filter { it.name in names }
+
+    private fun hookAll(methods: List<Method>, hook: MethodHook) {
+        if (methods.isEmpty()) Log.w(TAG, "Bootstrap method not found")
+        methods.forEach { method ->
+            runCatching { VMToolsHookBackend.hook(method, hook) }
+                .onFailure { Log.e(TAG, "Failed to hook $method", it) }
+        }
+    }
+
+    private fun start(app: Application) {
+        if (started.get() || app.packageName != Constants.VENDING_PACKAGE_NAME) return
+        if (!started.compareAndSet(false, true)) return
+        Bootstrap.start(VMToolsHookBackend, app.classLoader)
     }
 }
