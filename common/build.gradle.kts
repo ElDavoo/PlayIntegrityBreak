@@ -25,7 +25,7 @@ extensions.configure<LibraryExtension>("android") {
         buildConfigField("int", "CONFIG_VERSION", configVerCode.toString())
         buildConfigField("int", "SERVICE_VERSION", serviceVerCode.toString())
         buildConfigField("int", "MIN_BACKUP_VERSION", minBackupVerCode.toString())
-        buildConfigField("String", "APP_PACKAGE_NAME", "\"$appPackageName\"")
+        buildConfigField("String", "APP_PACKAGE_NAME", "\"$appPackageName.test\"")
         buildConfigField("String", "APP_VERSION_NAME", "\"$appVerName\"")
         buildConfigField("int", "APP_VERSION_CODE", appVerCode.toString())
     }
