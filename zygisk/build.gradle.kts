@@ -35,7 +35,6 @@ extensions.configure<ApplicationExtension>("android") {
 
     buildFeatures {
         buildConfig = false
-        prefab = true
     }
 
     buildTypes {
@@ -71,7 +70,6 @@ kotlin {
 dependencies {
     implementation(projects.core)
 
-    implementation(libs.io.github.vvb2060.ndk.dobby)
 }
 
 // Builds the flashable Magisk/KernelSU module: zygisk/<abi>.so + classes.dex + PIB app.
