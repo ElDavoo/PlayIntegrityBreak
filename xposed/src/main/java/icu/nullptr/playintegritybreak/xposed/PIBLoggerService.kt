@@ -311,7 +311,7 @@ object PIBLoggerService : IPIBService.Stub() {
                 val label = runCatching {
                     pm.getApplicationInfo(callerPkg, 0).loadLabel(pm)
                 }.getOrDefault(callerPkg)
-                Toast.makeText(app, "PIB: Play Integrity request from $label", Toast.LENGTH_SHORT).show()
+                Toast.makeText(app, "$label asked for Play Integrity", Toast.LENGTH_SHORT).show()
             }.onFailure {
                 logW(TAG, "Failed to show integrity request toast", it)
             }
