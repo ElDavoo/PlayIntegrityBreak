@@ -1,6 +1,6 @@
 #!/system/bin/sh
 # "Action" button in the KernelSU/Magisk manager: opens the PIB app.
-PIB_PACKAGE=it.eldavo.pib
+PIB_PACKAGE=it.eldavo.pib.test
 
 # am start can exit with 0 even when the activity doesn't exist, so check its output too.
 OUTPUT=$(am start -n "$PIB_PACKAGE/it.eldavo.pib.ui.activity.MainActivity" 2>&1)
