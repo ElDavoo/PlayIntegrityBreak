@@ -60,6 +60,8 @@
     <string name="app_enable_intervention_desc">Disable to allow Play Integrity requests even when interception is enabled by default.</string>
     <string name="app_rewrite_integrity_response">Enable synthetic errors</string>
     <string name="app_rewrite_integrity_response_desc">When enabled, the app will not communicate with Play Integrity and will instead receive a generated error.</string>
+    <string name="app_integrity_request_toast">Toast on Integrity requests</string>
+    <string name="app_integrity_request_toast_desc">Show a toast when this app asks for Play Integrity. Requires the global switch in Settings.</string>
     <string name="app_deliver_synthetic_response">Deliver synthetic response</string>
     <string name="app_deliver_synthetic_response_desc">When disabled, the app will not receive a response at all. Use it only to test where exactly the app asks for Play Integrity (as they will likely hang for a long time).</string>
     <string name="app_delay_synthetic_response">Delay response delivery</string>
@@ -156,7 +158,7 @@
     <string name="settings_launcher_icon">Launcher icon</string>
     <string name="settings_error_only_log">Error-only log</string>
     <string name="settings_integrity_request_toast">Toast on Integrity requests</string>
-    <string name="settings_integrity_request_toast_summary">Show a toast every time an app\'s Play Integrity request is logged</string>
+    <string name="settings_integrity_request_toast_summary">Show a toast every time an app\'s Play Integrity request is logged. Can be turned off per app.</string>
 
     <string name="settings_telemetry">Telemetry</string>
     <string name="settings_telemetry_enabled">Enable telemetry upload</string>

@@ -187,6 +187,7 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                 "enableLogger" -> if (isDefaultMode) pack.config.rewriteIntegrityResponse else effectiveRewriteEnabled()
                 "deliverSyntheticResponse" -> pack.config.deliverSyntheticResponse
                 "delaySyntheticResponseDelivery" -> pack.config.delaySyntheticResponseDelivery
+                "integrityRequestToast" -> pack.config.integrityRequestToast
                 "rewriteIntegrityErrorRemediable" -> if (hasAppRewriteOverride()) {
                     pack.config.rewriteIntegrityErrorRemediable
                 } else {
@@ -238,6 +239,10 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                         pack.config.interventionEnabled = true
                     }
                     pack.config.delaySyntheticResponseDelivery = value
+                }
+                "integrityRequestToast" -> {
+                    pack.enabled = true
+                    pack.config.integrityRequestToast = value
                 }
                 "rewriteIntegrityErrorRemediable" -> {
                     pack.enabled = true
@@ -320,6 +325,8 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                     }
                 } else if (isDefaultMode) {
                     it.isVisible = false
+                    // The global toast switch lives in Settings.
+                    findPreference<Preference>("integrityRequestToast")?.isVisible = false
                 } else {
                     it.icon = PackageHelper.loadAppIcon(pack.app)
                     it.title = PackageHelper.loadAppLabel(pack.app)

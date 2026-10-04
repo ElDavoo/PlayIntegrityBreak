@@ -303,7 +303,10 @@ object PIBLoggerService : IPIBService.Stub() {
 
     // Runs in the Play Store process, which has no access to PIB's resources, so the text is not localized.
     private fun showRequestToast(callerPkg: String) {
-        if (!synchronized(configLock) { config.integrityRequestToast }) return
+        val enabled = synchronized(configLock) {
+            config.integrityRequestToast && config.scope[callerPkg]?.integrityRequestToast != false
+        }
+        if (!enabled) return
         val app = getCurrentApplication() ?: return
         heartbeatHandler.post {
             runCatching {
