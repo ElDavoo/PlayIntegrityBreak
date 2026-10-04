@@ -5,6 +5,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven("https://jitpack.io")
         maven("https://mirrors.cloud.tencent.com/nexus/repository/maven-public")
         maven("https://maven.aliyun.com/repository/public")
     }

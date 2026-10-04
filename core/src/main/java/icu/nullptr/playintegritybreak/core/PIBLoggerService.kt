@@ -36,6 +36,7 @@ object PIBLoggerService : IPIBService.Stub() {
     private val initialized = AtomicBoolean(false)
     private val heartbeatLoopStarted = AtomicBoolean(false)
     private val binderPublished = AtomicBoolean(false)
+    private val configSnapshotRestored = AtomicBoolean(false)
     private val publishFlushRunning = AtomicBoolean(false)
     private val capturedEvents = AtomicLong(0)
     private val lastHealthcheckTimestamp = AtomicLong(0)
@@ -137,6 +138,7 @@ object PIBLoggerService : IPIBService.Stub() {
 
     fun resolvePolicy(callerPkg: String): IntegrityPolicy {
         touchHealthcheck()
+        loadPersistedConfigSnapshot()
 
         val unknownCaller = callerPkg.isBlank() || callerPkg == "unknown"
         if (unknownCaller) {
@@ -397,6 +399,8 @@ object PIBLoggerService : IPIBService.Stub() {
         synchronized(configLock) {
             config = parsedConfig
         }
+        // The app's config is newer than any snapshot on disk.
+        configSnapshotRestored.set(true)
 
         persistConfigSnapshot(parsedConfig.toString())
     }
@@ -534,8 +538,14 @@ object PIBLoggerService : IPIBService.Stub() {
         return file
     }
 
+    /**
+     * Restores the config the app last pushed. Hooks can be installed before the Application
+     * exists (the snapshot lives in its files dir), so this is retried until it can run once.
+     */
     private fun loadPersistedConfigSnapshot() {
+        if (configSnapshotRestored.get()) return
         val file = ensureConfigSnapshotFile() ?: return
+        if (!configSnapshotRestored.compareAndSet(false, true)) return
         if (!file.exists() || file.length() == 0L) return
 
         runCatching {

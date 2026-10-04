@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.agp.app) apply false
     alias(libs.plugins.agp.lib) apply false
     alias(libs.plugins.nav.safeargs.kotlin) apply false
+    alias(libs.plugins.zygoteloader) apply false
 }
 
 fun String.execute(currentWorkingDir: File = file("./")): String {

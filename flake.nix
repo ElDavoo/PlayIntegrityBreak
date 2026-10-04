@@ -24,9 +24,7 @@
             platformVersions = [ "37" ];
             buildToolsVersions = [ "37.0.0" ];
             includeEmulator = false;
-            includeNDK = true;
-            ndkVersions = [ "29.0.14206865" ];
-            cmakeVersions = [ "3.31.6" ];
+            includeNDK = false;
           };
 
           androidSdk = androidComposition.androidsdk;
@@ -49,9 +47,7 @@
               # Prefer host SDK only when it already has the exact components this build expects.
               if [ -n "$host_sdk" ] \
                 && [ -d "$host_sdk/platforms/android-37" ] \
-                && [ -d "$host_sdk/build-tools/37.0.0" ] \
-                && [ -d "$host_sdk/ndk/29.0.14206865" ] \
-                && [ -d "$host_sdk/cmake/3.31.6" ]; then
+                && [ -d "$host_sdk/build-tools/37.0.0" ]; then
                 sdk_root="$host_sdk"
                 echo "Using host Android SDK: $sdk_root"
               else

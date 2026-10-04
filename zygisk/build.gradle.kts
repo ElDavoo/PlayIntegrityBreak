@@ -1,60 +1,31 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import java.util.Locale
-import java.util.zip.ZipFile
 
 plugins {
     alias(libs.plugins.agp.app)
+    // Java-only Zygisk module, like HMA-OSS: ZygoteLoader injects our dex, AndroidVMTools hooks.
+    alias(libs.plugins.zygoteloader)
 }
 
 val appPackageName: String by rootProject.extra
 val appVerName: String by rootProject.extra
-val appVerCode: Int by rootProject.extra
-
-val moduleAbis = listOf("arm64-v8a", "armeabi-v7a", "x86_64", "x86")
 
 extensions.configure<ApplicationExtension>("android") {
     namespace = "$appPackageName.zygisk"
-    ndkVersion = "29.0.14206865"
 
     defaultConfig {
         applicationId = namespace
-        ndk {
-            abiFilters += moduleAbis
-        }
-        externalNativeBuild {
-            cmake {
-                arguments += "-DANDROID_STL=c++_static"
-            }
-        }
     }
 
     buildFeatures {
         buildConfig = false
-        prefab = true
     }
 
     buildTypes {
-        // The payload is loaded from a single classes.dex, so keep debug builds shrunk too.
-        named("debug") {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
         named("release") {
             // There are no resources to shrink, only the payload dex.
             isShrinkResources = false
-        }
-    }
-
-    externalNativeBuild {
-        cmake {
-            path = file("src/main/cpp/CMakeLists.txt")
-            version = "3.31.6"
-        }
-    }
-
-    packaging {
-        resources {
-            excludes += arrayOf("/META-INF/**", "/kotlin/**", "**.bin")
         }
     }
 }
@@ -63,68 +34,56 @@ kotlin {
     jvmToolchain(21)
 }
 
-val lsplantAar: Configuration by configurations.creating {
-    isTransitive = false
+zygisk {
+    // Only the Play Store gets the payload (Constants.VENDING_PACKAGE_NAME).
+    packages("com.android.vending")
+
+    id = "pib_zygisk"
+    name = "Play Integrity Break (Zygisk)"
+    author = "ElDavoo"
+    description = "Logs and optionally intercepts Play Integrity requests in the Play Store. Zygisk backend of PIB."
+    entrypoint = "icu.nullptr.playintegritybreak.zygisk.ZygiskEntry"
+    archiveName = "PIB-ZYGISK-$appVerName"
+    isAddVariantToArchiveName = true
 }
 
 dependencies {
     implementation(projects.core)
+    implementation(libs.com.github.aerath.stuff.androidvmtools)
+}
 
-    implementation(libs.io.github.vvb2060.ndk.dobby)
-    implementation(libs.org.lsposed.lsplant.standalone)
-    lsplantAar(libs.org.lsposed.lsplant.standalone) {
-        artifact { type = "aar" }
+/** Copies the PIB app APK into the module's assets, so the zip ships it as pib.apk. */
+abstract class BundleAppTask : DefaultTask() {
+    @get:InputFiles
+    abstract val appApkDir: DirectoryProperty
+
+    @get:OutputDirectory
+    abstract val outputDir: DirectoryProperty
+
+    @TaskAction
+    fun copy() {
+        val apk = appApkDir.asFileTree.matching { include("*.apk") }.singleFile
+        val out = outputDir.get().asFile
+        out.deleteRecursively()
+        out.mkdirs()
+        apk.copyTo(out.resolve("pib.apk"))
     }
 }
 
-// Builds the flashable Magisk/KernelSU module: zygisk/<abi>.so + classes.dex + liblsplant + PIB app.
-for (variant in listOf("debug", "release")) {
-    val variantCapped = variant.replaceFirstChar { it.titlecase(Locale.ROOT) }
-    val payloadApk = layout.buildDirectory.file("outputs/apk/$variant/zygisk-$variant.apk")
-    val appApkDir = project(":app").layout.buildDirectory.dir("outputs/apk/$variant")
-
-    tasks.register<Zip>("zipZygisk$variantCapped") {
-        group = "build"
-        description = "Assembles the $variant Zygisk module zip"
-        dependsOn("assemble$variantCapped", ":app:assemble$variantCapped")
-
-        archiveFileName.set("PIB-ZYGISK-$appVerName-$variant.zip")
-        destinationDirectory.set(layout.buildDirectory.dir("outputs/zip"))
-
-        from("src/main/module") {
-            filesMatching("module.prop") {
-                expand(
-                    "version" to appVerName,
-                    "versionCode" to appVerCode.toString(),
-                )
-            }
+extensions.configure<ApplicationAndroidComponentsExtension>("androidComponents") {
+    onVariants { variant ->
+        val variantCapped = variant.name.replaceFirstChar { it.titlecase(Locale.ROOT) }
+        val bundleApp = tasks.register<BundleAppTask>("bundle${variantCapped}PibApp") {
+            dependsOn(":app:assemble$variantCapped")
+            appApkDir.set(project(":app").layout.buildDirectory.dir("outputs/apk/${variant.name}"))
         }
-        from(payloadApk.map { zipTree(it) }) {
-            include("classes.dex")
-            include("lib/*/libpib_zygisk.so")
-            eachFile { if (path.startsWith("lib/")) path = "zygisk/${relativePath.segments[1]}.so" }
-        }
-        from(lsplantAar.elements.map { files -> files.map { zipTree(it) } }) {
-            include("prefab/modules/lsplant/libs/*/liblsplant.so")
-            eachFile {
-                val abi = relativePath.segments[4].removePrefix("android.")
-                if (abi in moduleAbis) path = "lsplant/$abi.so" else exclude()
-            }
-        }
-        from(appApkDir) {
-            include("*.apk")
-            rename { "pib.apk" }
-        }
-        includeEmptyDirs = false
+        variant.sources.assets?.addGeneratedSourceDirectory(bundleApp, BundleAppTask::outputDir)
 
-        val requiredEntries = listOf("module.prop", "customize.sh", "action.sh", "classes.dex", "pib.apk") +
-            moduleAbis.flatMap { listOf("zygisk/$it.so", "lsplant/$it.so") }
-        doLast {
-            val zip = archiveFile.get().asFile
-            val entries = ZipFile(zip).use { z -> z.entries().asSequence().map { it.name }.toSet() }
-            val missing = requiredEntries - entries
-            check(missing.isEmpty()) { "$zip is missing $missing" }
-            logger.lifecycle("Zygisk module: $zip")
+        // ZygoteLoader builds the zip in assemble<Variant>; keep the old task name for CI/README.
+        tasks.register("zipZygisk$variantCapped") {
+            group = "build"
+            description = "Assembles the ${variant.name} Zygisk module zip"
+            dependsOn("zipMagisk$variantCapped")
         }
     }
 }

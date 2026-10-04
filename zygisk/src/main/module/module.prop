@@ -1,6 +1,0 @@
-id=pib_zygisk
-name=Play Integrity Break (Zygisk)
-version=${version}
-versionCode=${versionCode}
-author=ElDavoo
-description=Logs and optionally intercepts Play Integrity requests in the Play Store. Zygisk backend of PIB.
