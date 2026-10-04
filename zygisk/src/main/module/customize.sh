@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034
 SKIPUNZIP=0
 
-PIB_PACKAGE=it.eldavo.pib
+PIB_PACKAGE=it.eldavo.pib.test
 PIB_APK=$MODPATH/pib.apk
 
 # Zygisk check (adapted from HMA-OSS): ZygiskNext/ReZygisk ship zygiskd, Magisk has a setting.
