@@ -2,78 +2,146 @@ package icu.nullptr.playintegritybreak.common
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonObject
 import it.eldavo.pib.common.BuildConfig
 
 @Serializable
 data class JsonConfig(
-    var configVersion: Int = BuildConfig.CONFIG_VERSION,
-    var integrityModeMigrated: Boolean = false,
-    var detailLog: Boolean = false,
-    var errorOnlyLog: Boolean = false,
-    var integrityRequestToast: Boolean = true,
-    var defaultInterventionEnabled: Boolean = true,
-    var defaultHookRewriteEnabled: Boolean = true,
-    var defaultHookRewriteErrorCode: Int = -8,
-    var defaultHookRewriteRemediable: Boolean = true,
-    var defaultDeliverSyntheticResponse: Boolean = true,
-    var defaultDelaySyntheticResponseDelivery: Boolean = false,
-    var maxLogSize: Int = 512,
-    var telemetryEnabled: Boolean = false,
-    var telemetryBatchSize: Int = 10,
-    var telemetryMaxAttempts: Int = 8,
-    var telemetryBaseRetrySeconds: Int = 30,
-    var telemetryLeaseDurationSeconds: Int = 120,
-    var telemetryStaleInFlightMinutes: Int = 15,
-    var intentApiEnabled: Boolean = false,
-    var userId: String = "",
-    var forceMountData: Boolean = true,
-    var disableActivityLaunchProtection: Boolean = false,
-    var altAppDataIsolation: Boolean = false,
-    var altVoldAppDataIsolation: Boolean = false,
-    var skipSystemAppDataIsolation: Boolean = true,
-    var packageQueryWorkaround: Boolean = false,
-    var favoritePackages: MutableSet<String> = mutableSetOf(),
-    val scope: MutableMap<String, AppConfig> = mutableMapOf()
+    val configVersion: Int = BuildConfig.CONFIG_VERSION,
+    val detailLog: Boolean = false,
+    val errorOnlyLog: Boolean = false,
+    val maxLogSize: Int = 512,
+    val telemetryEnabled: Boolean = false,
+    val intentApiEnabled: Boolean = false,
+    val userId: String = "",
+    val packageQueryWorkaround: Boolean = false,
+    val favoritePackages: Set<String> = emptySet(),
+    val defaults: Policy = Policy(),
+    val scope: Map<String, AppConfig> = emptyMap(),
 ) {
+    /** A fully specified policy. Used for the defaults and as the result of [policyFor]. */
+    @Serializable
+    data class Policy(
+        val interventionEnabled: Boolean = true,
+        val rewriteResponse: Boolean = true,
+        val rewriteErrorCode: Int = -8,
+        val rewriteRemediable: Boolean = true,
+        val deliverSyntheticResponse: Boolean = true,
+        val delaySyntheticResponse: Boolean = false,
+        val requestToast: Boolean = true,
+    )
+
+    /** Per-app overrides. A null field follows [defaults]. */
     @Serializable
     data class AppConfig(
-        var interventionEnabled: Boolean = true,
-        var integrityLoggerEnabled: Boolean = true,
-        var logIntegrityRequests: Boolean = true,
-        var logIntegrityResponses: Boolean = true,
-        var rewriteIntegrityResponseOverridden: Boolean = false,
-        var rewriteIntegrityResponse: Boolean = false,
-        var rewriteIntegrityErrorCode: Int = -8,
-        var rewriteIntegrityErrorRemediable: Boolean = true,
-        var deliverSyntheticResponse: Boolean = true,
-        var delaySyntheticResponseDelivery: Boolean = false,
-        var integrityRequestToast: Boolean = true,
+        val interventionEnabled: Boolean? = null,
+        val rewriteResponse: Boolean? = null,
+        val rewriteErrorCode: Int? = null,
+        val rewriteRemediable: Boolean? = null,
+        val deliverSyntheticResponse: Boolean? = null,
+        val delaySyntheticResponse: Boolean? = null,
+        val requestToast: Boolean? = null,
     ) {
-        override fun toString() = encoder.encodeToString(this)
+        fun isEmpty() = this == AppConfig()
 
-        companion object {
-            fun parse(json: String) = encoder.decodeFromString<AppConfig>(json)
-        }
+        fun applyTo(base: Policy) = Policy(
+            interventionEnabled = interventionEnabled ?: base.interventionEnabled,
+            rewriteResponse = rewriteResponse ?: base.rewriteResponse,
+            rewriteErrorCode = rewriteErrorCode ?: base.rewriteErrorCode,
+            rewriteRemediable = rewriteRemediable ?: base.rewriteRemediable,
+            deliverSyntheticResponse = deliverSyntheticResponse ?: base.deliverSyntheticResponse,
+            delaySyntheticResponse = delaySyntheticResponse ?: base.delaySyntheticResponse,
+            requestToast = requestToast ?: base.requestToast,
+        )
     }
 
+    /**
+     * The effective policy for [packageName]. Rewrite settings are returned as stored even when
+     * intervention is off; callers gate on [Policy.interventionEnabled].
+     */
+    fun policyFor(packageName: String): Policy = scope[packageName]?.applyTo(defaults) ?: defaults
+
+    override fun toString() = encoder.encodeToString(this)
+
     companion object {
-        fun parse(json: String): JsonConfig {
-            val parsed = encoder.decodeFromString<JsonConfig>(json)
-            val root = runCatching { encoder.parseToJsonElement(json).jsonObject }.getOrNull()
-
-            if (root != null && !root.containsKey("defaultInterventionEnabled")) {
-                parsed.defaultInterventionEnabled = parsed.defaultHookRewriteEnabled
-            }
-
-            return parsed
-        }
+        /** First config version with [defaults] and nullable per-app overrides. */
+        const val OVERRIDES_CONFIG_VERSION = 94
 
         private val encoder = Json {
             encodeDefaults = true
             ignoreUnknownKeys = true
         }
-    }
 
-    override fun toString() = encoder.encodeToString(this)
+        /** Parses any config version. The returned [configVersion] is the one found in [json]. */
+        fun parse(json: String): JsonConfig {
+            val root = encoder.parseToJsonElement(json).jsonObject
+            val version = root.int("configVersion") ?: 0
+            val current = if (version < OVERRIDES_CONFIG_VERSION) migrateLegacy(root) else root
+            return encoder.decodeFromJsonElement(serializer(), current)
+        }
+
+        /**
+         * Converts the old flat default* fields and the rewriteIntegrityResponseOverridden flag
+         * into [defaults] and per-app overrides, keeping what the hook used to do for every app.
+         */
+        private fun migrateLegacy(root: JsonObject): JsonObject {
+            val rewriteDefault = root.bool("defaultHookRewriteEnabled") ?: true
+            val defaults = Policy(
+                interventionEnabled = root.bool("defaultInterventionEnabled") ?: rewriteDefault,
+                rewriteResponse = rewriteDefault,
+                rewriteErrorCode = root.int("defaultHookRewriteErrorCode") ?: -8,
+                rewriteRemediable = root.bool("defaultHookRewriteRemediable") ?: true,
+                deliverSyntheticResponse = root.bool("defaultDeliverSyntheticResponse") ?: true,
+                delaySyntheticResponse = root.bool("defaultDelaySyntheticResponseDelivery") ?: false,
+                requestToast = root.bool("integrityRequestToast") ?: true,
+            )
+            // Configs from before the integrity logger reset every app to logger defaults on load.
+            val loggerMigrated = root.bool("integrityModeMigrated") ?: false
+            val scope = (root["scope"] as? JsonObject).orEmpty().mapValues { (_, value) ->
+                migrateLegacyApp(value as? JsonObject ?: JsonObject(emptyMap()), defaults, loggerMigrated)
+            }
+
+            return JsonObject(
+                root + mapOf(
+                    "defaults" to encoder.encodeToJsonElement(Policy.serializer(), defaults),
+                    "scope" to JsonObject(scope.mapValues { encoder.encodeToJsonElement(AppConfig.serializer(), it.value) }),
+                )
+            )
+        }
+
+        private fun migrateLegacyApp(app: JsonObject, defaults: Policy, loggerMigrated: Boolean): AppConfig {
+            fun <T> differing(value: T, default: T) = value.takeIf { it != default }
+
+            val toast = if (app.bool("integrityRequestToast") == false) false else null
+            val deliver = if (loggerMigrated) app.bool("deliverSyntheticResponse") ?: true else true
+            val delay = if (loggerMigrated) app.bool("delaySyntheticResponseDelivery") ?: false else false
+            val synthetic = AppConfig(
+                deliverSyntheticResponse = differing(deliver, defaults.deliverSyntheticResponse),
+                delaySyntheticResponse = differing(delay, defaults.delaySyntheticResponse),
+                requestToast = toast,
+            )
+            if (!loggerMigrated) return synthetic
+
+            if (app.bool("interventionEnabled") == false) {
+                return synthetic.copy(interventionEnabled = false)
+            }
+            if (app.bool("rewriteIntegrityResponseOverridden") != true) {
+                return synthetic
+            }
+            return synthetic.copy(
+                interventionEnabled = differing(true, defaults.interventionEnabled),
+                rewriteResponse = differing(app.bool("rewriteIntegrityResponse") ?: false, defaults.rewriteResponse),
+                rewriteErrorCode = differing(app.int("rewriteIntegrityErrorCode") ?: -8, defaults.rewriteErrorCode),
+                rewriteRemediable = differing(app.bool("rewriteIntegrityErrorRemediable") ?: true, defaults.rewriteRemediable),
+            )
+        }
+
+        private fun JsonObject.primitive(key: String): JsonPrimitive? = this[key] as? JsonPrimitive
+        private fun JsonObject.bool(key: String): Boolean? = primitive(key)?.booleanOrNull
+        private fun JsonObject.int(key: String): Int? = primitive(key)?.intOrNull
+    }
 }

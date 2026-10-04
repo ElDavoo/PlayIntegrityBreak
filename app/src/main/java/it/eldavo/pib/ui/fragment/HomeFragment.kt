@@ -52,11 +52,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val backupSAFLauncher =
         registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) backup@{ uri ->
             if (uri == null) return@backup
-            ConfigManager.configFile.inputStream().use { input ->
-                contentResolver.openOutputStream(uri).use { output ->
-                    if (output == null) showToast(R.string.home_export_failed)
-                    else input.copyTo(output)
+            contentResolver.openOutputStream(uri).use { output ->
+                if (output == null) {
+                    showToast(R.string.home_export_failed)
+                    return@backup
                 }
+                output.write(ConfigManager.exportJson().toByteArray())
             }
             showToast(R.string.home_exported)
         }

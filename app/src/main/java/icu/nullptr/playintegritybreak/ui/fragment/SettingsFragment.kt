@@ -20,17 +20,14 @@ import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.androidbroadcast.vbpd.viewBinding
 import icu.nullptr.playintegritybreak.common.Constants
-import icu.nullptr.playintegritybreak.common.PropertyUtils
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
-import icu.nullptr.playintegritybreak.ui.util.enabledString
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.recreateMainActivity
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
 import icu.nullptr.playintegritybreak.ui.util.setupToolbar
 import icu.nullptr.playintegritybreak.ui.util.showToast
-import icu.nullptr.playintegritybreak.ui.util.withAnimations
 import icu.nullptr.playintegritybreak.util.ConfigUtils
 import icu.nullptr.playintegritybreak.util.LangList
 import icu.nullptr.playintegritybreak.util.PackageHelper.findEnabledAppComponent
@@ -90,11 +87,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "errorOnlyLog" -> ConfigManager.errorOnlyLog
                 "hideIcon" -> PrefManager.hideIcon
                 "bypassRiskyPackageWarning" -> PrefManager.bypassRiskyPackageWarning
-                "appDataIsolation" -> ConfigManager.altAppDataIsolation
-                "voldAppDataIsolation" -> ConfigManager.altVoldAppDataIsolation
-                "skipSystemAppDataIsolation" -> ConfigManager.skipSystemAppDataIsolation
-                "disableActivityLaunchProtection" -> ConfigManager.disableActivityLaunchProtection
-                "forceMountData" -> ConfigManager.forceMountData
                 "disableUpdate" -> PrefManager.disableUpdate
                 "packageQueryWorkaround" -> ConfigManager.packageQueryWorkaround
                 "telemetryEnabled" -> ConfigManager.telemetryEnabled
@@ -127,14 +119,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "blackDarkTheme" -> PrefManager.blackDarkTheme = value
                 "detailLog" -> ConfigManager.detailLog = value
                 "errorOnlyLog" -> ConfigManager.errorOnlyLog = value
-                "forceMountData" -> ConfigManager.forceMountData = value
                 "disableUpdate" -> PrefManager.disableUpdate = value
                 "hideIcon" -> PrefManager.hideIcon = value
                 "bypassRiskyPackageWarning" -> PrefManager.bypassRiskyPackageWarning = value
-                "disableActivityLaunchProtection" -> ConfigManager.disableActivityLaunchProtection = value
-                "appDataIsolation" -> ConfigManager.altAppDataIsolation = value
-                "voldAppDataIsolation" -> ConfigManager.altVoldAppDataIsolation = value
-                "skipSystemAppDataIsolation" -> ConfigManager.skipSystemAppDataIsolation = value
                 "packageQueryWorkaround" -> ConfigManager.packageQueryWorkaround = value
                 "telemetryEnabled" -> ConfigManager.telemetryEnabled = value
                 "intentApiEnabled" -> ConfigManager.intentApiEnabled = value
@@ -160,47 +147,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
         }
     }
 
-    class DataIsolationPreferenceFragment(private val preferenceDataStore: PreferenceDataStore) : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            preferenceManager.preferenceDataStore = preferenceDataStore
-            setPreferencesFromResource(R.xml.settings_data_isolation, rootKey)
-
-            findPreference<SwitchPreferenceCompat>("appDataIsolation")?.let {
-                it.summary = getString(R.string.settings_need_reboot) + "\n\n" +
-                        getString(
-                            R.string.settings_default_value,
-                            PropertyUtils.isAppDataIsolationEnabled.enabledString(resources)
-                        )
-            }
-
-            findPreference<SwitchPreferenceCompat>("voldAppDataIsolation")?.let {
-                it.summary = getString(R.string.settings_need_reboot) + "\n\n" +
-                        getString(
-                            R.string.settings_default_value,
-                            PropertyUtils.isVoldAppDataIsolationEnabled.enabledString(resources)
-                        )
-
-                it.setOnPreferenceChangeListener { _, newValue ->
-                    val enabled = newValue as Boolean
-                    if (enabled) {
-                        MaterialAlertDialogBuilder(requireContext())
-                            .setTitle(R.string.settings_warning)
-                            .setMessage(R.string.settings_vold_warning)
-                            .setPositiveButton(android.R.string.ok) { _, _ ->
-                                it.isChecked = true
-                            }
-                            .setNegativeButton(android.R.string.cancel) { _, _ ->
-                                it.isChecked = false
-                            }
-                            .setCancelable(false)
-                            .show()
-                    }
-                    !enabled
-                }
-            }
-        }
-    }
-
     class SettingsPreferenceFragment : PreferenceFragmentCompat() {
         private fun getLocaleSummary(tag: String): String {
             if (tag == "SYSTEM") return getString(R.string.follow_system)
@@ -215,38 +161,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
             }
         }
 
-        private fun configureDataIsolation() {
-            findPreference<Preference>("dataIsolation")?.let {
-                it.isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-                it.summary = when {
-                    it.isEnabled -> getString(
-                        R.string.settings_data_isolation_summary,
-                        if (ConfigManager.altAppDataIsolation) getString(R.string.settings_overwritten)
-                        else PropertyUtils.isAppDataIsolationEnabled.enabledString(resources),
-                        if (ConfigManager.altVoldAppDataIsolation) getString(R.string.settings_overwritten)
-                        else PropertyUtils.isVoldAppDataIsolationEnabled.enabledString(resources),
-                        ConfigManager.forceMountData.enabledString(resources)
-                    )
-                    else -> getString(R.string.settings_data_isolation_unsupported)
-                }
-                it.setOnPreferenceClickListener { _ ->
-                    parentFragmentManager.beginTransaction()
-                        .withAnimations()
-                        .replace(
-                            R.id.settings_container,
-                            DataIsolationPreferenceFragment(
-                                preferenceManager.preferenceDataStore!!
-                            )
-                        )
-                        .addToBackStack(null)
-                        .commit()
-
-                    true
-                }
-            }
-        }
-
-        @Suppress("deprecation")
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             preferenceManager.preferenceDataStore = SettingsPreferenceDataStore()
             setPreferencesFromResource(R.xml.settings, rootKey)
@@ -415,14 +329,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                     true
                 }
             }
-
-            configureDataIsolation()
-
-        }
-
-        override fun onResume() {
-            super.onResume()
-            configureDataIsolation()
         }
     }
 }

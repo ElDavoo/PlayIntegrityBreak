@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Uygulamaya isteğin yeniden denenmesi gerektiğini söyler (ör. hata geçici).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integrity hata kodu referansı</string>
     <string name="app_rewrite_integrity_error_code_copied">Kopyalanan hata kodu: %1$s</string>
-    <string name="app_exclude_system_apps">Sistem uygulamalarını dahil et</string>
     <string name="app_warning_risky_package_title">Riskli paket</string>
     <string name="app_warning_risky_package_desc">Bu paket riskli olarak işaretlenmiştir ve kararsızlığa neden olabilir. Devam edilsin mi?</string>
     <string name="app_favorite_add">Favori olarak işaretle</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modül</string>
-    <string name="settings_overwrite">Üzerine yaz</string>
-    <string name="settings_overwritten">Üzerine yazıldı</string>
-    <string name="settings_overwrite_summary">Anahtarlar işaretliyse bu kategori öğeleri zorla etkinleştirilecektir</string>
-    <string name="settings_default_value">Varsayılan değer: %s</string>
-    <string name="settings_data_isolation">Veri izolasyonu</string>
-    <string name="settings_data_isolation_summary">Uygulama verisi: %1$s\nVold uygulama verisi: %2$s\nZorla bağlama: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Bu seçenek yalnızca Android 11 ve üstünde kullanılabilir</string>
-    <string name="settings_app_data_isolation">Uygulama veri izolasyonu</string>
-    <string name="settings_vold_app_data_isolation">Vold uygulama veri izolasyonu</string>
-    <string name="settings_warning">Uyarı</string>
-    <string name="settings_vold_warning">Bu, uygulamanın harici özel depolaması için bir AOSP izolasyon özelliğini etkinleştirir. Uyumluluğu artırabilir ancak kararlılığı azaltabilir ve gelecekteki Android sürümlerinde çalışmayı durdurabilir.</string>
-    <string name="settings_need_reboot">Değişiklikler yeniden başlatma gerektirir</string>
-    <string name="settings_force_mount_data">Tüm uygulamalar için veri izolasyonunu zorla</string>
-    <string name="settings_force_mount_data_summary">Varsayılan olarak API hedefi 30\'un altındaki uygulamalarda veri izolasyonu devre dışıdır</string>
     <string name="settings_detail_log">Hata ayıklama için ayrıntılı kayıt</string>
     <string name="settings_max_log_size">Kayıtçı bellek boyutları</string>
     <string name="settings_hide_icon">Başlatıcıda modül simgesini gizle</string>
     <string name="settings_hide_icon_summary">Yine de Xposed yöneticisinde uygulamayı açabilirsiniz</string>
     <string name="settings_bypass_risky_package_warning">Riskli paket uyarısını atla</string>
     <string name="settings_bypass_risky_package_warning_summary">Bu özelliği etkinleştirmeden önce geliştiricilerin riskli paketle ilgili sorunlardan sorumlu olmadığını unutmayın.</string>
-    <string name="settings_disable_activity_launch_protection">Activity başlatma korumasını devre dışı bırak</string>
-    <string name="settings_disable_activity_launch_protection_summary">Bu anahtar tüm startActivity korumalarını kaldırır. Emin değilseniz etkinleştirmeyin.</string>
     <string name="settings_system_wallpaper">Sistem duvar kağıdını kullan</string>
     <string name="settings_clear_uninstalled_app_configs">Kaldırılmış uygulama yapılandırmalarını temizle</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Bu seçenek artık kalıntı olmadan bir yapılandırma oluşturmanızı sağlar ancak uygulamaları yeniden yüklediğinizde tekrar yapılandırmanız gerekir.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Güncelleme bildirimi devre dışı</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Toplu kayıt yapılandırması</string>
 
     <!-- About -->
     <string name="about_description">PIB, uygulamaların Google Play Integrity API\'sini kullanmasını engellemeye odaklanmış bir LSPosed modülüdür.</string>

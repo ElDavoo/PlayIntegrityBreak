@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Teilt der App mit, dass die Anfrage erneut versucht werden sollte (z. B. ist der Fehler vorübergehend).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referenz für Integrity-Fehlercodes</string>
     <string name="app_rewrite_integrity_error_code_copied">Kopierter Fehlercode: %1$s</string>
-    <string name="app_exclude_system_apps">System-Apps einbeziehen</string>
     <string name="app_warning_risky_package_title">Risiko-Paket</string>
     <string name="app_warning_risky_package_desc">Dieses Paket ist als riskant markiert und kann Instabilität verursachen. Fortfahren?</string>
     <string name="app_favorite_add">Als Favorit markieren</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modul</string>
-    <string name="settings_overwrite">Überschreiben</string>
-    <string name="settings_overwritten">Überschrieben</string>
-    <string name="settings_overwrite_summary">Elemente dieser Kategorie werden erzwungen aktiviert, wenn die Schalter gesetzt sind</string>
-    <string name="settings_default_value">Standardwert: %s</string>
-    <string name="settings_data_isolation">Datenisolation</string>
-    <string name="settings_data_isolation_summary">App-Daten: %1$s\nVold-App-Daten: %2$s\nEinhängen erzwingen: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Diese Option ist nur auf Android 11 und höher verfügbar</string>
-    <string name="settings_app_data_isolation">App-Datenisolation</string>
-    <string name="settings_vold_app_data_isolation">Vold-App-Datenisolation</string>
-    <string name="settings_warning">Warnung</string>
-    <string name="settings_vold_warning">Dies aktiviert eine AOSP-Isolationsfunktion für externen privaten Speicher von Apps. Es kann die Kompatibilität verbessern, die Stabilität verringern und in zukünftigen Android-Versionen nicht mehr funktionieren.</string>
-    <string name="settings_need_reboot">Änderung erfordert Neustart</string>
-    <string name="settings_force_mount_data">Datenisolation für alle Apps durchsetzen</string>
-    <string name="settings_force_mount_data_summary">Datenisolation ist standardmäßig für Apps mit Ziel-API unter 30 deaktiviert</string>
     <string name="settings_detail_log">Detailliertes Protokoll zur Fehlerbehebung</string>
     <string name="settings_max_log_size">Puffergrößen des Loggers</string>
     <string name="settings_hide_icon">Symbol im Launcher ausblenden</string>
     <string name="settings_hide_icon_summary">Sie können die App weiterhin im Xposed-Manager öffnen.</string>
     <string name="settings_bypass_risky_package_warning">Warnung für riskante Pakete umgehen</string>
     <string name="settings_bypass_risky_package_warning_summary">Beachten Sie, dass die Entwickler nicht für Probleme im Zusammenhang mit riskanten Paketen vor oder nach der Aktivierung dieser Funktion verantwortlich sind.</string>
-    <string name="settings_disable_activity_launch_protection">Schutz für Activity-Start deaktivieren</string>
-    <string name="settings_disable_activity_launch_protection_summary">Dieser Schalter hebt alle startActivity-Schutzmaßnahmen auf. Wenn Sie unsicher sind, nicht aktivieren.</string>
     <string name="settings_system_wallpaper">Systemhintergrund verwenden</string>
     <string name="settings_clear_uninstalled_app_configs">Konfigurationen für deinstallierte Apps löschen</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Diese Option ermöglicht es, eine Konfiguration ohne Überreste zu erstellen, aber Sie müssen Apps neu konfigurieren, wenn Sie sie erneut installieren.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Update-Benachrichtigung deaktivieren</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Massenkonfiguration des Loggers</string>
 
     <!-- About -->
     <string name="about_description">PIB ist ein LSPosed-Modul, das sich darauf konzentriert, Apps daran zu hindern, die Google Play Integrity API zu verwenden.</string>

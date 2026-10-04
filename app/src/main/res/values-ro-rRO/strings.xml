@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Indică aplicației că cererea trebuie reîncercată (de ex. eroare tranzitorie).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referință coduri de eroare Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Cod de eroare copiat: %1$s</string>
-    <string name="app_exclude_system_apps">Include aplicațiile de sistem</string>
     <string name="app_warning_risky_package_title">Pachet riscant</string>
     <string name="app_warning_risky_package_desc">Acest pachet este marcat ca riscant și poate provoca instabilitate. Continuați?</string>
     <string name="app_favorite_add">Marchează ca favorit</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modul</string>
-    <string name="settings_overwrite">Suprascrie</string>
-    <string name="settings_overwritten">Suprascris</string>
-    <string name="settings_overwrite_summary">Articolele din această categorie vor fi forțate ca active dacă comutatoarele sunt bifate</string>
-    <string name="settings_default_value">Valoare implicită: %s</string>
-    <string name="settings_data_isolation">Izolarea datelor</string>
-    <string name="settings_data_isolation_summary">Date aplicație: %1$s\nDate Vold aplicație: %2$s\nForțare montare: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Această opțiune este disponibilă doar pe Android 11 și versiuni superioare</string>
-    <string name="settings_app_data_isolation">Izolarea datelor aplicației</string>
-    <string name="settings_vold_app_data_isolation">Izolarea datelor Vold</string>
-    <string name="settings_warning">Avertisment</string>
-    <string name="settings_vold_warning">Activează o funcție AOSP de izolare pentru stocarea externă privată a aplicațiilor. Poate îmbunătăți compatibilitatea, dar poate reduce stabilitatea și s-ar putea să nu funcționeze în versiunile viitoare de Android.</string>
-    <string name="settings_need_reboot">Schimbarea necesită repornire</string>
-    <string name="settings_force_mount_data">Aplică izolarea datelor pentru toate aplicațiile</string>
-    <string name="settings_force_mount_data_summary">Izolarea datelor este dezactivată pentru aplicațiile cu target API mai mic de 30 în mod implicit</string>
     <string name="settings_detail_log">Jurnal detaliat pentru depanare</string>
     <string name="settings_max_log_size">Dimensiuni buffer jurnal</string>
     <string name="settings_hide_icon">Ascunde pictograma modulului în launcher</string>
     <string name="settings_hide_icon_summary">Poți încă deschide aplicația în managerul Xposed</string>
     <string name="settings_bypass_risky_package_warning">Ocolește avertizarea pentru pachete riscante</string>
     <string name="settings_bypass_risky_package_warning_summary">Rețineți că dezvoltatorii nu sunt responsabili pentru probleme legate de pachete riscante înainte sau după ce activați această funcție</string>
-    <string name="settings_disable_activity_launch_protection">Dezactivează protecția lansării Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Acest comutator va ridica toate protecțiile startActivity. Dacă nu sunteți sigur, nu îl activați.</string>
     <string name="settings_system_wallpaper">Folosește tapetul sistemului</string>
     <string name="settings_clear_uninstalled_app_configs">Curăță configurațiile aplicațiilor dezinstalate</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Această opțiune vă permite să creați o configurație fără resturi, dar va trebui să reconfigurați aplicațiile când le reinstalați.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Dezactivează notificarea de actualizare</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Configurare în masă a jurnalizatorului</string>
 
     <!-- About -->
     <string name="about_description">PIB este un modul LSPosed axat pe blocarea aplicațiilor de la utilizarea API-ului Google Play Integrity.</string>

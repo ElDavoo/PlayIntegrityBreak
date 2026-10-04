@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Indica à aplicação que o pedido deve ser refeito (ex.: o erro é transitório).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referência de códigos de erro de integridade</string>
     <string name="app_rewrite_integrity_error_code_copied">Código de erro copiado: %1$s</string>
-    <string name="app_exclude_system_apps">Incluir aplicações do sistema</string>
     <string name="app_warning_risky_package_title">Pacote arriscado</string>
     <string name="app_warning_risky_package_desc">Este pacote está marcado como arriscado e pode causar instabilidade. Continuar?</string>
     <string name="app_favorite_add">Marcar como favorito</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Módulo</string>
-    <string name="settings_overwrite">Sobrescrever</string>
-    <string name="settings_overwritten">Sobrescrito</string>
-    <string name="settings_overwrite_summary">Os itens desta categoria serão forçados como ativados se os interruptores estiverem marcados</string>
-    <string name="settings_default_value">Valor por omissão: %s</string>
-    <string name="settings_data_isolation">Isolamento de dados</string>
-    <string name="settings_data_isolation_summary">Dados da aplicação: %1$s\nDados Vold da aplicação: %2$s\nForçar montagem: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Esta opção só está disponível no Android 11 ou superior</string>
-    <string name="settings_app_data_isolation">Isolamento de dados da aplicação</string>
-    <string name="settings_vold_app_data_isolation">Isolamento de dados Vold da aplicação</string>
-    <string name="settings_warning">Aviso</string>
-    <string name="settings_vold_warning">Isto ativa uma funcionalidade AOSP de isolamento para o armazenamento externo privado da aplicação. Pode melhorar compatibilidade mas reduzir estabilidade e pode deixar de funcionar em versões futuras do Android.</string>
-    <string name="settings_need_reboot">Alteração requer reinício</string>
-    <string name="settings_force_mount_data">Forçar isolamento de dados para todas as aplicações</string>
-    <string name="settings_force_mount_data_summary">O isolamento de dados está desativado por predefinição para aplicações com target API inferior a 30</string>
     <string name="settings_detail_log">Registo detalhado para depuração</string>
     <string name="settings_max_log_size">Tamanhos dos buffers do logger</string>
     <string name="settings_hide_icon">Ocultar ícone do módulo no lançador</string>
     <string name="settings_hide_icon_summary">Ainda pode abrir a aplicação no gestor Xposed</string>
     <string name="settings_bypass_risky_package_warning">Contornar aviso de pacote arriscado</string>
     <string name="settings_bypass_risky_package_warning_summary">Note que os desenvolvedores não são responsáveis por problemas relacionados com pacotes arriscados antes ou depois de ativar esta funcionalidade</string>
-    <string name="settings_disable_activity_launch_protection">Desativar proteção de lançamento de Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Este interruptor removerá todas as proteções de startActivity. Se não tiver a certeza, não ative.</string>
     <string name="settings_system_wallpaper">Usar papel de parede do sistema</string>
     <string name="settings_clear_uninstalled_app_configs">Limpar configurações de aplicações desinstaladas</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Esta opção permite criar uma configuração sem resíduos, mas terá de reconfigurar as aplicações quando as voltar a instalar.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Desativar notificação de atualização</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Assistente de configuração em massa</string>
 
     <!-- About -->
     <string name="about_description">PIB é um módulo LSPosed focado em bloquear aplicações de utilizarem a API Google Play Integrity.</string>

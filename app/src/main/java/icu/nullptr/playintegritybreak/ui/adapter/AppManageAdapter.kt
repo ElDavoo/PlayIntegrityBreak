@@ -37,7 +37,7 @@ class AppManageAdapter(
             val appItemView = itemView as AppItemView
             appItemView.let {
                 it.load(packageName)
-                it.showEnabled = ConfigManager.isLoggerEnabled(packageName)
+                it.showEnabled = ConfigManager.isConfigured(packageName)
                 it.isFavorite = ConfigManager.isFavorite(packageName)
                 it.setOnFavoriteClickListener {
                     val newFavoriteState = !ConfigManager.isFavorite(packageName)

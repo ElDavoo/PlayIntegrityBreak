@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">บอกแอปให้ลองใหม่ (เช่น ข้อผิดพลาดเป็นแบบชั่วคราว)</string>
     <string name="app_rewrite_integrity_error_code_reference_title">อ้างอิงรหัสข้อผิดพลาด Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">คัดลอกรหัสข้อผิดพลาด: %1$s</string>
-    <string name="app_exclude_system_apps">รวมแอประบบ</string>
     <string name="app_warning_risky_package_title">แพ็กเกจที่เสี่ยง</string>
     <string name="app_warning_risky_package_desc">แพ็กเกจนี้ถูกมาร์กเป็นเสี่ยงและอาจทำให้ไม่เสถียร ต้องการดำเนินการต่อหรือไม่?</string>
     <string name="app_favorite_add">มาร์กเป็นรายการโปรด</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">โมดูล</string>
-    <string name="settings_overwrite">บังคับเขียนทับ</string>
-    <string name="settings_overwritten">ถูกเขียนทับแล้ว</string>
-    <string name="settings_overwrite_summary">รายการในหมวดนี้จะถูกบังคับให้เปิดหากสวิตช์ถูกเลือก</string>
-    <string name="settings_default_value">ค่าตั้งต้น: %s</string>
-    <string name="settings_data_isolation">แยกข้อมูล</string>
-    <string name="settings_data_isolation_summary">ข้อมูลแอป: %1$s\nVold ข้อมูลแอป: %2$s\nบังคับเมานท์: %3$s</string>
-    <string name="settings_data_isolation_unsupported">ตัวเลือกนี้ใช้ได้เฉพาะบน Android 11 ขึ้นไป</string>
-    <string name="settings_app_data_isolation">การแยกข้อมูลแอป</string>
-    <string name="settings_vold_app_data_isolation">การแยกข้อมูลแอป Vold</string>
-    <string name="settings_warning">คำเตือน</string>
-    <string name="settings_vold_warning">นี่เปิดใช้งานฟีเจอร์แยกข้อมูล AOSP สำหรับพื้นที่เก็บข้อมูลส่วนตัวภายนอกของแอป อาจปรับปรุงความเข้ากันได้แต่ลดความเสถียรและอาจหยุดทำงานใน Android เวอร์ชันอนาคต</string>
-    <string name="settings_need_reboot">การเปลี่ยนแปลงต้องรีบูต</string>
-    <string name="settings_force_mount_data">บังคับการแยกข้อมูลสำหรับทุกแอป</string>
-    <string name="settings_force_mount_data_summary">การแยกข้อมูลถูกปิดสำหรับแอปที่ target API ต่ำกว่า 30 โดยค่าเริ่มต้น</string>
     <string name="settings_detail_log">บันทึกรายละเอียดสำหรับดีบัก</string>
     <string name="settings_max_log_size">ขนาดบัฟเฟอร์ล็อก</string>
     <string name="settings_hide_icon">ซ่อนไอคอนโมดูลในตัวเรียกใช้งาน</string>
     <string name="settings_hide_icon_summary">คุณยังสามารถเปิดแอปได้ใน Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">ข้ามคำเตือนแพ็กเกจเสี่ยง</string>
     <string name="settings_bypass_risky_package_warning_summary">โปรดทราบว่า devs จะไม่รับผิดชอบต่อปัญหาเกี่ยวกับแพ็กเกจเสี่ยงก่อนหรือหลังที่คุณเปิดคุณสมบัตินี้</string>
-    <string name="settings_disable_activity_launch_protection">ปิดการป้องกันการเปิด Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">สวิตช์นี้จะยกเลิกการป้องกัน startActivity ทั้งหมด หากไม่แน่ใจ อย่าเปิดใช้งาน</string>
     <string name="settings_system_wallpaper">ใช้ภาพพื้นหลังระบบ</string>
     <string name="settings_clear_uninstalled_app_configs">ล้างการตั้งค่าสำหรับแอปที่ถอนการติดตั้ง</string>
     <string name="settings_clear_uninstalled_app_configs_summary">ตัวเลือกนี้ช่วยให้คุณสร้างการตั้งค่าใหม่โดยไม่มีข้อมูลเหลือ แต่คุณจะต้องตั้งค่าแอปใหม่เมื่อติดตั้งอีกครั้ง</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">ปิดแจ้งเตือนอัปเดต</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">การตั้งค่าบันทึกแบบกลุ่ม</string>
 
     <!-- About -->
     <string name="about_description">PIB เป็นโมดูล LSPosed ที่มุ่งเน้นการบล็อกแอปจากการใช้ Google Play Integrity API</string>

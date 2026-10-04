@@ -60,6 +60,8 @@
     <string name="app_enable_intervention_desc">Disable to allow Play Integrity requests even when interception is enabled by default.</string>
     <string name="app_rewrite_integrity_response">Enable synthetic errors</string>
     <string name="app_rewrite_integrity_response_desc">When enabled, the app will not communicate with Play Integrity and will instead receive a generated error.</string>
+    <string name="app_reset_to_defaults">Reset to defaults</string>
+    <string name="app_reset_to_defaults_desc">Drop this app\'s overrides so every setting follows the default options.</string>
     <string name="app_integrity_request_toast">Toast on Integrity requests</string>
     <string name="app_integrity_request_toast_desc">Show a toast when this app asks for Play Integrity. Also needs to be enabled in Default options.</string>
     <string name="app_integrity_request_toast_default_desc">Show a toast when an app asks for Play Integrity. Can be turned off per app.</string>
@@ -76,7 +78,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Tells the app the request should be retried (e.g. the error is transient).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integrity error code reference</string>
     <string name="app_rewrite_integrity_error_code_copied">Copied error code: %1$s</string>
-    <string name="app_exclude_system_apps">Include system apps</string>
     <string name="app_warning_risky_package_title">Risky package</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and may cause instability. Continue?</string>
     <string name="app_favorite_add">Mark as favorite</string>
@@ -124,28 +125,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Module</string>
-    <string name="settings_overwrite">Overwrite</string>
-    <string name="settings_overwritten">Overwritten</string>
-    <string name="settings_overwrite_summary">This category items will be forced as enabled if the switches are checked</string>
-    <string name="settings_default_value">Default value: %s</string>
-    <string name="settings_data_isolation">Data isolation</string>
-    <string name="settings_data_isolation_summary">App data: %1$s\nVold app data: %2$s\nForce mount: %3$s</string>
-    <string name="settings_data_isolation_unsupported">This option is only available on Android 11 and above</string>
-    <string name="settings_app_data_isolation">App data isolation</string>
-    <string name="settings_vold_app_data_isolation">Vold app data isolation</string>
-    <string name="settings_warning">Warning</string>
-    <string name="settings_vold_warning">This enables an AOSP isolation feature for app external private storage. It may improve compatibility but can reduce stability and may stop working in future Android versions.</string>
-    <string name="settings_need_reboot">Changing requires reboot</string>
-    <string name="settings_force_mount_data">Enforce data isolation for all apps</string>
-    <string name="settings_force_mount_data_summary">Data isolation is disabled for apps target API lower than 30 by default</string>
     <string name="settings_detail_log">Detail log for debugging</string>
     <string name="settings_max_log_size">Logger buffer sizes</string>
     <string name="settings_hide_icon">Hide module icon in launcher</string>
     <string name="settings_hide_icon_summary">You can still open the app in Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
     <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
-    <string name="settings_disable_activity_launch_protection">Disable Activity launch protection</string>
-    <string name="settings_disable_activity_launch_protection_summary">This toggle will lift all startActivity protections. If you\'re unsure, don\'t enable it.</string>
     <string name="settings_system_wallpaper">Use system wallpaper</string>
     <string name="settings_clear_uninstalled_app_configs">Clear uninstalled app configs</string>
     <string name="settings_clear_uninstalled_app_configs_summary">This option allows you to create a config without remnants but you\'ll have to reconfigure apps when you installed them again.</string>
@@ -185,7 +170,6 @@ You can disable telemetry at any time in Settings.</string>
     <string name="settings_disable_update">Disable update notification</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Bulk logger configuration</string>
 
     <!-- About -->
     <string name="about_description">

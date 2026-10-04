@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">به برنامه می‌گوید که باید درخواست را دوباره تلاش کند (مثلاً خطا گذرا است).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">مرجع کدهای خطای Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">کد خطا کپی شد: %1$s</string>
-    <string name="app_exclude_system_apps">شامل برنامه‌های سیستمی</string>
     <string name="app_warning_risky_package_title">پکیج پرریسک</string>
     <string name="app_warning_risky_package_desc">این پکیج به‌عنوان پرریسک علامت‌گذاری شده و ممکن است باعث ناپایداری شود. ادامه می‌دهید؟</string>
     <string name="app_favorite_add">علامت‌گذاری به‌عنوان مورد علاقه</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">ماژول</string>
-    <string name="settings_overwrite">بازنویسی</string>
-    <string name="settings_overwritten">بازنویسی‌شده</string>
-    <string name="settings_overwrite_summary">آیتم‌های این دسته در صورت فعال بودن سوئیچ‌ها، اجباری فعال می‌شوند</string>
-    <string name="settings_default_value">مقدار پیش‌فرض: %s</string>
-    <string name="settings_data_isolation">جداسازی داده‌ها</string>
-    <string name="settings_data_isolation_summary">دادهٔ برنامه: %1$s\nدادهٔ برنامه (vold): %2$s\nاجبار در مونت: %3$s</string>
-    <string name="settings_data_isolation_unsupported">این گزینه تنها در اندروید ۱۱ و بالاتر در دسترس است</string>
-    <string name="settings_app_data_isolation">جداسازی دادهٔ برنامه</string>
-    <string name="settings_vold_app_data_isolation">جداسازی دادهٔ برنامه (vold)</string>
-    <string name="settings_warning">هشدار</string>
-    <string name="settings_vold_warning">این ویژگی یک قابلیت جداسازی AOSP برای فضای خصوصی خارجی برنامه را فعال می‌کند. ممکن است سازگاری را بهبود دهد اما می‌تواند پایداری را کاهش دهد و ممکن است در نسخه‌های آینده اندروید کار نکند.</string>
-    <string name="settings_need_reboot">تغییر نیاز به راه‌اندازی مجدد دارد</string>
-    <string name="settings_force_mount_data">اجرای جداسازی داده برای همه برنامه‌ها</string>
-    <string name="settings_force_mount_data_summary">به‌طور پیش‌فرض جداسازی داده برای برنامه‌هایی که target API کمتر از ۳۰ دارند غیرفعال است</string>
     <string name="settings_detail_log">گزارش جزئیات برای دیباگ</string>
     <string name="settings_max_log_size">اندازه‌های بافر لاگر</string>
     <string name="settings_hide_icon">مخفی کردن آیکون ماژول در لانچر</string>
     <string name="settings_hide_icon_summary">هنوز می‌توانید برنامه را در Xposed manager باز کنید</string>
     <string name="settings_bypass_risky_package_warning">رد هشدار پکیج پرریسک</string>
     <string name="settings_bypass_risky_package_warning_summary">توجه داشته باشید که توسعه‌دهنده مسئول مشکلات مرتبط با پکیج پرریسک قبل یا بعد از فعال‌سازی این ویژگی نیست</string>
-    <string name="settings_disable_activity_launch_protection">غیرفعال کردن حفاظت راه‌اندازی Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">این سوئیچ همهٔ محافظت‌های startActivity را برداشته و اگر مطمئن نیستید آن را فعال نکنید.</string>
     <string name="settings_system_wallpaper">استفاده از تصویر پس‌زمینهٔ سیستم</string>
     <string name="settings_clear_uninstalled_app_configs">پاک کردن پیکربندی برنامه‌های حذف‌شده</string>
     <string name="settings_clear_uninstalled_app_configs_summary">این گزینه به شما اجازه می‌دهد پیکربندی بدون باقیمانده ایجاد کنید، اما وقتی برنامه‌ها را دوباره نصب می‌کنید باید دوباره پیکربندی کنید.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">غیرفعال کردن اعلان به‌روزرسانی</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">پیکربندی دسته‌ای لاگر</string>
 
     <!-- About -->
     <string name="about_description">PIB یک ماژول LSPosed است که بر مسدودسازی برنامه‌ها از استفاده از Google Play Integrity API تمرکز دارد.</string>

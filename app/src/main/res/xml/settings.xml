@@ -80,16 +80,6 @@
             android:title="@string/settings_intent_api_enabled"
             android:summary="@string/settings_intent_api_enabled_summary" />
         <SwitchPreferenceCompat
-            android:icon="@drawable/outline_android_24"
-            android:key="disableActivityLaunchProtection"
-            app:singleLineTitle="false"
-            android:title="@string/settings_disable_activity_launch_protection"
-            android:summary="@string/settings_disable_activity_launch_protection_summary" />
-        <Preference
-            android:icon="@drawable/outline_storage_24"
-            android:key="dataIsolation"
-            android:title="@string/settings_data_isolation" />
-        <SwitchPreferenceCompat
             android:icon="@drawable/outline_bug_report_24"
             android:key="detailLog"
             app:singleLineTitle="false"

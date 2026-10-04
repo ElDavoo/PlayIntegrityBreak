@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Megmondja az alkalmazásnak, hogy a kérés újrapróbálható (pl. a hiba átmeneti).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integritási hibakódok</string>
     <string name="app_rewrite_integrity_error_code_copied">Másolt hibakód: %1$s</string>
-    <string name="app_exclude_system_apps">Rendszeralkalmazások bevonása</string>
     <string name="app_warning_risky_package_title">Kockázatos csomag</string>
     <string name="app_warning_risky_package_desc">Ez a csomag kockázatosként van megjelölve és instabilitást okozhat. Folytatod?</string>
     <string name="app_favorite_add">Hozzáadás a kedvencekhez</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modul</string>
-    <string name="settings_overwrite">Felülír</string>
-    <string name="settings_overwritten">Felülírva</string>
-    <string name="settings_overwrite_summary">Ha a kapcsolók be vannak kapcsolva, ezen kategória elemei kötelezően engedélyezettek lesznek.</string>
-    <string name="settings_default_value">Alapértelmezett érték: %s</string>
-    <string name="settings_data_isolation">Adatszigetelés</string>
-    <string name="settings_data_isolation_summary">Alkalmazás adatai: %1$s\nVold alkalmazás adatai: %2$s\nErőltetett csatolás: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Ez az opció csak Android 11-en és újabb verziókon érhető el</string>
-    <string name="settings_app_data_isolation">Alkalmazás adatai elkülönítése</string>
-    <string name="settings_vold_app_data_isolation">Vold alkalmazásadatok elkülönítése</string>
-    <string name="settings_warning">Figyelmeztetés</string>
-    <string name="settings_vold_warning">Ez egy AOSP elkülönítési funkciót engedélyez az alkalmazás külső privát tárhelyéhez. Javíthatja a kompatibilitást, de csökkentheti a stabilitást és előfordulhat, hogy a jövőbeli Android verziókban nem fog működni.</string>
-    <string name="settings_need_reboot">A módosításhoz újraindítás szükséges</string>
-    <string name="settings_force_mount_data">Adatelkülönítést kényszerít minden alkalmazásnál</string>
-    <string name="settings_force_mount_data_summary">Az adatelkülönítés alapértelmezés szerint ki van kapcsolva azoknál az alkalmazásoknál, amelyek célzott API-szintje 30 alatti.</string>
     <string name="settings_detail_log">Részletes napló a hibakereséshez</string>
     <string name="settings_max_log_size">Naplózó pufferméretek</string>
     <string name="settings_hide_icon">Modul ikonának elrejtése a launcherben</string>
     <string name="settings_hide_icon_summary">Az alkalmazást továbbra is megnyithatod az Xposed kezelőben</string>
     <string name="settings_bypass_risky_package_warning">Kockázatos csomag figyelmeztetés kikapcsolása</string>
     <string name="settings_bypass_risky_package_warning_summary">Figyelem: a fejlesztők nem vállalnak felelősséget kockázatos csomagok okozta problémákért, sem az engedélyezés előtt, sem utána.</string>
-    <string name="settings_disable_activity_launch_protection">Activity indítási védelem tiltása</string>
-    <string name="settings_disable_activity_launch_protection_summary">Ez a kapcsoló eltávolít minden startActivity védelmet. Ha bizonytalan vagy, ne engedélyezd.</string>
     <string name="settings_system_wallpaper">Rendszer háttérkép használata</string>
     <string name="settings_clear_uninstalled_app_configs">Eltávolított alkalmazások konfigurációinak törlése</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Ez az opció lehetővé teszi konfiguráció létrehozását maradékok nélkül, de újratelepítéskor újra be kell állítanod az alkalmazásokat.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Frissítés értesítés letiltása</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Tömeges naplózó beállítások</string>
 
     <!-- About -->
     <string name="about_description">A PIB egy LSPosed modul, amely megakadályozza az alkalmazásokat abban, hogy a Google Play Integrity API-t használják.</string>

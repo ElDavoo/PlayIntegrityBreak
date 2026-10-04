@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Кажe апликацији да захтев треба бити поновљен (на пример, грешка је привремена).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Референца кодова Integrity грешака</string>
     <string name="app_rewrite_integrity_error_code_copied">Копиран код грешке: %1$s</string>
-    <string name="app_exclude_system_apps">Укључи системске апликације</string>
     <string name="app_warning_risky_package_title">Ризичан пакет</string>
     <string name="app_warning_risky_package_desc">Овај пакет је означен као ризичан и може изазвати нестабилност. Наставити?</string>
     <string name="app_favorite_add">Означи као омиљено</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Модул</string>
-    <string name="settings_overwrite">Присили</string>
-    <string name="settings_overwritten">Присилено</string>
-    <string name="settings_overwrite_summary">Ови ставке категорије ће бити присилно омогућене ако су прекидачи укључени</string>
-    <string name="settings_default_value">Подразумевана вредност: %s</string>
-    <string name="settings_data_isolation">Изолација података</string>
-    <string name="settings_data_isolation_summary">Подаци апликације: %1$s\nVold подаци апликације: %2$s\nПрисили монтирање: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Ова опција је доступна само на Android 11 и новијим верзијама</string>
-    <string name="settings_app_data_isolation">Изолација података апликације</string>
-    <string name="settings_vold_app_data_isolation">Vold изолација података апликације</string>
-    <string name="settings_warning">Упозорење</string>
-    <string name="settings_vold_warning">Ово омогућава AOSP функцију изолације за спољну приватну меморију апликације. Може побољшати компатибилност али смањити стабилност и можда престати да ради у будућим верзијама Android-а.</string>
-    <string name="settings_need_reboot">Промене захтевају поновно покретање</string>
-    <string name="settings_force_mount_data">Присили изолацију података за све апликације</string>
-    <string name="settings_force_mount_data_summary">Изолација података је по подразумеваној вредности онемогућена за апликације са target API &lt; 30</string>
     <string name="settings_detail_log">Детаљан лог за дебаговање</string>
     <string name="settings_max_log_size">Величине бафера логера</string>
     <string name="settings_hide_icon">Сакриј икону модула у ланчера</string>
     <string name="settings_hide_icon_summary">Још увек можете отворити апликацију у Xposed manager-у</string>
     <string name="settings_bypass_risky_package_warning">Прескочи упозорење о ризичном пакету</string>
     <string name="settings_bypass_risky_package_warning_summary">Имајте у виду да одржаваоци не сносе одговорност за проблеме везане за ризичне пакете пре или после омогућавања ове функције</string>
-    <string name="settings_disable_activity_launch_protection">Онемогући заштиту покретања Activity-а</string>
-    <string name="settings_disable_activity_launch_protection_summary">Ова опција ће уклонити сва заштитна мере за startActivity. Ако нисте сигурни, не омогућавајте је.</string>
     <string name="settings_system_wallpaper">Користи системски тапет</string>
     <string name="settings_clear_uninstalled_app_configs">Обриши конфигурације деинсталираних апликаacija</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Ова опција вам омогућава да креирате конфигурацију без остатака али ћете морати поново да конфигуришете апликације када их поново инсталирате.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Онемогући обавештења о ажурирању</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Чаробњак за масовну конфигурацију логера</string>
 
     <!-- About -->
     <string name="about_description">PIB је LSPosed модул фокусиран на блокирање апликација у коришћењу Google Play Integrity API.</string>

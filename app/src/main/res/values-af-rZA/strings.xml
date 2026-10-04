@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Sê vir die app dat die versoek herhaal moet word (bv. die fout is tydelik).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integriteitsfoutkode verwysing</string>
     <string name="app_rewrite_integrity_error_code_copied">Gekopieer foutkode: %1$s</string>
-    <string name="app_exclude_system_apps">Sluit stelselapps in</string>
     <string name="app_warning_risky_package_title">Riskante pakket</string>
     <string name="app_warning_risky_package_desc">Hierdie pakket is gemerk as riskant en kan onstabiliteit veroorsaak. Voortgaan?</string>
     <string name="app_favorite_add">Merk as gunsteling</string>
@@ -132,30 +131,12 @@ Misluk: %5$d</string>
 
     <!-- Settings -->
     <string name="settings_module">Module</string>
-    <string name="settings_overwrite">Oorskryf</string>
-    <string name="settings_overwritten">Oorskryf</string>
-    <string name="settings_overwrite_summary">Items in hierdie kategorie sal gedwing word as aangeskakel indien die skakelaars gekies is</string>
-    <string name="settings_default_value">Standaard waarde: %s</string>
-    <string name="settings_data_isolation">Data isolasie</string>
-    <string name="settings_data_isolation_summary">App-data: %1$s
-Vold app-data: %2$s
-Force mount: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Hierdie opsie is net beskikbaar op Android 11 en hoër</string>
-    <string name="settings_app_data_isolation">App data isolasie</string>
-    <string name="settings_vold_app_data_isolation">Vold app data isolasie</string>
-    <string name="settings_warning">Waarskuwing</string>
-    <string name="settings_vold_warning">Dit skakel \'n AOSP isolasie-funksie vir app eksterne privaat stoorruimte in. Dit kan versoenbaarheid verbeter maar kan stabiliteit verminder en in toekomstige Android-weergawes ophou werk.</string>
-    <string name="settings_need_reboot">Verandering vereis herbegin</string>
-    <string name="settings_force_mount_data">Forceer data isolasie vir alle apps</string>
-    <string name="settings_force_mount_data_summary">Data isolasie is standaard gedeaktiveer vir apps met teiken API laer as 30</string>
     <string name="settings_detail_log">Detail log vir ontfouting</string>
     <string name="settings_max_log_size">Logger buffer groottes</string>
     <string name="settings_hide_icon">Verberg module-ikoon in lanceerder</string>
     <string name="settings_hide_icon_summary">Jy kan steeds die app in Xposed bestuurder oopmaak</string>
     <string name="settings_bypass_risky_package_warning">Omseil riskante pakket waarskuwing</string>
     <string name="settings_bypass_risky_package_warning_summary">Let daarop dat die ontwikkelaars nie verantwoordelik is vir riskante pakket probleme voor of na jy hierdie funksie geaktiveer het nie</string>
-    <string name="settings_disable_activity_launch_protection">Deaktiveer Activity launch beskerming</string>
-    <string name="settings_disable_activity_launch_protection_summary">Hierdie skakel sal alle startActivity beskermings verwyder. As jy onseker is, skakel dit nie aan nie.</string>
     <string name="settings_system_wallpaper">Gebruik stelsel agtergrond</string>
     <string name="settings_clear_uninstalled_app_configs">Maak verwyderde app-konfigs skoon</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Hierdie opsie laat jou toe om \'n konfig te skep sonder oorblyfsels maar jy sal die apps weer moet herkonfigureer wanneer jy dit weer installeer.</string>
@@ -195,7 +176,6 @@ Jy kan telemetrie enige tyd in Instellings deaktiveer.</string>
     <string name="settings_disable_update">Deaktiveer opdateringswaarskuwing</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Gekombineerde logger konfigurering</string>
 
     <!-- About -->
     <string name="about_description">PIB is \'n LSPosed module gefokus op die blokkeer van apps se gebruik van Google Play Integrity API.</string>

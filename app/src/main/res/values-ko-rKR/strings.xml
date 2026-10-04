@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">요청을 재시도해야 함을 앱에 알립니다(예: 오류가 일시적임).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">무결성 오류 코드 참조</string>
     <string name="app_rewrite_integrity_error_code_copied">복사된 오류 코드: %1$s</string>
-    <string name="app_exclude_system_apps">시스템 앱 포함</string>
     <string name="app_warning_risky_package_title">위험한 패키지</string>
     <string name="app_warning_risky_package_desc">이 패키지는 위험으로 표시되어 불안정성을 초래할 수 있습니다. 계속하시겠습니까?</string>
     <string name="app_favorite_add">즐겨찾기로 추가</string>
@@ -132,30 +131,12 @@ Failed responses: %5$d</string>
 
     <!-- Settings -->
     <string name="settings_module">모듈</string>
-    <string name="settings_overwrite">덮어쓰기</string>
-    <string name="settings_overwritten">덮어써짐</string>
-    <string name="settings_overwrite_summary">스위치가 켜져 있으면 이 카테고리 항목이 강제로 활성화됩니다</string>
-    <string name="settings_default_value">기본값: %s</string>
-    <string name="settings_data_isolation">데이터 분리</string>
-    <string name="settings_data_isolation_summary">앱 데이터: %1$s
-Vold 앱 데이터: %2$s
-강제 마운트: %3$s</string>
-    <string name="settings_data_isolation_unsupported">이 옵션은 Android 11 이상에서만 사용 가능합니다</string>
-    <string name="settings_app_data_isolation">앱 데이터 분리</string>
-    <string name="settings_vold_app_data_isolation">Vold 앱 데이터 분리</string>
-    <string name="settings_warning">경고</string>
-    <string name="settings_vold_warning">앱 외부 개인 저장소에 대한 AOSP 분리 기능을 활성화합니다. 호환성은 향상될 수 있으나 안정성이 저하될 수 있으며 향후 Android 버전에서 동작하지 않을 수 있습니다.</string>
-    <string name="settings_need_reboot">변경 시 재부팅 필요</string>
-    <string name="settings_force_mount_data">모든 앱에 데이터 분리 적용</string>
-    <string name="settings_force_mount_data_summary">기본적으로 target API가 30 미만인 앱에는 데이터 분리가 비활성화됩니다</string>
     <string name="settings_detail_log">디버깅을 위한 상세 로그</string>
     <string name="settings_max_log_size">로거 버퍼 크기</string>
     <string name="settings_hide_icon">실행기에서 모듈 아이콘 숨기기</string>
     <string name="settings_hide_icon_summary">Xposed 관리자에서 앱을 여는 것은 여전히 가능합니다</string>
     <string name="settings_bypass_risky_package_warning">위험 패키지 경고 우회</string>
     <string name="settings_bypass_risky_package_warning_summary">이 기능을 활성화하기 전후로 발생한 위험 패키지 관련 문제에 대해 개발자는 책임지지 않습니다</string>
-    <string name="settings_disable_activity_launch_protection">Activity 실행 보호 비활성화</string>
-    <string name="settings_disable_activity_launch_protection_summary">이 토글은 모든 startActivity 보호를 해제합니다. 확실하지 않으면 활성화하지 마세요.</string>
     <string name="settings_system_wallpaper">시스템 배경화면 사용</string>
     <string name="settings_clear_uninstalled_app_configs">제거된 앱 구성 삭제</string>
     <string name="settings_clear_uninstalled_app_configs_summary">이 옵션은 잔여 없이 구성을 생성할 수 있지만 앱을 다시 설치하면 다시 구성해야 합니다.</string>
@@ -195,7 +176,6 @@ Vold 앱 데이터: %2$s
     <string name="settings_disable_update">업데이트 알림 비활성화</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">대량 로거 구성</string>
 
     <!-- About -->
     <string name="about_description">PIB는 앱이 Google Play Integrity API를 사용하는 것을 차단하는 데 중점을 둔 LSPosed 모듈입니다.</string>

@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Повідомляє додатку, що запит слід повторити (наприклад, помилка тимчасова).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Довідник кодів помилок Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Скопійовано код помилки: %1$s</string>
-    <string name="app_exclude_system_apps">Включати системні додатки</string>
     <string name="app_warning_risky_package_title">Ризикований пакет</string>
     <string name="app_warning_risky_package_desc">Цей пакет позначено як ризиковий і може спричинити нестабільність. Продовжити?</string>
     <string name="app_favorite_add">Позначити як улюблений</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Модуль</string>
-    <string name="settings_overwrite">Перезаписати</string>
-    <string name="settings_overwritten">Перезаписано</string>
-    <string name="settings_overwrite_summary">Елементи цієї категорії будуть примусово ввімкнені, якщо ці перемикачі встановлені</string>
-    <string name="settings_default_value">Значення за замовчуванням: %s</string>
-    <string name="settings_data_isolation">Ізоляція даних</string>
-    <string name="settings_data_isolation_summary">Дані додатку: %1$s\nVold дані додатку: %2$s\nПримусовий монтування: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Ця опція доступна лише на Android 11 і новіше</string>
-    <string name="settings_app_data_isolation">Ізоляція даних додатка</string>
-    <string name="settings_vold_app_data_isolation">Ізоляція Vold для даних додатка</string>
-    <string name="settings_warning">Увага</string>
-    <string name="settings_vold_warning">Це вмикає AOSP-функцію ізоляції для зовнішнього приватного сховища додатка. Це може покращити сумісність, але зменшити стабільність і може перестати працювати у майбутніх версіях Android.</string>
-    <string name="settings_need_reboot">Для застосування потрібне перезавантаження</string>
-    <string name="settings_force_mount_data">Примусово застосувати ізоляцію даних для всіх додатків</string>
-    <string name="settings_force_mount_data_summary">Ізоляція даних вимкнена для додатків з target API нижче 30 за замовчуванням</string>
     <string name="settings_detail_log">Детальний журнал для відлагодження</string>
     <string name="settings_max_log_size">Розмір буфера логера</string>
     <string name="settings_hide_icon">Приховати іконку модуля в лаунчері</string>
     <string name="settings_hide_icon_summary">Ви все ще можете відкрити додаток в Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Обійти попередження про ризиковий пакет</string>
     <string name="settings_bypass_risky_package_warning_summary">Розробники не несуть відповідальності за проблеми, пов\'язані з ризиковими пакетами до або після увімкнення цієї функції</string>
-    <string name="settings_disable_activity_launch_protection">Вимкнути захист запуску Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Цей перемикач зніме всі захисти startActivity. Якщо ви не впевнені, не вмикайте.</string>
     <string name="settings_system_wallpaper">Використовувати системні шпалери</string>
     <string name="settings_clear_uninstalled_app_configs">Очистити конфігурації видалених додатків</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Ця опція дозволяє створити конфіг без залишків, але вам доведеться налаштувати додатки заново після повторної установки.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Вимкнути повідомлення про оновлення</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Масове налаштування журналів</string>
 
     <!-- About -->
     <string name="about_description">PIB — модуль LSPosed, спрямований на блокування додатків від використання Google Play Integrity API.</string>

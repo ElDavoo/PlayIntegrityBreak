@@ -43,23 +43,6 @@
             android:name="packageName"
             app:argType="string" />
 
-        <argument
-            android:name="bulkConfig"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-
-        <argument
-            android:name="bulkConfigApps"
-            app:argType="string[]"
-            app:nullable="true"
-            android:defaultValue="@null" />
-
-        <argument
-            android:name="bulkConfigMode"
-            app:argType="boolean"
-            android:defaultValue="false" />
-
     </fragment>
 
 </navigation>

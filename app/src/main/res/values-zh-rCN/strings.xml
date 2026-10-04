@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">告诉应用该请求应重试（例如错误是临时性的）。</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integrity 错误代码参考</string>
     <string name="app_rewrite_integrity_error_code_copied">已复制错误代码：%1$s</string>
-    <string name="app_exclude_system_apps">包括系统应用</string>
     <string name="app_warning_risky_package_title">风险包</string>
     <string name="app_warning_risky_package_desc">该包被标记为有风险，可能导致不稳定。继续？</string>
     <string name="app_favorite_add">标记为收藏</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">模块</string>
-    <string name="settings_overwrite">覆盖</string>
-    <string name="settings_overwritten">已覆盖</string>
-    <string name="settings_overwrite_summary">该类别的项目将在切换开关被选中时被强制启用</string>
-    <string name="settings_default_value">默认值：%s</string>
-    <string name="settings_data_isolation">数据隔离</string>
-    <string name="settings_data_isolation_summary">应用数据：%1$s\nVold 应用数据：%2$s\n强制挂载：%3$s</string>
-    <string name="settings_data_isolation_unsupported">此选项仅在 Android 11 及更高版本可用</string>
-    <string name="settings_app_data_isolation">应用数据隔离</string>
-    <string name="settings_vold_app_data_isolation">Vold 应用数据隔离</string>
-    <string name="settings_warning">警告</string>
-    <string name="settings_vold_warning">这将为应用的外部私有存储启用 AOSP 隔离功能。它可能提高兼容性，但可能降低稳定性，并可能在未来的 Android 版本中停止工作。</string>
-    <string name="settings_need_reboot">更改后需要重启</string>
-    <string name="settings_force_mount_data">对所有应用强制数据隔离</string>
-    <string name="settings_force_mount_data_summary">默认情况下，目标 API 小于 30 的应用禁用数据隔离</string>
     <string name="settings_detail_log">调试详细日志</string>
     <string name="settings_max_log_size">日志缓冲区大小</string>
     <string name="settings_hide_icon">在启动器中隐藏模块图标</string>
     <string name="settings_hide_icon_summary">您仍然可以在 Xposed 管理器中打开该应用</string>
     <string name="settings_bypass_risky_package_warning">绕过风险包警告</string>
     <string name="settings_bypass_risky_package_warning_summary">请注意，在您启用此功能之前或之后，开发者不对与风险包相关的问题负责。</string>
-    <string name="settings_disable_activity_launch_protection">禁用 Activity 启动保护</string>
-    <string name="settings_disable_activity_launch_protection_summary">此开关将解除所有 startActivity 保护。如果不确定，请不要启用。</string>
     <string name="settings_system_wallpaper">使用系统壁纸</string>
     <string name="settings_clear_uninstalled_app_configs">清除已卸载应用的配置</string>
     <string name="settings_clear_uninstalled_app_configs_summary">此选项允许您创建无残留的配置，但在重新安装应用时需要重新配置它们。</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">禁用更新通知</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">批量记录器配置</string>
 
     <!-- About -->
     <string name="about_description">

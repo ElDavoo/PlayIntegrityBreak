@@ -38,4 +38,6 @@ kotlin {
 dependencies {
     api(libs.kotlinx.serialization.json)
     compileOnly(libs.dev.rikka.hidden.stub)
+
+    testImplementation(libs.junit)
 }

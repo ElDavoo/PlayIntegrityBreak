@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Informuje aplikację, że żądanie powinno zostać ponowione (np. błąd jest tymczasowy).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Odniesienie kodów błędów Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Skopiowano kod błędu: %1$s</string>
-    <string name="app_exclude_system_apps">Uwzględnij aplikacje systemowe</string>
     <string name="app_warning_risky_package_title">Ryzykowny pakiet</string>
     <string name="app_warning_risky_package_desc">Ten pakiet oznaczono jako ryzykowny i może powodować niestabilność. Kontynuować?</string>
     <string name="app_favorite_add">Dodaj do ulubionych</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Moduł</string>
-    <string name="settings_overwrite">Nadpisz</string>
-    <string name="settings_overwritten">Nadpisano</string>
-    <string name="settings_overwrite_summary">Elementy z tej kategorii będą wymuszone jako włączone, jeśli przełączniki są zaznaczone</string>
-    <string name="settings_default_value">Wartość domyślna: %s</string>
-    <string name="settings_data_isolation">Izolacja danych</string>
-    <string name="settings_data_isolation_summary">Dane aplikacji: %1$s\nDane Vold: %2$s\nWymuś montowanie: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Ta opcja dostępna tylko na Androidzie 11 i wyżej</string>
-    <string name="settings_app_data_isolation">Izolacja danych aplikacji</string>
-    <string name="settings_vold_app_data_isolation">Izolacja danych aplikacji Vold</string>
-    <string name="settings_warning">Ostrzeżenie</string>
-    <string name="settings_vold_warning">To włącza funkcję izolacji AOSP dla zewnętrznej prywatnej pamięci aplikacji. Może poprawić kompatybilność, ale zmniejszyć stabilność i przestać działać w przyszłych wersjach Androida.</string>
-    <string name="settings_need_reboot">Zmiana wymaga restartu</string>
-    <string name="settings_force_mount_data">Wymuś izolację danych dla wszystkich aplikacji</string>
-    <string name="settings_force_mount_data_summary">Izolacja danych jest domyślnie wyłączona dla aplikacji z target API niższym niż 30</string>
     <string name="settings_detail_log">Szczegółowy log do debugowania</string>
     <string name="settings_max_log_size">Rozmiary bufora loggera</string>
     <string name="settings_hide_icon">Ukryj ikonę modułu w launcherze</string>
     <string name="settings_hide_icon_summary">Nadal możesz otworzyć aplikację w menedżerze Xposed</string>
     <string name="settings_bypass_risky_package_warning">Pomiń ostrzeżenie o ryzykownych pakietach</string>
     <string name="settings_bypass_risky_package_warning_summary">Zwróć uwagę, że deweloperzy nie ponoszą odpowiedzialności za problemy związane z ryzykownymi pakietami przed ani po włączeniu tej funkcji</string>
-    <string name="settings_disable_activity_launch_protection">Wyłącz ochronę uruchamiania Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Ten przełącznik zdjemie wszystkie zabezpieczenia startActivity. Jeśli nie jesteś pewien, nie włączaj.</string>
     <string name="settings_system_wallpaper">Użyj tapety systemowej</string>
     <string name="settings_clear_uninstalled_app_configs">Usuń konfiguracje odinstalowanych aplikacji</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Ta opcja pozwala utworzyć konfigurację bez pozostałości, ale będziesz musiał ponownie skonfigurować aplikacje po ich ponownej instalacji.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Wyłącz powiadomienia o aktualizacjach</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Kreator zbiorowej konfiguracji logera</string>
 
     <!-- About -->
     <string name="about_description">PIB to moduł LSPosed skoncentrowany na blokowaniu aplikacji przed używaniem API Google Play Integrity.</string>
