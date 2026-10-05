@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name" translatable="false">Play Integrity Break</string>
     <string name="app_name_launcher" translatable="false">PIB</string>
+    <string name="integrity_request_notification_title" translatable="false">Play Integrity</string>
 
     <string name="title_home">Home</string>
     <string name="title_logs">Logs</string>
