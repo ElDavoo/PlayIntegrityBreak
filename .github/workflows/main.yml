@@ -129,7 +129,16 @@ jobs:
           COMMIT_URL: ${{ github.event.head_commit.url }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          export release=${{ steps.buildAll.outputs.releaseFile }}
-          export debug=${{ steps.buildAll.outputs.debugFile }}
-          ESCAPED=`python3 -c 'import json,os,urllib.parse; msg = json.dumps(os.environ["COMMIT_MESSAGE"]); print(urllib.parse.quote(msg if len(msg) <= 1024 else json.dumps(os.environ["COMMIT_URL"])))'`
-          curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=${CHANNEL_ID}&media=%5B%7B%22type%22:%22document%22,%20%22media%22:%22attach://release%22%7D,%7B%22type%22:%22document%22,%20%22media%22:%22attach://debug%22,%22caption%22:${ESCAPED}%7D%5D"  -F release="@$release" -F debug="@$debug"
+          # One album with the APKs and the Zygisk modules; the caption goes on the last file.
+          MEDIA=`python3 -c 'import json,os,urllib.parse
+          msg = os.environ["COMMIT_MESSAGE"]
+          caption = msg if len(json.dumps(msg)) <= 1024 else os.environ["COMMIT_URL"]
+          names = ["release", "debug", "zygiskRelease", "zygiskDebug"]
+          media = [{"type": "document", "media": "attach://" + n} for n in names]
+          media[-1]["caption"] = caption
+          print(urllib.parse.quote(json.dumps(media)))'`
+          curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=${CHANNEL_ID}&media=${MEDIA}" \
+            -F release="@${{ steps.buildAll.outputs.releaseFile }}" \
+            -F debug="@${{ steps.buildAll.outputs.debugFile }}" \
+            -F zygiskRelease="@${{ steps.buildAll.outputs.zygiskReleaseFile }}" \
+            -F zygiskDebug="@${{ steps.buildAll.outputs.zygiskDebugFile }}"
