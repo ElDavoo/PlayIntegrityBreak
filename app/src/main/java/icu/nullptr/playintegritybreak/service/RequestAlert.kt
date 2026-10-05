@@ -22,7 +22,10 @@ import it.eldavo.pib.R
  */
 object RequestAlert {
     private const val TAG = "RequestAlert"
-    private const val CHANNEL_ID = "integrity_requests"
+    // High importance, so the notification pops up on screen like the toast. Channel importance
+    // can't be raised once created, so this replaces the default-importance channel of earlier builds.
+    private const val CHANNEL_ID = "integrity_requests_popup"
+    private const val OLD_CHANNEL_ID = "integrity_requests"
 
     /** Requests buffered by the hook while PIB was unreachable are too old to alert about. */
     private const val MAX_AGE_MS = 30_000L
@@ -69,22 +72,22 @@ object RequestAlert {
 
     private fun notify(packageName: String, text: String, timestampMs: Long) {
         val manager = pibApp.getSystemService(NotificationManager::class.java)
+        manager.deleteNotificationChannel(OLD_CHANNEL_ID)
         manager.createNotificationChannel(
             NotificationChannel(
                 CHANNEL_ID,
                 pibApp.getString(R.string.integrity_request_channel),
-                NotificationManager.IMPORTANCE_DEFAULT,
+                NotificationManager.IMPORTANCE_HIGH,
             )
         )
         val launch = pibApp.packageManager.getLaunchIntentForPackage(pibApp.packageName)
         val notification = Notification.Builder(pibApp, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher_foreground)
-            .setContentTitle(text)
-            .setContentText(packageName)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(pibApp.getString(R.string.integrity_request_notification_title))
+            .setContentText(text)
             .setWhen(timestampMs)
             .setShowWhen(true)
             .setAutoCancel(true)
-            .setOnlyAlertOnce(true)
             .apply {
                 if (launch != null) {
                     setContentIntent(PendingIntent.getActivity(pibApp, 0, launch, PendingIntent.FLAG_IMMUTABLE))
