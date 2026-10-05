@@ -42,7 +42,7 @@ object AppIntegrityEventStore {
     private const val COL_TELEMETRY_SERVER_ACK_ID = "telemetry_server_ack_id"
     private const val COL_TELEMETRY_LAST_ERROR = "telemetry_last_error"
 
-    private const val EVENT_TYPE_REQUEST = "request"
+    const val EVENT_TYPE_REQUEST = "request"
     private const val EVENT_TYPE_RESPONSE = "response"
     private const val MAX_BATCH_EVENTS = 500
     private const val MIN_BATCH_LEASE_MS = 5_000L

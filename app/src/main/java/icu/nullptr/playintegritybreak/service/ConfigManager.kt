@@ -111,6 +111,10 @@ object ConfigManager {
         get() = config.intentApiEnabled
         set(value) = update { it.copy(intentApiEnabled = value) }
 
+    var requestAlertStyle: JsonConfig.AlertStyle
+        get() = config.requestAlertStyle
+        set(value) = update { it.copy(requestAlertStyle = value) }
+
     var packageQueryWorkaround: Boolean
         get() = config.packageQueryWorkaround
         set(value) {

@@ -41,7 +41,7 @@ Boolean keys (require booleanValue):
 - deliverSyntheticResponse
 - delaySyntheticResponseDelivery
 - rewriteIntegrityErrorRemediable
-- integrityRequestToast
+- integrityRequestAlert
 
 Integer keys (require intValue):
 

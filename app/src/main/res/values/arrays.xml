@@ -3,6 +3,16 @@
         <item>com.android.vending</item>
     </string-array>
 
+    <string-array name="request_alert_style_entries" translatable="false">
+        <item>@string/request_alert_style_toast</item>
+        <item>@string/request_alert_style_notification</item>
+    </string-array>
+
+    <string-array name="request_alert_style_values" translatable="false">
+        <item>TOAST</item>
+        <item>NOTIFICATION</item>
+    </string-array>
+
     <string-array name="max_log_size_entries" translatable="false">
         <item>256K</item>
         <item>512K</item>

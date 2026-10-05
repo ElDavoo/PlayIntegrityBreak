@@ -20,6 +20,8 @@ data class JsonConfig(
     val userId: String = "",
     val packageQueryWorkaround: Boolean = false,
     val favoritePackages: Set<String> = emptySet(),
+    /** How the app tells the user that an app asked for Play Integrity, see [Policy.requestAlert]. */
+    val requestAlertStyle: AlertStyle = AlertStyle.TOAST,
     val defaults: Policy = Policy(),
     val scope: Map<String, AppConfig> = emptyMap(),
 ) {
@@ -32,8 +34,11 @@ data class JsonConfig(
         val rewriteRemediable: Boolean = true,
         val deliverSyntheticResponse: Boolean = true,
         val delaySyntheticResponse: Boolean = false,
-        val requestToast: Boolean = true,
+        val requestAlert: Boolean = true,
     )
+
+    @Serializable
+    enum class AlertStyle { TOAST, NOTIFICATION }
 
     /** Per-app overrides. A null field follows [defaults]. */
     @Serializable
@@ -44,7 +49,7 @@ data class JsonConfig(
         val rewriteRemediable: Boolean? = null,
         val deliverSyntheticResponse: Boolean? = null,
         val delaySyntheticResponse: Boolean? = null,
-        val requestToast: Boolean? = null,
+        val requestAlert: Boolean? = null,
     ) {
         fun isEmpty() = this == AppConfig()
 
@@ -55,7 +60,7 @@ data class JsonConfig(
             rewriteRemediable = rewriteRemediable ?: base.rewriteRemediable,
             deliverSyntheticResponse = deliverSyntheticResponse ?: base.deliverSyntheticResponse,
             delaySyntheticResponse = delaySyntheticResponse ?: base.delaySyntheticResponse,
-            requestToast = requestToast ?: base.requestToast,
+            requestAlert = requestAlert ?: base.requestAlert,
         )
     }
 
@@ -97,7 +102,7 @@ data class JsonConfig(
                 rewriteRemediable = root.bool("defaultHookRewriteRemediable") ?: true,
                 deliverSyntheticResponse = root.bool("defaultDeliverSyntheticResponse") ?: true,
                 delaySyntheticResponse = root.bool("defaultDelaySyntheticResponseDelivery") ?: false,
-                requestToast = root.bool("integrityRequestToast") ?: true,
+                requestAlert = root.bool("integrityRequestToast") ?: true,
             )
             // Configs from before the integrity logger reset every app to logger defaults on load.
             val loggerMigrated = root.bool("integrityModeMigrated") ?: false
@@ -122,7 +127,7 @@ data class JsonConfig(
             val synthetic = AppConfig(
                 deliverSyntheticResponse = differing(deliver, defaults.deliverSyntheticResponse),
                 delaySyntheticResponse = differing(delay, defaults.delaySyntheticResponse),
-                requestToast = toast,
+                requestAlert = toast,
             )
             if (!loggerMigrated) return synthetic
 
