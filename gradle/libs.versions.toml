@@ -7,6 +7,8 @@ hidden-api = "4.4.0"
 androidx-navigation = "2.10.2"
 androidx-work = "2.12.0"
 vbpd = "2.0.4"
+androidvmtools = "c1da5dd"
+zygoteloader = "2a2160f"
 
 [plugins]
 agp-app = { id = "com.android.application", version.ref = "agp" }
@@ -16,6 +18,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 nav-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
 autoresconfig = { id = "dev.rikka.tools.autoresconfig", version = "1.2.2" }
 refine = { id = "dev.rikka.tools.refine", version = "4.4.0" }
+zygoteloader = { id = "com.github.aerath-stuff.ZygoteLoader", version.ref = "zygoteloader" }
 
 [libraries]
 androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.8.0" }
@@ -34,6 +37,7 @@ com-github-topjohnwu-libsu-core = { module = "com.github.topjohnwu.libsu:core", 
 de-robv-android-xposed-api = { module = "de.robv.android.xposed:api", version = "82" }
 dev-rikka-hidden-compat = { module = "dev.rikka.hidden:compat", version.ref = "hidden-api" }
 dev-rikka-hidden-stub = { module = "dev.rikka.hidden:stub", version.ref = "hidden-api" }
+com-github-aerath-stuff-androidvmtools = { module = "com.github.aerath-stuff:AndroidVMTools", version.ref = "androidvmtools" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.11.0" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 me-zhanghai-android-appiconloader = { module = "me.zhanghai.android.appiconloader:appiconloader", version = "1.5.0" }

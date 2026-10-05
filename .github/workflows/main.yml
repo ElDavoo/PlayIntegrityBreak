@@ -69,11 +69,13 @@ jobs:
       - name: Build all
         id: buildAll
         run: |
-          ./gradlew assemble
+          ./gradlew assemble zipZygiskRelease zipZygiskDebug
           echo "releaseName=$(ls app/build/outputs/apk/release/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
           echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
           echo "releaseFile=$(ls app/build/outputs/apk/release/*.apk)" >> $GITHUB_OUTPUT
           echo "debugFile=$(ls app/build/outputs/apk/debug/*.apk)" >> $GITHUB_OUTPUT
+          echo "zygiskReleaseFile=$(ls zygisk/build/outputs/magisk/release/*.zip)" >> $GITHUB_OUTPUT
+          echo "zygiskDebugFile=$(ls zygisk/build/outputs/magisk/debug/*.zip)" >> $GITHUB_OUTPUT
           echo "versionNum=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}' | cut -f2 -d'-')" >> $GITHUB_OUTPUT
 
       - name: Upload release
@@ -90,6 +92,13 @@ jobs:
           name: ${{ steps.buildAll.outputs.debugName }}
           path: "app/build/outputs/apk/debug/*.apk"
 
+      - name: Upload Zygisk modules
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.buildAll.outputs.releaseName }}-zygisk
+          path: "zygisk/build/outputs/magisk/*/*.zip"
+
       - name: Upload mappings
         uses: actions/upload-artifact@v7
         with:
@@ -105,6 +114,8 @@ jobs:
           files: |
             ${{ steps.buildAll.outputs.releaseFile }}
             ${{ steps.buildAll.outputs.debugFile }}
+            ${{ steps.buildAll.outputs.zygiskReleaseFile }}
+            ${{ steps.buildAll.outputs.zygiskDebugFile }}
           tag_name: pib-${{ steps.buildAll.outputs.versionNum }}
 
       - name: Post to channel

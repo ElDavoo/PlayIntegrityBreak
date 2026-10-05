@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.agp.app) apply false
     alias(libs.plugins.agp.lib) apply false
     alias(libs.plugins.nav.safeargs.kotlin) apply false
+    alias(libs.plugins.zygoteloader) apply false
 }
 
 fun String.execute(currentWorkingDir: File = file("./")): String {
@@ -77,7 +78,7 @@ val appVerName by extra("${gitCommitCountAfterReset}${gitHasUncommittedSuffix}")
 val configVerCode by extra(93)
 
 @Suppress("unused")
-val serviceVerCode by extra(102)
+val serviceVerCode by extra(103)
 
 @Suppress("unused")
 val minBackupVerCode by extra(65)

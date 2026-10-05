@@ -4,6 +4,10 @@
 - [SettingsFirewall](https://github.com/canyie/SettingsFirewall) - settings replacement idea
 - [IAmNotADeveloper](https://github.com/xfqwdsj/IAmNotADeveloper) - hiding developer options idea
 - [BetterKnownInstalled](https://github.com/Pixel-Props/BetterKnownInstalled) - package installer spoofing idea
+- [ZygoteLoader](https://github.com/aerath-stuff/ZygoteLoader) - Java-only Zygisk module loader for the Zygisk backend
+- [AndroidVMTools](https://github.com/aerath-stuff/AndroidVMTools) - ART hooking for the Zygisk backend
+- [Magisk](https://github.com/topjohnwu/Magisk) - Zygisk API and module installer
+- [HMA-OSS](https://github.com/frknkrc44/HMA-OSS) - Zygisk backend design, Zygisk detection and app install scripts
 - [0bbedCode](https://github.com/0bbedCode) - ID checker
 - All translators
 - All root community

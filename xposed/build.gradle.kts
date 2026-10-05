@@ -20,7 +20,7 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.common)
+    implementation(projects.core)
 
     implementation(libs.androidx.annotation.jvm)
     implementation(libs.com.github.kyuubiran.ezxhelper)

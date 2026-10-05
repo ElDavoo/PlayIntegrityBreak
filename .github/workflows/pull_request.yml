@@ -62,7 +62,7 @@ jobs:
       - name: Build debug
         id: buildDebug
         run: |
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug zipZygiskDebug
           echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
 
       - name: Upload debug
@@ -71,3 +71,10 @@ jobs:
         with:
           name: ${{ steps.buildDebug.outputs.debugName }}
           path: "app/build/outputs/apk/debug/*.apk"
+
+      - name: Upload Zygisk debug
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.buildDebug.outputs.debugName }}-zygisk
+          path: "zygisk/build/outputs/magisk/debug/*.zip"

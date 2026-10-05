@@ -11,6 +11,15 @@ Fix Google Play Integrity... by BREAKING it!
 
 PIB is an Xposed module that logs, and optionally intercepts, Play Integrity service requests/responses activity per target app.
 
+### Xposed or Zygisk
+
+PIB comes in two flavours that share the same hooks and the same app:
+
+- **Xposed**: install the PIB APK and enable it in LSPosed (scope: Google Play Store).
+- **Zygisk**: flash `PIB-ZYGISK-*.zip` in Magisk/KernelSU/APatch with Zygisk enabled (Magisk Zygisk, ZygiskNext or ReZygisk) and reboot. The zip installs the PIB app for you. No Xposed framework needed, and it works alongside one (Vector/LSPosed): like HMA-OSS, it is Java-only ([ZygoteLoader](https://github.com/aerath-stuff/ZygoteLoader) + [AndroidVMTools](https://github.com/aerath-stuff/AndroidVMTools)) and does not patch libart.
+
+Use one or the other. If both are enabled, only the first one to load hooks the Play Store. The app's home screen shows which one is active.
+
 ### Why do we want to do this? (Project vision)
 
 #### 1. Have a more stable bypass for Play Integrity
@@ -121,8 +130,16 @@ nix develop
 2. Build all modules:
 
 ```bash
-nix develop -c ./gradlew :common:assembleDebug :xposed:assembleDebug :app:assembleDebug --no-daemon
+nix develop -c ./gradlew :app:assembleDebug --no-daemon
 ```
+
+3. Build the Zygisk module zip (also builds the app it bundles):
+
+```bash
+nix develop -c ./gradlew :zygisk:zipZygiskDebug --no-daemon
+```
+
+The zip ends up in `zygisk/build/outputs/magisk/debug/`.
 
 The shell uses Android SDK components from nixpkgs by default and only falls back to a host SDK when the required platform/build-tools are already present.
 
