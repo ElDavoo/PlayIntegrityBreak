@@ -15,9 +15,9 @@ When enabled, any app on the device can call this API. Only enable it if you tru
 ## Transport
 
 - Entry point: exported broadcast receiver
-- Receiver: icu.nullptr.playintegritybreak.receiver.IntentApiReceiver
-- Action: icu.nullptr.playintegritybreak.action.SET_APP_SETTING
-- Recommended: send explicit broadcasts with package set to icu.nullptr.playintegritybreak
+- Receiver: icu.nullptr.playintegritybreak.receiver.IntentApiReceiver (in package it.eldavo.pib)
+- Action: it.eldavo.pib.action.SET_APP_SETTING
+- Recommended: send explicit broadcasts with package set to it.eldavo.pib
 - Response style: ordered-broadcast result code plus result extras
 
 ## Request extras
@@ -41,6 +41,7 @@ Boolean keys (require booleanValue):
 - deliverSyntheticResponse
 - delaySyntheticResponseDelivery
 - rewriteIntegrityErrorRemediable
+- integrityRequestToast
 
 Integer keys (require intValue):
 
@@ -48,7 +49,9 @@ Integer keys (require intValue):
 
 Notes:
 
-- For per-app updates, PIB initializes new entries from current global defaults and then applies your requested key mutation.
+- For per-app updates, only the requested key is stored for the app. Every setting you never set follows the global default policy, including later changes to it.
+- Setting enableLogger, deliverSyntheticResponse, delaySyntheticResponseDelivery, rewriteIntegrityErrorCode or rewriteIntegrityErrorRemediable for an app also turns enableIntervention on for that app.
+- Values must have the right extra type (`--ez` for booleans, `--ei` for integers); anything else returns INVALID_VALUE.
 - Set targetPackage to default to update the global default policy values.
 - Default policy updates only the requested key and keep other default values unchanged.
 
@@ -78,8 +81,8 @@ Boolean setting example:
 
 ```bash
 adb shell am broadcast \
-  -a icu.nullptr.playintegritybreak.action.SET_APP_SETTING \
-  -p icu.nullptr.playintegritybreak \
+  -a it.eldavo.pib.action.SET_APP_SETTING \
+  -p it.eldavo.pib \
   --es targetPackage com.example.bankapp \
   --es settingKey enableIntervention \
   --ez booleanValue true
@@ -89,8 +92,8 @@ Integer setting example:
 
 ```bash
 adb shell am broadcast \
-  -a icu.nullptr.playintegritybreak.action.SET_APP_SETTING \
-  -p icu.nullptr.playintegritybreak \
+  -a it.eldavo.pib.action.SET_APP_SETTING \
+  -p it.eldavo.pib \
   --es targetPackage com.example.bankapp \
   --es settingKey rewriteIntegrityErrorCode \
   --ei intValue -8
@@ -100,8 +103,8 @@ Default policy example:
 
 ```bash
 adb shell am broadcast \
-  -a icu.nullptr.playintegritybreak.action.SET_APP_SETTING \
-  -p icu.nullptr.playintegritybreak \
+  -a it.eldavo.pib.action.SET_APP_SETTING \
+  -p it.eldavo.pib \
   --es targetPackage default \
   --es settingKey enableLogger \
   --ez booleanValue false
@@ -110,8 +113,8 @@ adb shell am broadcast \
 ## Example from Android app
 
 ```kotlin
-val intent = Intent("icu.nullptr.playintegritybreak.action.SET_APP_SETTING").apply {
-    setPackage("icu.nullptr.playintegritybreak")
+val intent = Intent("it.eldavo.pib.action.SET_APP_SETTING").apply {
+    setPackage("it.eldavo.pib")
     putExtra("targetPackage", "com.example.bankapp")
     putExtra("settingKey", "enableLogger")
     putExtra("booleanValue", true)

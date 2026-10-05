@@ -75,10 +75,10 @@ val appVerName by extra("${gitCommitCountAfterReset}${gitHasUncommittedSuffix}")
 */
 
 @Suppress("unused")
-val configVerCode by extra(93)
+val configVerCode by extra(94)
 
 @Suppress("unused")
-val serviceVerCode by extra(103)
+val serviceVerCode by extra(104)
 
 @Suppress("unused")
 val minBackupVerCode by extra(65)

@@ -9,7 +9,7 @@ import it.eldavo.pib.ui.fragment.AppSettingsV2FragmentArgs
 
 class AppManageFragment : AppSelectFragment() {
 
-    override val firstComparator: Comparator<String> = Comparator.comparing(ConfigManager::isLoggerEnabled).reversed()
+    override val firstComparator: Comparator<String> = Comparator.comparing(ConfigManager::isConfigured).reversed()
 
     override val adapter = AppManageAdapter(
         onItemClickListener = {

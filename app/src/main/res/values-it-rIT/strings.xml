@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Indica all\'app che la richiesta dovrebbe essere ritentata (es. l\'errore è transitorio).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Riferimento codici errore Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Codice errore copiato: %1$s</string>
-    <string name="app_exclude_system_apps">Includi app di sistema</string>
     <string name="app_warning_risky_package_title">Pacchetto rischioso</string>
     <string name="app_warning_risky_package_desc">Questo pacchetto è segnalato come rischioso e può causare instabilità. Continuare?</string>
     <string name="app_favorite_add">Segna come preferito</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modulo</string>
-    <string name="settings_overwrite">Sovrascrivi</string>
-    <string name="settings_overwritten">Sovrascritto</string>
-    <string name="settings_overwrite_summary">Queste voci di categoria saranno forzate come abilitate se gli interruttori sono selezionati</string>
-    <string name="settings_default_value">Valore predefinito: %s</string>
-    <string name="settings_data_isolation">Isolamento dati</string>
-    <string name="settings_data_isolation_summary">Dati app: %1$s\nDati app Vold: %2$s\nForza mount: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Questa opzione è disponibile solo su Android 11 e versioni successive</string>
-    <string name="settings_app_data_isolation">Isolamento dati app</string>
-    <string name="settings_vold_app_data_isolation">Isolamento dati app Vold</string>
-    <string name="settings_warning">Avviso</string>
-    <string name="settings_vold_warning">Questa opzione abilita una funzione di isolamento AOSP per lo storage privato esterno delle app. Può migliorare la compatibilità ma ridurre la stabilità e potrebbe smettere di funzionare in future versioni di Android.</string>
-    <string name="settings_need_reboot">È richiesto il riavvio</string>
-    <string name="settings_force_mount_data">Forza isolamento dati per tutte le app</string>
-    <string name="settings_force_mount_data_summary">L\'isolamento dati è disabilitato per le app con target API inferiore a 30 per impostazione predefinita</string>
     <string name="settings_detail_log">Log dettagliato per il debug</string>
     <string name="settings_max_log_size">Dimensioni buffer logger</string>
     <string name="settings_hide_icon">Nascondi icona del modulo nel launcher</string>
     <string name="settings_hide_icon_summary">Puoi comunque aprire l\'app in Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Ignora avviso pacchetto rischioso</string>
     <string name="settings_bypass_risky_package_warning_summary">Nota che gli sviluppatori non sono responsabili per problemi correlati a pacchetti rischiosi prima o dopo aver abilitato questa funzione</string>
-    <string name="settings_disable_activity_launch_protection">Disabilita protezione avvio Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Questo toggle rimuoverà tutte le protezioni di startActivity. Se non sei sicuro, non abilitarlo.</string>
     <string name="settings_system_wallpaper">Usa sfondo di sistema</string>
     <string name="settings_clear_uninstalled_app_configs">Cancella configurazioni di app disinstallate</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Questa opzione consente di creare una config senza residui ma dovrai riconfigurare le app quando le reinstalli.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Disabilita notifiche aggiornamento</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Configurazione in blocco del logger</string>
 
     <!-- About -->
     <string name="about_description">PIB è un modulo LSPosed pensato per bloccare le app dall\'utilizzo dell\'API Google Play Integrity.</string>

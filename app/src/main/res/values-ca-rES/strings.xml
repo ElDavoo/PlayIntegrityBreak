@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Indica a l\'aplicació que la sol·licitud s\'hauria de reintentar (per exemple, l\'error és temporal).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referència de codis d\'error d\'Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Codi d\'error copiat: %1$s</string>
-    <string name="app_exclude_system_apps">Inclou aplicacions del sistema</string>
     <string name="app_warning_risky_package_title">Paquet arriscat</string>
     <string name="app_warning_risky_package_desc">Aquest paquet està marcat com a arriscat i pot causar inestabilitat. Continuar?</string>
     <string name="app_favorite_add">Marca com a favorit</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Mòdul</string>
-    <string name="settings_overwrite">Sobrescriu</string>
-    <string name="settings_overwritten">Sobrescrit</string>
-    <string name="settings_overwrite_summary">Els elements d\'aquesta categoria s\'activaran forçosament si els commutadors estan marcats</string>
-    <string name="settings_default_value">Valor per defecte: %s</string>
-    <string name="settings_data_isolation">Aïllament de dades</string>
-    <string name="settings_data_isolation_summary">Dades de l\'aplicació: %1$s\nDades Vold de l\'aplicació: %2$s\nForçar muntatge: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Aquesta opció només està disponible a Android 11 o superior</string>
-    <string name="settings_app_data_isolation">Aïllament de dades de l\'aplicació</string>
-    <string name="settings_vold_app_data_isolation">Aïllament de dades Vold de l\'aplicació</string>
-    <string name="settings_warning">Avís</string>
-    <string name="settings_vold_warning">Això activa una funció d\'aïllament AOSP per a l\'emmagatzematge extern privat de l\'aplicació. Pot millorar la compatibilitat però pot reduir l\'estabilitat i pot deixar de funcionar en futures versions d\'Android.</string>
-    <string name="settings_need_reboot">Canviar requereix reinici</string>
-    <string name="settings_force_mount_data">Fer complir l\'aïllament de dades per a totes les aplicacions</string>
-    <string name="settings_force_mount_data_summary">L\'aïllament de dades està desactivat per a aplicacions amb API target inferior a 30 per defecte</string>
     <string name="settings_detail_log">Registre detallat per a depuració</string>
     <string name="settings_max_log_size">Mides del buffer del registrador</string>
     <string name="settings_hide_icon">Amaga la icona del mòdul al llançador</string>
     <string name="settings_hide_icon_summary">Encara pots obrir l\'aplicació al gestor Xposed</string>
     <string name="settings_bypass_risky_package_warning">Omet l\'avís de paquet arriscat</string>
     <string name="settings_bypass_risky_package_warning_summary">Tingues en compte que els desenvolupadors no són responsables dels problemes relacionats amb paquets arriscats abans ni després d\'haver activat aquesta funció</string>
-    <string name="settings_disable_activity_launch_protection">Desactiva la protecció d\'inici d\'Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Aquest interruptor eliminarà totes les proteccions startActivity. Si no estàs segur, no l\'activis.</string>
     <string name="settings_system_wallpaper">Utilitza el fons de pantalla del sistema</string>
     <string name="settings_clear_uninstalled_app_configs">Esborra configuracions d\'aplicacions desinstal·lades</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Aquesta opció et permet crear una configuració sense restes però hauràs de reconfigurar les aplicacions quan les tornis a instal·lar.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Desactiva la notificació d\'actualització</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Configuració massiva del registrador</string>
 
     <!-- About -->
     <string name="about_description">PIB és un mòdul LSPosed centrat en bloquejar les aplicacions que utilitzen l\'API de Google Play Integrity.</string>

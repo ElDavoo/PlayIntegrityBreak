@@ -86,7 +86,7 @@ object IntegrityServiceHook {
                 val looksLikeRequest = hasBundleAndCallback(args)
                 val requestPayload = isIntegrityRequestPayload(args)
 
-                if (policy.enabled && requestPayload && callerPkg != "unknown") {
+                if (policy.interventionEnabled && requestPayload && callerPkg != "unknown") {
                     PIBLoggerService.recordIntegrityRequest(
                         callerPkg = callerPkg,
                         playIntegrityVersionMajor = playIntegrityVersion?.major,
@@ -95,11 +95,11 @@ object IntegrityServiceHook {
                     )
                 }
 
-                if (policy.enabled && policy.logRequest && looksLikeRequest && callerPkg != "unknown") {
+                if (policy.interventionEnabled && looksLikeRequest && callerPkg != "unknown") {
                     logI("Integrity request intercepted from $callerPkg")
                 }
 
-                val shouldShortCircuit = policy.enabled && policy.rewriteResponse && requestPayload
+                val shouldShortCircuit = policy.interventionEnabled && policy.rewriteResponse && requestPayload
                 if (shouldShortCircuit) {
                     val deliveryEnabled = policy.deliverSyntheticResponse
                     val callback = if (deliveryEnabled) extractCallback(args) else null
@@ -113,7 +113,7 @@ object IntegrityServiceHook {
                                 callback = callback,
                                 errorCode = policy.rewriteErrorCode,
                                 remediable = policy.rewriteRemediable,
-                                applyDelay = policy.delaySyntheticResponseDelivery,
+                                applyDelay = policy.delaySyntheticResponse,
                                 callerPkg = callerPkg,
                             )
                         }
@@ -145,7 +145,7 @@ object IntegrityServiceHook {
                         )
                     }
 
-                    val shouldLogSynthetic = callerPkg != "unknown" && policy.logResponse
+                    val shouldLogSynthetic = callerPkg != "unknown"
 
                     if (shouldLogSynthetic) {
                         logResult(
@@ -184,7 +184,7 @@ object IntegrityServiceHook {
                 val outcome = extractOutcome(args)
                 val policy = PIBLoggerService.resolvePolicy(callerPkg)
 
-                if (outcome != null && callerPkg != "unknown" && policy.enabled) {
+                if (outcome != null && callerPkg != "unknown" && policy.interventionEnabled) {
                     PIBLoggerService.recordIntegrityResponse(
                         callerPkg = callerPkg,
                         playIntegrityVersionMajor = playIntegrityVersion?.major,
@@ -199,9 +199,8 @@ object IntegrityServiceHook {
 
                 val shouldLogOutcome = outcome != null
                     && callerPkg != "unknown"
-                    && policy.enabled
-                    && policy.logResponse
-                    && (!policy.errorOnly || !outcome.success)
+                    && policy.interventionEnabled
+                    && (!PIBLoggerService.isErrorOnlyLogging() || !outcome.success)
 
                 if (shouldLogOutcome) {
                     logResult(

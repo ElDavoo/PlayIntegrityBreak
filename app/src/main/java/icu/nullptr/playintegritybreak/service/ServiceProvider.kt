@@ -5,7 +5,9 @@ import android.content.ContentValues
 import android.net.Uri
 import android.os.Binder
 import android.os.Bundle
+import android.util.AtomicFile
 import android.util.Log
+import androidx.core.util.readText
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.telemetry.AppIntegrityEventStore
 import it.eldavo.pib.common.BuildConfig
@@ -57,8 +59,8 @@ class ServiceProvider : ContentProvider() {
         val appContext = context ?: return
         thread(name = "PIB-ConfigSync", isDaemon = true) {
             runCatching {
-                val configFile = File(appContext.filesDir, CONFIG_FILE_NAME)
-                if (!configFile.exists()) return@runCatching
+                // Read the file directly: this can run before Application.onCreate initialises ConfigManager.
+                val configFile = AtomicFile(File(appContext.filesDir, CONFIG_FILE_NAME))
                 ServiceClient.writeConfig(configFile.readText())
             }.onFailure {
                 Log.w(TAG, "Failed to sync config snapshot", it)

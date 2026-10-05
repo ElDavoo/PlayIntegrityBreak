@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Indica a la app que la solicitud debe reintentarse (p. ej., el error es transitorio).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referencia de códigos de error de Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Código de error copiado: %1$s</string>
-    <string name="app_exclude_system_apps">Incluir apps del sistema</string>
     <string name="app_warning_risky_package_title">Paquete riesgoso</string>
     <string name="app_warning_risky_package_desc">Este paquete está marcado como riesgoso y puede causar inestabilidad. ¿Continuar?</string>
     <string name="app_favorite_add">Marcar como favorito</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Módulo</string>
-    <string name="settings_overwrite">Sobrescribir</string>
-    <string name="settings_overwritten">Sobrescrito</string>
-    <string name="settings_overwrite_summary">Los elementos de esta categoría se forzarán como habilitados si los interruptores están marcados</string>
-    <string name="settings_default_value">Valor predeterminado: %s</string>
-    <string name="settings_data_isolation">Aislamiento de datos</string>
-    <string name="settings_data_isolation_summary">Datos de la app: %1$s\nDatos de app de Vold: %2$s\nForzar montaje: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Esta opción solo está disponible en Android 11 y superior</string>
-    <string name="settings_app_data_isolation">Aislamiento de datos de la app</string>
-    <string name="settings_vold_app_data_isolation">Aislamiento de datos de app de Vold</string>
-    <string name="settings_warning">Advertencia</string>
-    <string name="settings_vold_warning">Esto habilita una función de aislamiento de AOSP para el almacenamiento externo privado de la app. Puede mejorar la compatibilidad, pero reducir la estabilidad y podría dejar de funcionar en futuras versiones de Android.</string>
-    <string name="settings_need_reboot">El cambio requiere reinicio</string>
-    <string name="settings_force_mount_data">Forzar aislamiento de datos para todas las apps</string>
-    <string name="settings_force_mount_data_summary">El aislamiento de datos está deshabilitado por defecto para apps con target API menor que 30</string>
     <string name="settings_detail_log">Registro detallado para depuración</string>
     <string name="settings_max_log_size">Tamaños del búfer de registro</string>
     <string name="settings_hide_icon">Ocultar icono del módulo en el lanzador</string>
     <string name="settings_hide_icon_summary">Aún puedes abrir la app en el gestor Xposed</string>
     <string name="settings_bypass_risky_package_warning">Omitir advertencia de paquete riesgoso</string>
     <string name="settings_bypass_risky_package_warning_summary">Ten en cuenta que los desarrolladores no son responsables de problemas relacionados con paquetes riesgosos antes o después de habilitar esta función</string>
-    <string name="settings_disable_activity_launch_protection">Deshabilitar protección de inicio de Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Este interruptor quitará todas las protecciones de startActivity. Si no estás seguro, no lo habilites.</string>
     <string name="settings_system_wallpaper">Usar fondo de pantalla del sistema</string>
     <string name="settings_clear_uninstalled_app_configs">Borrar configuraciones de apps desinstaladas</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Esta opción permite crear una configuración sin residuos, pero tendrás que volver a configurar las apps cuando las instales otra vez.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Deshabilitar notificación de actualización</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Configuración masiva del registrador</string>
 
     <!-- About -->
     <string name="about_description">PIB es un módulo de LSPosed enfocado en bloquear que las apps usen la API de Google Play Integrity.</string>

@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Geeft aan dat de aanvraag opnieuw geprobeerd moet worden (bijv. de fout is tijdelijk).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referentie voor Integrity-foutcodes</string>
     <string name="app_rewrite_integrity_error_code_copied">Gekopieerde foutcode: %1$s</string>
-    <string name="app_exclude_system_apps">Systeemapps opnemen</string>
     <string name="app_warning_risky_package_title">Risicopakket</string>
     <string name="app_warning_risky_package_desc">Dit pakket is gemarkeerd als risicovol en kan instabiliteit veroorzaken. Doorgaan?</string>
     <string name="app_favorite_add">Markeren als favoriet</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Module</string>
-    <string name="settings_overwrite">Overschrijven</string>
-    <string name="settings_overwritten">Overschreven</string>
-    <string name="settings_overwrite_summary">Deze categorie-items worden geforceerd ingeschakeld als de schakelaars zijn aangevinkt</string>
-    <string name="settings_default_value">Standaardwaarde: %s</string>
-    <string name="settings_data_isolation">Gegevensisolatie</string>
-    <string name="settings_data_isolation_summary">App-gegevens: %1$s\nVold app-gegevens: %2$s\nForceer mount: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Deze optie is alleen beschikbaar op Android 11 en hoger</string>
-    <string name="settings_app_data_isolation">App-gegevensisolatie</string>
-    <string name="settings_vold_app_data_isolation">Vold app-gegevensisolatie</string>
-    <string name="settings_warning">Waarschuwing</string>
-    <string name="settings_vold_warning">Dit schakelt een AOSP-isolatiefunctie in voor de externe privéopslag van apps. Het kan compatibiliteit verbeteren maar de stabiliteit verminderen en kan in toekomstige Android-versies stoppen met werken.</string>
-    <string name="settings_need_reboot">Wijziging vereist herstart</string>
-    <string name="settings_force_mount_data">Forceer gegevensisolatie voor alle apps</string>
-    <string name="settings_force_mount_data_summary">Gegevensisolatie is standaard uitgeschakeld voor apps met target API lager dan 30</string>
     <string name="settings_detail_log">Gedetailleerde log voor debugging</string>
     <string name="settings_max_log_size">Logger-buffergroottes</string>
     <string name="settings_hide_icon">Verberg module-icoon in launcher</string>
     <string name="settings_hide_icon_summary">Je kunt de app nog steeds openen in de Xposed-manager</string>
     <string name="settings_bypass_risky_package_warning">Overschrijd waarschuwing risicopakket</string>
     <string name="settings_bypass_risky_package_warning_summary">Opmerking: de ontwikkelaars zijn niet verantwoordelijk voor problemen gerelateerd aan risicopakketten vóór of nadat je deze functie hebt ingeschakeld</string>
-    <string name="settings_disable_activity_launch_protection">Schakel Activity launch-protectie uit</string>
-    <string name="settings_disable_activity_launch_protection_summary">Deze schakel haalt alle startActivity-bescherming weg. Als je het niet zeker weet, schakel dit dan niet in.</string>
     <string name="settings_system_wallpaper">Gebruik systeemachtergrond</string>
     <string name="settings_clear_uninstalled_app_configs">Wis configuraties van verwijderde apps</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Deze optie laat je een config aanmaken zonder resten, maar je moet apps opnieuw configureren als je ze weer installeert.</string>
@@ -185,7 +168,6 @@ Je kunt telemetry op elk moment uitschakelen in Instellingen.</string>
     <string name="settings_disable_update">Schakel update-notificatie uit</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Bulk logger-configuratie</string>
 
     <!-- About -->
     <string name="about_description">PIB is een LSPosed-module gericht op het blokkeren van apps die de Google Play Integrity API gebruiken.</string>

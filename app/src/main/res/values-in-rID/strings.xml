@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Memberitahu aplikasi bahwa permintaan harus dicoba ulang (mis. error bersifat sementara).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referensi kode error integritas</string>
     <string name="app_rewrite_integrity_error_code_copied">Kode error disalin: %1$s</string>
-    <string name="app_exclude_system_apps">Termasuk aplikasi sistem</string>
     <string name="app_warning_risky_package_title">Paket berisiko</string>
     <string name="app_warning_risky_package_desc">Paket ini ditandai berisiko dan dapat menyebabkan ketidakstabilan. Lanjutkan?</string>
     <string name="app_favorite_add">Tandai sebagai favorit</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modul</string>
-    <string name="settings_overwrite">Timpa</string>
-    <string name="settings_overwritten">Ditimpa</string>
-    <string name="settings_overwrite_summary">Item di kategori ini akan dipaksa aktif jika sakelar dicentang</string>
-    <string name="settings_default_value">Nilai default: %s</string>
-    <string name="settings_data_isolation">Isolasi data</string>
-    <string name="settings_data_isolation_summary">Data aplikasi: %1$s\nData aplikasi Vold: %2$s\nPaksa mount: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Opsi ini hanya tersedia di Android 11 ke atas</string>
-    <string name="settings_app_data_isolation">Isolasi data aplikasi</string>
-    <string name="settings_vold_app_data_isolation">Isolasi data aplikasi Vold</string>
-    <string name="settings_warning">Peringatan</string>
-    <string name="settings_vold_warning">Ini mengaktifkan fitur isolasi AOSP untuk penyimpanan privat eksternal aplikasi. Mungkin meningkatkan kompatibilitas tetapi dapat mengurangi stabilitas dan dapat berhenti bekerja di versi Android mendatang.</string>
-    <string name="settings_need_reboot">Perubahan membutuhkan reboot</string>
-    <string name="settings_force_mount_data">Terapkan isolasi data untuk semua aplikasi</string>
-    <string name="settings_force_mount_data_summary">Isolasi data dinonaktifkan untuk aplikasi yang target API-nya di bawah 30 secara default</string>
     <string name="settings_detail_log">Log detail untuk debugging</string>
     <string name="settings_max_log_size">Ukuran buffer logger</string>
     <string name="settings_hide_icon">Sembunyikan ikon modul di launcher</string>
     <string name="settings_hide_icon_summary">Anda masih dapat membuka aplikasi di Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Lewati peringatan paket berisiko</string>
     <string name="settings_bypass_risky_package_warning_summary">Catatan: pengembang tidak bertanggung jawab atas masalah terkait paket berisiko sebelum atau setelah Anda mengaktifkan fitur ini</string>
-    <string name="settings_disable_activity_launch_protection">Nonaktifkan proteksi peluncuran Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Toggle ini akan mengangkat semua proteksi startActivity. Jika Anda tidak yakin, jangan aktifkan.</string>
     <string name="settings_system_wallpaper">Gunakan wallpaper sistem</string>
     <string name="settings_clear_uninstalled_app_configs">Hapus konfigurasi aplikasi yang dicopot</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Opsi ini memungkinkan Anda membuat konfigurasi tanpa sisa, tetapi Anda harus mengonfigurasi ulang aplikasi saat Anda memasangnya kembali.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Nonaktifkan notifikasi pembaruan</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Konfigurasi logger massal</string>
 
     <!-- About -->
     <string name="about_description">PIB adalah modul LSPosed yang berfokus pada memblokir aplikasi dari menggunakan Google Play Integrity API.</string>

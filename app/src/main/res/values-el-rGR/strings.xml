@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Ενημερώνει την εφαρμογή ότι το αίτημα πρέπει να επαναληφθεί (π.χ. το σφάλμα είναι προσωρινό).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Αναφορά κωδικών σφαλμάτων Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Αντιγράφηκε κωδικός σφάλματος: %1$s</string>
-    <string name="app_exclude_system_apps">Συμπερίληψη συστημικών εφαρμογών</string>
     <string name="app_warning_risky_package_title">Επικίνδυνο πακέτο</string>
     <string name="app_warning_risky_package_desc">Αυτό το πακέτο χαρακτηρίζεται επικίνδυνο και μπορεί να προκαλέσει αστάθεια. Συνεχίσετε;</string>
     <string name="app_favorite_add">Σήμανση ως αγαπημένο</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Μονάδα</string>
-    <string name="settings_overwrite">Επανεγγραφή</string>
-    <string name="settings_overwritten">Επανεγράφη</string>
-    <string name="settings_overwrite_summary">Αυτά τα στοιχεία θα επιβληθούν ως ενεργοποιημένα αν οι διακόπτες είναι τσεκαρισμένοι</string>
-    <string name="settings_default_value">Προεπιλεγμένη τιμή: %s</string>
-    <string name="settings_data_isolation">Απομόνωση δεδομένων</string>
-    <string name="settings_data_isolation_summary">App data: %1$s\nVold app data: %2$s\nForce mount: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Αυτή η επιλογή είναι διαθέσιμη μόνο σε Android 11 και νεότερα</string>
-    <string name="settings_app_data_isolation">Απομόνωση δεδομένων εφαρμογής</string>
-    <string name="settings_vold_app_data_isolation">Απομόνωση δεδομένων Vold εφαρμογής</string>
-    <string name="settings_warning">Προειδοποίηση</string>
-    <string name="settings_vold_warning">Αυτό ενεργοποιεί μια λειτουργία απομόνωσης AOSP για το εξωτερικό ιδιωτικό αποθηκευτικό χώρου εφαρμογής. Μπορεί να βελτιώσει τη συμβατότητα αλλά να μειώσει τη σταθερότητα και να σταματήσει να λειτουργεί σε μελλοντικές εκδόσεις Android.</string>
-    <string name="settings_need_reboot">Απαιτείται επανεκκίνηση</string>
-    <string name="settings_force_mount_data">Εναγκαστική απομόνωση δεδομένων για όλες τις εφαρμογές</string>
-    <string name="settings_force_mount_data_summary">Η απομόνωση δεδομένων είναι απενεργοποιημένη για εφαρμογές με target API κάτω από 30 από προεπιλογή</string>
     <string name="settings_detail_log">Λεπτομερές αρχείο καταγραφής για αποσφαλμάτωση</string>
     <string name="settings_max_log_size">Μέγεθος buffer καταγραφής</string>
     <string name="settings_hide_icon">Απόκρυψη εικονιδίου εφαρμογής στο launcher</string>
     <string name="settings_hide_icon_summary">Μπορείτε ακόμα να ανοίξετε την εφαρμογή στο Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Παράκαμψη προειδοποίησης επικίνδυνου πακέτου</string>
     <string name="settings_bypass_risky_package_warning_summary">Σημειώστε ότι οι προγραμματιστές δεν ευθύνονται για ζητήματα που προκαλούνται από επικίνδυνα πακέτα πριν ή μετά την ενεργοποίηση αυτής της λειτουργίας</string>
-    <string name="settings_disable_activity_launch_protection">Απενεργοποίηση προστασίας εκκίνησης Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Αυτό το toggle θα άρει όλες τις προστασίες startActivity. Αν δεν είστε σίγουροι, μην το ενεργοποιήσετε.</string>
     <string name="settings_system_wallpaper">Χρήση συστημικού φόντου</string>
     <string name="settings_clear_uninstalled_app_configs">Εκκαθάριση ρυθμίσεων απεγκατεστημένων εφαρμογών</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Αυτή η επιλογή σας επιτρέπει να δημιουργήσετε ρυθμίσεις χωρίς υπολείμματα αλλά θα πρέπει να επαναδιαμορφώσετε τις εφαρμογές όταν τις εγκαταστήσετε ξανά.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Απενεργοποίηση ειδοποίησης ενημέρωσης</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Μαζική ρύθμιση καταγραφής</string>
 
     <!-- About -->
     <string name="about_description">Το PIB είναι ένα module LSPosed που στοχεύει στο μπλοκάρισμα εφαρμογών από τη χρήση του Google Play Integrity API.</string>

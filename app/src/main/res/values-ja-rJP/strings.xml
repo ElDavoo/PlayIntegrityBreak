@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">リクエストは再試行されるべきであるとアプリに伝えます（例えばエラーが一時的である場合）。</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integrityエラーコード参照</string>
     <string name="app_rewrite_integrity_error_code_copied">コピーしたエラーコード: %1$s</string>
-    <string name="app_exclude_system_apps">システムアプリを含める</string>
     <string name="app_warning_risky_package_title">危険なパッケージ</string>
     <string name="app_warning_risky_package_desc">このパッケージは危険とマークされており、安定性に影響を与える可能性があります。続行しますか？</string>
     <string name="app_favorite_add">お気に入りに追加</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">モジュール</string>
-    <string name="settings_overwrite">上書き</string>
-    <string name="settings_overwritten">上書きされました</string>
-    <string name="settings_overwrite_summary">チェックされたスイッチのカテゴリ項目は強制的に有効になります</string>
-    <string name="settings_default_value">デフォルト値: %s</string>
-    <string name="settings_data_isolation">データ分離</string>
-    <string name="settings_data_isolation_summary">アプリデータ: %1$s\nVoldのアプリデータ: %2$s\n強制マウント: %3$s</string>
-    <string name="settings_data_isolation_unsupported">このオプションはAndroid 11以上でのみ利用可能です</string>
-    <string name="settings_app_data_isolation">アプリデータ分離</string>
-    <string name="settings_vold_app_data_isolation">Voldのアプリデータ分離</string>
-    <string name="settings_warning">警告</string>
-    <string name="settings_vold_warning">これはアプリの外部プライベートストレージに対するAOSPの分離機能を有効にします。互換性は向上する可能性がありますが、安定性が低下したり将来のAndroidで動作しなくなる可能性があります。</string>
-    <string name="settings_need_reboot">変更には再起動が必要です</string>
-    <string name="settings_force_mount_data">すべてのアプリに対してデータ分離を強制する</string>
-    <string name="settings_force_mount_data_summary">デフォルトではAPIターゲットが30未満のアプリではデータ分離は無効です</string>
     <string name="settings_detail_log">デバッグ用の詳細ログ</string>
     <string name="settings_max_log_size">ロガーバッファサイズ</string>
     <string name="settings_hide_icon">ランチャーのモジュールアイコンを非表示にする</string>
     <string name="settings_hide_icon_summary">Xposedマネージャーからアプリを開くことはできます</string>
     <string name="settings_bypass_risky_package_warning">危険なパッケージ警告を無視する</string>
     <string name="settings_bypass_risky_package_warning_summary">この機能を有効にする前後の危険なパッケージ関連の問題について開発者は責任を負いません</string>
-    <string name="settings_disable_activity_launch_protection">Activity起動保護を無効にする</string>
-    <string name="settings_disable_activity_launch_protection_summary">このトグルはすべてのstartActivity保護を解除します。よくわからない場合は有効にしないでください。</string>
     <string name="settings_system_wallpaper">システムの壁紙を使う</string>
     <string name="settings_clear_uninstalled_app_configs">アンインストールされたアプリの設定をクリア</string>
     <string name="settings_clear_uninstalled_app_configs_summary">このオプションを使うと残骸なしで設定を作成できますが、再インストール時にアプリを再設定する必要があります。</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">更新通知を無効にする</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">一括ログ設定ウィザード</string>
 
     <!-- About -->
     <string name="about_description">PIBはGoogle Play Integrity APIへのアクセスをブロックすることに焦点を当てたLSPosedモジュールです。</string>

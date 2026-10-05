@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Říká aplikaci, že by měl být požadavek opakován (např. chyba je přechodná).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Reference kódů chyb Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Zkopírovaný kód chyby: %1$s</string>
-    <string name="app_exclude_system_apps">Zahrnout systémové aplikace</string>
     <string name="app_warning_risky_package_title">Rizikový balíček</string>
     <string name="app_warning_risky_package_desc">Tento balíček je označen jako rizikový a může způsobit nestabilitu. Pokračovat?</string>
     <string name="app_favorite_add">Přidat mezi oblíbené</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modul</string>
-    <string name="settings_overwrite">Přepsat</string>
-    <string name="settings_overwritten">Přepsáno</string>
-    <string name="settings_overwrite_summary">Položky v této kategorii budou vynuceně povoleny, pokud jsou přepínače zaškrtnuté</string>
-    <string name="settings_default_value">Výchozí hodnota: %s</string>
-    <string name="settings_data_isolation">Izolace dat</string>
-    <string name="settings_data_isolation_summary">Data aplikace: %1$s\nData Vold aplikace: %2$s\nVynutit připojení: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Tato možnost je dostupná pouze na Androidu 11 a vyšším</string>
-    <string name="settings_app_data_isolation">Izolace dat aplikace</string>
-    <string name="settings_vold_app_data_isolation">Izolace dat Vold aplikace</string>
-    <string name="settings_warning">Varování</string>
-    <string name="settings_vold_warning">Tímto povolíte AOSP funkci izolace pro externí soukromé úložiště aplikace. Může to zlepšit kompatibilitu, ale snížit stabilitu a v budoucnu přestat fungovat.</string>
-    <string name="settings_need_reboot">Změna vyžaduje restart</string>
-    <string name="settings_force_mount_data">Vynutit izolaci dat pro všechny aplikace</string>
-    <string name="settings_force_mount_data_summary">Izolace dat je ve výchozím nastavení vypnuta pro aplikace s cílovým API nižším než 30</string>
     <string name="settings_detail_log">Detailní záznam pro ladění</string>
     <string name="settings_max_log_size">Velikosti bufferu protokolování</string>
     <string name="settings_hide_icon">Skrýt ikonu modulu v launcheru</string>
     <string name="settings_hide_icon_summary">Aplikaci můžete stále otevřít v Xposed manageru</string>
     <string name="settings_bypass_risky_package_warning">Přeskočit varování o rizikovém balíčku</string>
     <string name="settings_bypass_risky_package_warning_summary">Pozor: vývojáři neodpovídají za problémy související s rizikovými balíčky před nebo po povolení této funkce</string>
-    <string name="settings_disable_activity_launch_protection">Zakázat ochranu spuštění Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Tímto přepínačem odstraníte všechna omezení startActivity. Pokud si nejste jisti, tento přepínač nepovolujte.</string>
     <string name="settings_system_wallpaper">Použít systémové pozadí</string>
     <string name="settings_clear_uninstalled_app_configs">Vymazat konfigurace odinstalovaných aplikací</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Tato volba vám umožní vytvořit konfiguraci bez pozůstatků, ale při opětovné instalaci aplikací je budete muset znovu nakonfigurovat.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Vypnout upozornění na aktualizace</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Hromadné nastavení záznamníku</string>
 
     <!-- About -->
     <string name="about_description">PIB je modul pro LSPosed zaměřený na blokování aplikací používajících API Google Play Integrity.</string>

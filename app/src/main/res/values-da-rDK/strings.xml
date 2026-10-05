@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Fortæller appen, at forespørgslen bør forsøges igen (fx fejlen er midlertidig).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integritetsfejlkode-reference</string>
     <string name="app_rewrite_integrity_error_code_copied">Kopieret fejlkode: %1$s</string>
-    <string name="app_exclude_system_apps">Inkluder systemapps</string>
     <string name="app_warning_risky_package_title">Risikoapp</string>
     <string name="app_warning_risky_package_desc">Denne pakke er markeret som risikabel og kan forårsage ustabilitet. Fortsæt?</string>
     <string name="app_favorite_add">Markér som favorit</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Modul</string>
-    <string name="settings_overwrite">Overskriv</string>
-    <string name="settings_overwritten">Overskrevet</string>
-    <string name="settings_overwrite_summary">Elementerne i denne kategori vil blive tvunget til at være aktiverede, hvis skifterne er slået til</string>
-    <string name="settings_default_value">Standardværdi: %s</string>
-    <string name="settings_data_isolation">Data-isolering</string>
-    <string name="settings_data_isolation_summary">App-data: %1$s\nVold-app-data: %2$s\nTvangsmontering: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Denne mulighed er kun tilgængelig på Android 11 og nyere</string>
-    <string name="settings_app_data_isolation">App-data-isolering</string>
-    <string name="settings_vold_app_data_isolation">Vold-app-data-isolering</string>
-    <string name="settings_warning">Advarsel</string>
-    <string name="settings_vold_warning">Dette aktiverer en AOSP-isoleringsfunktion for apps\' eksterne private lager. Det kan forbedre kompatibilitet, men kan reducere stabilitet og kan stoppe med at fungere i fremtidige Android-versioner.</string>
-    <string name="settings_need_reboot">Ændring kræver genstart</string>
-    <string name="settings_force_mount_data">Tving data-isolering for alle apps</string>
-    <string name="settings_force_mount_data_summary">Data-isolering er som standard deaktiveret for apps med mål-API under 30</string>
     <string name="settings_detail_log">Detaljeret log til fejlfinding</string>
     <string name="settings_max_log_size">Logbufferstørrelser</string>
     <string name="settings_hide_icon">Skjul modulikon i launcher</string>
     <string name="settings_hide_icon_summary">Du kan stadig åbne appen i Xposed-manageren</string>
     <string name="settings_bypass_risky_package_warning">Omgå advarsel om risikabel pakke</string>
     <string name="settings_bypass_risky_package_warning_summary">Bemærk, at udviklerne ikke er ansvarlige for problemer relateret til risikable pakker før eller efter, du har aktiveret denne funktion</string>
-    <string name="settings_disable_activity_launch_protection">Deaktiver Activity-startbeskyttelse</string>
-    <string name="settings_disable_activity_launch_protection_summary">Denne kontakt fjerner alle startActivity-beskyttelser. Hvis du er usikker, aktiver den ikke.</string>
     <string name="settings_system_wallpaper">Brug systembaggrund</string>
     <string name="settings_clear_uninstalled_app_configs">Ryd konfigurationer for afinstallerede apps</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Denne mulighed tillader dig at oprette en konfiguration uden rester, men du bliver nødt til at konfigurere apps igen, når du installerer dem på ny.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Deaktiver opdateringsnotifikation</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Massekonfiguration af logger</string>
 
     <!-- About -->
     <string name="about_description">PIB er et LSPosed-modul med fokus på at blokere apps fra at bruge Google Play Integrity API.</string>

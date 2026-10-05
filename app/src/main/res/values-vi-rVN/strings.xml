@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Cho biết ứng dụng nên thử lại yêu cầu (ví dụ: lỗi tạm thời).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Tham chiếu mã lỗi Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Đã sao chép mã lỗi: %1$s</string>
-    <string name="app_exclude_system_apps">Bao gồm ứng dụng hệ thống</string>
     <string name="app_warning_risky_package_title">Gói rủi ro</string>
     <string name="app_warning_risky_package_desc">Gói này được đánh dấu rủi ro và có thể gây mất ổn định. Tiếp tục?</string>
     <string name="app_favorite_add">Đánh dấu yêu thích</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Mô-đun</string>
-    <string name="settings_overwrite">Ghi đè</string>
-    <string name="settings_overwritten">Đã bị ghi đè</string>
-    <string name="settings_overwrite_summary">Các mục trong danh mục này sẽ được ép bật nếu các công tắc được chọn</string>
-    <string name="settings_default_value">Giá trị mặc định: %s</string>
-    <string name="settings_data_isolation">Cô lập dữ liệu</string>
-    <string name="settings_data_isolation_summary">Dữ liệu ứng dụng: %1$s\nDữ liệu Vold app: %2$s\nÉp gắn: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Tùy chọn này chỉ có sẵn trên Android 11 trở lên</string>
-    <string name="settings_app_data_isolation">Cô lập dữ liệu ứng dụng</string>
-    <string name="settings_vold_app_data_isolation">Cô lập dữ liệu Vold app</string>
-    <string name="settings_warning">Cảnh báo</string>
-    <string name="settings_vold_warning">Tùy chọn này kích hoạt một tính năng cô lập của AOSP cho bộ nhớ riêng bên ngoài của ứng dụng. Nó có thể cải thiện tương thích nhưng làm giảm độ ổn định và có thể ngừng hoạt động trong các phiên bản Android tương lai.</string>
-    <string name="settings_need_reboot">Thay đổi yêu cầu khởi động lại</string>
-    <string name="settings_force_mount_data">Áp đặt cô lập dữ liệu cho tất cả ứng dụng</string>
-    <string name="settings_force_mount_data_summary">Theo mặc định, cô lập dữ liệu bị tắt cho ứng dụng có target API thấp hơn 30</string>
     <string name="settings_detail_log">Nhật ký chi tiết để gỡ lỗi</string>
     <string name="settings_max_log_size">Kích thước bộ nhớ đệm trình ghi</string>
     <string name="settings_hide_icon">Ẩn biểu tượng mô-đun trong launcher</string>
     <string name="settings_hide_icon_summary">Bạn vẫn có thể mở ứng dụng trong Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Bỏ qua cảnh báo gói rủi ro</string>
     <string name="settings_bypass_risky_package_warning_summary">Lưu ý rằng nhà phát triển không chịu trách nhiệm cho các vấn đề liên quan đến gói rủi ro trước hoặc sau khi bạn bật tính năng này</string>
-    <string name="settings_disable_activity_launch_protection">Vô hiệu hóa bảo vệ khởi chạy Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Công tắc này sẽ bỏ tất cả các biện pháp bảo vệ startActivity. Nếu bạn không chắc, đừng bật nó.</string>
     <string name="settings_system_wallpaper">Sử dụng hình nền hệ thống</string>
     <string name="settings_clear_uninstalled_app_configs">Xóa cấu hình ứng dụng đã gỡ cài đặt</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Tùy chọn này cho phép bạn tạo cấu hình không còn dư lượng nhưng bạn sẽ phải cấu hình lại ứng dụng khi cài lại.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Tắt thông báo cập nhật</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Cấu hình ghi hàng loạt</string>
 
     <!-- About -->
     <string name="about_description">PIB là một module LSPosed tập trung vào việc chặn ứng dụng sử dụng Google Play Integrity API.</string>

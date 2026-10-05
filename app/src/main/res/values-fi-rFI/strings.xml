@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Ilmoittaa sovellukselle, että pyyntö kannattaa yrittää uudelleen (esim. virhe on väliaikainen).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Integrity-virhekoodiviite</string>
     <string name="app_rewrite_integrity_error_code_copied">Kopioitu virhekoodi: %1$s</string>
-    <string name="app_exclude_system_apps">Sisällytä järjestelmäsovellukset</string>
     <string name="app_warning_risky_package_title">Riskipaketti</string>
     <string name="app_warning_risky_package_desc">Tämä paketti on merkitty riskialttiiksi ja saattaa aiheuttaa epävakautta. Jatketaanko?</string>
     <string name="app_favorite_add">Merkitse suosikiksi</string>
@@ -128,28 +127,12 @@ Epäonnistuneet: %5$d</string>
 
     <!-- Settings -->
     <string name="settings_module">Moduuli</string>
-    <string name="settings_overwrite">Ohita</string>
-    <string name="settings_overwritten">Ohitettu</string>
-    <string name="settings_overwrite_summary">Tämän kategorian kohteet pakotetaan käyttöön, jos kytkimet ovat valittuna</string>
-    <string name="settings_default_value">Oletusarvo: %s</string>
-    <string name="settings_data_isolation">Tietojen eristäminen</string>
-    <string name="settings_data_isolation_summary">Sovellustiedot: %1$s\nVold-sovellustiedot: %2$s\nPakota liitos: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Tämä vaihtoehto on käytettävissä vain Android 11:ssä ja uudemmissa</string>
-    <string name="settings_app_data_isolation">Sovellustietojen eristäminen</string>
-    <string name="settings_vold_app_data_isolation">Vold-sovellustietojen eristäminen</string>
-    <string name="settings_warning">Varoitus</string>
-    <string name="settings_vold_warning">Tämä ottaa käyttöön AOSP:n eristysominaisuuden sovelluksen ulkoiselle yksityiselle tallennustilalle. Se voi parantaa yhteensopivuutta, mutta vähentää vakautta ja voi lakata toimimasta tulevissa Android-versioissa.</string>
-    <string name="settings_need_reboot">Muutoksen jälkeen vaaditaan uudelleenkäynnistys</string>
-    <string name="settings_force_mount_data">Pakota tietojen eristäminen kaikille sovelluksille</string>
-    <string name="settings_force_mount_data_summary">Tietojen eristäminen on oletuksena pois päältä sovelluksille, joiden target API on alle 30</string>
     <string name="settings_detail_log">Yksityiskohtainen loki vianmääritykseen</string>
     <string name="settings_max_log_size">Lokkerin puskurikoot</string>
     <string name="settings_hide_icon">Piilota moduulin kuvake käynnistysohjelmasta</string>
     <string name="settings_hide_icon_summary">Voit silti avata sovelluksen Xposed-managerista</string>
     <string name="settings_bypass_risky_package_warning">Ohita riskipaketin varoitus</string>
     <string name="settings_bypass_risky_package_warning_summary">Huomaa, että kehittäjät eivät ole vastuussa riskipakettiin liittyvistä ongelmista ennen tai jälkeen tämän ominaisuuden ottamisen käyttöön.</string>
-    <string name="settings_disable_activity_launch_protection">Poista Activity-käynnistyssuojaus käytöstä</string>
-    <string name="settings_disable_activity_launch_protection_summary">Tämä kytkin poistaa kaikki startActivity-suojaukset. Jos et ole varma, älä ota käyttöön.</string>
     <string name="settings_system_wallpaper">Käytä järjestelmän taustakuvaa</string>
     <string name="settings_clear_uninstalled_app_configs">Tyhjennä poistettujen sovellusten asetukset</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Tämän asetuksen avulla voit luoda konfiguraation ilman jäänteitä, mutta joudut määrittämään sovellukset uudelleen, kun asennat ne uudelleen.</string>
@@ -184,7 +167,6 @@ Epäonnistuneet: %5$d</string>
     <string name="settings_disable_update">Poista päivitysilmoitus käytöstä</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Laaja lokikonfigurointi</string>
 
     <!-- About -->
     <string name="about_description">PIB on LSPosed-moduuli, joka keskittyy estämään sovelluksia käyttämästä Google Play Integrity -rajapintaa.</string>

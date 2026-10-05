@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Indique à l\'application que la requête doit être réessayée (par ex. l\'erreur est transitoire).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Référence des codes d\'erreur Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Code d\'erreur copié : %1$s</string>
-    <string name="app_exclude_system_apps">Inclure les applications système</string>
     <string name="app_warning_risky_package_title">Package risqué</string>
     <string name="app_warning_risky_package_desc">Ce package est marqué comme risqué et peut provoquer des instabilités. Continuer ?</string>
     <string name="app_favorite_add">Marquer comme favori</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Module</string>
-    <string name="settings_overwrite">Écraser</string>
-    <string name="settings_overwritten">Écrasé</string>
-    <string name="settings_overwrite_summary">Les éléments de cette catégorie seront forcés activés si les interrupteurs sont cochés</string>
-    <string name="settings_default_value">Valeur par défaut : %s</string>
-    <string name="settings_data_isolation">Isolation des données</string>
-    <string name="settings_data_isolation_summary">Données de l\'app : %1$s\nDonnées Vold de l\'app : %2$s\nForcer le montage : %3$s</string>
-    <string name="settings_data_isolation_unsupported">Cette option n\'est disponible que sur Android 11 et versions ultérieures</string>
-    <string name="settings_app_data_isolation">Isolation des données d\'application</string>
-    <string name="settings_vold_app_data_isolation">Isolation des données Vold de l\'application</string>
-    <string name="settings_warning">Avertissement</string>
-    <string name="settings_vold_warning">Ceci active une fonctionnalité d\'isolation AOSP pour le stockage privé externe des applications. Cela peut améliorer la compatibilité mais réduire la stabilité et pourrait cesser de fonctionner dans de futures versions d\'Android.</string>
-    <string name="settings_need_reboot">Modification nécessitant un redémarrage</string>
-    <string name="settings_force_mount_data">Appliquer l\'isolation des données pour toutes les applications</string>
-    <string name="settings_force_mount_data_summary">L\'isolation des données est désactivée par défaut pour les applications ciblant une API inférieure à 30</string>
     <string name="settings_detail_log">Journal détaillé pour le débogage</string>
     <string name="settings_max_log_size">Tailles des tampons du journal</string>
     <string name="settings_hide_icon">Masquer l\'icône du module dans le lanceur</string>
     <string name="settings_hide_icon_summary">Vous pouvez toujours ouvrir l\'application dans le gestionnaire Xposed</string>
     <string name="settings_bypass_risky_package_warning">Ignorer l\'avertissement de package risqué</string>
     <string name="settings_bypass_risky_package_warning_summary">Notez que les développeurs ne sont pas responsables des problèmes liés aux packages risqués avant ou après l\'activation de cette fonctionnalité</string>
-    <string name="settings_disable_activity_launch_protection">Désactiver la protection de lancement d\'Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Ce commutateur supprimera toutes les protections de startActivity. Si vous n\'êtes pas sûr, ne l\'activez pas.</string>
     <string name="settings_system_wallpaper">Utiliser le fond d\'écran système</string>
     <string name="settings_clear_uninstalled_app_configs">Effacer les configurations des applications désinstallées</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Cette option vous permet de créer une configuration sans restes, mais vous devrez reconfigurer les applications lorsque vous les réinstallerez.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Désactiver la notification de mise à jour</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Configuration groupée du journal</string>
 
     <!-- About -->
     <string name="about_description">PIB est un module LSPosed axé sur le blocage des applications utilisant l\'API Google Play Integrity.</string>

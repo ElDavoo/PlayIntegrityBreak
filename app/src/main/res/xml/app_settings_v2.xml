@@ -20,11 +20,15 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_info_24"
             android:key="integrityRequestToast"
-            android:defaultValue="true"
-            android:dependency="enableIntervention"
             app:singleLineTitle="false"
             android:title="@string/app_integrity_request_toast"
             android:summary="@string/app_integrity_request_toast_desc" />
+        <Preference
+            android:icon="@drawable/outline_settings_backup_restore_24"
+            android:key="resetToDefaults"
+            app:singleLineTitle="false"
+            android:title="@string/app_reset_to_defaults"
+            android:summary="@string/app_reset_to_defaults_desc" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -33,7 +37,6 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_bug_report_24"
             android:key="deliverSyntheticResponse"
-            android:defaultValue="true"
             android:dependency="enableLogger"
             app:singleLineTitle="false"
             android:title="@string/app_deliver_synthetic_response"
@@ -41,7 +44,6 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_bug_report_24"
             android:key="delaySyntheticResponseDelivery"
-            android:defaultValue="false"
             android:dependency="deliverSyntheticResponse"
             app:singleLineTitle="false"
             android:title="@string/app_delay_synthetic_response"
@@ -49,7 +51,6 @@
         <EditTextPreference
             android:icon="@drawable/outline_bug_report_24"
             android:key="rewriteIntegrityErrorCode"
-            android:defaultValue="-8"
             android:dependency="enableLogger"
             app:singleLineTitle="false"
             app:useSimpleSummaryProvider="true"
@@ -65,7 +66,6 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_bug_report_24"
             android:key="rewriteIntegrityErrorRemediable"
-            android:defaultValue="true"
             android:dependency="enableLogger"
             app:singleLineTitle="false"
             android:title="@string/app_rewrite_integrity_error_remediable"

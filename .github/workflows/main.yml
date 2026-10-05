@@ -66,6 +66,9 @@ jobs:
         run: |
           ./gradlew prebuild
 
+      - name: Unit tests
+        run: ./gradlew :common:testDebugUnitTest
+
       - name: Build all
         id: buildAll
         run: |

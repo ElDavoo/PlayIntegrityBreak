@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">Informa ao app que a solicitação deve ser tentada novamente (por exemplo, erro temporário).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">Referência de códigos de erro do Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">Código de erro copiado: %1$s</string>
-    <string name="app_exclude_system_apps">Incluir apps do sistema</string>
     <string name="app_warning_risky_package_title">Pacote arriscado</string>
     <string name="app_warning_risky_package_desc">Este pacote está marcado como arriscado e pode causar instabilidade. Continuar?</string>
     <string name="app_favorite_add">Marcar como favorito</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">Módulo</string>
-    <string name="settings_overwrite">Sobrescrever</string>
-    <string name="settings_overwritten">Sobrescrito</string>
-    <string name="settings_overwrite_summary">Os itens desta categoria serão forçados como ativados se as chaves estiverem marcadas</string>
-    <string name="settings_default_value">Valor padrão: %s</string>
-    <string name="settings_data_isolation">Isolamento de dados</string>
-    <string name="settings_data_isolation_summary">Dados do app: %1$s\nDados de app do Vold: %2$s\nForçar montagem: %3$s</string>
-    <string name="settings_data_isolation_unsupported">Esta opção está disponível apenas no Android 11 ou superior</string>
-    <string name="settings_app_data_isolation">Isolamento de dados do app</string>
-    <string name="settings_vold_app_data_isolation">Isolamento de dados do app no Vold</string>
-    <string name="settings_warning">Aviso</string>
-    <string name="settings_vold_warning">Isso ativa um recurso AOSP de isolamento para o armazenamento externo privado do app. Pode melhorar compatibilidade, mas reduzir estabilidade e pode parar de funcionar em versões futuras do Android.</string>
-    <string name="settings_need_reboot">Alteração requer reinicialização</string>
-    <string name="settings_force_mount_data">Forçar isolamento de dados para todos os apps</string>
-    <string name="settings_force_mount_data_summary">O isolamento de dados é desativado por padrão para apps com target API menor que 30</string>
     <string name="settings_detail_log">Log detalhado para depuração</string>
     <string name="settings_max_log_size">Tamanhos do buffer de log</string>
     <string name="settings_hide_icon">Ocultar ícone do módulo no launcher</string>
     <string name="settings_hide_icon_summary">Você ainda pode abrir o app no gerenciador Xposed</string>
     <string name="settings_bypass_risky_package_warning">Ignorar aviso de pacote arriscado</string>
     <string name="settings_bypass_risky_package_warning_summary">Observe que os desenvolvedores não se responsabilizam por problemas relacionados a pacotes arriscados antes ou depois de você ativar este recurso</string>
-    <string name="settings_disable_activity_launch_protection">Desativar proteção de inicialização de Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">Esta opção removerá todas as proteções de startActivity. Se não tiver certeza, não ative.</string>
     <string name="settings_system_wallpaper">Usar papel de parede do sistema</string>
     <string name="settings_clear_uninstalled_app_configs">Limpar configurações de apps desinstalados</string>
     <string name="settings_clear_uninstalled_app_configs_summary">Esta opção permite criar uma configuração sem resíduos, mas você terá que configurar novamente os apps quando os instalar de novo.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">Desativar notificação de atualização</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">Configuração em massa do registrador</string>
 
     <!-- About -->
     <string name="about_description">PIB é um módulo LSPosed focado em bloquear apps de usarem a API do Google Play Integrity.</string>

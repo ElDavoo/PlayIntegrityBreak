@@ -41,7 +41,6 @@ object PIBLoggerService : IPIBService.Stub() {
     private val capturedEvents = AtomicLong(0)
     private val lastHealthcheckTimestamp = AtomicLong(0)
     private val lastProviderMissingLogTimestamp = AtomicLong(0)
-    private val configLock = Any()
     private val logLock = Any()
     private val pendingEventLock = Any()
     private val pendingEvents = ArrayDeque<PendingIntegrityEvent>()
@@ -62,28 +61,13 @@ object PIBLoggerService : IPIBService.Stub() {
     }
 
     @Volatile
-    private var config = JsonConfig().apply {
-        detailLog = true
-        errorOnlyLog = false
-    }
+    private var config = JsonConfig(detailLog = true)
 
     @Volatile
     private var runtimeLogFile: File? = null
 
     @Volatile
     private var configSnapshotFile: File? = null
-
-    data class IntegrityPolicy(
-        val enabled: Boolean,
-        val logRequest: Boolean,
-        val logResponse: Boolean,
-        val errorOnly: Boolean,
-        val rewriteResponse: Boolean,
-        val rewriteErrorCode: Int,
-        val rewriteRemediable: Boolean,
-        val deliverSyntheticResponse: Boolean,
-        val delaySyntheticResponseDelivery: Boolean,
-    )
 
     private data class PendingIntegrityEvent(
         val timestampMs: Long,
@@ -115,15 +99,15 @@ object PIBLoggerService : IPIBService.Stub() {
 
     fun isActive(): Boolean = initialized.get()
 
-    fun isErrorOnlyLogging(): Boolean = synchronized(configLock) { config.errorOnlyLog }
+    fun isErrorOnlyLogging(): Boolean = config.errorOnlyLog
 
-    fun isDetailLogging(): Boolean = synchronized(configLock) { config.detailLog }
+    fun isDetailLogging(): Boolean = config.detailLog
 
     fun appendParsedLog(parsedMsg: String) {
         touchHealthcheck()
         synchronized(logLock) {
             val file = ensureLogFile() ?: return
-            val maxLogSizeKb = synchronized(configLock) { config.maxLogSize }
+            val maxLogSizeKb = config.maxLogSize
             if (maxLogSizeKb > 0 && file.length() / 1024 > maxLogSizeKb) {
                 rotateLogs(file)
             }
@@ -136,88 +120,10 @@ object PIBLoggerService : IPIBService.Stub() {
         }
     }
 
-    fun resolvePolicy(callerPkg: String): IntegrityPolicy {
+    fun resolvePolicy(callerPkg: String): JsonConfig.Policy {
         touchHealthcheck()
         loadPersistedConfigSnapshot()
-
-        val unknownCaller = callerPkg.isBlank() || callerPkg == "unknown"
-        if (unknownCaller) {
-            return synchronized(configLock) {
-                val defaultInterventionEnabled = config.defaultInterventionEnabled
-                val defaultRewriteEnabled = defaultInterventionEnabled && config.defaultHookRewriteEnabled
-                IntegrityPolicy(
-                    enabled = defaultInterventionEnabled,
-                    logRequest = true,
-                    logResponse = true,
-                    errorOnly = config.errorOnlyLog,
-                    rewriteResponse = defaultRewriteEnabled,
-                    rewriteErrorCode = config.defaultHookRewriteErrorCode,
-                    rewriteRemediable = config.defaultHookRewriteRemediable,
-                    deliverSyntheticResponse = config.defaultDeliverSyntheticResponse,
-                    delaySyntheticResponseDelivery = config.defaultDelaySyntheticResponseDelivery,
-                )
-            }
-        }
-
-        synchronized(configLock) {
-            val appConfig = config.scope[callerPkg]
-            val defaultInterventionEnabled = config.defaultInterventionEnabled
-            val defaultRewriteEnabled = defaultInterventionEnabled && config.defaultHookRewriteEnabled
-            if (appConfig == null) {
-                return IntegrityPolicy(
-                    enabled = defaultInterventionEnabled,
-                    logRequest = true,
-                    logResponse = true,
-                    errorOnly = config.errorOnlyLog,
-                    rewriteResponse = defaultRewriteEnabled,
-                    rewriteErrorCode = config.defaultHookRewriteErrorCode,
-                    rewriteRemediable = config.defaultHookRewriteRemediable,
-                    deliverSyntheticResponse = config.defaultDeliverSyntheticResponse,
-                    delaySyntheticResponseDelivery = config.defaultDelaySyntheticResponseDelivery,
-                )
-            }
-
-            if (!appConfig.interventionEnabled) {
-                return IntegrityPolicy(
-                    enabled = false,
-                    logRequest = true,
-                    logResponse = true,
-                    errorOnly = true,
-                    rewriteResponse = false,
-                    rewriteErrorCode = config.defaultHookRewriteErrorCode,
-                    rewriteRemediable = config.defaultHookRewriteRemediable,
-                    deliverSyntheticResponse = appConfig.deliverSyntheticResponse,
-                    delaySyntheticResponseDelivery = appConfig.delaySyntheticResponseDelivery,
-                )
-            }
-
-            if (!appConfig.rewriteIntegrityResponseOverridden) {
-                return IntegrityPolicy(
-                    enabled = defaultInterventionEnabled,
-                    logRequest = true,
-                    logResponse = true,
-                    errorOnly = config.errorOnlyLog,
-                    rewriteResponse = defaultRewriteEnabled,
-                    rewriteErrorCode = config.defaultHookRewriteErrorCode,
-                    rewriteRemediable = config.defaultHookRewriteRemediable,
-                    deliverSyntheticResponse = appConfig.deliverSyntheticResponse,
-                    delaySyntheticResponseDelivery = appConfig.delaySyntheticResponseDelivery,
-                )
-            }
-
-            return IntegrityPolicy(
-                enabled = true,
-                // Request/response logging is always enabled; only logger enable/error-only may filter output.
-                logRequest = true,
-                logResponse = true,
-                errorOnly = config.errorOnlyLog,
-                rewriteResponse = appConfig.rewriteIntegrityResponse,
-                rewriteErrorCode = appConfig.rewriteIntegrityErrorCode,
-                rewriteRemediable = appConfig.rewriteIntegrityErrorRemediable,
-                deliverSyntheticResponse = appConfig.deliverSyntheticResponse,
-                delaySyntheticResponseDelivery = appConfig.delaySyntheticResponseDelivery,
-            )
-        }
+        return config.policyFor(callerPkg)
     }
 
     fun recordIntegrityRequest(
@@ -304,10 +210,7 @@ object PIBLoggerService : IPIBService.Stub() {
     }
 
     private fun showRequestToast(callerPkg: String) {
-        val enabled = synchronized(configLock) {
-            config.integrityRequestToast && config.scope[callerPkg]?.integrityRequestToast != false
-        }
-        if (!enabled) return
+        if (!config.policyFor(callerPkg).requestToast) return
         val app = getCurrentApplication() ?: return
         heartbeatHandler.post {
             runCatching {
@@ -389,19 +292,14 @@ object PIBLoggerService : IPIBService.Stub() {
 
     override fun writeConfig(json: String) {
         val parsedConfig = runCatching {
-            JsonConfig.parse(json).apply {
-                configVersion = BuildConfig.CONFIG_VERSION
-            }
+            JsonConfig.parse(json)
         }.onFailure {
             logE(TAG, "Failed to parse config", it)
         }.getOrNull() ?: return
 
-        synchronized(configLock) {
-            config = parsedConfig
-        }
+        config = parsedConfig
         // The app's config is newer than any snapshot on disk.
         configSnapshotRestored.set(true)
-
         persistConfigSnapshot(parsedConfig.toString())
     }
 
@@ -436,7 +334,7 @@ object PIBLoggerService : IPIBService.Stub() {
         }
     }
 
-    override fun readConfig(): String = synchronized(configLock) { config.toString() }
+    override fun readConfig(): String = config.toString()
 
     override fun log(level: Int, tag: String, message: String) {
         logWithLevel(level, tag, message)
@@ -482,7 +380,7 @@ object PIBLoggerService : IPIBService.Stub() {
     }
 
     private fun currentUserId(): String? {
-        val value = synchronized(configLock) { config.userId.trim() }
+        val value = config.userId.trim()
         return value.takeIf { it.isNotEmpty() }
     }
 
@@ -549,13 +447,9 @@ object PIBLoggerService : IPIBService.Stub() {
         if (!file.exists() || file.length() == 0L) return
 
         runCatching {
-            JsonConfig.parse(file.readText()).apply {
-                configVersion = BuildConfig.CONFIG_VERSION
-            }
+            JsonConfig.parse(file.readText())
         }.onSuccess { restored ->
-            synchronized(configLock) {
-                config = restored
-            }
+            config = restored
         }.onFailure {
             logW(TAG, "Failed to load persisted config snapshot", it)
         }

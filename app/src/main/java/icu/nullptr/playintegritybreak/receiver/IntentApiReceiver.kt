@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.JsonConfig
+import icu.nullptr.playintegritybreak.common.PolicyKey
 import icu.nullptr.playintegritybreak.service.ConfigManager
 
 class IntentApiReceiver : BroadcastReceiver() {
@@ -63,13 +64,10 @@ class IntentApiReceiver : BroadcastReceiver() {
         }
 
         runCatching {
-            if (targetPackage == Constants.DEFAULT_APP_PACKAGE_NAME) {
-                applyDefaultSettingValue(extras, settingKey)
-            } else {
-                val appConfig = buildBaseConfig(targetPackage)
-                applyPerAppSettingValue(extras, settingKey, appConfig)
-                ConfigManager.setAppConfig(targetPackage, appConfig)
-            }
+            val key = PolicyKey.fromKey(settingKey)
+                ?: throw InvalidKeyException("Unsupported setting key: $settingKey")
+            val value: Any = if (key.isInt) requireIntValue(extras) else requireBooleanValue(extras)
+            applySetting(targetPackage, key, value)
         }.onSuccess {
             reply(
                 status = Constants.INTENT_API_STATUS_APPLIED,
@@ -94,138 +92,34 @@ class IntentApiReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun buildBaseConfig(targetPackage: String): JsonConfig.AppConfig {
-        val existing = ConfigManager.getAppConfig(targetPackage)
-        if (existing != null) {
-            return existing.copy()
+    private fun applySetting(targetPackage: String, key: PolicyKey, value: Any) {
+        if (targetPackage == Constants.DEFAULT_APP_PACKAGE_NAME) {
+            ConfigManager.defaults = key.with(ConfigManager.defaults, value)
+            return
         }
 
-        return JsonConfig.AppConfig(
-            interventionEnabled = ConfigManager.defaultInterventionEnabled,
-            rewriteIntegrityResponseOverridden = false,
-            rewriteIntegrityResponse = ConfigManager.defaultHookRewriteEnabled,
-            rewriteIntegrityErrorCode = ConfigManager.defaultHookRewriteErrorCode,
-            rewriteIntegrityErrorRemediable = ConfigManager.defaultHookRewriteRemediable,
-            deliverSyntheticResponse = ConfigManager.defaultDeliverSyntheticResponse,
-            delaySyntheticResponseDelivery = ConfigManager.defaultDelaySyntheticResponseDelivery,
-        )
+        var appConfig = key.with(ConfigManager.getAppConfig(targetPackage) ?: JsonConfig.AppConfig(), value)
+        // Changing how a request is answered only makes sense if PIB intervenes for the app.
+        if (key.impliesIntervention) {
+            appConfig = PolicyKey.INTERVENTION.with(appConfig, true)
+        }
+        ConfigManager.setAppConfig(targetPackage, appConfig)
     }
 
-    private fun applyPerAppSettingValue(extras: Bundle, settingKey: String, appConfig: JsonConfig.AppConfig) {
-        when (settingKey) {
-            Constants.INTENT_API_KEY_ENABLE_INTERVENTION -> {
-                appConfig.interventionEnabled = requireBooleanValue(extras)
-            }
+    private fun requireBooleanValue(extras: Bundle): Boolean =
+        requireValue(extras, Constants.INTENT_API_EXTRA_BOOLEAN_VALUE, "a boolean")
 
-            Constants.INTENT_API_KEY_ENABLE_LOGGER -> {
-                val value = requireBooleanValue(extras)
-                appConfig.interventionEnabled = true
-                appConfig.rewriteIntegrityResponseOverridden = true
-                appConfig.rewriteIntegrityResponse = value
-            }
+    private fun requireIntValue(extras: Bundle): Int =
+        requireValue(extras, Constants.INTENT_API_EXTRA_INT_VALUE, "an int")
 
-            Constants.INTENT_API_KEY_DELIVER_SYNTHETIC_RESPONSE -> {
-                val value = requireBooleanValue(extras)
-                appConfig.interventionEnabled = true
-                appConfig.deliverSyntheticResponse = value
-            }
-
-            Constants.INTENT_API_KEY_DELAY_SYNTHETIC_RESPONSE -> {
-                val value = requireBooleanValue(extras)
-                appConfig.interventionEnabled = true
-                appConfig.delaySyntheticResponseDelivery = value
-            }
-
-            Constants.INTENT_API_KEY_REWRITE_ERROR_CODE -> {
-                val value = requireIntValue(extras)
-                appConfig.interventionEnabled = true
-                appConfig.rewriteIntegrityResponseOverridden = true
-                appConfig.rewriteIntegrityErrorCode = value
-            }
-
-            Constants.INTENT_API_KEY_REWRITE_ERROR_REMEDIABLE -> {
-                val value = requireBooleanValue(extras)
-                appConfig.interventionEnabled = true
-                appConfig.rewriteIntegrityResponseOverridden = true
-                appConfig.rewriteIntegrityErrorRemediable = value
-            }
-
-            else -> {
-                throw InvalidKeyException("Unsupported setting key: $settingKey")
-            }
-        }
-    }
-
-    private fun applyDefaultSettingValue(extras: Bundle, settingKey: String) {
-        var interventionEnabled = ConfigManager.defaultInterventionEnabled
-        var rewriteEnabled = ConfigManager.defaultHookRewriteEnabled
-        var errorCode = ConfigManager.defaultHookRewriteErrorCode
-        var remediable = ConfigManager.defaultHookRewriteRemediable
-        var deliverSyntheticResponse = ConfigManager.defaultDeliverSyntheticResponse
-        var delaySyntheticResponseDelivery = ConfigManager.defaultDelaySyntheticResponseDelivery
-
-        when (settingKey) {
-            Constants.INTENT_API_KEY_ENABLE_INTERVENTION -> {
-                interventionEnabled = requireBooleanValue(extras)
-            }
-
-            Constants.INTENT_API_KEY_ENABLE_LOGGER -> {
-                rewriteEnabled = requireBooleanValue(extras)
-            }
-
-            Constants.INTENT_API_KEY_DELIVER_SYNTHETIC_RESPONSE -> {
-                deliverSyntheticResponse = requireBooleanValue(extras)
-            }
-
-            Constants.INTENT_API_KEY_DELAY_SYNTHETIC_RESPONSE -> {
-                delaySyntheticResponseDelivery = requireBooleanValue(extras)
-            }
-
-            Constants.INTENT_API_KEY_REWRITE_ERROR_CODE -> {
-                errorCode = requireIntValue(extras)
-            }
-
-            Constants.INTENT_API_KEY_REWRITE_ERROR_REMEDIABLE -> {
-                remediable = requireBooleanValue(extras)
-            }
-
-            else -> {
-                throw InvalidKeyException("Unsupported setting key: $settingKey")
-            }
+    // Bundle.getBoolean/getInt return a default on a type mismatch, so check the raw value instead.
+    private inline fun <reified T> requireValue(extras: Bundle, key: String, typeName: String): T {
+        if (!extras.containsKey(key)) {
+            throw MissingValueException("Missing $key")
         }
 
-        ConfigManager.setDefaultPolicyConfig(
-            interventionEnabled = interventionEnabled,
-            rewriteEnabled = rewriteEnabled,
-            errorCode = errorCode,
-            remediable = remediable,
-            deliverSyntheticResponse = deliverSyntheticResponse,
-            delaySyntheticResponseDelivery = delaySyntheticResponseDelivery,
-        )
-    }
-
-    private fun requireBooleanValue(extras: Bundle): Boolean {
-        if (!extras.containsKey(Constants.INTENT_API_EXTRA_BOOLEAN_VALUE)) {
-            throw MissingValueException("Missing ${Constants.INTENT_API_EXTRA_BOOLEAN_VALUE}")
-        }
-
-        return runCatching {
-            extras.getBoolean(Constants.INTENT_API_EXTRA_BOOLEAN_VALUE)
-        }.getOrElse {
-            throw InvalidValueException("${Constants.INTENT_API_EXTRA_BOOLEAN_VALUE} must be a boolean")
-        }
-    }
-
-    private fun requireIntValue(extras: Bundle): Int {
-        if (!extras.containsKey(Constants.INTENT_API_EXTRA_INT_VALUE)) {
-            throw MissingValueException("Missing ${Constants.INTENT_API_EXTRA_INT_VALUE}")
-        }
-
-        return runCatching {
-            extras.getInt(Constants.INTENT_API_EXTRA_INT_VALUE)
-        }.getOrElse {
-            throw InvalidValueException("${Constants.INTENT_API_EXTRA_INT_VALUE} must be an int")
-        }
+        @Suppress("DEPRECATION")
+        return extras.get(key) as? T ?: throw InvalidValueException("$key must be $typeName")
     }
 
     private fun reply(

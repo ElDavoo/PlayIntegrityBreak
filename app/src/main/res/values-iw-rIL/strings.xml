@@ -76,7 +76,6 @@
     <string name="app_rewrite_integrity_error_remediable_desc">מודיע לאפליקציה שיש לנסות שוב את הבקשה (למשל כשהשגיאה זמנית).</string>
     <string name="app_rewrite_integrity_error_code_reference_title">הפניה לקודי שגיאה של Integrity</string>
     <string name="app_rewrite_integrity_error_code_copied">קוד השגיאה הועתק: %1$s</string>
-    <string name="app_exclude_system_apps">כלול אפליקציות מערכת</string>
     <string name="app_warning_risky_package_title">חבילה מסוכנת</string>
     <string name="app_warning_risky_package_desc">חבילה זו מסומנת כמסוכנת ועלולה לגרום לחוסר יציבות. להמשיך?</string>
     <string name="app_favorite_add">סמן כמועדף</string>
@@ -124,28 +123,12 @@
 
     <!-- Settings -->
     <string name="settings_module">מודול</string>
-    <string name="settings_overwrite">דרוס</string>
-    <string name="settings_overwritten">נדרס</string>
-    <string name="settings_overwrite_summary">פריטי קטגוריה זו יכפו כמופעלים אם המתגים מסומנים</string>
-    <string name="settings_default_value">ערך ברירת מחדל: %s</string>
-    <string name="settings_data_isolation">בידוד נתונים</string>
-    <string name="settings_data_isolation_summary">נתוני אפליקציה: %1$s\nנתוני Vold של אפליקציה: %2$s\nכפיית עיגון: %3$s</string>
-    <string name="settings_data_isolation_unsupported">אפשרות זו זמינה רק ב-Android 11 ומעלה</string>
-    <string name="settings_app_data_isolation">בידוד נתוני אפליקציה</string>
-    <string name="settings_vold_app_data_isolation">בידוד נתוני אפליקציה של Vold</string>
-    <string name="settings_warning">אזהרה</string>
-    <string name="settings_vold_warning">אפשרות זו מפעילה יכולת בידוד של AOSP לאחסון חיצוני פרטי של אפליקציה. היא עשויה לשפר תאימות אך להפחית יציבות ועלולה להפסיק לעבוד בגרסאות Android עתידיות.</string>
-    <string name="settings_need_reboot">השינוי דורש אתחול</string>
-    <string name="settings_force_mount_data">אכוף בידוד נתונים לכל האפליקציות</string>
-    <string name="settings_force_mount_data_summary">בידוד נתונים כבוי כברירת מחדל עבור אפליקציות עם target API נמוך מ-30</string>
     <string name="settings_detail_log">יומן מפורט לדיבוג</string>
     <string name="settings_max_log_size">גדלי מאגר היומן</string>
     <string name="settings_hide_icon">הסתר סמל מודול במפעיל</string>
     <string name="settings_hide_icon_summary">עדיין אפשר לפתוח את האפליקציה במנהל Xposed</string>
     <string name="settings_bypass_risky_package_warning">עקוף אזהרת חבילה מסוכנת</string>
     <string name="settings_bypass_risky_package_warning_summary">שים לב שהמפתחים אינם אחראים לבעיות הקשורות לחבילות מסוכנות לפני או אחרי הפעלת תכונה זו</string>
-    <string name="settings_disable_activity_launch_protection">כבה הגנת הפעלת Activity</string>
-    <string name="settings_disable_activity_launch_protection_summary">מתג זה יסיר את כל ההגנות של startActivity. אם אינך בטוח, אל תפעיל אותו.</string>
     <string name="settings_system_wallpaper">השתמש ברקע מערכת</string>
     <string name="settings_clear_uninstalled_app_configs">נקה תצורות של אפליקציות שהוסרו</string>
     <string name="settings_clear_uninstalled_app_configs_summary">אפשרות זו מאפשרת ליצור תצורה ללא שאריות, אך תצטרך להגדיר מחדש אפליקציות לאחר התקנה חוזרת.</string>
@@ -180,7 +163,6 @@
     <string name="settings_disable_update">כבה התראת עדכון</string>
 
     <!-- Bulk config wizard -->
-    <string name="title_bulk_config_wizard">אשף תצורת לוגרים מרובה</string>
 
     <!-- About -->
     <string name="about_description">PIB הוא מודול LSPosed המתמקד בחסימת שימוש באפליקציות ב-API של Google Play Integrity.</string>

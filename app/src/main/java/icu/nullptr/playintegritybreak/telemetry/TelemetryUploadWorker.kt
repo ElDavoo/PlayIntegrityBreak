@@ -18,15 +18,11 @@ class TelemetryUploadWorker(
             return Result.success()
         }
 
-        val staleInFlightMs = ConfigManager.telemetryStaleInFlightMinutes * 60_000L
-        if (staleInFlightMs > 0L) {
-            val staleBefore = System.currentTimeMillis() - staleInFlightMs
-            AppIntegrityEventStore.recoverStaleInFlight(staleBefore)
-        }
+        AppIntegrityEventStore.recoverStaleInFlight(System.currentTimeMillis() - STALE_IN_FLIGHT_MS)
 
         val batch = AppIntegrityEventStore.dequeueTelemetryBatch(
-            maxEvents = ConfigManager.telemetryBatchSize,
-            leaseDurationMs = ConfigManager.telemetryLeaseDurationSeconds * 1000L,
+            maxEvents = BATCH_SIZE,
+            leaseDurationMs = LEASE_DURATION_MS,
         )
 
         if (batch.events.isEmpty()) {
@@ -46,8 +42,7 @@ class TelemetryUploadWorker(
         }
 
         val attempt = batch.events.maxOfOrNull { it.attemptCount } ?: 1
-        val maxAttempts = ConfigManager.telemetryMaxAttempts
-        val canRetry = outcome.retriable && attempt < maxAttempts
+        val canRetry = outcome.retriable && attempt < MAX_ATTEMPTS
 
         if (canRetry) {
             val retryDelayMs = computeRetryDelayMs(
@@ -91,7 +86,7 @@ class TelemetryUploadWorker(
             return serverDelay
         }
 
-        val baseDelayMs = ConfigManager.telemetryBaseRetrySeconds.coerceIn(5, 600) * 1000L
+        val baseDelayMs = BASE_RETRY_DELAY_MS
         val exponent = (attempt - 1).coerceIn(0, 8)
         val exponentialDelay = (baseDelayMs * (1L shl exponent)).coerceAtMost(MAX_RETRY_DELAY_MS)
         val jitter = Random.nextLong((baseDelayMs / 3).coerceAtLeast(1L))
@@ -101,5 +96,10 @@ class TelemetryUploadWorker(
     companion object {
         private const val TAG = "TelemetryUploadWorker"
         private const val MAX_RETRY_DELAY_MS = 6 * 60 * 60 * 1000L
+        private const val BATCH_SIZE = 10
+        private const val MAX_ATTEMPTS = 8
+        private const val BASE_RETRY_DELAY_MS = 30_000L
+        private const val LEASE_DURATION_MS = 120_000L
+        private const val STALE_IN_FLIGHT_MS = 15 * 60_000L
     }
 }
