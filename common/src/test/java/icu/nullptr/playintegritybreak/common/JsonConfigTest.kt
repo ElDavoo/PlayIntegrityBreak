@@ -89,7 +89,7 @@ class JsonConfigTest {
     }
 
     private fun JsonConfig.Policy.behaviour() =
-        behaviour(interventionEnabled, rewriteResponse, rewriteErrorCode, rewriteRemediable, deliverSyntheticResponse, delaySyntheticResponse, requestToast)
+        behaviour(interventionEnabled, rewriteResponse, rewriteErrorCode, rewriteRemediable, deliverSyntheticResponse, delaySyntheticResponse, requestAlert)
 
     private val bools = listOf(true, false)
 
@@ -119,6 +119,8 @@ class JsonConfigTest {
         val migrated = JsonConfig.parse(legacyJson(LegacyDefaults(true, true, true, true), null))
         assertEquals(93, migrated.configVersion)
         assertEquals("abc", migrated.userId)
+        // The hook used to show a toast, so legacy configs keep that alert style.
+        assertEquals(JsonConfig.AlertStyle.TOAST, migrated.requestAlertStyle)
         assertTrue("forceMountData" !in migrated.toString())
         assertTrue("telemetryBatchSize" !in migrated.toString())
     }
@@ -141,6 +143,7 @@ class JsonConfigTest {
     @Test
     fun `current configs round trip`() {
         val config = JsonConfig(
+            requestAlertStyle = JsonConfig.AlertStyle.NOTIFICATION,
             defaults = JsonConfig.Policy(rewriteErrorCode = -1),
             scope = mapOf("a.b" to JsonConfig.AppConfig(interventionEnabled = false)),
         )
@@ -150,12 +153,12 @@ class JsonConfigTest {
     @Test
     fun `unset overrides follow the defaults`() {
         val config = JsonConfig(
-            defaults = JsonConfig.Policy(rewriteErrorCode = -1, requestToast = false),
+            defaults = JsonConfig.Policy(rewriteErrorCode = -1, requestAlert = false),
             scope = mapOf("a.b" to JsonConfig.AppConfig(rewriteErrorCode = -7)),
         )
         val policy = config.policyFor("a.b")
         assertEquals(-7, policy.rewriteErrorCode)
-        assertEquals(false, policy.requestToast)
+        assertEquals(false, policy.requestAlert)
         assertEquals(config.defaults, config.policyFor("unknown"))
     }
 

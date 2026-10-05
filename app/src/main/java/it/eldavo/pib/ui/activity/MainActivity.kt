@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.DynamicColorsOptions
 import icu.nullptr.playintegritybreak.service.PrefManager
+import icu.nullptr.playintegritybreak.service.RequestAlert
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils
 import it.eldavo.pib.R
 import it.eldavo.pib.databinding.ActivityMainBinding
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (savedInstanceState == null) RequestAlert.requestPermissionIfNeeded(this)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

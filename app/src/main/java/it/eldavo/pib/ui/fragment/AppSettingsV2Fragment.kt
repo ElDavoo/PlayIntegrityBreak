@@ -13,7 +13,10 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceDataStore
 import androidx.preference.PreferenceFragmentCompat
 import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.common.JsonConfig
 import icu.nullptr.playintegritybreak.common.PolicyKey
+import icu.nullptr.playintegritybreak.service.ConfigManager
+import icu.nullptr.playintegritybreak.service.RequestAlert
 import icu.nullptr.playintegritybreak.service.ServiceClient
 import icu.nullptr.playintegritybreak.ui.util.navController
 import icu.nullptr.playintegritybreak.ui.util.setEdge2EdgeFlags
@@ -27,6 +30,9 @@ import it.eldavo.pib.databinding.FragmentSettingsBinding
 class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
     companion object {
         private const val TAG = "AppSettingsV2Fragment"
+
+        /** Global, so it is only shown on the Default options page. */
+        private const val ALERT_STYLE_KEY = "requestAlertStyle"
     }
 
     private val binding by viewBinding(FragmentSettingsBinding::bind)
@@ -78,11 +84,18 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
 
         override fun getBoolean(key: String, defValue: Boolean) = viewModel.get(policyKey(key)) as Boolean
 
-        override fun getString(key: String, defValue: String?) = viewModel.get(policyKey(key)).toString()
+        override fun getString(key: String, defValue: String?) = when (key) {
+            ALERT_STYLE_KEY -> ConfigManager.requestAlertStyle.name
+            else -> viewModel.get(policyKey(key)).toString()
+        }
 
         override fun putBoolean(key: String, value: Boolean) = viewModel.set(policyKey(key), value)
 
         override fun putString(key: String, value: String?) {
+            if (key == ALERT_STYLE_KEY) {
+                value?.let { ConfigManager.requestAlertStyle = JsonConfig.AlertStyle.valueOf(it) }
+                return
+            }
             val policyKey = policyKey(key)
             require(policyKey.isInt) { "Invalid key: $key" }
             value?.toIntOrNull()?.let { viewModel.set(policyKey, it) }
@@ -134,14 +147,20 @@ class AppSettingsV2Fragment : Fragment(R.layout.fragment_settings) {
                     .show(parentFragmentManager, "IntegrityErrorCodeReferenceDialog")
                 true
             }
+            findPreference<Preference>(PolicyKey.REQUEST_ALERT.key)?.setOnPreferenceChangeListener { _, enabled ->
+                if (enabled == true) RequestAlert.requestPermission(requireActivity())
+                true
+            }
 
             if (viewModel.isDefaults) {
                 findPreference<Preference>("appInfo")?.isVisible = false
                 findPreference<Preference>("resetToDefaults")?.isVisible = false
-                findPreference<Preference>(PolicyKey.REQUEST_TOAST.key)
-                    ?.setSummary(R.string.app_integrity_request_toast_default_desc)
+                findPreference<Preference>(PolicyKey.REQUEST_ALERT.key)
+                    ?.setSummary(R.string.app_integrity_request_alert_default_desc)
                 return
             }
+
+            findPreference<Preference>(ALERT_STYLE_KEY)?.isVisible = false
 
             val packageName = viewModel.packageName
             findPreference<Preference>("appInfo")?.let {

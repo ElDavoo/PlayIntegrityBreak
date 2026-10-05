@@ -122,6 +122,9 @@ class ServiceProvider : ContentProvider() {
             retriable = retriable,
             source = source,
         )
+        if (eventType == AppIntegrityEventStore.EVENT_TYPE_REQUEST) {
+            RequestAlert.onRequest(packageName, timestampMs)
+        }
 
         return Bundle().apply {
             putBoolean(Constants.PROVIDER_RESULT_OK, stored)
