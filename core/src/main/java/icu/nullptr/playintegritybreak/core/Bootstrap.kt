@@ -27,4 +27,19 @@ object Bootstrap {
             logE(TAG, "Failed to install Integrity hooks", it)
         }.isSuccess
     }
+
+    /** Installs the integrity monitor into the checker app process (see [CheckerMonitorHook]). */
+    fun startChecker(backend: HookBackend, classLoader: ClassLoader): Boolean {
+        val owner = Backend.claim(backend)
+        if (owner != null) {
+            Log.i("PIB", "${backend.name} backend skipped: hooks already installed by $owner")
+            return false
+        }
+
+        return runCatching {
+            CheckerMonitorHook.install(classLoader)
+        }.onFailure {
+            logE(TAG, "Failed to install checker monitor hook", it)
+        }.isSuccess
+    }
 }

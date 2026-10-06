@@ -39,6 +39,19 @@ object Constants {
     const val INTENT_API_STATUS_INVALID_VALUE = 6
     const val INTENT_API_STATUS_INTERNAL_ERROR = 7
 
+    // Integrity monitor: PIB asks the Play Integrity API Checker app to run a check (see CheckerMonitorHook).
+    const val CHECKER_PACKAGE_NAME = "gr.nikolasspyr.integritycheck"
+    const val CHECKER_TRIGGER_RECEIVER = "androidx.profileinstaller.ProfileInstallReceiver"
+    const val CHECKER_ACTION_RUN_CHECK = "${BuildConfig.APP_PACKAGE_NAME}.action.RUN_INTEGRITY_CHECK"
+    const val CHECKER_API_URL = "https://integrity.1nikolas.dev/api/check?token="
+
+    // Result codes of the check broadcast. 0 is what an unhooked checker answers.
+    const val CHECKER_RESULT_NOT_HOOKED = 0
+    const val CHECKER_RESULT_OK = 1
+    const val CHECKER_RESULT_INTEGRITY_ERROR = 2
+    const val CHECKER_RESULT_SERVER_ERROR = 3
+    const val CHECKER_RESULT_INTERNAL_ERROR = 4
+
     const val DEFAULT_APP_PACKAGE_NAME = "default"
     const val GMS_PACKAGE_NAME = "com.google.android.gms"
     const val GSF_PACKAGE_NAME = "com.google.android.gsf"

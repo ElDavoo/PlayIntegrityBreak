@@ -35,8 +35,9 @@ kotlin {
 }
 
 zygisk {
-    // Only the Play Store gets the payload (Constants.VENDING_PACKAGE_NAME).
-    packages("com.android.vending")
+    // Only the Play Store (Constants.VENDING_PACKAGE_NAME) and the Play Integrity API Checker
+    // (Constants.CHECKER_PACKAGE_NAME, for the integrity monitor) get the payload.
+    packages("com.android.vending", "gr.nikolasspyr.integritycheck")
 
     id = "pib_zygisk"
     name = "Play Integrity Break (Zygisk)"

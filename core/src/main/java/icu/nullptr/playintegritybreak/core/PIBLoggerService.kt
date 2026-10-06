@@ -1,6 +1,10 @@
 package icu.nullptr.playintegritybreak.core
 
 import android.app.Application
+import android.content.BroadcastReceiver
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -9,6 +13,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import icu.nullptr.playintegritybreak.common.Constants
+import icu.nullptr.playintegritybreak.common.IIntegrityCheckCallback
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
 import it.eldavo.pib.common.BuildConfig
@@ -346,6 +351,25 @@ object PIBLoggerService : IPIBService.Stub() {
     }
 
     override fun getBackendName(): String = Backend.name
+
+    override fun runIntegrityCheck(callback: IIntegrityCheckCallback) {
+        val app = getCurrentApplication()
+        if (app == null) {
+            callback.onResult(Constants.CHECKER_RESULT_INTERNAL_ERROR, null)
+            return
+        }
+        val intent = Intent(Constants.CHECKER_ACTION_RUN_CHECK)
+            .setComponent(ComponentName(Constants.CHECKER_PACKAGE_NAME, Constants.CHECKER_TRIGGER_RECEIVER))
+            .addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
+        val resultReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                runCatching { callback.onResult(resultCode, resultData) }
+                    .onFailure { logW(TAG, "Failed to deliver integrity check result", it) }
+            }
+        }
+        // The hook in the checker answers this ordered broadcast; an unhooked checker leaves the initial code.
+        app.sendOrderedBroadcast(intent, null, resultReceiver, null, Constants.CHECKER_RESULT_NOT_HOOKED, null, null)
+    }
 
     private fun Bundle.getIntOrNull(key: String): Int? {
         if (!containsKey(key)) return null

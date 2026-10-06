@@ -15,12 +15,13 @@ import java.util.concurrent.atomic.AtomicBoolean
 private const val TAG = "PIB-ZygiskEntry"
 
 /**
- * Entry point called by ZygoteLoader right after a Play Store process is specialized
- * (module.prop "entrypoint"). The app is not bound yet at that point, so the hooks are installed
- * as soon as its Application has been created.
+ * Entry point called by ZygoteLoader right after a Play Store (or Play Integrity API Checker)
+ * process is specialized (module.prop "entrypoint"). The app is not bound yet at that point, so the
+ * hooks are installed as soon as its Application has been created.
  */
 object ZygiskEntry {
     private val started = AtomicBoolean(false)
+    private val targetPackages = setOf(Constants.VENDING_PACKAGE_NAME, Constants.CHECKER_PACKAGE_NAME)
 
     /** Called before specialization, still with zygote privileges. Nothing to do. */
     @JvmStatic
@@ -30,7 +31,8 @@ object ZygiskEntry {
     @JvmStatic
     fun main() {
         // The payload is injected in every Play Store process, the Integrity service runs in the main one.
-        if (ZygoteLoader.getProcessName() != Constants.VENDING_PACKAGE_NAME) return
+        // The checker app gets it too, for the integrity monitor.
+        if (ZygoteLoader.getProcessName() !in targetPackages) return
 
         // Several bootstrap points, the first one that fires wins:
         // - Vector deoptimizes LoadedApk.makeApplication(Inner) and Instrumentation.newApplication
@@ -69,8 +71,12 @@ object ZygiskEntry {
     }
 
     private fun start(app: Application) {
-        if (started.get() || app.packageName != Constants.VENDING_PACKAGE_NAME) return
+        if (started.get() || app.packageName !in targetPackages) return
         if (!started.compareAndSet(false, true)) return
-        Bootstrap.start(VMToolsHookBackend, app.classLoader)
+        if (app.packageName == Constants.CHECKER_PACKAGE_NAME) {
+            Bootstrap.startChecker(VMToolsHookBackend, app.classLoader)
+        } else {
+            Bootstrap.start(VMToolsHookBackend, app.classLoader)
+        }
     }
 }

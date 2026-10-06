@@ -212,4 +212,33 @@ You can disable telemetry at any time in Settings.</string>
     <string name="dark_theme">Dark theme</string>
     <string name="dark_theme_off">Always off</string>
     <string name="dark_theme_on">Always on</string>
+
+    <!-- Integrity monitor -->
+    <string name="title_integrity_monitor">Integrity monitor</string>
+    <string name="monitor_description">Runs a Play Integrity check through the Play Integrity API Checker app, in the background. Needs the PIB hook in the checker app: with Xposed, enable the checker in the module scope; with Zygisk it is automatic.</string>
+    <string name="monitor_checker_missing">Play Integrity API Checker (gr.nikolasspyr.integritycheck) is not installed.</string>
+    <string name="monitor_checker_download">Download</string>
+    <string name="monitor_latest_title">Latest check</string>
+    <string name="monitor_never_checked">No check yet</string>
+    <string name="monitor_check_now">Check now</string>
+    <string name="monitor_show_details">Details</string>
+    <string name="monitor_periodic_title">Check periodically</string>
+    <string name="monitor_periodic_summary">Notifies you when the device verdict drops. The checker\'s quota is shared by all its users, so keep the interval long.</string>
+    <string name="monitor_interval_hours">%dh</string>
+    <string name="monitor_history_title">History</string>
+    <string name="monitor_history_clear">Clear</string>
+    <string name="monitor_history_empty">No checks yet.</string>
+    <string name="monitor_details_title">Check details</string>
+    <string name="monitor_copy">Copy</string>
+    <string name="monitor_copied">Copied</string>
+    <string name="monitor_status_integrity_error">Play Integrity error: %1$s (%2$d)</string>
+    <string name="monitor_status_server_error">Checker server error</string>
+    <string name="monitor_status_backend_error">Checker server error: %s</string>
+    <string name="monitor_status_internal_error">The check failed inside the checker app</string>
+    <string name="monitor_status_not_hooked">The PIB hook is not active in the checker app. With Xposed, add it to the module scope; with Zygisk, update the module and reboot.</string>
+    <string name="monitor_status_checker_missing">Checker app not installed</string>
+    <string name="monitor_status_unreachable">Cannot start the check: the PIB hook in the Play Store is not running, and PIB has no root access</string>
+    <string name="monitor_notification_channel">Integrity monitor</string>
+    <string name="monitor_notification_title">Play Integrity verdict dropped</string>
+    <string name="monitor_notification_text">%1$s → %2$s</string>
 </resources>

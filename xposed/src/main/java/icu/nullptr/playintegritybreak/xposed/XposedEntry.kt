@@ -17,13 +17,18 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
     }
 
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
-        if (lpparam.packageName != Constants.VENDING_PACKAGE_NAME) return
-        if (lpparam.processName != Constants.VENDING_PACKAGE_NAME) return
+        val packageName = lpparam.packageName
+        if (packageName != Constants.VENDING_PACKAGE_NAME && packageName != Constants.CHECKER_PACKAGE_NAME) return
+        if (lpparam.processName != packageName) return
         if (!lpparam.isFirstApplication) return
 
         EzXposed.initHandleLoadPackage(lpparam)
         if (!integrityHooksInstalled.compareAndSet(false, true)) return
 
-        Bootstrap.start(XposedHookBackend, lpparam.classLoader)
+        if (packageName == Constants.CHECKER_PACKAGE_NAME) {
+            Bootstrap.startChecker(XposedHookBackend, lpparam.classLoader)
+        } else {
+            Bootstrap.start(XposedHookBackend, lpparam.classLoader)
+        }
     }
 }

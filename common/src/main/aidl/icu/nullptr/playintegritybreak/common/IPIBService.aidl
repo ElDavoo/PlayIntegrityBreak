@@ -1,5 +1,7 @@
 package icu.nullptr.playintegritybreak.common;
 
+import icu.nullptr.playintegritybreak.common.IIntegrityCheckCallback;
+
 interface IPIBService {
 
     void writeConfig(String json) = 0;
@@ -25,5 +27,12 @@ interface IPIBService {
     String getLogFileLocation() = 9;
 
     String getBackendName() = 11;
+
+    /**
+     * Asks the Play Integrity API Checker app to run an integrity check (see CheckerMonitorHook).
+     * The Play Store holds the DUMP permission that the checker's trigger receiver requires,
+     * so PIB does not need root for this.
+     */
+    void runIntegrityCheck(IIntegrityCheckCallback callback) = 12;
 
 }

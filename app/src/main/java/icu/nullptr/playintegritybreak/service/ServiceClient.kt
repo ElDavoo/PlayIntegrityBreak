@@ -2,6 +2,7 @@ package icu.nullptr.playintegritybreak.service
 
 import android.os.IBinder
 import android.util.Log
+import icu.nullptr.playintegritybreak.common.IIntegrityCheckCallback
 import icu.nullptr.playintegritybreak.common.IPIBService
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
@@ -11,6 +12,9 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
 
     private const val TAG = "ServiceClient"
     private const val STATUS_CACHE_GRACE_MS = 120_000L
+
+    /** First SERVICE_VERSION with runIntegrityCheck. */
+    private const val INTEGRITY_CHECK_SERVICE_VERSION = 106
 
     private class ServiceProxy(private val obj: IPIBService) : InvocationHandler {
         override fun invoke(proxy: Any?, method: Method, args: Array<out Any?>?): Any? {
@@ -153,4 +157,12 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
     ) = service?.getPackageInfo(packageName, userId)
 
     override fun getLogFileLocation() = service?.logFileLocation ?: "the log file"
+
+    val canRunIntegrityCheck: Boolean
+        get() = service != null && serviceVersion >= INTEGRITY_CHECK_SERVICE_VERSION
+
+    override fun runIntegrityCheck(callback: IIntegrityCheckCallback) {
+        val remote = service ?: throw IllegalStateException("Service is not linked")
+        remote.runIntegrityCheck(callback)
+    }
 }
