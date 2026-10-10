@@ -6,6 +6,8 @@
 
 # Files for the ART/Dalvik VM
 *.dex
+# The locator test's fixture is built by tools/playstore-re/locator-fixture/build.sh
+!core/src/test/resources/*.dex
 
 # Java class files
 *.class
