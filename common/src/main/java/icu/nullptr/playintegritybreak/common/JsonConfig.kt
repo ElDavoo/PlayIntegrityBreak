@@ -23,7 +23,7 @@ data class JsonConfig(
     /** How the app tells the user that an app asked for Play Integrity, see [Policy.requestAlert]. */
     val requestAlertStyle: AlertStyle = AlertStyle.TOAST,
     val defaults: Policy = Policy(),
-    val scope: Map<String, AppConfig> = emptyMap(),
+    val scope: Map<String, AppConfig> = DEFAULT_SCOPE,
 ) {
     /** A fully specified policy. Used for the defaults and as the result of [policyFor]. */
     @Serializable
@@ -76,6 +76,15 @@ data class JsonConfig(
         /** First config version with [defaults] and nullable per-app overrides. */
         const val OVERRIDES_CONFIG_VERSION = 94
 
+        /** First config version where the Play Store's responses are not rewritten by default ([DEFAULT_SCOPE]). */
+        const val PLAY_STORE_DEFAULT_CONFIG_VERSION = 95
+
+        /**
+         * The Play Store's responses are not rewritten by default: the integrity monitor checks through the Play Store,
+         * and gets no verdict while they are. It is an override, so it shows in the Play Store's settings and can be changed.
+         */
+        val DEFAULT_SCOPE = mapOf(Constants.VENDING_PACKAGE_NAME to AppConfig(rewriteResponse = false))
+
         private val encoder = Json {
             encodeDefaults = true
             ignoreUnknownKeys = true
@@ -86,7 +95,15 @@ data class JsonConfig(
             val root = encoder.parseToJsonElement(json).jsonObject
             val version = root.int("configVersion") ?: 0
             val current = if (version < OVERRIDES_CONFIG_VERSION) migrateLegacy(root) else root
-            return encoder.decodeFromJsonElement(serializer(), current)
+            val parsed = encoder.decodeFromJsonElement(serializer(), current)
+            return if (version < PLAY_STORE_DEFAULT_CONFIG_VERSION) withPlayStoreDefault(parsed) else parsed
+        }
+
+        /** Gives older configs the Play Store default of [DEFAULT_SCOPE], unless rewriting was set for the Play Store. */
+        private fun withPlayStoreDefault(config: JsonConfig): JsonConfig {
+            val vending = config.scope[Constants.VENDING_PACKAGE_NAME] ?: AppConfig()
+            if (vending.rewriteResponse != null) return config
+            return config.copy(scope = config.scope + (Constants.VENDING_PACKAGE_NAME to vending.copy(rewriteResponse = false)))
         }
 
         /**

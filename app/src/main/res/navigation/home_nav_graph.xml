@@ -20,6 +20,11 @@
         android:label="@string/title_statistics" />
 
     <fragment
+        android:id="@+id/nav_integrity_monitor"
+        android:name="it.eldavo.pib.ui.fragment.IntegrityMonitorFragment"
+        android:label="@string/title_integrity_monitor" />
+
+    <fragment
         android:id="@+id/nav_settings"
         android:name="icu.nullptr.playintegritybreak.ui.fragment.SettingsFragment"
         android:label="@string/title_settings" />

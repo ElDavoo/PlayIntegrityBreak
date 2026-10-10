@@ -67,6 +67,7 @@
     <string name="app_integrity_request_alert_desc">Show an alert when this app asks for Play Integrity.</string>
     <string name="app_integrity_request_alert_default_desc">Show an alert when an app asks for Play Integrity. Can be changed per app.</string>
     <string name="integrity_request_alert">%1$s asked for Play Integrity</string>
+    <string name="integrity_own_check_alert">PIB asked the Play Store for Play Integrity</string>
     <string name="request_alert_style">Alert style</string>
     <string name="request_alert_style_toast">Toast</string>
     <string name="request_alert_style_notification">Notification</string>
@@ -212,4 +213,27 @@ You can disable telemetry at any time in Settings.</string>
     <string name="dark_theme">Dark theme</string>
     <string name="dark_theme_off">Always off</string>
     <string name="dark_theme_on">Always on</string>
+
+    <!-- Integrity monitor -->
+    <string name="title_integrity_monitor">Integrity monitor</string>
+    <string name="monitor_description">Runs a Play Integrity check in the background, through the Play Store itself, without UI. Needs PIB\'s hook in the Play Store: with Xposed, add the Play Store to the module scope; with Zygisk it is automatic. Synthetic errors must be off for the Play Store (the default).</string>
+    <string name="monitor_latest_title">Latest check</string>
+    <string name="monitor_never_checked">No check yet</string>
+    <string name="monitor_check_now">Check now</string>
+    <string name="monitor_show_details">Details</string>
+    <string name="monitor_periodic_title">Check periodically</string>
+    <string name="monitor_periodic_summary">Notifies you when the device verdict drops.</string>
+    <string name="monitor_interval_hours">%dh</string>
+    <string name="monitor_history_title">History</string>
+    <string name="monitor_history_clear">Clear</string>
+    <string name="monitor_history_empty">No checks yet.</string>
+    <string name="monitor_details_title">Check details</string>
+    <string name="monitor_copy">Copy</string>
+    <string name="monitor_copied">Copied</string>
+    <string name="monitor_status_play_store_error">The Play Store\'s check failed: %s</string>
+    <string name="monitor_status_no_verdict">The Play Store answered without a verdict.</string>
+    <string name="monitor_status_unreachable">Cannot reach PIB\'s hook in the Play Store. Check that the module is enabled.</string>
+    <string name="monitor_notification_channel">Integrity monitor</string>
+    <string name="monitor_notification_title">Play Integrity verdict dropped</string>
+    <string name="monitor_notification_text">%1$s → %2$s</string>
 </resources>

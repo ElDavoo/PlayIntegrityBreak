@@ -36,6 +36,8 @@ object PrefManager {
     private const val PREF_TELEMETRY_CONSENT_PROMPT_SHOWN = "telemetry_consent_prompt_shown"
     private const val PREF_LOG_FILTER_LEVEL = "log_filter_level"
     private const val PREF_LOG_FILTER_REVERSE_ORDER = "log_filter_reverse_order"
+    private const val PREF_INTEGRITY_MONITOR_ENABLED = "integrity_monitor_enabled"
+    private const val PREF_INTEGRITY_MONITOR_INTERVAL_HOURS = "integrity_monitor_interval_hours"
 
     enum class SortMethod {
         BY_LABEL, BY_PACKAGE_NAME, BY_INSTALL_TIME, BY_UPDATE_TIME
@@ -136,4 +138,12 @@ object PrefManager {
     var logFilter_reverseOrder: Boolean
         get() = pref.getBoolean(PREF_LOG_FILTER_REVERSE_ORDER, false)
         set(value) = pref.edit { putBoolean(PREF_LOG_FILTER_REVERSE_ORDER, value) }
+
+    var integrityMonitorEnabled: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_MONITOR_ENABLED, false)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_MONITOR_ENABLED, value) }
+
+    var integrityMonitorIntervalHours: Int
+        get() = pref.getInt(PREF_INTEGRITY_MONITOR_INTERVAL_HOURS, 6)
+        set(value) = pref.edit { putInt(PREF_INTEGRITY_MONITOR_INTERVAL_HOURS, value) }
 }
