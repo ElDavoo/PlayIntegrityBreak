@@ -85,8 +85,10 @@ object IntegrityServiceHook {
                 val policy = PIBLoggerService.resolvePolicy(callerPkg)
                 val looksLikeRequest = hasBundleAndCallback(args)
                 val requestPayload = isIntegrityRequestPayload(args)
+                // PIB's own Play Store check is not an app asking: it is not recorded, so it sends no event or alert.
+                val record = callerPkg != "unknown" && !PlayStoreIntegrityCheck.isOwnRequest(args)
 
-                if (policy.interventionEnabled && requestPayload && callerPkg != "unknown") {
+                if (policy.interventionEnabled && requestPayload && record) {
                     PIBLoggerService.recordIntegrityRequest(
                         callerPkg = callerPkg,
                         playIntegrityVersionMajor = playIntegrityVersion?.major,
@@ -132,7 +134,7 @@ object IntegrityServiceHook {
                         RESPONSE_SOURCE_SHORT_CIRCUIT_NO_DELIVERY
                     }
 
-                    if (callerPkg != "unknown") {
+                    if (record) {
                         PIBLoggerService.recordIntegrityResponse(
                             callerPkg = callerPkg,
                             playIntegrityVersionMajor = playIntegrityVersion?.major,
@@ -184,7 +186,7 @@ object IntegrityServiceHook {
                 val outcome = extractOutcome(args)
                 val policy = PIBLoggerService.resolvePolicy(callerPkg)
 
-                if (outcome != null && callerPkg != "unknown" && policy.interventionEnabled) {
+                if (outcome != null && callerPkg != "unknown" && policy.interventionEnabled && !PlayStoreIntegrityCheck.isOwnRequest(args)) {
                     PIBLoggerService.recordIntegrityResponse(
                         callerPkg = callerPkg,
                         playIntegrityVersionMajor = playIntegrityVersion?.major,
