@@ -39,11 +39,21 @@ object Constants {
     const val INTENT_API_STATUS_INVALID_VALUE = 6
     const val INTENT_API_STATUS_INTERNAL_ERROR = 7
 
+    // Result codes of IPIBService.runPlayStoreIntegrityCheck.
+    /** The verdict was read: the result data is the verdict JSON. */
+    const val PLAY_STORE_RESULT_OK = 1
+
+    /** The check failed, timed out or is not available in this build: the result data says why. */
+    const val PLAY_STORE_RESULT_FAILED = 2
+
     const val DEFAULT_APP_PACKAGE_NAME = "default"
     const val GMS_PACKAGE_NAME = "com.google.android.gms"
     const val GSF_PACKAGE_NAME = "com.google.android.gsf"
     const val VENDING_PACKAGE_NAME = "com.android.vending"
     const val ANDROID_PACKAGE_NAME = "android"
+
+    /** Binds the Play Store's Play Integrity service (the Play Core protocol). */
+    const val PLAY_INTEGRITY_BIND_ACTION = "com.google.android.play.core.integrityservice.BIND_INTEGRITY_SERVICE"
 
     val gmsPackages = arrayOf(GMS_PACKAGE_NAME, GSF_PACKAGE_NAME)
     val riskyPackages = arrayOf(VENDING_PACKAGE_NAME) + gmsPackages

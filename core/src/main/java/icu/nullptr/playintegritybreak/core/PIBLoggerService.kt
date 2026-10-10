@@ -9,9 +9,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import icu.nullptr.playintegritybreak.common.Constants
+import icu.nullptr.playintegritybreak.common.IIntegrityCheckCallback
 import icu.nullptr.playintegritybreak.common.IPIBService
 import icu.nullptr.playintegritybreak.common.JsonConfig
+import icu.nullptr.playintegritybreak.common.PlayStoreVerdict
 import it.eldavo.pib.common.BuildConfig
+import kotlin.concurrent.thread
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
@@ -346,6 +349,28 @@ object PIBLoggerService : IPIBService.Stub() {
     }
 
     override fun getBackendName(): String = Backend.name
+
+    override fun runPlayStoreIntegrityCheck(callback: IIntegrityCheckCallback) {
+        thread(name = "PIB-PlayStoreCheck") {
+            // This thread is in the Play Store: anything it throws kills the Play Store.
+            try {
+                val result = PlayStoreIntegrityCheck.run()
+                when (result.status) {
+                    PlayStoreIntegrityCheck.Status.OK -> callback.onResult(
+                        Constants.PLAY_STORE_RESULT_OK,
+                        PlayStoreVerdict.toVerdictJson(result.labels),
+                    )
+                    else -> callback.onResult(
+                        Constants.PLAY_STORE_RESULT_FAILED,
+                        "${result.status}: ${result.detail.orEmpty()}",
+                    )
+                }
+            } catch (e: Throwable) {
+                // Mostly a DeadObjectException: PIB was killed during the check.
+                logW(TAG, "Play Store check result not delivered", e)
+            }
+        }
+    }
 
     private fun Bundle.getIntOrNull(key: String): Int? {
         if (!containsKey(key)) return null
