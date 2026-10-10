@@ -2,6 +2,7 @@ package icu.nullptr.playintegritybreak.service
 
 import android.os.IBinder
 import android.util.Log
+import icu.nullptr.playintegritybreak.common.IIntegrityCheckCallback
 import icu.nullptr.playintegritybreak.common.IPIBService
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
@@ -11,6 +12,9 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
 
     private const val TAG = "ServiceClient"
     private const val STATUS_CACHE_GRACE_MS = 120_000L
+
+    /** First SERVICE_VERSION with runPlayStoreIntegrityCheck. */
+    private const val PLAY_STORE_CHECK_SERVICE_VERSION = 107
 
     private class ServiceProxy(private val obj: IPIBService) : InvocationHandler {
         override fun invoke(proxy: Any?, method: Method, args: Array<out Any?>?): Any? {
@@ -24,8 +28,10 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
     @Volatile
     private var service: IPIBService? = null
 
+    /** The linked hook's binder, to watch for its death. Null when none is linked. */
     @Volatile
-    private var linkedBinder: IBinder? = null
+    var linkedBinder: IBinder? = null
+        private set
 
     @Volatile
     private var lastKnownServiceVersion: Int = 0
@@ -153,4 +159,23 @@ object ServiceClient : IPIBService, IBinder.DeathRecipient {
     ) = service?.getPackageInfo(packageName, userId)
 
     override fun getLogFileLocation() = service?.logFileLocation ?: "the log file"
+
+    /**
+     * The version the linked hook reports right now. Null when no live link answers: none is linked, or the Play Store
+     * died. The cached version is not used here, since it stays fresh for a while after the link is gone.
+     */
+    private val liveVersion: Int?
+        get() = service?.let { remote -> runCatching { remote.serviceVersion }.getOrNull() }
+
+    /** Whether a live link to the hook answers now. */
+    val isLinked: Boolean
+        get() = liveVersion != null
+
+    val canRunPlayStoreCheck: Boolean
+        get() = (liveVersion ?: 0) >= PLAY_STORE_CHECK_SERVICE_VERSION
+
+    override fun runPlayStoreIntegrityCheck(callback: IIntegrityCheckCallback) {
+        val remote = service ?: throw IllegalStateException("Service is not linked")
+        remote.runPlayStoreIntegrityCheck(callback)
+    }
 }

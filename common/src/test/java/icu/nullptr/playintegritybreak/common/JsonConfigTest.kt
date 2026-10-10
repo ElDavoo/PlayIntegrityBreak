@@ -163,6 +163,24 @@ class JsonConfigTest {
     }
 
     @Test
+    fun `older configs stop rewriting the Play Store unless it was set`() {
+        val vending = Constants.VENDING_PACKAGE_NAME
+        val unset = JsonConfig.parse("""{"configVersion": 94, "scope": {"$vending": {"requestAlert": false}}}""")
+        assertEquals(JsonConfig.AppConfig(rewriteResponse = false, requestAlert = false), unset.scope[vending])
+        val absent = JsonConfig.parse("""{"configVersion": 94, "scope": {}}""")
+        assertEquals(false, absent.policyFor(vending).rewriteResponse)
+        val set = JsonConfig.parse("""{"configVersion": 94, "scope": {"$vending": {"rewriteResponse": true}}}""")
+        assertEquals(true, set.policyFor(vending).rewriteResponse)
+    }
+
+    @Test
+    fun `the Play Store default is not added back once removed`() {
+        val config = JsonConfig(scope = emptyMap())
+        assertEquals(true, JsonConfig.parse(config.toString()).policyFor(Constants.VENDING_PACKAGE_NAME).rewriteResponse)
+        assertEquals(false, JsonConfig().policyFor(Constants.VENDING_PACKAGE_NAME).rewriteResponse)
+    }
+
+    @Test
     fun `policy keys read and write every field`() {
         for (key in PolicyKey.entries) {
             val value: Any = if (key.isInt) 42 else false

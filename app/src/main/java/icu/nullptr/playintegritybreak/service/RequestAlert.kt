@@ -12,6 +12,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
+import icu.nullptr.playintegritybreak.common.Constants
 import icu.nullptr.playintegritybreak.common.JsonConfig.AlertStyle
 import icu.nullptr.playintegritybreak.pibApp
 import it.eldavo.pib.R
@@ -30,6 +31,9 @@ object RequestAlert {
     /** Requests buffered by the hook while PIB was unreachable are too old to alert about. */
     private const val MAX_AGE_MS = 30_000L
 
+    /** The notification of PIB's own check; app notifications use their package name's hash. */
+    private const val OWN_CHECK_NOTIFICATION_ID = 0x5048
+
     private val mainHandler = Handler(Looper.getMainLooper())
 
     fun onRequest(packageName: String, timestampMs: Long) {
@@ -37,12 +41,26 @@ object RequestAlert {
         if (!config.policyFor(packageName).requestAlert) return
         if (System.currentTimeMillis() - timestampMs > MAX_AGE_MS) return
 
-        val text = pibApp.getString(R.string.integrity_request_alert, loadLabel(packageName))
+        // One notification per app, updated on every request.
+        show(config.requestAlertStyle, packageName.hashCode(), pibApp.getString(R.string.integrity_request_alert, loadLabel(packageName)), timestampMs)
+    }
+
+    /**
+     * Tells the user that PIB itself asks the Play Store for Play Integrity (the integrity monitor's check). The hook does
+     * not report that request, so it gets this alert instead of the one for an app. It follows the Play Store's setting.
+     */
+    fun onOwnCheck() {
+        val config = ConfigManager.config
+        if (!config.policyFor(Constants.VENDING_PACKAGE_NAME).requestAlert) return
+        show(config.requestAlertStyle, OWN_CHECK_NOTIFICATION_ID, pibApp.getString(R.string.integrity_own_check_alert), System.currentTimeMillis())
+    }
+
+    private fun show(style: AlertStyle, notificationId: Int, text: String, timestampMs: Long) {
         mainHandler.post {
             runCatching {
-                when (config.requestAlertStyle) {
+                when (style) {
                     AlertStyle.TOAST -> Toast.makeText(pibApp, text, Toast.LENGTH_SHORT).show()
-                    AlertStyle.NOTIFICATION -> notify(packageName, text, timestampMs)
+                    AlertStyle.NOTIFICATION -> notify(notificationId, text, timestampMs)
                 }
             }.onFailure {
                 Log.w(TAG, "Failed to show integrity request alert", it)
@@ -70,20 +88,31 @@ object RequestAlert {
         pm.getApplicationInfo(packageName, 0).loadLabel(pm)
     }.getOrDefault(packageName)
 
-    private fun notify(packageName: String, text: String, timestampMs: Long) {
-        val manager = pibApp.getSystemService(NotificationManager::class.java)
-        manager.deleteNotificationChannel(OLD_CHANNEL_ID)
-        manager.createNotificationChannel(
-            NotificationChannel(
+    private fun notify(notificationId: Int, text: String, timestampMs: Long) {
+        pibApp.getSystemService(NotificationManager::class.java).deleteNotificationChannel(OLD_CHANNEL_ID)
+        postNotification(
+            channel = NotificationChannel(
                 CHANNEL_ID,
                 pibApp.getString(R.string.integrity_request_channel),
                 NotificationManager.IMPORTANCE_HIGH,
-            )
+            ),
+            id = notificationId,
+            title = pibApp.getString(R.string.integrity_request_notification_title),
+            text = text,
+            timestampMs = timestampMs,
         )
+    }
+
+    /** Posts a notification that opens PIB, in [channel] (created if needed). Nothing is posted with notifications off. */
+    fun postNotification(channel: NotificationChannel, id: Int, title: String, text: String, timestampMs: Long) {
+        val manager = pibApp.getSystemService(NotificationManager::class.java)
+        // False when POST_NOTIFICATIONS is not granted.
+        if (!manager.areNotificationsEnabled()) return
+        manager.createNotificationChannel(channel)
         val launch = pibApp.packageManager.getLaunchIntentForPackage(pibApp.packageName)
-        val notification = Notification.Builder(pibApp, CHANNEL_ID)
+        val notification = Notification.Builder(pibApp, channel.id)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(pibApp.getString(R.string.integrity_request_notification_title))
+            .setContentTitle(title)
             .setContentText(text)
             .setWhen(timestampMs)
             .setShowWhen(true)
@@ -94,7 +123,6 @@ object RequestAlert {
                 }
             }
             .build()
-        // One notification per app, updated on every request.
-        manager.notify(packageName.hashCode(), notification)
+        manager.notify(id, notification)
     }
 }
