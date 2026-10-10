@@ -303,6 +303,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
+        with(binding.navIntegrityMonitor) {
+            text1.text = getString(R.string.title_integrity_monitor)
+            icon.setImageResource(R.drawable.baseline_monitor_heart_24)
+            root.setOnClickListener {
+                navigate(R.id.nav_integrity_monitor)
+            }
+        }
+
         with(binding.navSettings) {
             text1.text = getString(R.string.title_settings)
             icon.setImageResource(R.drawable.outline_settings_24)
