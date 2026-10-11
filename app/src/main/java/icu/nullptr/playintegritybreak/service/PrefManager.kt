@@ -5,6 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
+import icu.nullptr.playintegritybreak.common.IntegrityAutomationPhase
 import icu.nullptr.playintegritybreak.data.AppConstants
 import icu.nullptr.playintegritybreak.pibApp
 import icu.nullptr.playintegritybreak.ui.util.get
@@ -38,6 +39,15 @@ object PrefManager {
     private const val PREF_LOG_FILTER_REVERSE_ORDER = "log_filter_reverse_order"
     private const val PREF_INTEGRITY_MONITOR_ENABLED = "integrity_monitor_enabled"
     private const val PREF_INTEGRITY_MONITOR_INTERVAL_HOURS = "integrity_monitor_interval_hours"
+    private const val PREF_INTEGRITY_AUTOMATION_NOTIFY_DROP = "integrity_automation_notify_drop"
+    private const val PREF_INTEGRITY_AUTOMATION_NOTIFY_RECOVER = "integrity_automation_notify_recover"
+    private const val PREF_INTEGRITY_AUTOMATION_SYNTHETIC_ERRORS = "integrity_automation_synthetic_errors"
+    private const val PREF_INTEGRITY_AUTOMATION_KEYBOX = "integrity_automation_keybox"
+    private const val PREF_INTEGRITY_AUTOMATION_PHASE = "integrity_automation_phase"
+    private const val PREF_INTEGRITY_AUTOMATION_INTERVENTION_SNAPSHOT = "integrity_automation_intervention_snapshot"
+    private const val PREF_INTEGRITY_KEYBOX_LAST_FAILED_MS = "integrity_keybox_last_failed_ms"
+    private const val PREF_INTEGRITY_AUTOMATION_SYNTHETIC_IF_NO_KEYBOX = "integrity_automation_synthetic_if_no_keybox"
+    private const val PREF_INTEGRITY_KEYBOX_EXHAUSTED = "integrity_keybox_exhausted"
 
     enum class SortMethod {
         BY_LABEL, BY_PACKAGE_NAME, BY_INSTALL_TIME, BY_UPDATE_TIME
@@ -146,4 +156,45 @@ object PrefManager {
     var integrityMonitorIntervalHours: Int
         get() = pref.getInt(PREF_INTEGRITY_MONITOR_INTERVAL_HOURS, 6)
         set(value) = pref.edit { putInt(PREF_INTEGRITY_MONITOR_INTERVAL_HOURS, value) }
+
+    var integrityAutomationNotifyDrop: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_AUTOMATION_NOTIFY_DROP, true)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_AUTOMATION_NOTIFY_DROP, value) }
+
+    var integrityAutomationNotifyRecover: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_AUTOMATION_NOTIFY_RECOVER, true)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_AUTOMATION_NOTIFY_RECOVER, value) }
+
+    var integrityAutomationSyntheticErrors: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_AUTOMATION_SYNTHETIC_ERRORS, false)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_AUTOMATION_SYNTHETIC_ERRORS, value) }
+
+    var integrityAutomationKeybox: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_AUTOMATION_KEYBOX, false)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_AUTOMATION_KEYBOX, value) }
+
+    var integrityAutomationPhase: IntegrityAutomationPhase
+        get() = pref.getString(PREF_INTEGRITY_AUTOMATION_PHASE, null)
+            ?.let { runCatching { IntegrityAutomationPhase.valueOf(it) }.getOrNull() }
+            ?: IntegrityAutomationPhase.UNARMED
+        set(value) = pref.edit { putString(PREF_INTEGRITY_AUTOMATION_PHASE, value.name) }
+
+    /** What [AllAppsIntervention] changed and must restore; empty when nothing is changed. */
+    var integrityAutomationInterventionSnapshot: String
+        get() = pref.getString(PREF_INTEGRITY_AUTOMATION_INTERVENTION_SNAPSHOT, "") ?: ""
+        set(value) = pref.edit { putString(PREF_INTEGRITY_AUTOMATION_INTERVENTION_SNAPSHOT, value) }
+
+    /** When the last keybox fallback run that did not reach STRONG ended, in epoch milliseconds. */
+    var integrityKeyboxLastFailedMs: Long
+        get() = pref.getLong(PREF_INTEGRITY_KEYBOX_LAST_FAILED_MS, 0L)
+        set(value) = pref.edit { putLong(PREF_INTEGRITY_KEYBOX_LAST_FAILED_MS, value) }
+
+    var integrityAutomationSyntheticIfNoKeybox: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_AUTOMATION_SYNTHETIC_IF_NO_KEYBOX, false)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_AUTOMATION_SYNTHETIC_IF_NO_KEYBOX, value) }
+
+    /** Whether the last keybox fallback run ended without a keybox that gives STRONG, or could not run. */
+    var integrityKeyboxExhausted: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_KEYBOX_EXHAUSTED, false)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_KEYBOX_EXHAUSTED, value) }
 }

@@ -18,6 +18,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.androidbroadcast.vbpd.viewBinding
+import icu.nullptr.playintegritybreak.common.IntegrityAutomationPhase
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.RequestAlert
 import icu.nullptr.playintegritybreak.ui.util.ThemeUtils.themeColor
@@ -28,9 +29,11 @@ import icu.nullptr.playintegritybreak.ui.util.showToast
 import it.eldavo.pib.R
 import it.eldavo.pib.databinding.FragmentIntegrityMonitorBinding
 import it.eldavo.pib.databinding.ItemIntegrityCheckBinding
+import it.eldavo.pib.monitor.IntegrityAutomation
 import it.eldavo.pib.monitor.IntegrityCheck
 import it.eldavo.pib.monitor.IntegrityCheckStore
 import it.eldavo.pib.monitor.IntegrityMonitor
+import it.eldavo.pib.monitor.KeyboxInstaller
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -57,6 +60,7 @@ class IntegrityMonitorFragment : Fragment(R.layout.fragment_integrity_monitor) {
         }
 
         setupPeriodicControls()
+        setupAutomationControls()
 
         // The check runs outside of this screen, from the button or the periodic job. Every time the screen starts, and when
         // a check ends, the history is reread.
@@ -100,7 +104,66 @@ class IntegrityMonitorFragment : Fragment(R.layout.fragment_integrity_monitor) {
         }
     }
 
+    private fun setupAutomationControls() {
+        binding.automationNotifyDrop.isChecked = PrefManager.integrityAutomationNotifyDrop
+        binding.automationNotifyDrop.setOnCheckedChangeListener { _, isChecked ->
+            PrefManager.integrityAutomationNotifyDrop = isChecked
+            if (isChecked) RequestAlert.requestPermission(requireActivity())
+        }
+
+        binding.automationNotifyRecover.isChecked = PrefManager.integrityAutomationNotifyRecover
+        binding.automationNotifyRecover.setOnCheckedChangeListener { _, isChecked ->
+            PrefManager.integrityAutomationNotifyRecover = isChecked
+            if (isChecked) RequestAlert.requestPermission(requireActivity())
+        }
+
+        binding.automationSyntheticErrors.isChecked = PrefManager.integrityAutomationSyntheticErrors
+        binding.automationSyntheticErrors.setOnCheckedChangeListener { _, isChecked ->
+            PrefManager.integrityAutomationSyntheticErrors = isChecked
+            // Turning it on while the verdict is down applies it now; turning it off restores the apps' settings now.
+            IntegrityAutomation.reconcile(requireContext())
+        }
+
+        binding.automationKeybox.isChecked = PrefManager.integrityAutomationKeybox
+        binding.automationKeybox.setOnCheckedChangeListener { switch, isChecked ->
+            if (!isChecked) {
+                PrefManager.integrityAutomationKeybox = false
+                return@setOnCheckedChangeListener
+            }
+            // The action needs root and TrickyStore. Both are checked before it is turned on, and the switch goes back off
+            // without them.
+            viewLifecycleOwner.lifecycleScope.launch {
+                val ready = withContext(Dispatchers.IO) { KeyboxInstaller.hasRoot() && KeyboxInstaller.moduleInstalled() }
+                if (ready) {
+                    PrefManager.integrityAutomationKeybox = true
+                    IntegrityAutomation.reconcile(requireContext())
+                } else {
+                    switch.isChecked = false
+                    showToast(R.string.automation_keybox_needs_root)
+                }
+            }
+        }
+        binding.automationSyntheticIfNoKeybox.isChecked = PrefManager.integrityAutomationSyntheticIfNoKeybox
+        binding.automationSyntheticIfNoKeybox.setOnCheckedChangeListener { _, isChecked ->
+            PrefManager.integrityAutomationSyntheticIfNoKeybox = isChecked
+            // Applies now when the keybox action has already run out of keyboxes while the verdict is down.
+            IntegrityAutomation.reconcile(requireContext())
+        }
+        showAutomationStatus()
+    }
+
+    private fun showAutomationStatus() {
+        binding.automationStatus.setText(
+            when (PrefManager.integrityAutomationPhase) {
+                IntegrityAutomationPhase.UNARMED -> R.string.automation_status_unarmed
+                IntegrityAutomationPhase.PASSING -> R.string.automation_status_passing
+                IntegrityAutomationPhase.DEGRADED -> R.string.automation_status_degraded
+            },
+        )
+    }
+
     private fun refresh() {
+        showAutomationStatus()
         viewLifecycleOwner.lifecycleScope.launch {
             val history = withContext(Dispatchers.IO) { IntegrityCheckStore.all() }
             showLatest(history.firstOrNull())

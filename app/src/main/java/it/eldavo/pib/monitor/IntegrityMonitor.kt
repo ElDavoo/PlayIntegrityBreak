@@ -1,7 +1,5 @@
 package it.eldavo.pib.monitor
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -22,7 +20,6 @@ import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.RequestAlert
 import icu.nullptr.playintegritybreak.service.ServiceClient
-import it.eldavo.pib.R
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +29,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeoutOrNull
 import java.util.concurrent.TimeUnit
 
@@ -43,8 +41,6 @@ import java.util.concurrent.TimeUnit
 object IntegrityMonitor {
     private const val TAG = "IntegrityMonitor"
     private const val PERIODIC_WORK = "integrity.monitor.periodic"
-    private const val NOTIFICATION_CHANNEL = "integrity_monitor"
-    private const val NOTIFICATION_ID = 0x5049
     private const val SERVICE_LINK_TIMEOUT_MS = 20_000L
 
     /**
@@ -81,22 +77,51 @@ object IntegrityMonitor {
     }
 
     /**
-     * Runs one check, stores it in the history and notifies if the verdict dropped. Returns null without checking when a
-     * check is already running: its result is the one that gets recorded, and a second would ask Google again right after.
+     * Runs one check, stores it in the history, and lets the telemetry and the automation see it. Returns null without
+     * checking when a check is already running: its result is the one that gets recorded, and a second would ask Google
+     * again right after.
      */
     suspend fun checkAndRecord(context: Context = pibApp): IntegrityCheck? {
         if (!checkLock.tryLock()) return null
+        val (previous, check) = try {
+            recordCheck(context)
+        } finally {
+            checkLock.unlock()
+        }
+        afterCheck(context, previous, check)
+        return check
+    }
+
+    /**
+     * Like [checkAndRecord], but waits for a check that is running. The keybox fallback needs the result of a check it
+     * starts itself, so it cannot take the one already running.
+     */
+    suspend fun checkWhenFree(context: Context = pibApp): IntegrityCheck {
+        val (previous, check) = checkLock.withLock { recordCheck(context) }
+        afterCheck(context, previous, check)
+        return check
+    }
+
+    /** Runs the check and stores it. The caller holds [checkLock]. */
+    private suspend fun recordCheck(context: Context): Pair<IntegrityCheck?, IntegrityCheck> {
         checkingFlow.value = true
         try {
             val previous = IntegrityCheckStore.lastVerdict()
             val check = checkWithPlayStore(context)
             IntegrityCheckStore.add(check)
-            notifyIfDropped(context, previous, check)
-            return check
+            return previous to check
         } finally {
             checkingFlow.value = false
-            checkLock.unlock()
         }
+    }
+
+    /**
+     * Runs once the lock is released, since the automation can start another check, and that needs the lock. A verdict
+     * goes to the telemetry at once, if the user allowed telemetry.
+     */
+    private fun afterCheck(context: Context, previous: IntegrityCheck?, check: IntegrityCheck) {
+        IntegrityTelemetry.sendVerdict(check)
+        IntegrityAutomation.onCheck(context, previous, check)
     }
 
     private suspend fun checkWithPlayStore(context: Context): IntegrityCheck {
@@ -252,24 +277,4 @@ object IntegrityMonitor {
         }
     }
 
-    // Notifications
-
-    private fun notifyIfDropped(context: Context, previous: IntegrityCheck?, current: IntegrityCheck) {
-        val before = previous?.level ?: return
-        val after = current.level ?: return
-        // Levels are declared from the strongest down.
-        if (after.ordinal <= before.ordinal) return
-
-        RequestAlert.postNotification(
-            channel = NotificationChannel(
-                NOTIFICATION_CHANNEL,
-                context.getString(R.string.monitor_notification_channel),
-                NotificationManager.IMPORTANCE_DEFAULT,
-            ),
-            id = NOTIFICATION_ID,
-            title = context.getString(R.string.monitor_notification_title),
-            text = context.getString(R.string.monitor_notification_text, before.label, after.label),
-            timestampMs = current.timestampMs,
-        )
-    }
 }
