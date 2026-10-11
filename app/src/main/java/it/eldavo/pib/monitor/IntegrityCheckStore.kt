@@ -23,9 +23,6 @@ object IntegrityCheckStore {
         }
     }
 
-    /** The newest check that produced a device verdict. */
-    fun lastVerdict(): IntegrityCheck? = all().firstOrNull { it.level != null }
-
     @Synchronized
     fun add(check: IntegrityCheck) {
         val entries = (listOf(check) + all()).take(MAX_ENTRIES)

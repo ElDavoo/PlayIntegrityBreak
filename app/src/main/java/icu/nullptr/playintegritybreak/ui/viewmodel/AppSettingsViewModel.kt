@@ -25,6 +25,7 @@ class AppSettingsViewModel(val packageName: String) : ViewModel() {
     val isDefaults = packageName == Constants.DEFAULT_APP_PACKAGE_NAME
 
     private var defaults = ConfigManager.defaults
+    private var savedDefaults = defaults
     private var savedOverrides = ConfigManager.getAppConfig(packageName)
     private var overrides = savedOverrides ?: JsonConfig.AppConfig()
 
@@ -44,13 +45,26 @@ class AppSettingsViewModel(val packageName: String) : ViewModel() {
 
     fun save() {
         if (isDefaults) {
-            ConfigManager.defaults = defaults
+            // Only the settings changed here are written: something else, such as the integrity automation, may have
+            // changed the others since this draft was taken.
+            val changed = PolicyKey.entries.filter { it.get(defaults) != it.get(savedDefaults) }
+            if (changed.isEmpty()) return
+            ConfigManager.update { config ->
+                config.copy(defaults = changed.fold(config.defaults) { policy, key -> key.with(policy, key.get(defaults)) })
+            }
+            savedDefaults = defaults
             return
         }
 
-        val toSave = overrides.takeUnless { it.isEmpty() }
-        if (toSave == savedOverrides) return
-        ConfigManager.setAppConfig(packageName, toSave)
-        savedOverrides = toSave
+        // The same for an app: the integrity automation may have changed its other settings since the draft was taken.
+        val saved = savedOverrides ?: JsonConfig.AppConfig()
+        val changed = PolicyKey.entries.filter { it.get(overrides) != it.get(saved) }
+        if (changed.isEmpty()) return
+        ConfigManager.update { config ->
+            val current = config.scope[packageName] ?: JsonConfig.AppConfig()
+            val merged = changed.fold(current) { app, key -> key.with(app, key.get(overrides)) }
+            config.copy(scope = if (merged.isEmpty()) config.scope - packageName else config.scope + (packageName to merged))
+        }
+        savedOverrides = overrides.takeUnless { it.isEmpty() }
     }
 }

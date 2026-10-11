@@ -17,6 +17,8 @@ object KeyboxXml {
      */
     fun isKeybox(bytes: ByteArray): Boolean {
         if (bytes.isEmpty() || bytes.size > MAX_BYTES) return false
+        // A keybox is ASCII. A NUL byte means UTF-16 or similar, which would hide a DOCTYPE from the check below.
+        if (bytes.contains(0)) return false
         // The file comes from a server: no DTDs, so no entities either. Android's parser supports neither feature below
         // and ignores them, so a document type declaration is refused here, before any parser sees it.
         if (bytes.decodeToString().contains("<!DOCTYPE", ignoreCase = true)) return false

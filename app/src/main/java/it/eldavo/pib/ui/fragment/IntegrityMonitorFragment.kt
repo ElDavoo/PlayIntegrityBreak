@@ -7,15 +7,14 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.core.view.children
 import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.androidbroadcast.vbpd.viewBinding
 import icu.nullptr.playintegritybreak.common.IntegrityAutomationPhase
@@ -76,29 +75,9 @@ class IntegrityMonitorFragment : Fragment(R.layout.fragment_integrity_monitor) {
     }
 
     private fun setupPeriodicControls() {
-        val group = binding.intervalGroup
-        for (hours in IntegrityMonitor.intervalHoursOptions) {
-            val button = MaterialButton(requireContext(), null, com.google.android.material.R.attr.materialButtonOutlinedStyle)
-            button.id = View.generateViewId()
-            button.tag = hours
-            button.text = getString(R.string.monitor_interval_hours, hours)
-            // Share the row equally, or the last buttons are cut off on narrow screens.
-            group.addView(button, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
-            if (hours == PrefManager.integrityMonitorIntervalHours) group.check(button.id)
-        }
-        group.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (!isChecked) return@addOnButtonCheckedListener
-            val hours = group.findViewById<View>(checkedId).tag as Int
-            if (hours == PrefManager.integrityMonitorIntervalHours) return@addOnButtonCheckedListener
-            PrefManager.integrityMonitorIntervalHours = hours
-            IntegrityMonitor.syncSchedule(replace = true)
-        }
-
         binding.periodicSwitch.isChecked = PrefManager.integrityMonitorEnabled
-        group.isEnabled = PrefManager.integrityMonitorEnabled
         binding.periodicSwitch.setOnCheckedChangeListener { _, isChecked ->
             PrefManager.integrityMonitorEnabled = isChecked
-            group.isEnabled = isChecked
             IntegrityMonitor.syncSchedule()
             if (isChecked) RequestAlert.requestPermission(requireActivity())
         }
@@ -128,14 +107,22 @@ class IntegrityMonitorFragment : Fragment(R.layout.fragment_integrity_monitor) {
         binding.automationKeybox.setOnCheckedChangeListener { switch, isChecked ->
             if (!isChecked) {
                 PrefManager.integrityAutomationKeybox = false
+                // The errors that came on because no keybox gave STRONG go off now.
+                IntegrityAutomation.reconcile(requireContext())
                 return@setOnCheckedChangeListener
             }
             // The action needs root and TrickyStore. Both are checked before it is turned on, and the switch goes back off
             // without them.
             viewLifecycleOwner.lifecycleScope.launch {
                 val ready = withContext(Dispatchers.IO) { KeyboxInstaller.hasRoot() && KeyboxInstaller.moduleInstalled() }
+                // Turned off again during the wait: that stands.
+                if (!switch.isChecked) return@launch
                 if (ready) {
                     PrefManager.integrityAutomationKeybox = true
+                    // Turning it on is a request now: a run that failed earlier (for example, before root was granted)
+                    // should not make it wait out its cooldown, nor count as given up before the new run tries a keybox.
+                    PrefManager.integrityKeyboxLastFailedMs = 0L
+                    PrefManager.integrityKeyboxExhausted = false
                     IntegrityAutomation.reconcile(requireContext())
                 } else {
                     switch.isChecked = false
@@ -153,8 +140,11 @@ class IntegrityMonitorFragment : Fragment(R.layout.fragment_integrity_monitor) {
     }
 
     private fun showAutomationStatus() {
+        val phase = PrefManager.integrityAutomationPhase
+        // The actions mean nothing before the device has passed STRONG once, so they cannot be changed until then.
+        for (view in binding.automationActions.children) view.isEnabled = phase != IntegrityAutomationPhase.UNARMED
         binding.automationStatus.setText(
-            when (PrefManager.integrityAutomationPhase) {
+            when (phase) {
                 IntegrityAutomationPhase.UNARMED -> R.string.automation_status_unarmed
                 IntegrityAutomationPhase.PASSING -> R.string.automation_status_passing
                 IntegrityAutomationPhase.DEGRADED -> R.string.automation_status_degraded
@@ -173,8 +163,6 @@ class IntegrityMonitorFragment : Fragment(R.layout.fragment_integrity_monitor) {
 
     private fun showLatest(check: IntegrityCheck?) {
         binding.latestTime.text = check?.let { formatTime(it.timestampMs) } ?: getString(R.string.monitor_never_checked)
-        binding.showJson.visibility = if (check == null) View.GONE else View.VISIBLE
-        binding.showJson.setOnClickListener { check?.let(::showDetails) }
 
         val verdicts = check?.deviceVerdicts
         val hasVerdict = check?.level != null

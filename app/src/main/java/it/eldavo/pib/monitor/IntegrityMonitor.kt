@@ -50,7 +50,8 @@ object IntegrityMonitor {
      */
     private const val CHECK_TIMEOUT_MS = 5 * 60_000L
 
-    val intervalHoursOptions = intArrayOf(1, 3, 6, 12, 24)
+    /** How often the periodic check runs. */
+    private const val INTERVAL_HOURS = 3L
 
     private val checkLock = Mutex()
 
@@ -83,45 +84,39 @@ object IntegrityMonitor {
      */
     suspend fun checkAndRecord(context: Context = pibApp): IntegrityCheck? {
         if (!checkLock.tryLock()) return null
-        val (previous, check) = try {
-            recordCheck(context)
+        try {
+            return recordCheck(context)
         } finally {
             checkLock.unlock()
         }
-        afterCheck(context, previous, check)
-        return check
     }
 
     /**
      * Like [checkAndRecord], but waits for a check that is running. The keybox fallback needs the result of a check it
-     * starts itself, so it cannot take the one already running.
+     * starts itself, so it cannot take the one already running. Each of its checks goes to the telemetry, even one without
+     * a verdict.
      */
-    suspend fun checkWhenFree(context: Context = pibApp): IntegrityCheck {
-        val (previous, check) = checkLock.withLock { recordCheck(context) }
-        afterCheck(context, previous, check)
-        return check
-    }
-
-    /** Runs the check and stores it. The caller holds [checkLock]. */
-    private suspend fun recordCheck(context: Context): Pair<IntegrityCheck?, IntegrityCheck> {
-        checkingFlow.value = true
-        try {
-            val previous = IntegrityCheckStore.lastVerdict()
-            val check = checkWithPlayStore(context)
-            IntegrityCheckStore.add(check)
-            return previous to check
-        } finally {
-            checkingFlow.value = false
-        }
-    }
+    suspend fun checkWhenFree(context: Context = pibApp): IntegrityCheck =
+        checkLock.withLock { recordCheck(context, keyboxRun = true) }
 
     /**
-     * Runs once the lock is released, since the automation can start another check, and that needs the lock. A verdict
-     * goes to the telemetry at once, if the user allowed telemetry.
+     * Runs the check, stores it, and lets the telemetry and the automation see it. The caller holds [checkLock], so the
+     * automation sees the checks in the order they ran. A keybox run the automation starts takes the lock for its own
+     * checks, so it waits for this one to end.
      */
-    private fun afterCheck(context: Context, previous: IntegrityCheck?, check: IntegrityCheck) {
-        IntegrityTelemetry.sendVerdict(check)
-        IntegrityAutomation.onCheck(context, previous, check)
+    private suspend fun recordCheck(context: Context, keyboxRun: Boolean = false): IntegrityCheck {
+        checkingFlow.value = true
+        try {
+            val check = checkWithPlayStore(context)
+            IntegrityCheckStore.add(check)
+            // The telemetry reads the installed keybox first: the automation can start a keybox run, which installs others.
+            IntegrityTelemetry.sendVerdict(check, withoutVerdict = keyboxRun)
+            IntegrityAutomation.onCheck(context, check, keyboxRun)
+            return check
+        } finally {
+            // Cleared once the automation has written its phase, so that the screen shows the new one.
+            checkingFlow.value = false
+        }
     }
 
     private suspend fun checkWithPlayStore(context: Context): IntegrityCheck {
@@ -249,10 +244,10 @@ object IntegrityMonitor {
     // Periodic monitoring
 
     /**
-     * Schedules or cancels the periodic check. [replace] reschedules an existing check (after the
-     * interval changed); otherwise it is kept, since replacing it cancels a run that is starting.
+     * Schedules or cancels the periodic check. A check scheduled with [INTERVAL_HOURS] is kept, since replacing it cancels
+     * a run that is starting. One scheduled with another interval, from when the interval was a setting, is updated once.
      */
-    fun syncSchedule(context: Context = pibApp, replace: Boolean = false) {
+    fun syncSchedule(context: Context = pibApp) {
         val workManager = WorkManager.getInstance(context)
         if (!PrefManager.integrityMonitorEnabled) {
             workManager.cancelUniqueWork(PERIODIC_WORK)
@@ -260,14 +255,19 @@ object IntegrityMonitor {
         }
 
         val request = PeriodicWorkRequestBuilder<Worker>(
-            PrefManager.integrityMonitorIntervalHours.toLong(),
+            INTERVAL_HOURS,
             TimeUnit.HOURS,
         ).setConstraints(
             Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
         ).build()
 
-        val policy = if (replace) ExistingPeriodicWorkPolicy.UPDATE else ExistingPeriodicWorkPolicy.KEEP
+        val policy = if (PrefManager.integrityMonitorScheduledHours == INTERVAL_HOURS.toInt()) {
+            ExistingPeriodicWorkPolicy.KEEP
+        } else {
+            ExistingPeriodicWorkPolicy.UPDATE
+        }
         workManager.enqueueUniquePeriodicWork(PERIODIC_WORK, policy, request)
+        PrefManager.integrityMonitorScheduledHours = INTERVAL_HOURS.toInt()
     }
 
     class Worker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {

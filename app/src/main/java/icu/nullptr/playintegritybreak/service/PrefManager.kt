@@ -48,6 +48,8 @@ object PrefManager {
     private const val PREF_INTEGRITY_KEYBOX_LAST_FAILED_MS = "integrity_keybox_last_failed_ms"
     private const val PREF_INTEGRITY_AUTOMATION_SYNTHETIC_IF_NO_KEYBOX = "integrity_automation_synthetic_if_no_keybox"
     private const val PREF_INTEGRITY_KEYBOX_EXHAUSTED = "integrity_keybox_exhausted"
+    private const val PREF_INTEGRITY_ROOT_SEEN = "integrity_root_seen"
+    private const val PREF_INTEGRITY_AUTOMATION_LAST_LEVEL = "integrity_automation_last_level"
 
     enum class SortMethod {
         BY_LABEL, BY_PACKAGE_NAME, BY_INSTALL_TIME, BY_UPDATE_TIME
@@ -153,7 +155,11 @@ object PrefManager {
         get() = pref.getBoolean(PREF_INTEGRITY_MONITOR_ENABLED, false)
         set(value) = pref.edit { putBoolean(PREF_INTEGRITY_MONITOR_ENABLED, value) }
 
-    var integrityMonitorIntervalHours: Int
+    /**
+     * The interval the periodic check was scheduled with. The interval used to be a setting, with 6 hours by default, so a
+     * schedule made then may have another one.
+     */
+    var integrityMonitorScheduledHours: Int
         get() = pref.getInt(PREF_INTEGRITY_MONITOR_INTERVAL_HOURS, 6)
         set(value) = pref.edit { putInt(PREF_INTEGRITY_MONITOR_INTERVAL_HOURS, value) }
 
@@ -179,10 +185,13 @@ object PrefManager {
             ?: IntegrityAutomationPhase.UNARMED
         set(value) = pref.edit { putString(PREF_INTEGRITY_AUTOMATION_PHASE, value.name) }
 
-    /** What [AllAppsIntervention] changed and must restore; empty when nothing is changed. */
+    /**
+     * What [AllAppsIntervention] changed and must restore; empty when nothing is changed. Written to disk before the forced
+     * config is, so that a process killed in between does not leave the forced settings without their snapshot.
+     */
     var integrityAutomationInterventionSnapshot: String
         get() = pref.getString(PREF_INTEGRITY_AUTOMATION_INTERVENTION_SNAPSHOT, "") ?: ""
-        set(value) = pref.edit { putString(PREF_INTEGRITY_AUTOMATION_INTERVENTION_SNAPSHOT, value) }
+        set(value) = pref.edit(commit = true) { putString(PREF_INTEGRITY_AUTOMATION_INTERVENTION_SNAPSHOT, value) }
 
     /** When the last keybox fallback run that did not reach STRONG ended, in epoch milliseconds. */
     var integrityKeyboxLastFailedMs: Long
@@ -197,4 +206,17 @@ object PrefManager {
     var integrityKeyboxExhausted: Boolean
         get() = pref.getBoolean(PREF_INTEGRITY_KEYBOX_EXHAUSTED, false)
         set(value) = pref.edit { putBoolean(PREF_INTEGRITY_KEYBOX_EXHAUSTED, value) }
+
+    /** Whether root was granted the last time PIB asked for it. Kept across processes, see KeyboxInstaller.installedIdWithoutAsking. */
+    var integrityRootSeen: Boolean
+        get() = pref.getBoolean(PREF_INTEGRITY_ROOT_SEEN, false)
+        set(value) = pref.edit { putBoolean(PREF_INTEGRITY_ROOT_SEEN, value) }
+
+    /**
+     * The level name of the last check that gave a verdict, which tells the automation that a verdict dropped. It is kept
+     * here and not read from the history, which the user can clear.
+     */
+    var integrityAutomationLastLevel: String?
+        get() = pref.getString(PREF_INTEGRITY_AUTOMATION_LAST_LEVEL, null)
+        set(value) = pref.edit { putString(PREF_INTEGRITY_AUTOMATION_LAST_LEVEL, value) }
 }

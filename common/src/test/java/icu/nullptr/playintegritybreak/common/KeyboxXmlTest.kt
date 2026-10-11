@@ -38,6 +38,11 @@ class KeyboxXmlTest {
     }
 
     @Test
+    fun refusesUtf16WhereADoctypeWouldNotShow() {
+        assertFalse(KeyboxXml.isKeybox(keybox.toByteArray(Charsets.UTF_16LE)))
+    }
+
+    @Test
     fun refusesAKeyboxWithoutAPrivateKeyOrChain() {
         val withoutChain = keybox.replace("CertificateChain", "Chain")
         assertFalse(KeyboxXml.isKeybox(withoutChain.bytes()))

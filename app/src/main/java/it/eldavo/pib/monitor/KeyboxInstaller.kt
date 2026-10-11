@@ -2,11 +2,13 @@ package it.eldavo.pib.monitor
 
 import com.topjohnwu.superuser.Shell
 import icu.nullptr.playintegritybreak.pibApp
+import icu.nullptr.playintegritybreak.service.PrefManager
 import java.io.File
 
 /**
  * Replaces the keybox TrickyStore reads, through root. The root shell writes the module's files. The copies the app keeps
- * live in its own storage, so the app can read them, and the root shell only reads them from there.
+ * live in its own storage, so the app can read them, and the root shell only reads them from there. That storage is the
+ * one Auto Backup skips, since a keybox has a private key.
  */
 object KeyboxInstaller {
     private const val MODULE_DIR = "/data/adb/modules/tricky_store"
@@ -14,15 +16,20 @@ object KeyboxInstaller {
     /** The module's data directory. TEESimulator-RS, the module on the test device, reads its keybox from there. */
     private const val DATA_DIR = "/data/adb/tricky_store"
 
-    private val nextFile = File(pibApp.filesDir, "keybox-next.xml")
-    private val originalFile = File(pibApp.filesDir, "keybox-original.xml")
-    private val noOriginalMarker = File(pibApp.filesDir, "keybox-original.none")
+    private val nextFile = File(pibApp.noBackupFilesDir, "keybox-next.xml")
+    private val originalFile = File(pibApp.noBackupFilesDir, "keybox-original.xml")
+    private val noOriginalMarker = File(pibApp.noBackupFilesDir, "keybox-original.none")
 
-    /** Asks for root, which may show the root manager's prompt. False when it is refused. */
-    fun hasRoot(): Boolean = Shell.getShell().isRoot
+    /** Asks for root, which may show the root manager's prompt. False when it is refused. Remembers the answer. */
+    fun hasRoot(): Boolean {
+        // After a refused or timed-out prompt, libsu keeps the non-root shell it fell back to, and would answer false until
+        // the app restarts. It is dropped, so that root is asked for again.
+        Shell.getCachedShell()?.takeUnless { it.isRoot }?.let { runCatching { it.close() } }
+        val root = Shell.getShell().isRoot
+        PrefManager.integrityRootSeen = root
+        return root
+    }
 
-    /** Whether root was already granted. Never asks. */
-    fun rootGranted(): Boolean = Shell.isAppGrantedRoot() == true
 
     fun moduleInstalled(): Boolean = Shell.cmd("test -d '$MODULE_DIR'").exec().isSuccess
 
@@ -32,6 +39,18 @@ object KeyboxInstaller {
      */
     private fun keyboxPath(): String =
         if (Shell.cmd("test -d '$DATA_DIR'").exec().isSuccess) "$DATA_DIR/keybox.xml" else "$MODULE_DIR/keybox.xml"
+
+    /**
+     * [installedId], read only where it cannot bring up a root prompt the user did not ask for: in a process whose root
+     * shell is open already, or with the keybox action on (which uses root anyway) and root granted the last time it was
+     * asked for. A new process has no root shell yet, so libsu cannot say, and that answer is kept in the preferences.
+     * Null otherwise.
+     */
+    fun installedIdWithoutAsking(): String? {
+        val shellOpen = Shell.getCachedShell()?.isRoot == true
+        val allowed = shellOpen || (PrefManager.integrityAutomationKeybox && PrefManager.integrityRootSeen)
+        return if (allowed) installedId() else null
+    }
 
     /** The ID of the keybox the module reads now, or null when there is none. Needs root. */
     fun installedId(): String? {
@@ -64,27 +83,31 @@ object KeyboxInstaller {
         val path = keyboxPath()
         nextFile.writeBytes(bytes)
         return try {
-            Shell.cmd(
-                "cp '${nextFile.path}' '$path.pib' && chmod 644 '$path.pib' && mv -f '$path.pib' '$path'",
-            ).exec().isSuccess
+            replace(nextFile, path)
         } finally {
             nextFile.delete()
         }
     }
 
-    /** Puts back the keybox kept by [keepOriginal], or removes the keybox when the device had none. */
+    /**
+     * Puts back the keybox kept by [keepOriginal], or removes the keybox when the device had none. False when it failed,
+     * or when nothing was kept, so there is nothing to put back.
+     */
     fun restoreOriginal(): Boolean {
         val path = keyboxPath()
         val restored = when {
-            originalFile.exists() -> Shell.cmd(
-                "cp '${originalFile.path}' '$path.pib' && chmod 644 '$path.pib' && mv -f '$path.pib' '$path'",
-            ).exec().isSuccess
+            originalFile.exists() -> replace(originalFile, path)
             noOriginalMarker.exists() -> Shell.cmd("rm -f '$path'").exec().isSuccess
-            else -> return true
+            else -> return false
         }
         if (restored) forgetOriginal()
         return restored
     }
+
+    /** Copies [source] over [path] in one step, so the module never reads half of it. */
+    private fun replace(source: File, path: String): Boolean = Shell.cmd(
+        "cp '${source.path}' '$path.pib' && chmod 644 '$path.pib' && mv -f '$path.pib' '$path'",
+    ).exec().isSuccess
 
     /** Drops the kept copy, once the keybox that is installed is the one that works. */
     fun forgetOriginal() {

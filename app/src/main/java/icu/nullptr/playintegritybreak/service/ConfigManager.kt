@@ -17,6 +17,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import it.eldavo.pib.R
 import it.eldavo.pib.common.BuildConfig
+import it.eldavo.pib.monitor.AllAppsIntervention
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.UUID
@@ -83,12 +84,15 @@ object ConfigManager {
         }
     }
 
-    /** Backup contents. The telemetry user id stays on this device. */
-    fun exportJson(): String = config.copy(userId = "").toString()
+    /**
+     * Backup contents. The telemetry user id stays on this device, and so does what the integrity automation forces while
+     * the verdict is down.
+     */
+    fun exportJson(): String = AllAppsIntervention.withoutForced(config).copy(userId = "").toString()
 
     fun importConfig(json: String) {
         val imported = parseChecked(json)
-        update { withUserId(imported.copy(userId = it.userId)) }
+        AllAppsIntervention.replaceConfig { update { withUserId(imported.copy(userId = it.userId)) } }
     }
 
     var detailLog: Boolean

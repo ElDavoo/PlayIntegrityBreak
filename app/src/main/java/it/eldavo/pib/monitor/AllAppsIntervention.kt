@@ -2,71 +2,63 @@ package it.eldavo.pib.monitor
 
 import android.util.Log
 import icu.nullptr.playintegritybreak.common.Constants
+import icu.nullptr.playintegritybreak.common.InterventionSnapshot
 import icu.nullptr.playintegritybreak.common.JsonConfig
 import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
-import org.json.JSONObject
 
 /**
- * Turns intervention on for every app but the Play Store, which the monitor needs to get its verdict. Restoring puts back
- * what each app had before, so a per-app setting the user made is not lost.
+ * Turns intervention and synthetic errors on for every app but the Play Store, which the monitor needs to get its verdict.
+ * The change and its undo are in common ([InterventionSnapshot]), where they are unit tested. This object keeps the
+ * snapshot and applies it. Its functions are synchronized, so that the snapshot and the config change together.
  */
 object AllAppsIntervention {
     private const val TAG = "AllAppsIntervention"
+    private const val VENDING = Constants.VENDING_PACKAGE_NAME
 
-    /** Turns intervention on for all apps. Does nothing when it is already on from here. */
+    /** Turns the errors on for all apps. Does nothing when they are already on from here. */
+    @Synchronized
     fun enable() {
         if (PrefManager.integrityAutomationInterventionSnapshot.isNotEmpty()) return
         ConfigManager.update { current ->
-            PrefManager.integrityAutomationInterventionSnapshot = snapshotOf(current).toString()
-            val vending = Constants.VENDING_PACKAGE_NAME
-            val scope = current.scope.mapValues { (pkg, app) ->
-                when {
-                    pkg == vending -> app.copy(interventionEnabled = false)
-                    app.interventionEnabled == false -> app.copy(interventionEnabled = true)
-                    else -> app
-                }
-            }
-            current.copy(
-                defaults = current.defaults.copy(interventionEnabled = true),
-                scope = scope + (vending to (scope[vending] ?: JsonConfig.AppConfig()).copy(interventionEnabled = false)),
-            )
+            // Kept before the config is saved, so that a forced config always has its snapshot.
+            PrefManager.integrityAutomationInterventionSnapshot = InterventionSnapshot.of(current, VENDING).encode()
+            InterventionSnapshot.enableForAllApps(current, VENDING)
         }
     }
 
     /** Puts back what [enable] changed. Does nothing when [enable] did not change anything. */
+    @Synchronized
     fun restore() {
         val text = PrefManager.integrityAutomationInterventionSnapshot
         if (text.isEmpty()) return
-        PrefManager.integrityAutomationInterventionSnapshot = ""
-        runCatching {
-            val snapshot = JSONObject(text)
-            val apps = snapshot.getJSONObject("apps")
-            ConfigManager.update { current ->
-                val scope = current.scope.toMutableMap()
-                apps.keys().forEach { pkg ->
-                    val value = if (apps.isNull(pkg)) null else apps.getBoolean(pkg)
-                    val app = (scope[pkg] ?: JsonConfig.AppConfig()).copy(interventionEnabled = value)
-                    if (app.isEmpty()) scope.remove(pkg) else scope[pkg] = app
-                }
-                current.copy(
-                    defaults = current.defaults.copy(interventionEnabled = snapshot.getBoolean("defaults")),
-                    scope = scope,
-                )
-            }
-        }.onFailure {
-            Log.e(TAG, "Could not restore the intervention settings", it)
+        val snapshot = InterventionSnapshot.decode(text)
+        if (snapshot == null) {
+            Log.e(TAG, "Could not read the intervention snapshot, so the settings were left as they are")
+        } else {
+            ConfigManager.update { current -> InterventionSnapshot.restore(current, snapshot, VENDING) }
         }
+        // Dropped once the config is saved: restoring a second time changes nothing more.
+        PrefManager.integrityAutomationInterventionSnapshot = ""
     }
 
-    /** The interventions as they are now: the default, and each app's own value (null when it follows the default). */
-    private fun snapshotOf(config: JsonConfig): JSONObject {
-        val apps = JSONObject()
-        for (pkg in config.scope.keys + Constants.VENDING_PACKAGE_NAME) {
-            apps.put(pkg, config.scope[pkg]?.interventionEnabled ?: JSONObject.NULL)
-        }
-        return JSONObject()
-            .put("defaults", config.defaults.interventionEnabled)
-            .put("apps", apps)
+    /**
+     * Runs [replace], which replaces the whole config (an import), then forces the errors again on top of it while they
+     * are on, with a snapshot of the new config: the old snapshot describes a config that is gone. Both happen under this
+     * object's lock, so a [restore] cannot apply the old snapshot to the new config in between.
+     */
+    @Synchronized
+    fun replaceConfig(replace: () -> Unit) {
+        val forced = PrefManager.integrityAutomationInterventionSnapshot.isNotEmpty()
+        replace()
+        if (!forced) return
+        PrefManager.integrityAutomationInterventionSnapshot = ""
+        enable()
+    }
+
+    /** [config] without what [enable] forced, for a backup: it would be restored as the user's own settings. */
+    fun withoutForced(config: JsonConfig): JsonConfig {
+        val snapshot = InterventionSnapshot.decode(PrefManager.integrityAutomationInterventionSnapshot) ?: return config
+        return InterventionSnapshot.restore(config, snapshot, VENDING)
     }
 }
