@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.AppIconLoader
 import it.eldavo.pib.R
+import it.eldavo.pib.monitor.IntegrityMonitor
 import kotlin.system.exitProcess
 
 lateinit var pibApp: MyApp
@@ -43,6 +44,7 @@ class MyApp : Application() {
         }
         TelemetryUploadScheduler.syncSchedule()
         TelemetryUploadScheduler.triggerImmediate(reason = "app-startup")
+        IntegrityMonitor.syncSchedule()
 
         AppCompatDelegate.setDefaultNightMode(PrefManager.darkTheme)
         ConfigUtils.initializeAppLocale()
