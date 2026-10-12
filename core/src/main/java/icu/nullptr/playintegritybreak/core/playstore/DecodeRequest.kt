@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream
  *     message DeviceHolder    { DeviceInfo info = 1; }
  *     message DeviceInfo      { string fingerprint = 1; string brand = 2; string device = 3; string model = 4; string id = 5; }
  *
- * `id` is the nonce suffix of the token request (see docs/playstore-checker-di-chain.md, section 12).
+ * `id` is the nonce suffix of the token request: the server answers 400 to any other (see PlayStoreIntegrityCheck).
  */
 internal object DecodeRequest {
     class Device(val fingerprint: String, val brand: String, val device: String, val model: String, val id: String) {

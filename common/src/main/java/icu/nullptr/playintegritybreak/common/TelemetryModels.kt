@@ -28,6 +28,10 @@ data class TelemetryEventPayload(
     val retriable: Boolean? = null,
     val source: String,
     val attemptCount: Int = 0,
+    /** For an integrity event: the verdict level, such as MEETS_STRONG_INTEGRITY. */
+    val verdict: String? = null,
+    /** For an integrity event: the MD5 of the keybox the device had, as the scavenger names it. */
+    val keyboxId: String? = null,
 )
 
 @Serializable

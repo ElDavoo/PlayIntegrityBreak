@@ -2,7 +2,7 @@
 
 Scripts used to map the Play Store's obfuscated dependency injection graph for the built-in integrity
 check. They are for analysing a Play Store build you have on your own device. Nothing here changes the app.
-The findings they support are in `docs/playstore-checker-di-chain.md`.
+The findings they supported were written up in `docs/playstore-checker-di-chain.md`, since removed: see the git history.
 
 ## Get the input
 

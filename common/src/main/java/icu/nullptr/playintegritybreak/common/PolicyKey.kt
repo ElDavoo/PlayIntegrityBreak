@@ -36,6 +36,17 @@ enum class PolicyKey(val key: String, val isInt: Boolean = false, val impliesInt
         REQUEST_ALERT -> policy.copy(requestAlert = value as Boolean)
     }
 
+    /** The app's override, or null when it follows the default. */
+    fun get(app: AppConfig): Any? = when (this) {
+        INTERVENTION -> app.interventionEnabled
+        REWRITE -> app.rewriteResponse
+        REWRITE_ERROR_CODE -> app.rewriteErrorCode
+        REWRITE_REMEDIABLE -> app.rewriteRemediable
+        DELIVER_SYNTHETIC -> app.deliverSyntheticResponse
+        DELAY_SYNTHETIC -> app.delaySyntheticResponse
+        REQUEST_ALERT -> app.requestAlert
+    }
+
     /** Sets the override; null makes the app follow the default again. */
     fun with(app: AppConfig, value: Any?): AppConfig = when (this) {
         INTERVENTION -> app.copy(interventionEnabled = value as Boolean?)

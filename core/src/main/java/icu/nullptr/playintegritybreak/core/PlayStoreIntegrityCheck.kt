@@ -51,7 +51,6 @@ import kotlin.concurrent.withLock
  *    The body has the token and the device. Its device id must be the nonce's suffix, or the server answers
  *    400 (DF-DFERH-01). That is the nonce binding: a decode request can only be made for the token it was
  *    asked for. The body and the sender are the Play Store's own, so the request headers are the Play Store's.
- *    See docs/playstore-checker-di-chain.md, section 12.
  *
  * The Play Store's classes are obfuscated and renamed in every build, so none is named here. The classic token
  * uses the Play Core integrity service, whose binder protocol is public. The decode request is found in the Play
@@ -285,7 +284,7 @@ object PlayStoreIntegrityCheck {
     /**
      * The verdict list in the decode response [payload]. The response message answers with one of several messages, in a
      * oneof: a field of type Object holds the answer and an int field its field number, 1 for the labels message, whose
-     * string is the list. The other answers are not a verdict. See docs/playstore-checker-di-chain.md, section 10.
+     * string is the list. The other answers are not a verdict.
      */
     private fun verdictListIn(payload: Any): String? {
         var list: String? = null

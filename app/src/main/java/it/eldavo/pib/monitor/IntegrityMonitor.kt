@@ -1,7 +1,5 @@
 package it.eldavo.pib.monitor
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -22,7 +20,6 @@ import icu.nullptr.playintegritybreak.service.ConfigManager
 import icu.nullptr.playintegritybreak.service.PrefManager
 import icu.nullptr.playintegritybreak.service.RequestAlert
 import icu.nullptr.playintegritybreak.service.ServiceClient
-import it.eldavo.pib.R
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +29,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeoutOrNull
 import java.util.concurrent.TimeUnit
 
@@ -43,8 +41,6 @@ import java.util.concurrent.TimeUnit
 object IntegrityMonitor {
     private const val TAG = "IntegrityMonitor"
     private const val PERIODIC_WORK = "integrity.monitor.periodic"
-    private const val NOTIFICATION_CHANNEL = "integrity_monitor"
-    private const val NOTIFICATION_ID = 0x5049
     private const val SERVICE_LINK_TIMEOUT_MS = 20_000L
 
     /**
@@ -54,7 +50,8 @@ object IntegrityMonitor {
      */
     private const val CHECK_TIMEOUT_MS = 5 * 60_000L
 
-    val intervalHoursOptions = intArrayOf(1, 3, 6, 12, 24)
+    /** How often the periodic check runs. */
+    private const val INTERVAL_HOURS = 3L
 
     private val checkLock = Mutex()
 
@@ -81,21 +78,44 @@ object IntegrityMonitor {
     }
 
     /**
-     * Runs one check, stores it in the history and notifies if the verdict dropped. Returns null without checking when a
-     * check is already running: its result is the one that gets recorded, and a second would ask Google again right after.
+     * Runs one check, stores it in the history, and lets the telemetry and the automation see it. Returns null without
+     * checking when a check is already running: its result is the one that gets recorded, and a second would ask Google
+     * again right after.
      */
     suspend fun checkAndRecord(context: Context = pibApp): IntegrityCheck? {
         if (!checkLock.tryLock()) return null
+        try {
+            return recordCheck(context)
+        } finally {
+            checkLock.unlock()
+        }
+    }
+
+    /**
+     * Like [checkAndRecord], but waits for a check that is running. The keybox fallback needs the result of a check it
+     * starts itself, so it cannot take the one already running. Each of its checks goes to the telemetry, even one without
+     * a verdict.
+     */
+    suspend fun checkWhenFree(context: Context = pibApp): IntegrityCheck =
+        checkLock.withLock { recordCheck(context, keyboxRun = true) }
+
+    /**
+     * Runs the check, stores it, and lets the telemetry and the automation see it. The caller holds [checkLock], so the
+     * automation sees the checks in the order they ran. A keybox run the automation starts takes the lock for its own
+     * checks, so it waits for this one to end.
+     */
+    private suspend fun recordCheck(context: Context, keyboxRun: Boolean = false): IntegrityCheck {
         checkingFlow.value = true
         try {
-            val previous = IntegrityCheckStore.lastVerdict()
             val check = checkWithPlayStore(context)
             IntegrityCheckStore.add(check)
-            notifyIfDropped(context, previous, check)
+            // The telemetry reads the installed keybox first: the automation can start a keybox run, which installs others.
+            IntegrityTelemetry.sendVerdict(check, withoutVerdict = keyboxRun)
+            IntegrityAutomation.onCheck(context, check, keyboxRun)
             return check
         } finally {
+            // Cleared once the automation has written its phase, so that the screen shows the new one.
             checkingFlow.value = false
-            checkLock.unlock()
         }
     }
 
@@ -224,10 +244,10 @@ object IntegrityMonitor {
     // Periodic monitoring
 
     /**
-     * Schedules or cancels the periodic check. [replace] reschedules an existing check (after the
-     * interval changed); otherwise it is kept, since replacing it cancels a run that is starting.
+     * Schedules or cancels the periodic check. A check scheduled with [INTERVAL_HOURS] is kept, since replacing it cancels
+     * a run that is starting. One scheduled with another interval, from when the interval was a setting, is updated once.
      */
-    fun syncSchedule(context: Context = pibApp, replace: Boolean = false) {
+    fun syncSchedule(context: Context = pibApp) {
         val workManager = WorkManager.getInstance(context)
         if (!PrefManager.integrityMonitorEnabled) {
             workManager.cancelUniqueWork(PERIODIC_WORK)
@@ -235,14 +255,19 @@ object IntegrityMonitor {
         }
 
         val request = PeriodicWorkRequestBuilder<Worker>(
-            PrefManager.integrityMonitorIntervalHours.toLong(),
+            INTERVAL_HOURS,
             TimeUnit.HOURS,
         ).setConstraints(
             Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
         ).build()
 
-        val policy = if (replace) ExistingPeriodicWorkPolicy.UPDATE else ExistingPeriodicWorkPolicy.KEEP
+        val policy = if (PrefManager.integrityMonitorScheduledHours == INTERVAL_HOURS.toInt()) {
+            ExistingPeriodicWorkPolicy.KEEP
+        } else {
+            ExistingPeriodicWorkPolicy.UPDATE
+        }
         workManager.enqueueUniquePeriodicWork(PERIODIC_WORK, policy, request)
+        PrefManager.integrityMonitorScheduledHours = INTERVAL_HOURS.toInt()
     }
 
     class Worker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
@@ -252,24 +277,4 @@ object IntegrityMonitor {
         }
     }
 
-    // Notifications
-
-    private fun notifyIfDropped(context: Context, previous: IntegrityCheck?, current: IntegrityCheck) {
-        val before = previous?.level ?: return
-        val after = current.level ?: return
-        // Levels are declared from the strongest down.
-        if (after.ordinal <= before.ordinal) return
-
-        RequestAlert.postNotification(
-            channel = NotificationChannel(
-                NOTIFICATION_CHANNEL,
-                context.getString(R.string.monitor_notification_channel),
-                NotificationManager.IMPORTANCE_DEFAULT,
-            ),
-            id = NOTIFICATION_ID,
-            title = context.getString(R.string.monitor_notification_title),
-            text = context.getString(R.string.monitor_notification_text, before.label, after.label),
-            timestampMs = current.timestampMs,
-        )
-    }
 }
